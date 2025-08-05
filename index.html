@@ -16,6 +16,11 @@
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             min-height: 100vh;
             color: #333;
+            overflow: hidden; /* Initially hidden to prevent scrolling during login */
+        }
+
+        body.logged-in {
+            overflow: auto; /* Allow scrolling after login */
         }
 
         .container {
@@ -32,6 +37,8 @@
             max-width: 400px;
             margin: 50px auto;
             text-align: center;
+            position: relative;
+            z-index: 1000;
         }
 
         .main-container {
@@ -41,6 +48,8 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.1);
             margin: 20px auto;
             display: none;
+            position: relative;
+            z-index: 1;
         }
 
         .header {
@@ -1039,8 +1048,13 @@
                 document.getElementById('mainApp').style.display = 'block';
                 document.getElementById('userWelcome').textContent = `Bem-vindo, ${email}!`;
                 
+                // Allow scrolling after login
+                document.body.classList.add('logged-in');
+                document.body.style.overflow = 'auto';
+                
                 loadSampleData();
                 initializeApp();
+                showNotification('Login realizado com sucesso!', 'success');
             } else {
                 showNotification('Email ou senha incorretos!', 'error');
             }
@@ -1051,6 +1065,12 @@
             document.getElementById('mainApp').style.display = 'none';
             document.getElementById('email').value = '';
             document.getElementById('password').value = '';
+            
+            // Reset scrolling and body classes
+            document.body.classList.remove('logged-in');
+            document.body.style.overflow = 'hidden';
+            
+            showNotification('Logout realizado com sucesso!', 'info');
         }
 
         // App Initialization
@@ -1878,13 +1898,21 @@
 
         // Initialize the application when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Ensure only login screen is visible initially
+            document.getElementById('loginScreen').style.display = 'block';
+            document.getElementById('mainApp').style.display = 'none';
+            document.body.style.overflow = 'hidden';
+            
             // Set current date for date inputs
             setCurrentDate();
             
             // Load saved configuration
             const savedUrl = localStorage.getItem('gamecreatorsApiUrl');
             if (savedUrl) {
-                document.getElementById('sheetsApiUrl').value = savedUrl;
+                const urlInput = document.getElementById('sheetsApiUrl');
+                if (urlInput) {
+                    urlInput.value = savedUrl;
+                }
             }
 
             // Close modals when clicking outside
@@ -1895,11 +1923,24 @@
             }
 
             // Handle Enter key on login
-            document.getElementById('password').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    login();
-                }
-            });
+            const passwordInput = document.getElementById('password');
+            if (passwordInput) {
+                passwordInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        login();
+                    }
+                });
+            }
+
+            // Handle Enter key on email input too
+            const emailInput = document.getElementById('email');
+            if (emailInput) {
+                emailInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        login();
+                    }
+                });
+            }
 
             console.log('Sistema GameCreators carregado com sucesso!');
         });
