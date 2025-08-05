@@ -112,74 +112,6 @@
             display: block;
         }
 
-        .config-section {
-            background: #f8f9fa;
-            border: 2px solid #4CAF50;
-            border-radius: 10px;
-            padding: 30px;
-            margin: 20px 0;
-        }
-
-        .config-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .config-header h2 {
-            color: #4CAF50;
-            margin-bottom: 10px;
-        }
-
-        .steps-container {
-            background: white;
-            border-radius: 8px;
-            padding: 25px;
-            margin: 20px 0;
-            border-left: 4px solid #4CAF50;
-        }
-
-        .step {
-            margin-bottom: 25px;
-            padding: 15px;
-            border-radius: 8px;
-            background: #f8f9fa;
-        }
-
-        .step-number {
-            background: #4CAF50;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-
-        .step-title {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .step-description {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .code-block {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            margin: 10px 0;
-            overflow-x: auto;
-        }
-
         .form-group {
             margin-bottom: 20px;
         }
@@ -250,6 +182,128 @@
             background: #F57C00;
         }
 
+        .btn-info {
+            background: #9C27B0;
+        }
+
+        .btn-info:hover {
+            background: #7B1FA2;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .table th {
+            background: #f5f5f5;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            width: 300px;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 2% auto;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
         .notification {
             position: fixed;
             top: 20px;
@@ -279,71 +333,73 @@
             background: #2196F3;
         }
 
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-
-        .status-connected {
-            background: #4CAF50;
-        }
-
-        .status-disconnected {
-            background: #f44336;
-        }
-
-        .status-testing {
-            background: #FF9800;
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .highlight {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-
-        .success-box {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
 
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: white;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-matriculado {
+            background: #4CAF50;
+        }
+
+        .status-formado {
+            background: #2196F3;
+        }
+
+        .status-cancelado {
+            background: #f44336;
+        }
+
+        .status-trancado {
+            background: #FF9800;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
             }
-            
+
             .nav-tabs {
                 flex-direction: column;
             }
-            
+
             .nav-tab {
                 border-radius: 8px;
                 margin-bottom: 5px;
             }
-            
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
             .grid-2 {
                 grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: stretch;
             }
         }
     </style>
@@ -383,292 +439,266 @@
 
         <!-- Dashboard Tab -->
         <div id="dashboard" class="tab-content active">
-            <h2>Dashboard</h2>
-            <p>Bem-vindo ao Sistema de Gestão Escolar! Use as abas acima para navegar.</p>
+            <div class="stats-grid" id="statsGrid"></div>
+            <div class="card">
+                <h3 class="card-title">Atividades Recentes</h3>
+                <div id="recentActivities"></div>
+            </div>
+        </div>
+
+        <!-- Students Tab -->
+        <div id="students" class="tab-content">
+            <div class="action-buttons">
+                <h2>Gestão de Alunos</h2>
+                <button class="btn" onclick="openModal('studentModal')">Novo Aluno</button>
+            </div>
+            <input type="text" class="search-box" placeholder="Buscar aluno..." onkeyup="searchTable('studentsTable', this.value)">
+            <table class="table" id="studentsTable">
+                <thead>
+                    <tr>
+                        <th>RA</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Curso</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="studentsTableBody"></tbody>
+            </table>
+        </div>
+
+        <!-- Teachers Tab -->
+        <div id="teachers" class="tab-content">
+            <div class="action-buttons">
+                <h2>Gestão de Professores</h2>
+                <button class="btn" onclick="openModal('teacherModal')">Novo Professor</button>
+            </div>
+            <table class="table" id="teachersTable">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Disciplinas</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="teachersTableBody"></tbody>
+            </table>
+        </div>
+
+        <!-- Classes Tab -->
+        <div id="classes" class="tab-content">
+            <div class="action-buttons">
+                <h2>Gestão de Turmas</h2>
+                <button class="btn" onclick="openModal('classModal')">Nova Turma</button>
+            </div>
+            <div class="grid-2" id="classesGrid"></div>
         </div>
 
         <!-- Configuration Tab -->
         <div id="configuracao" class="tab-content">
-            <div class="config-section">
-                <div class="config-header">
-                    <h2>🔧 Configuração do Google Sheets</h2>
-                    <p>Configure sua planilha Google Sheets como banco de dados</p>
-                </div>
-
-                <!-- Status Connection -->
-                <div class="form-group">
-                    <label>Status da Conexão:</label>
-                    <div style="padding: 10px; border-radius: 8px; background: #f8f9fa;">
-                        <span class="status-indicator status-disconnected" id="connectionStatus"></span>
-                        <span id="connectionText">Não conectado</span>
-                    </div>
-                </div>
-
-                <!-- Steps -->
-                <div class="steps-container">
-                    <div class="step">
-                        <div style="display: flex; align-items: flex-start;">
-                            <div class="step-number">1</div>
-                            <div>
-                                <div class="step-title">Criar Nova Planilha:</div>
-                                <div class="step-description">
-                                    • Acesse <a href="https://sheets.google.com" target="_blank">Google Sheets</a><br>
-                                    • Crie uma nova planilha em branco<br>
-                                    • Renomeie para "SGE - Sistema de Gestão Escolar"<br>
-                                    • Copie o ID da URL (entre /d/ e /edit)
-                                </div>
-                                <div class="highlight">
-                                    <strong>Exemplo de URL:</strong><br>
-                                    https://docs.google.com/spreadsheets/d/<strong>1ABC123xyz789</strong>/edit<br>
-                                    <strong>ID:</strong> 1ABC123xyz789
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div style="display: flex; align-items: flex-start;">
-                            <div class="step-number">2</div>
-                            <div>
-                                <div class="step-title">Criar Google Apps Script:</div>
-                                <div class="step-description">
-                                    • Acesse <a href="https://script.google.com" target="_blank">Google Apps Script</a><br>
-                                    • Clique em "Novo projeto"<br>
-                                    • Apague o código padrão<br>
-                                    • Cole o código fornecido abaixo
-                                </div>
-                                <button class="btn btn-secondary" onclick="showGoogleAppsScript()">📄 Ver Código</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div style="display: flex; align-items: flex-start;">
-                            <div class="step-number">3</div>
-                            <div>
-                                <div class="step-title">Configurar ID da Planilha:</div>
-                                <div class="step-description">
-                                    • No código, encontre a linha: <code>const SPREADSHEET_ID = 'SUA_PLANILHA_ID_AQUI';</code><br>
-                                    • Substitua <strong>SUA_PLANILHA_ID_AQUI</strong> pelo ID copiado da planilha<br>
-                                    • Salve o projeto (Ctrl+S)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div style="display: flex; align-items: flex-start;">
-                            <div class="step-number">4</div>
-                            <div>
-                                <div class="step-title">Publicar como Aplicativo Web:</div>
-                                <div class="step-description">
-                                    • Clique em "Implantar" → "Nova implantação"<br>
-                                    • Tipo: "Aplicativo da Web"<br>
-                                    • Executar como: "Eu (seu email)"<br>
-                                    • Quem tem acesso: "Qualquer pessoa"<br>
-                                    • Clique em "Implantar"
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div style="display: flex; align-items: flex-start;">
-                            <div class="step-number">5</div>
-                            <div>
-                                <div class="step-title">Copiar URL e Testar:</div>
-                                <div class="step-description">
-                                    • Copie a "URL do aplicativo da Web"<br>
-                                    • Cole no campo abaixo<br>
-                                    • Clique em "Salvar Configuração"<br>
-                                    • Clique em "Testar Conexão"
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Configuration Form -->
+            <div class="card">
+                <h3 class="card-title">⚙️ Configuração do Google Sheets</h3>
                 <div class="form-group">
                     <label for="sheetsApiUrl">URL do Google Apps Script:</label>
                     <input type="url" id="sheetsApiUrl" placeholder="Cole aqui a URL do seu Google Apps Script">
                 </div>
-
                 <div style="text-align: center; margin-top: 20px;">
                     <button class="btn" onclick="saveConfiguration()">💾 Salvar Configuração</button>
                     <button class="btn btn-secondary" onclick="testConnection()">🔍 Testar Conexão</button>
-                    <button class="btn btn-warning" onclick="initializeSheets()">📋 Inicializar Planilhas</button>
                 </div>
-
                 <div id="configResult"></div>
-            </div>
-        </div>
-
-        <!-- GitHub Tab -->
-        <div id="github" class="tab-content">
-            <div class="config-section">
-                <div class="config-header">
-                    <h2>🚀 Publicar no GitHub</h2>
-                    <p>Transforme seu sistema em um site público gratuito</p>
-                </div>
-
-                <div class="steps-container">
-                    <div class="step">
-                        <div style="display: flex; align-items: flex-start;">
-                            <div class="step-number">1</div>
-                            <div>
-                                <div class="step-title">Baixar Arquivos:</div>
-                                <div class="step-description">
-                                    Clique no botão abaixo para baixar todos os arquivos do sistema
-                                </div>
-                                <button class="btn" onclick="downloadSystemFiles()">📥 Baixar Sistema Completo</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div style="display: flex; align-items: flex-start;">
-                            <div class="step-number">2</div>
-                            <div>
-                                <div class="step-title">Criar Conta no GitHub:</div>
-                                <div class="step-description">
-                                    • Acesse <a href="https://github.com" target="_blank">GitHub.com</a><br>
-                                    • Clique em "Sign up" para criar uma conta gratuita<br>
-                                    • Confirme seu email<br>
-                                    • Faça login na sua conta
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div style="display: flex; align-items: flex-start;">
-                            <div class="step-number">3</div>
-                            <div>
-                                <div class="step-title">Criar Novo Repositório:</div>
-                                <div class="step-description">
-                                    • Clique no ➕ no canto superior direito → "New repository"<br>
-                                    • Nome do repositório: <strong>sge-sistema</strong><br>
-                                    • Descrição: "Sistema de Gestão Escolar"<br>
-                                    • Marque "Public" (para usar GitHub Pages gratuitamente)<br>
-                                    • Marque "Add a README file"<br>
-                                    • Clique em "Create repository"
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div style="display: flex; align-items: flex-start;">
-                            <div class="step-number">4</div>
-                            <div>
-                                <div class="step-title">Fazer Upload dos Arquivos:</div>
-                                <div class="step-description">
-                                    • No seu repositório, clique em "uploading an existing file"<br>
-                                    • Arraste e solte os arquivos baixados na etapa 1<br>
-                                    • OU clique em "choose your files" e selecione os arquivos<br>
-                                    • Adicione uma mensagem: "Primeira versão do SGE"<br>
-                                    • Clique em "Commit changes"
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div style="display: flex; align-items: flex-start;">
-                            <div class="step-number">5</div>
-                            <div>
-                                <div class="step-title">Ativar GitHub Pages:</div>
-                                <div class="step-description">
-                                    • No seu repositório, vá em "Settings" (aba superior)<br>
-                                    • Role até a seção "Pages" no menu lateral<br>
-                                    • Em "Source", selecione "Deploy from a branch"<br>
-                                    • Branch: "main", Folder: "/ (root)"<br>
-                                    • Clique em "Save"
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div style="display: flex; align-items: flex-start;">
-                            <div class="step-number">6</div>
-                            <div>
-                                <div class="step-title">Acessar Seu Site:</div>
-                                <div class="step-description">
-                                    • Aguarde 2-5 minutos para o GitHub processar<br>
-                                    • Seu site estará disponível em:<br>
-                                    <strong>https://SEU_USUARIO.github.io/sge-sistema/</strong><br>
-                                    • Substitua "SEU_USUARIO" pelo seu nome de usuário do GitHub
-                                </div>
-                                <div class="success-box">
-                                    🎉 <strong>Parabéns!</strong> Seu sistema agora está online e acessível por qualquer pessoa!
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="githubUsername">Seu usuário do GitHub:</label>
-                    <input type="text" id="githubUsername" placeholder="Digite seu nome de usuário">
-                </div>
-
-                <div class="form-group">
-                    <label>URL do seu site (após publicação):</label>
-                    <input type="text" id="siteUrl" readonly placeholder="https://SEU_USUARIO.github.io/sge-sistema/">
-                </div>
-
-                <div style="text-align: center; margin-top: 20px;">
-                    <button class="btn" onclick="generateSiteUrl()">🔗 Gerar URL do Site</button>
-                    <button class="btn btn-secondary" onclick="openSite()">🌐 Abrir Site</button>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Google Apps Script Code Modal -->
-    <div id="codeModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000;">
-        <div style="background: white; margin: 2% auto; padding: 30px; border-radius: 15px; max-width: 90%; max-height: 90%; overflow-y: auto;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h3>📄 Código do Google Apps Script</h3>
-                <button onclick="closeCodeModal()" style="background: #f44336; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">✕</button>
+    <!-- Student Modal -->
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('studentModal')">&times;</span>
+            <h2 id="studentModalTitle">Cadastro de Aluno</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Nome Completo:</label>
+                    <input type="text" id="studentName">
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="studentEmail">
+                </div>
+                <div class="form-group">
+                    <label>Telefone:</label>
+                    <input type="tel" id="studentPhone">
+                </div>
+                <div class="form-group">
+                    <label>CPF:</label>
+                    <input type="text" id="studentCPF">
+                </div>
             </div>
-            <p>Copie este código e cole no Google Apps Script:</p>
-            <div class="code-block" id="appsScriptCode" style="max-height: 400px; overflow-y: auto;"></div>
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="btn" onclick="copyCode()">📋 Copiar Código</button>
+            <div class="form-group">
+                <label>Curso:</label>
+                <select id="studentCourse">
+                    <option value="">Selecione um curso</option>
+                    <option value="Informática Básica">Informática Básica</option>
+                    <option value="Programação Web">Programação Web</option>
+                    <option value="Design Gráfico">Design Gráfico</option>
+                    <option value="Marketing Digital">Marketing Digital</option>
+                </select>
             </div>
+            <button class="btn" onclick="saveStudent()">Salvar Aluno</button>
+            <input type="hidden" id="editingStudentId">
+        </div>
+    </div>
+
+    <!-- Teacher Modal -->
+    <div id="teacherModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('teacherModal')">&times;</span>
+            <h2 id="teacherModalTitle">Cadastro de Professor</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Nome Completo:</label>
+                    <input type="text" id="teacherName">
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="teacherEmail">
+                </div>
+                <div class="form-group">
+                    <label>Telefone:</label>
+                    <input type="tel" id="teacherPhone">
+                </div>
+                <div class="form-group">
+                    <label>CPF:</label>
+                    <input type="text" id="teacherCPF">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Disciplinas:</label>
+                <input type="text" id="teacherSubjects" placeholder="Ex: Matemática, Física">
+            </div>
+            <button class="btn" onclick="saveTeacher()">Salvar Professor</button>
+            <input type="hidden" id="editingTeacherId">
+        </div>
+    </div>
+
+    <!-- Class Modal -->
+    <div id="classModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('classModal')">&times;</span>
+            <h2 id="classModalTitle">Criar Nova Turma</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Nome da Turma:</label>
+                    <input type="text" id="className">
+                </div>
+                <div class="form-group">
+                    <label>Curso:</label>
+                    <select id="classCourse">
+                        <option value="">Selecione um curso</option>
+                        <option value="Informática Básica">Informática Básica</option>
+                        <option value="Programação Web">Programação Web</option>
+                        <option value="Design Gráfico">Design Gráfico</option>
+                        <option value="Marketing Digital">Marketing Digital</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Horário:</label>
+                    <input type="text" id="classSchedule" placeholder="Ex: Segunda a Sexta - 19h às 22h">
+                </div>
+                <div class="form-group">
+                    <label>Capacidade:</label>
+                    <input type="number" id="classCapacity" value="20">
+                </div>
+            </div>
+            <button class="btn" onclick="saveClass()">Salvar Turma</button>
+            <input type="hidden" id="editingClassId">
         </div>
     </div>
 
     <script>
+        // Configuration
+        const CONFIG = {
+            SHEETS_API_URL: localStorage.getItem('sheetsApiUrl') || '',
+            SHEETS: {
+                STUDENTS: 'Alunos',
+                TEACHERS: 'Professores',
+                CLASSES: 'Turmas',
+                COURSES: 'Cursos'
+            }
+        };
+
         // Global variables
         let currentUser = null;
         let currentUserRole = null;
-        let sheetsApiUrl = localStorage.getItem('sheetsApiUrl') || '';
+        let studentsData = [];
+        let teachersData = [];
+        let classesData = [];
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('mainApp').style.display = 'none';
-            
-            // Load saved configuration
-            if (sheetsApiUrl) {
-                document.getElementById('sheetsApiUrl').value = sheetsApiUrl;
-            }
-
-            // Add enter key support for login
-            document.getElementById('password').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    login();
+        // Initialize demo data
+        function initializeDemoData() {
+            studentsData = [
+                {
+                    id: 1,
+                    ra: 'ALU001',
+                    nome: 'João Silva',
+                    email: 'joao@email.com',
+                    telefone: '(11) 99999-9999',
+                    cpf: '123.456.789-00',
+                    curso: 'Programação Web',
+                    status: 'Matriculado'
+                },
+                {
+                    id: 2,
+                    ra: 'ALU002',
+                    nome: 'Maria Santos',
+                    email: 'maria@email.com',
+                    telefone: '(11) 88888-8888',
+                    cpf: '987.654.321-00',
+                    curso: 'Design Gráfico',
+                    status: 'Matriculado'
                 }
-            });
+            ];
 
-            // Update site URL when GitHub username changes
-            document.getElementById('githubUsername').addEventListener('input', function() {
-                updateSiteUrl();
-            });
-        });
+            teachersData = [
+                {
+                    id: 1,
+                    nome: 'Ana Paula Santos',
+                    email: 'ana@escola.com',
+                    telefone: '(11) 91234-5678',
+                    cpf: '111.222.333-44',
+                    disciplinas: 'Programação Web, JavaScript'
+                },
+                {
+                    id: 2,
+                    nome: 'Carlos Roberto Silva',
+                    email: 'carlos@escola.com',
+                    telefone: '(11) 98765-4321',
+                    cpf: '555.666.777-88',
+                    disciplinas: 'Design Gráfico, Photoshop'
+                }
+            ];
+
+            classesData = [
+                {
+                    id: 1,
+                    nome: 'Turma A - Manhã',
+                    curso: 'Programação Web',
+                    horario: 'Segunda a Sexta - 08h às 12h',
+                    capacidade: 20,
+                    matriculados: 15
+                },
+                {
+                    id: 2,
+                    nome: 'Turma B - Noite',
+                    curso: 'Design Gráfico',
+                    horario: 'Segunda a Sexta - 19h às 22h',
+                    capacidade: 15,
+                    matriculados: 12
+                }
+            ];
+        }
 
         // Login function
         function login() {
@@ -685,19 +715,16 @@
                 return;
             }
 
-            // Determine user role based on email
-            if (email.includes('admin')) {
-                currentUserRole = 'admin';
-            } else {
-                currentUserRole = 'admin'; // Default to admin for demo
-            }
-
+            currentUserRole = 'admin';
             currentUser = email;
             
             document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('mainApp').style.display = 'block';
             
             setupUserInterface();
+            initializeDemoData();
+            loadDashboard();
+            
             showNotification('Login realizado com sucesso!', 'success');
         }
 
@@ -718,14 +745,14 @@
             
             userWelcome.textContent = `Bem-vindo, ${currentUser} (Administrador)`;
             
-            // Clear existing tabs
             navTabs.innerHTML = '';
             
-            // Add tabs
             const tabs = [
                 { id: 'dashboard', label: 'Dashboard' },
-                { id: 'configuracao', label: '⚙️ Configuração' },
-                { id: 'github', label: '🚀 Publicar no GitHub' }
+                { id: 'students', label: 'Alunos' },
+                { id: 'teachers', label: 'Professores' },
+                { id: 'classes', label: 'Turmas' },
+                { id: 'configuracao', label: '⚙️ Configuração' }
             ];
 
             tabs.forEach((tab, index) => {
@@ -739,307 +766,119 @@
 
         // Switch between tabs
         function switchTab(tabId) {
-            // Hide all tab contents
             const tabContents = document.querySelectorAll('.tab-content');
             tabContents.forEach(content => content.classList.remove('active'));
 
-            // Remove active class from all nav tabs
             const navTabs = document.querySelectorAll('.nav-tab');
             navTabs.forEach(tab => tab.classList.remove('active'));
 
-            // Show selected tab content
             document.getElementById(tabId).classList.add('active');
-
-            // Add active class to clicked nav tab
             event.target.classList.add('active');
+
+            switch(tabId) {
+                case 'students':
+                    loadStudents();
+                    break;
+                case 'teachers':
+                    loadTeachers();
+                    break;
+                case 'classes':
+                    loadClasses();
+                    break;
+                case 'configuracao':
+                    loadConfiguration();
+                    break;
+            }
         }
 
-        // Show Google Apps Script code
-        function showGoogleAppsScript() {
-            const code = `// SGE - Sistema de Gestão Escolar - Google Apps Script
-// Substitua 'SUA_PLANILHA_ID_AQUI' pelo ID da sua planilha
+        // Load dashboard
+        function loadDashboard() {
+            const statsGrid = document.getElementById('statsGrid');
+            statsGrid.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${studentsData.length}</div>
+                    <div class="stat-label">Total de Alunos</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);">
+                    <div class="stat-number">${teachersData.length}</div>
+                    <div class="stat-label">Professores</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);">
+                    <div class="stat-number">${classesData.length}</div>
+                    <div class="stat-label">Turmas Ativas</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Taxa de Aprovação</div>
+                </div>
+            `;
 
-const SPREADSHEET_ID = 'SUA_PLANILHA_ID_AQUI';
-
-function doGet(e) {
-  const action = e.parameter.action;
-  const sheet = e.parameter.sheet;
-  
-  try {
-    switch(action) {
-      case 'read':
-        return readData(sheet);
-      case 'init':
-        return initializeSheets();
-      case 'test':
-        return testConnection();
-      default:
-        return createResponse({error: 'Ação inválida'}, false);
-    }
-  } catch(error) {
-    return createResponse({error: error.toString()}, false);
-  }
-}
-
-function doPost(e) {
-  try {
-    const data = JSON.parse(e.postData.contents);
-    const action = data.action;
-    const sheet = data.sheet;
-    
-    switch(action) {
-      case 'write':
-        return writeData(sheet, data);
-      case 'update':
-        return updateData(sheet, data);
-      case 'delete':
-        return deleteData(sheet, data);
-      default:
-        return createResponse({error: 'Ação inválida'}, false);
-    }
-  } catch(error) {
-    return createResponse({error: error.toString()}, false);
-  }
-}
-
-function createResponse(data, success = true) {
-  return ContentService.createTextOutput(JSON.stringify({
-    success: success,
-    ...data
-  })).setMimeType(ContentService.MimeType.JSON);
-}
-
-function testConnection() {
-  try {
-    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-    return createResponse({
-      message: 'Conexão estabelecida com sucesso!',
-      spreadsheetName: spreadsheet.getName()
-    });
-  } catch(error) {
-    return createResponse({error: 'Erro ao conectar: ' + error.toString()}, false);
-  }
-}
-
-function initializeSheets() {
-  try {
-    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-    
-    // Definir estrutura das planilhas
-    const sheetsConfig = {
-      'Alunos': ['id', 'ra', 'nome', 'email', 'telefone', 'cpf', 'endereco', 'curso', 'cursoId', 'turma', 'turmaId', 'status', 'mensalidade', 'dataInicio', 'duracao', 'moduloAtual', 'nomeModuloAtual', 'aulaAtual', 'nomeAulaAtual', 'modulosConcluidos', 'dataTermino', 'xp', 'moedas', 'level'],
-      'Professores': ['id', 'nome', 'email', 'telefone', 'cpf', 'disciplinas', 'turmas', 'nomesTurmas'],
-      'Turmas': ['id', 'nome', 'curso', 'cursoId', 'professor', 'professorId', 'horario', 'dataInicio', 'capacidade', 'matriculados'],
-      'Cursos': ['id', 'nome', 'duracao', 'modulos'],
-      'Presenca': ['id', 'alunoId', 'nomeAluno', 'data', 'status', 'turmaId'],
-      'Financeiro': ['id', 'alunoId', 'nomeAluno', 'valor', 'vencimento', 'status', 'diasAtraso']
-    };
-    
-    // Criar ou atualizar cada planilha
-    Object.keys(sheetsConfig).forEach(sheetName => {
-      let sheet = spreadsheet.getSheetByName(sheetName);
-      
-      if (!sheet) {
-        sheet = spreadsheet.insertSheet(sheetName);
-      }
-      
-      // Adicionar cabeçalhos se a planilha estiver vazia
-      if (sheet.getLastRow() === 0) {
-        sheet.getRange(1, 1, 1, sheetsConfig[sheetName].length).setValues([sheetsConfig[sheetName]]);
-        
-        // Formatar cabeçalhos
-        const headerRange = sheet.getRange(1, 1, 1, sheetsConfig[sheetName].length);
-        headerRange.setBackground('#4CAF50');
-        headerRange.setFontColor('white');
-        headerRange.setFontWeight('bold');
-      }
-    });
-    
-    // Adicionar dados de exemplo se necessário
-    addSampleData(spreadsheet);
-    
-    return createResponse({
-      message: 'Planilhas inicializadas com sucesso!',
-      sheetsCreated: Object.keys(sheetsConfig)
-    });
-  } catch(error) {
-    return createResponse({error: 'Erro ao inicializar: ' + error.toString()}, false);
-  }
-}
-
-function addSampleData(spreadsheet) {
-  // Adicionar cursos de exemplo
-  const cursosSheet = spreadsheet.getSheetByName('Cursos');
-  if (cursosSheet.getLastRow() === 1) {
-    const cursos = [
-      [1, 'Informática Básica', 6, 'Introdução ao Computador,Internet e Email,Editores de Texto,Planilhas,Apresentações,Projeto Final'],
-      [2, 'Programação Web', 12, 'HTML e CSS,JavaScript,React.js,Backend Node.js,Projeto Final'],
-      [3, 'Design Gráfico', 10, 'Fundamentos do Design,Photoshop,Illustrator,InDesign,Portfolio'],
-      [4, 'Marketing Digital', 8, 'Fundamentos,Redes Sociais,Google Ads,Analytics']
-    ];
-    cursosSheet.getRange(2, 1, cursos.length, cursos[0].length).setValues(cursos);
-  }
-  
-  // Adicionar professores de exemplo
-  const professoresSheet = spreadsheet.getSheetByName('Professores');
-  if (professoresSheet.getLastRow() === 1) {
-    const professores = [
-      [1, 'Ana Paula Santos', 'ana@escola.com', '(11) 91234-5678', '111.222.333-44', 'Programação Web, JavaScript, Marketing Digital', '1,3', 'Turma A - Manhã,Turma C - Tarde'],
-      [2, 'Carlos Roberto Silva', 'carlos@escola.com', '(11) 98765-4321', '555.666.777-88', 'Design Gráfico, Photoshop, Illustrator', '2', 'Turma B - Noite']
-    ];
-    professoresSheet.getRange(2, 1, professores.length, professores[0].length).setValues(professores);
-  }
-  
-  // Adicionar turmas de exemplo
-  const turmasSheet = spreadsheet.getSheetByName('Turmas');
-  if (turmasSheet.getLastRow() === 1) {
-    const turmas = [
-      [1, 'Turma A - Manhã', 'Programação Web', 2, 'Ana Paula Santos', 1, 'Segunda a Sexta - 08h às 12h', '2024-01-15', 20, 15],
-      [2, 'Turma B - Noite', 'Design Gráfico', 3, 'Carlos Roberto Silva', 2, 'Segunda a Sexta - 19h às 22h', '2024-02-01', 15, 12],
-      [3, 'Turma C - Tarde', 'Marketing Digital', 4, 'Ana Paula Santos', 1, 'Segunda a Sexta - 14h às 17h', '2024-01-10', 25, 18]
-    ];
-    turmasSheet.getRange(2, 1, turmas.length, turmas[0].length).setValues(turmas);
-  }
-  
-  // Adicionar alunos de exemplo
-  const alunosSheet = spreadsheet.getSheetByName('Alunos');
-  if (alunosSheet.getLastRow() === 1) {
-    const alunos = [
-      [1, 'ALU001', 'João Silva', 'joao@email.com', '(11) 99999-9999', '123.456.789-00', 'Rua das Flores, 123 - Centro', 'Programação Web', 2, 'Turma A - Manhã', 1, 'Matriculado', 299.90, '2024-01-15', 12, 2, 'JavaScript', 1, 'Sintaxe básica', 1, '2025-01-15', 1250, 85, 3],
-      [2, 'ALU002', 'Maria Santos', 'maria@email.com', '(11) 88888-8888', '987.654.321-00', 'Av. Principal, 456 - Jardim', 'Design Gráfico', 3, 'Turma B - Noite', 2, 'Matriculado', 249.90, '2024-02-01', 10, 3, 'Illustrator', 2, 'Logos', 2, '2024-12-01', 890, 42, 2],
-      [3, 'ALU003', 'Pedro Costa', 'pedro@email.com', '(11) 77777-7777', '456.789.123-00', 'Rua do Comércio, 789 - Vila Nova', 'Marketing Digital', 4, 'Turma C - Tarde', 3, 'Trancado', 199.90, '2024-01-10', 8, 2, 'Redes Sociais', 1, 'Facebook', 1, '2024-09-10', 450, 15, 1]
-    ];
-    alunosSheet.getRange(2, 1, alunos.length, alunos[0].length).setValues(alunos);
-  }
-}
-
-function readData(sheetName) {
-  try {
-    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-    const sheet = spreadsheet.getSheetByName(sheetName);
-    
-    if (!sheet) {
-      return createResponse({error: 'Planilha não encontrada: ' + sheetName}, false);
-    }
-    
-    const data = sheet.getDataRange().getValues();
-    const headers = data[0];
-    const rows = data.slice(1);
-    
-    const result = rows.map(row => {
-      const obj = {};
-      headers.forEach((header, index) => {
-        obj[header] = row[index];
-      });
-      return obj;
-    });
-    
-    return createResponse({data: result});
-  } catch(error) {
-    return createResponse({error: error.toString()}, false);
-  }
-}
-
-function writeData(sheetName, data) {
-  try {
-    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-    const sheet = spreadsheet.getSheetByName(sheetName);
-    
-    if (!sheet) {
-      return createResponse({error: 'Planilha não encontrada: ' + sheetName}, false);
-    }
-    
-    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-    
-    // Gerar novo ID
-    const lastRow = sheet.getLastRow();
-    const newId = lastRow > 1 ? Math.max(...sheet.getRange(2, 1, lastRow - 1, 1).getValues().flat()) + 1 : 1;
-    
-    const newRow = headers.map(header => {
-      if (header === 'id') return newId;
-      return data[header] || '';
-    });
-    
-    sheet.appendRow(newRow);
-    
-    return createResponse({id: newId, message: 'Dados salvos com sucesso!'});
-  } catch(error) {
-    return createResponse({error: error.toString()}, false);
-  }
-}
-
-function updateData(sheetName, data) {
-  try {
-    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-    const sheet = spreadsheet.getSheetByName(sheetName);
-    
-    if (!sheet) {
-      return createResponse({error: 'Planilha não encontrada: ' + sheetName}, false);
-    }
-    
-    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-    const dataRange = sheet.getDataRange().getValues();
-    
-    const rowIndex = dataRange.findIndex(row => row[0] == data.id);
-    
-    if (rowIndex === -1) {
-      return createResponse({error: 'Registro não encontrado'}, false);
-    }
-    
-    headers.forEach((header, index) => {
-      if (data[header] !== undefined) {
-        sheet.getRange(rowIndex + 1, index + 1).setValue(data[header]);
-      }
-    });
-    
-    return createResponse({message: 'Dados atualizados com sucesso!'});
-  } catch(error) {
-    return createResponse({error: error.toString()}, false);
-  }
-}
-
-function deleteData(sheetName, data) {
-  try {
-    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-    const sheet = spreadsheet.getSheetByName(sheetName);
-    
-    if (!sheet) {
-      return createResponse({error: 'Planilha não encontrada: ' + sheetName}, false);
-    }
-    
-    const dataRange = sheet.getDataRange().getValues();
-    
-    const rowIndex = dataRange.findIndex(row => row[0] == data.id);
-    
-    if (rowIndex === -1) {
-      return createResponse({error: 'Registro não encontrado'}, false);
-    }
-    
-    sheet.deleteRow(rowIndex + 1);
-    
-    return createResponse({message: 'Registro excluído com sucesso!'});
-  } catch(error) {
-    return createResponse({error: error.toString()}, false);
-  }
-}`;
-
-            document.getElementById('appsScriptCode').textContent = code;
-            document.getElementById('codeModal').style.display = 'block';
+            const recentActivities = document.getElementById('recentActivities');
+            recentActivities.innerHTML = `
+                <div style="padding: 20px; text-align: center; color: #666;">
+                    <p>• Novo aluno cadastrado: João Silva</p>
+                    <p>• Turma de Design Gráfico iniciada</p>
+                    <p>• Professor Carlos Roberto adicionado</p>
+                    <p>• Sistema conectado ao Google Sheets</p>
+                </div>
+            `;
         }
 
-        // Close code modal
-        function closeCodeModal() {
-            document.getElementById('codeModal').style.display = 'none';
+        // Load students
+        function loadStudents() {
+            const tbody = document.getElementById('studentsTableBody');
+            tbody.innerHTML = studentsData.map(student => `
+                <tr>
+                    <td>${student.ra}</td>
+                    <td>${student.nome}</td>
+                    <td>${student.email}</td>
+                    <td>${student.curso}</td>
+                    <td><span class="status-badge status-${student.status.toLowerCase()}">${student.status}</span></td>
+                    <td>
+                        <button class="btn btn-small" onclick="editStudent(${student.id})">Editar</button>
+                        <button class="btn btn-danger btn-small" onclick="deleteStudent(${student.id})">Excluir</button>
+                    </td>
+                </tr>
+            `).join('');
         }
 
-        // Copy code to clipboard
-        function copyCode() {
-            const code = document.getElementById('appsScriptCode').textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                showNotification('Código copiado para a área de transferência!', 'success');
-            }).catch(() => {
-                showNotification('Erro ao copiar código!', 'error');
-            });
+        // Load teachers
+        function loadTeachers() {
+            const tbody = document.getElementById('teachersTableBody');
+            tbody.innerHTML = teachersData.map(teacher => `
+                <tr>
+                    <td>${teacher.nome}</td>
+                    <td>${teacher.email}</td>
+                    <td>${teacher.disciplinas}</td>
+                    <td>
+                        <button class="btn btn-small" onclick="editTeacher(${teacher.id})">Editar</button>
+                        <button class="btn btn-danger btn-small" onclick="deleteTeacher(${teacher.id})">Excluir</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Load classes
+        function loadClasses() {
+            const grid = document.getElementById('classesGrid');
+            grid.innerHTML = classesData.map(classItem => `
+                <div class="card">
+                    <h3 class="card-title">${classItem.nome}</h3>
+                    <p><strong>Curso:</strong> ${classItem.curso}</p>
+                    <p><strong>Horário:</strong> ${classItem.horario}</p>
+                    <p><strong>Alunos:</strong> ${classItem.matriculados}/${classItem.capacidade}</p>
+                    <div style="margin-top: 15px;">
+                        <button class="btn btn-small" onclick="editClass(${classItem.id})">Editar</button>
+                        <button class="btn btn-danger btn-small" onclick="deleteClass(${classItem.id})">Excluir</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load configuration
+        function loadConfiguration() {
+            const apiUrl = localStorage.getItem('sheetsApiUrl') || '';
+            document.getElementById('sheetsApiUrl').value = apiUrl;
         }
 
         // Save configuration
@@ -1051,17 +890,10 @@ function deleteData(sheetName, data) {
                 return;
             }
             
-            // Validate URL format
-            if (!apiUrl.includes('script.google.com') && !apiUrl.includes('script.googleusercontent.com')) {
-                showNotification('URL inválida! Deve ser uma URL do Google Apps Script.', 'error');
-                return;
-            }
-            
             localStorage.setItem('sheetsApiUrl', apiUrl);
-            sheetsApiUrl = apiUrl;
+            CONFIG.SHEETS_API_URL = apiUrl;
             
             showNotification('Configuração salva com sucesso!', 'success');
-            updateConnectionStatus('disconnected', 'Configuração salva - Teste a conexão');
         }
 
         // Test connection
@@ -1073,228 +905,476 @@ function deleteData(sheetName, data) {
                 return;
             }
             
-            updateConnectionStatus('testing', 'Testando conexão...');
-            
             try {
                 const response = await fetch(apiUrl + '?action=test');
                 const result = await response.json();
                 
                 if (result.success) {
-                    updateConnectionStatus('connected', 'Conectado - ' + result.message);
                     showNotification('Conexão estabelecida com sucesso!', 'success');
                     
                     const configResult = document.getElementById('configResult');
                     configResult.innerHTML = `
-                        <div class="success-box" style="margin-top: 20px;">
+                        <div style="background: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 15px; border-radius: 8px; margin-top: 20px;">
                             <h4>✅ Conexão Estabelecida!</h4>
                             <p><strong>Planilha conectada:</strong> ${result.spreadsheetName || 'SGE Database'}</p>
-                            <p>Agora você pode inicializar as planilhas clicando no botão "Inicializar Planilhas"</p>
+                            <p>Sistema pronto para uso!</p>
                         </div>
                     `;
                 } else {
-                    updateConnectionStatus('disconnected', 'Erro de conexão');
                     showNotification('Erro na conexão: ' + result.error, 'error');
                 }
             } catch (error) {
-                updateConnectionStatus('disconnected', 'Erro de conexão');
                 showNotification('Erro ao testar conexão: ' + error.message, 'error');
             }
         }
 
-        // Initialize sheets
-        async function initializeSheets() {
-            const apiUrl = document.getElementById('sheetsApiUrl').value.trim();
-            
-            if (!apiUrl) {
-                showNotification('Por favor, configure e teste a conexão primeiro!', 'error');
+        // Save student
+        async function saveStudent() {
+            const isEditing = document.getElementById('editingStudentId').value;
+            const studentData = {
+                nome: document.getElementById('studentName').value,
+                email: document.getElementById('studentEmail').value,
+                telefone: document.getElementById('studentPhone').value,
+                cpf: document.getElementById('studentCPF').value,
+                curso: document.getElementById('studentCourse').value
+            };
+
+            if (!studentData.nome || !studentData.email || !studentData.curso) {
+                showNotification('Preencha todos os campos obrigatórios!', 'error');
                 return;
             }
+
+            if (CONFIG.SHEETS_API_URL) {
+                // Save to Google Sheets
+                try {
+                    const response = await fetch(CONFIG.SHEETS_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            action: isEditing ? 'update' : 'write',
+                            sheet: CONFIG.SHEETS.STUDENTS,
+                            ...studentData,
+                            ...(isEditing && { id: parseInt(isEditing) })
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    if (result.success) {
+                        showNotification(isEditing ? 'Aluno atualizado com sucesso!' : 'Aluno cadastrado com sucesso!', 'success');
+                        closeModal('studentModal');
+                        loadStudentsFromAPI();
+                        clearStudentForm();
+                    } else {
+                        showNotification('Erro ao salvar: ' + result.error, 'error');
+                    }
+                } catch (error) {
+                    showNotification('Erro de conexão!', 'error');
+                }
+            } else {
+                // Save locally (demo mode)
+                if (isEditing) {
+                    const student = studentsData.find(s => s.id == isEditing);
+                    Object.assign(student, studentData);
+                } else {
+                    const newStudent = {
+                        id: studentsData.length + 1,
+                        ra: `ALU${String(studentsData.length + 1).padStart(3, '0')}`,
+                        status: 'Matriculado',
+                        ...studentData
+                    };
+                    studentsData.push(newStudent);
+                }
+                
+                showNotification(isEditing ? 'Aluno atualizado!' : 'Aluno cadastrado!', 'success');
+                closeModal('studentModal');
+                loadStudents();
+                clearStudentForm();
+            }
+        }
+
+        // Save teacher
+        async function saveTeacher() {
+            const isEditing = document.getElementById('editingTeacherId').value;
+            const teacherData = {
+                nome: document.getElementById('teacherName').value,
+                email: document.getElementById('teacherEmail').value,
+                telefone: document.getElementById('teacherPhone').value,
+                cpf: document.getElementById('teacherCPF').value,
+                disciplinas: document.getElementById('teacherSubjects').value
+            };
+
+            if (!teacherData.nome || !teacherData.email) {
+                showNotification('Preencha todos os campos obrigatórios!', 'error');
+                return;
+            }
+
+            if (CONFIG.SHEETS_API_URL) {
+                // Save to Google Sheets
+                try {
+                    const response = await fetch(CONFIG.SHEETS_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            action: isEditing ? 'update' : 'write',
+                            sheet: CONFIG.SHEETS.TEACHERS,
+                            ...teacherData,
+                            ...(isEditing && { id: parseInt(isEditing) })
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    if (result.success) {
+                        showNotification(isEditing ? 'Professor atualizado!' : 'Professor cadastrado!', 'success');
+                        closeModal('teacherModal');
+                        loadTeachersFromAPI();
+                        clearTeacherForm();
+                    } else {
+                        showNotification('Erro ao salvar: ' + result.error, 'error');
+                    }
+                } catch (error) {
+                    showNotification('Erro de conexão!', 'error');
+                }
+            } else {
+                // Save locally (demo mode)
+                if (isEditing) {
+                    const teacher = teachersData.find(t => t.id == isEditing);
+                    Object.assign(teacher, teacherData);
+                } else {
+                    const newTeacher = {
+                        id: teachersData.length + 1,
+                        ...teacherData
+                    };
+                    teachersData.push(newTeacher);
+                }
+                
+                showNotification(isEditing ? 'Professor atualizado!' : 'Professor cadastrado!', 'success');
+                closeModal('teacherModal');
+                loadTeachers();
+                clearTeacherForm();
+            }
+        }
+
+        // Save class
+        async function saveClass() {
+            const isEditing = document.getElementById('editingClassId').value;
+            const classData = {
+                nome: document.getElementById('className').value,
+                curso: document.getElementById('classCourse').value,
+                horario: document.getElementById('classSchedule').value,
+                capacidade: parseInt(document.getElementById('classCapacity').value)
+            };
+
+            if (!classData.nome || !classData.curso) {
+                showNotification('Preencha todos os campos obrigatórios!', 'error');
+                return;
+            }
+
+            if (CONFIG.SHEETS_API_URL) {
+                // Save to Google Sheets
+                try {
+                    const response = await fetch(CONFIG.SHEETS_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            action: isEditing ? 'update' : 'write',
+                            sheet: CONFIG.SHEETS.CLASSES,
+                            ...classData,
+                            matriculados: 0,
+                            ...(isEditing && { id: parseInt(isEditing) })
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    if (result.success) {
+                        showNotification(isEditing ? 'Turma atualizada!' : 'Turma criada!', 'success');
+                        closeModal('classModal');
+                        loadClassesFromAPI();
+                        clearClassForm();
+                    } else {
+                        showNotification('Erro ao salvar: ' + result.error, 'error');
+                    }
+                } catch (error) {
+                    showNotification('Erro de conexão!', 'error');
+                }
+            } else {
+                // Save locally (demo mode)
+                if (isEditing) {
+                    const classItem = classesData.find(c => c.id == isEditing);
+                    Object.assign(classItem, classData);
+                } else {
+                    const newClass = {
+                        id: classesData.length + 1,
+                        matriculados: 0,
+                        ...classData
+                    };
+                    classesData.push(newClass);
+                }
+                
+                showNotification(isEditing ? 'Turma atualizada!' : 'Turma criada!', 'success');
+                closeModal('classModal');
+                loadClasses();
+                clearClassForm();
+            }
+        }
+
+        // Load data from API
+        async function loadStudentsFromAPI() {
+            if (!CONFIG.SHEETS_API_URL) return;
             
             try {
-                showNotification('Inicializando planilhas...', 'info');
-                
-                const response = await fetch(apiUrl + '?action=init');
+                const response = await fetch(CONFIG.SHEETS_API_URL + '?action=read&sheet=' + CONFIG.SHEETS.STUDENTS);
                 const result = await response.json();
                 
                 if (result.success) {
-                    showNotification('Planilhas inicializadas com sucesso!', 'success');
-                    
-                    const configResult = document.getElementById('configResult');
-                    configResult.innerHTML = `
-                        <div class="success-box" style="margin-top: 20px;">
-                            <h4>🎉 Sistema Configurado!</h4>
-                            <p><strong>Planilhas criadas:</strong> ${result.sheetsCreated.join(', ')}</p>
-                            <p>Seu sistema está pronto para uso! Agora você pode:</p>
-                            <ul style="margin: 15px 0; padding-left: 30px;">
-                                <li>Gerenciar alunos, professores e turmas</li>
-                                <li>Controlar frequência e progresso</li>
-                                <li>Usar o sistema de gamificação</li>
-                                <li>Publicar no GitHub para acesso online</li>
-                            </ul>
-                        </div>
-                    `;
-                } else {
-                    showNotification('Erro ao inicializar planilhas: ' + result.error, 'error');
+                    studentsData = result.data;
+                    loadStudents();
                 }
             } catch (error) {
-                showNotification('Erro ao inicializar planilhas: ' + error.message, 'error');
+                console.error('Erro ao carregar alunos:', error);
             }
         }
 
-        // Update connection status
-        function updateConnectionStatus(status, text) {
-            const statusElement = document.getElementById('connectionStatus');
-            const textElement = document.getElementById('connectionText');
+        async function loadTeachersFromAPI() {
+            if (!CONFIG.SHEETS_API_URL) return;
             
-            statusElement.className = `status-indicator status-${status}`;
-            textElement.textContent = text;
+            try {
+                const response = await fetch(CONFIG.SHEETS_API_URL + '?action=read&sheet=' + CONFIG.SHEETS.TEACHERS);
+                const result = await response.json();
+                
+                if (result.success) {
+                    teachersData = result.data;
+                    loadTeachers();
+                }
+            } catch (error) {
+                console.error('Erro ao carregar professores:', error);
+            }
         }
 
-        // Update site URL
-        function updateSiteUrl() {
-            const username = document.getElementById('githubUsername').value.trim();
-            const siteUrlField = document.getElementById('siteUrl');
+        async function loadClassesFromAPI() {
+            if (!CONFIG.SHEETS_API_URL) return;
             
-            if (username) {
-                siteUrlField.value = `https://${username}.github.io/sge-sistema/`;
+            try {
+                const response = await fetch(CONFIG.SHEETS_API_URL + '?action=read&sheet=' + CONFIG.SHEETS.CLASSES);
+                const result = await response.json();
+                
+                if (result.success) {
+                    classesData = result.data;
+                    loadClasses();
+                }
+            } catch (error) {
+                console.error('Erro ao carregar turmas:', error);
+            }
+        }
+
+        // Edit functions
+        function editStudent(studentId) {
+            const student = studentsData.find(s => s.id === studentId);
+            if (!student) return;
+
+            document.getElementById('studentModalTitle').textContent = 'Editar Aluno';
+            document.getElementById('studentName').value = student.nome;
+            document.getElementById('studentEmail').value = student.email;
+            document.getElementById('studentPhone').value = student.telefone;
+            document.getElementById('studentCPF').value = student.cpf;
+            document.getElementById('studentCourse').value = student.curso;
+            document.getElementById('editingStudentId').value = student.id;
+
+            openModal('studentModal');
+        }
+
+        function editTeacher(teacherId) {
+            const teacher = teachersData.find(t => t.id === teacherId);
+            if (!teacher) return;
+
+            document.getElementById('teacherModalTitle').textContent = 'Editar Professor';
+            document.getElementById('teacherName').value = teacher.nome;
+            document.getElementById('teacherEmail').value = teacher.email;
+            document.getElementById('teacherPhone').value = teacher.telefone;
+            document.getElementById('teacherCPF').value = teacher.cpf;
+            document.getElementById('teacherSubjects').value = teacher.disciplinas;
+            document.getElementById('editingTeacherId').value = teacher.id;
+
+            openModal('teacherModal');
+        }
+
+        function editClass(classId) {
+            const classItem = classesData.find(c => c.id === classId);
+            if (!classItem) return;
+
+            document.getElementById('classModalTitle').textContent = 'Editar Turma';
+            document.getElementById('className').value = classItem.nome;
+            document.getElementById('classCourse').value = classItem.curso;
+            document.getElementById('classSchedule').value = classItem.horario;
+            document.getElementById('classCapacity').value = classItem.capacidade;
+            document.getElementById('editingClassId').value = classItem.id;
+
+            openModal('classModal');
+        }
+
+        // Delete functions
+        async function deleteStudent(studentId) {
+            if (!confirm('Tem certeza que deseja excluir este aluno?')) return;
+
+            if (CONFIG.SHEETS_API_URL) {
+                try {
+                    const response = await fetch(CONFIG.SHEETS_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            action: 'delete',
+                            sheet: CONFIG.SHEETS.STUDENTS,
+                            id: studentId
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    if (result.success) {
+                        showNotification('Aluno excluído com sucesso!', 'success');
+                        loadStudentsFromAPI();
+                    } else {
+                        showNotification('Erro ao excluir: ' + result.error, 'error');
+                    }
+                } catch (error) {
+                    showNotification('Erro de conexão!', 'error');
+                }
             } else {
-                siteUrlField.value = 'https://SEU_USUARIO.github.io/sge-sistema/';
+                studentsData = studentsData.filter(s => s.id !== studentId);
+                loadStudents();
+                showNotification('Aluno excluído!', 'success');
             }
         }
 
-        // Generate site URL
-        function generateSiteUrl() {
-            const username = document.getElementById('githubUsername').value.trim();
-            
-            if (!username) {
-                showNotification('Por favor, digite seu nome de usuário do GitHub!', 'error');
-                return;
+        async function deleteTeacher(teacherId) {
+            if (!confirm('Tem certeza que deseja excluir este professor?')) return;
+
+            if (CONFIG.SHEETS_API_URL) {
+                try {
+                    const response = await fetch(CONFIG.SHEETS_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            action: 'delete',
+                            sheet: CONFIG.SHEETS.TEACHERS,
+                            id: teacherId
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    if (result.success) {
+                        showNotification('Professor excluído com sucesso!', 'success');
+                        loadTeachersFromAPI();
+                    } else {
+                        showNotification('Erro ao excluir: ' + result.error, 'error');
+                    }
+                } catch (error) {
+                    showNotification('Erro de conexão!', 'error');
+                }
+            } else {
+                teachersData = teachersData.filter(t => t.id !== teacherId);
+                loadTeachers();
+                showNotification('Professor excluído!', 'success');
             }
-            
-            updateSiteUrl();
-            showNotification('URL do site gerada com sucesso!', 'success');
         }
 
-        // Open site
-        function openSite() {
-            const siteUrl = document.getElementById('siteUrl').value;
-            
-            if (!siteUrl || siteUrl.includes('SEU_USUARIO')) {
-                showNotification('Por favor, gere a URL do site primeiro!', 'error');
-                return;
+        async function deleteClass(classId) {
+            if (!confirm('Tem certeza que deseja excluir esta turma?')) return;
+
+            if (CONFIG.SHEETS_API_URL) {
+                try {
+                    const response = await fetch(CONFIG.SHEETS_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            action: 'delete',
+                            sheet: CONFIG.SHEETS.CLASSES,
+                            id: classId
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    if (result.success) {
+                        showNotification('Turma excluída com sucesso!', 'success');
+                        loadClassesFromAPI();
+                    } else {
+                        showNotification('Erro ao excluir: ' + result.error, 'error');
+                    }
+                } catch (error) {
+                    showNotification('Erro de conexão!', 'error');
+                }
+            } else {
+                classesData = classesData.filter(c => c.id !== classId);
+                loadClasses();
+                showNotification('Turma excluída!', 'success');
             }
-            
-            window.open(siteUrl, '_blank');
         }
 
-        // Download system files
-        function downloadSystemFiles() {
-            // Get current configuration
-            const apiUrl = document.getElementById('sheetsApiUrl').value.trim();
+        // Clear form functions
+        function clearStudentForm() {
+            document.getElementById('studentName').value = '';
+            document.getElementById('studentEmail').value = '';
+            document.getElementById('studentPhone').value = '';
+            document.getElementById('studentCPF').value = '';
+            document.getElementById('studentCourse').value = '';
+            document.getElementById('editingStudentId').value = '';
+            document.getElementById('studentModalTitle').textContent = 'Cadastro de Aluno';
+        }
+
+        function clearTeacherForm() {
+            document.getElementById('teacherName').value = '';
+            document.getElementById('teacherEmail').value = '';
+            document.getElementById('teacherPhone').value = '';
+            document.getElementById('teacherCPF').value = '';
+            document.getElementById('teacherSubjects').value = '';
+            document.getElementById('editingTeacherId').value = '';
+            document.getElementById('teacherModalTitle').textContent = 'Cadastro de Professor';
+        }
+
+        function clearClassForm() {
+            document.getElementById('className').value = '';
+            document.getElementById('classCourse').value = '';
+            document.getElementById('classSchedule').value = '';
+            document.getElementById('classCapacity').value = '20';
+            document.getElementById('editingClassId').value = '';
+            document.getElementById('classModalTitle').textContent = 'Criar Nova Turma';
+        }
+
+        // Utility functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
             
-            if (!apiUrl) {
-                showNotification('Configure a URL do Google Apps Script primeiro!', 'error');
-                return;
+            // Clear forms when closing
+            if (modalId === 'studentModal') clearStudentForm();
+            else if (modalId === 'teacherModal') clearTeacherForm();
+            else if (modalId === 'classModal') clearClassForm();
+        }
+
+        function searchTable(tableId, searchTerm) {
+            const table = document.getElementById(tableId);
+            const rows = table.getElementsByTagName('tr');
+            
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm.toLowerCase()) ? '' : 'none';
             }
-
-            // Create index.html with current configuration
-            const indexHtml = createIndexHtml(apiUrl);
-            
-            // Create config.js
-            const configJs = `// Configuração do SGE
-const CONFIG = {
-    SHEETS_API_URL: '${apiUrl}',
-    SHEETS: {
-        STUDENTS: 'Alunos',
-        TEACHERS: 'Professores',
-        CLASSES: 'Turmas',
-        COURSES: 'Cursos',
-        ATTENDANCE: 'Presenca',
-        FINANCIAL: 'Financeiro'
-    }
-};`;
-
-            // Create README.md
-            const readmeMd = `# SGE - Sistema de Gestão Escolar
-
-Sistema completo para gestão escolar com Google Sheets como banco de dados.
-
-## 🚀 Funcionalidades
-
-- ✅ Gestão de Alunos, Professores e Turmas
-- ✅ Controle de Presença e Frequência
-- ✅ Acompanhamento de Progresso Acadêmico
-- ✅ Sistema Financeiro Integrado
-- ✅ Gamificação com XP e Moedas
-- ✅ Geração de Documentos Acadêmicos
-- ✅ Interface Responsiva e Moderna
-
-## 📋 Como usar
-
-1. Acesse o sistema pelo link: [Seu Site](${document.getElementById('siteUrl').value})
-2. Faça login com qualquer email e senha "123456"
-3. Configure o Google Sheets na aba "Configuração"
-4. Comece a usar o sistema!
-
-## 🔧 Tecnologias
-
-- HTML5, CSS3, JavaScript
-- Google Sheets como banco de dados
-- Google Apps Script para API
-- GitHub Pages para hospedagem
-
-## 📞 Suporte
-
-Desenvolvido como sistema de demonstração para gestão escolar.
-
----
-🎓 **SGE - Transformando a gestão educacional!**`;
-
-            // Create and download files
-            downloadFile('index.html', indexHtml);
-            downloadFile('config.js', configJs);
-            downloadFile('README.md', readmeMd);
-            
-            showNotification('Arquivos baixados com sucesso! Agora você pode enviar para o GitHub.', 'success');
         }
 
-        // Create index.html with configuration
-        function createIndexHtml(apiUrl) {
-            // This would be the full HTML content with the API URL configured
-            // For brevity, I'll return a placeholder - in real implementation, 
-            // this would be the complete HTML content with the API integrated
-            return `<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGE - Sistema de Gestão Escolar</title>
-    <script src="config.js"></script>
-    <!-- Full system HTML would be here -->
-</head>
-<body>
-    <!-- Complete SGE system with Google Sheets integration -->
-    <div id="app">
-        <h1>SGE - Sistema de Gestão Escolar</h1>
-        <p>Sistema configurado e pronto para uso!</p>
-        <p>API URL: ${apiUrl}</p>
-    </div>
-</body>
-</html>`;
-        }
-
-        // Download file function
-        function downloadFile(filename, content) {
-            const element = document.createElement('a');
-            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
-            element.setAttribute('download', filename);
-            element.style.display = 'none';
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
-        }
-
-        // Show notification
         function showNotification(message, type) {
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
@@ -1307,6 +1387,31 @@ Desenvolvido como sistema de demonstração para gestão escolar.
                 setTimeout(() => document.body.removeChild(notification), 300);
             }, 3000);
         }
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('mainApp').style.display = 'none';
+            
+            // Add enter key support for login
+            document.getElementById('password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    login();
+                }
+            });
+
+            // Close modals when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
+                }
+            });
+
+            // Load saved configuration
+            const savedApiUrl = localStorage.getItem('sheetsApiUrl');
+            if (savedApiUrl) {
+                CONFIG.SHEETS_API_URL = savedApiUrl;
+            }
+        });
     </script>
 </body>
 </html>
