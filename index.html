@@ -143,6 +143,7 @@
         .btn-danger { background: #f44336; }
         .btn-success { background: #4CAF50; }
         .btn-warning { background: #FF9800; }
+        .btn-info { background: #2196F3; }
         .btn-small { padding: 6px 12px; font-size: 12px; }
 
         .table {
@@ -370,6 +371,103 @@
             margin: 10px 0;
         }
 
+        .turma-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .turma-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .turma-students {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .student-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #f8f9fa;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .attendance-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            margin: 5px 0;
+            border-radius: 8px;
+        }
+
+        .attendance-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .attendance-controls label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .boleto-item {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .mission-card {
+            background: #f0f8ff;
+            border: 2px solid #2196F3;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .inventory-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            margin: 5px 0;
+            border-radius: 6px;
+            background: #f9f9f9;
+        }
+
+        .cash-flow-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-left: 4px solid #2196F3;
+            background: #f8f9fa;
+            margin: 8px 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .cash-flow-item.expense {
+            border-left-color: #f44336;
+        }
+
         .level-indicator {
             background: linear-gradient(135deg, #9C27B0, #673AB7);
             color: white;
@@ -474,6 +572,7 @@
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Curso</th>
+                        <th>Turma</th>
                         <th>Status</th>
                         <th>Progresso</th>
                         <th>Pontos</th>
@@ -509,29 +608,47 @@
                     <div class="stat-number" id="totalPendente2">R$ 0,00</div>
                     <div class="stat-label">Pendentes</div>
                 </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);">
+                    <div class="stat-number" id="proximoMes">R$ 0,00</div>
+                    <div class="stat-label">Próximo Mês</div>
+                </div>
             </div>
 
             <div class="action-buttons">
                 <button class="btn" onclick="openModal('paymentModal')">Registrar Pagamento</button>
                 <button class="btn btn-secondary" onclick="generateFinancialReport()">Relatório</button>
                 <button class="btn btn-success" onclick="openModal('boletoModal')">Gerar Boleto</button>
+                <button class="btn btn-info" onclick="openModal('cashFlowModal')">Fluxo de Caixa</button>
+                <button class="btn btn-warning" onclick="openModal('inventoryModal')">Estoque</button>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title">Controle de Pagamentos</h3>
+                    <table class="table" id="paymentsTable">
+                        <thead>
+                            <tr>
+                                <th>Participante</th>
+                                <th>Parcela</th>
+                                <th>Valor</th>
+                                <th>Vencimento</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentsTableBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Boletos</h3>
+                    <div id="boletosContainer"></div>
+                </div>
             </div>
 
             <div class="card">
-                <h3 class="card-title">Controle de Pagamentos</h3>
-                <table class="table" id="paymentsTable">
-                    <thead>
-                        <tr>
-                            <th>Participante</th>
-                            <th>Parcela</th>
-                            <th>Valor</th>
-                            <th>Vencimento</th>
-                            <th>Status</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="paymentsTableBody"></tbody>
-                </table>
+                <h3 class="card-title">Fluxo de Caixa</h3>
+                <div id="cashFlowContainer"></div>
             </div>
         </div>
 
@@ -582,6 +699,10 @@
                 <div id="attendanceStudents"></div>
                 <button class="btn" onclick="saveAttendance()">Salvar Presença</button>
             </div>
+            <div class="card">
+                <h3 class="card-title">Relatório de Frequência</h3>
+                <div id="attendanceReport"></div>
+            </div>
         </div>
 
         <!-- Gamification Tab -->
@@ -595,12 +716,12 @@
                 </div>
                 
                 <div class="card">
-                    <h3 class="card-title">Premiações Ativas</h3>
+                    <h3 class="card-title">Missões Ativas</h3>
                     <div class="action-buttons">
-                        <button class="btn" onclick="openModal('achievementModal')">Nova Conquista</button>
+                        <button class="btn" onclick="openModal('missionModal')">Nova Missão</button>
                         <button class="btn btn-secondary" onclick="openModal('pointsModal')">Dar Pontos</button>
                     </div>
-                    <div id="achievementsList"></div>
+                    <div id="missionsList"></div>
                 </div>
             </div>
             
@@ -688,6 +809,21 @@
                         <option value="">Selecione um curso</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label>Turma: *</label>
+                    <select id="studentTurma" required>
+                        <option value="">Selecione uma turma</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Vendedor:</label>
+                    <select id="studentVendedor">
+                        <option value="">Selecione um vendedor</option>
+                        <option value="vendedor1">João Vendedor</option>
+                        <option value="vendedor2">Maria Vendedora</option>
+                        <option value="gerente1">Carlos Gerente</option>
+                    </select>
+                </div>
             </div>
             
             <h3>Responsável Financeiro</h3>
@@ -723,16 +859,98 @@
                         <option value="parcelado">Parcelado</option>
                         <option value="cartao">Cartão</option>
                         <option value="boleto">Boleto</option>
+                        <option value="semestral">Semestral</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Número de Parcelas:</label>
                     <input type="number" id="installments" value="1" min="1" max="24">
                 </div>
+                <div class="form-group">
+                    <label>Data de Início:</label>
+                    <input type="date" id="contractStartDate">
+                </div>
+                <div class="form-group">
+                    <label>Duração (meses):</label>
+                    <input type="number" id="contractDuration" value="12" min="1" max="36">
+                </div>
+                <div class="form-group">
+                    <label>Módulo Atual:</label>
+                    <input type="text" id="currentModule" placeholder="Ex: Módulo 1">
+                </div>
             </div>
             
             <button class="btn" onclick="saveStudent()">Salvar Participante</button>
             <input type="hidden" id="editingStudentId">
+        </div>
+    </div>
+
+    <!-- Turma Modal -->
+    <div id="turmaModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('turmaModal')">&times;</span>
+            <h2 id="turmaModalTitle">Nova Turma</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Nome da Turma:</label>
+                    <input type="text" id="turmaName">
+                </div>
+                <div class="form-group">
+                    <label>Curso:</label>
+                    <select id="turmaCourse">
+                        <option value="">Selecione um curso</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Data de Início:</label>
+                    <input type="date" id="turmaStart">
+                </div>
+                <div class="form-group">
+                    <label>Data de Fim:</label>
+                    <input type="date" id="turmaEnd">
+                </div>
+                <div class="form-group">
+                    <label>Horário:</label>
+                    <input type="time" id="turmaHorario">
+                </div>
+                <div class="form-group">
+                    <label>Dias da Semana:</label>
+                    <select id="turmaDias" multiple>
+                        <option value="segunda">Segunda</option>
+                        <option value="terca">Terça</option>
+                        <option value="quarta">Quarta</option>
+                        <option value="quinta">Quinta</option>
+                        <option value="sexta">Sexta</option>
+                        <option value="sabado">Sábado</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn" onclick="saveTurma()">Salvar</button>
+            <input type="hidden" id="editingTurmaId">
+        </div>
+    </div>
+
+    <!-- Edit Student in Turma Modal -->
+    <div id="editTurmaStudentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editTurmaStudentModal')">&times;</span>
+            <h2>Editar Aluno na Turma</h2>
+            <div class="form-group">
+                <label>Nome:</label>
+                <input type="text" id="editTurmaStudentName" readonly>
+            </div>
+            <div class="form-group">
+                <label>Nova Turma:</label>
+                <select id="editTurmaStudentNewTurma">
+                    <option value="">Selecione uma turma</option>
+                </select>
+            </div>
+            <div class="action-buttons">
+                <button class="btn" onclick="saveStudentTurmaEdit()">Salvar</button>
+                <button class="btn btn-warning" onclick="transferStudent()">Transferir</button>
+                <button class="btn btn-danger" onclick="removeStudentFromTurma()">Remover da Turma</button>
+            </div>
+            <input type="hidden" id="editTurmaStudentId">
         </div>
     </div>
 
@@ -790,6 +1008,7 @@
                         <option value="trancamento">Trancamento</option>
                         <option value="cancelamento">Cancelamento</option>
                         <option value="contrato">Contrato</option>
+                        <option value="certificado">Certificado</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -800,6 +1019,27 @@
                 </div>
             </div>
             <button class="btn" onclick="generateDocument()">Gerar</button>
+        </div>
+    </div>
+
+    <!-- Template Modal -->
+    <div id="templateModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('templateModal')">&times;</span>
+            <h2>Templates de Documentos</h2>
+            <div class="card">
+                <h4>Templates Disponíveis</h4>
+                <div class="action-buttons">
+                    <button class="btn" onclick="useTemplate('contrato')">Usar Template de Contrato</button>
+                    <button class="btn" onclick="useTemplate('declaracao')">Usar Template de Declaração</button>
+                    <button class="btn" onclick="useTemplate('certificado')">Usar Template de Certificado</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Personalizar Template:</label>
+                <textarea id="templateContent" rows="10" placeholder="Digite o conteúdo do template..."></textarea>
+            </div>
+            <button class="btn" onclick="saveTemplate()">Salvar Template</button>
         </div>
     </div>
 
@@ -830,6 +1070,7 @@
                         <option value="cartao">Cartão</option>
                         <option value="pix">PIX</option>
                         <option value="transferencia">Transferência</option>
+                        <option value="boleto">Boleto</option>
                     </select>
                 </div>
             </div>
@@ -838,6 +1079,155 @@
                 <textarea id="paymentNotes" rows="3"></textarea>
             </div>
             <button class="btn" onclick="savePayment()">Salvar</button>
+        </div>
+    </div>
+
+    <!-- Boleto Modal -->
+    <div id="boletoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('boletoModal')">&times;</span>
+            <h2>Gerar Boleto</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Participante:</label>
+                    <select id="boletoStudent">
+                        <option value="">Selecione um participante</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Valor:</label>
+                    <input type="number" id="boletoValue" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label>Data de Vencimento:</label>
+                    <input type="date" id="boletoDueDate">
+                </div>
+                <div class="form-group">
+                    <label>Parcela:</label>
+                    <input type="number" id="boletoInstallment" min="1">
+                </div>
+            </div>
+            <button class="btn" onclick="generateBoleto()">Gerar Boleto</button>
+        </div>
+    </div>
+
+    <!-- Cash Flow Modal -->
+    <div id="cashFlowModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cashFlowModal')">&times;</span>
+            <h2>Controle de Fluxo de Caixa</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Tipo:</label>
+                    <select id="cashFlowType">
+                        <option value="entrada">Entrada</option>
+                        <option value="saida">Saída</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Valor:</label>
+                    <input type="number" id="cashFlowValue" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label>Categoria:</label>
+                    <select id="cashFlowCategory">
+                        <option value="mensalidade">Mensalidade</option>
+                        <option value="matricula">Matrícula</option>
+                        <option value="material">Material</option>
+                        <option value="aluguel">Aluguel</option>
+                        <option value="salario">Salário</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Data:</label>
+                    <input type="date" id="cashFlowDate">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Descrição:</label>
+                <textarea id="cashFlowDescription" rows="3"></textarea>
+            </div>
+            <button class="btn" onclick="saveCashFlow()">Salvar</button>
+        </div>
+    </div>
+
+    <!-- Inventory Modal -->
+    <div id="inventoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('inventoryModal')">&times;</span>
+            <h2>Controle de Estoque</h2>
+            <div class="action-buttons">
+                <button class="btn" onclick="openModal('addProductModal')">Adicionar Produto</button>
+                <button class="btn btn-secondary" onclick="openModal('saleModal')">Registrar Venda</button>
+            </div>
+            <div id="inventoryList"></div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addProductModal')">&times;</span>
+            <h2>Adicionar Produto</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Nome do Produto:</label>
+                    <input type="text" id="productName">
+                </div>
+                <div class="form-group">
+                    <label>Preço:</label>
+                    <input type="number" id="productPrice" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label>Quantidade:</label>
+                    <input type="number" id="productQuantity" min="0">
+                </div>
+                <div class="form-group">
+                    <label>Categoria:</label>
+                    <select id="productCategory">
+                        <option value="bebida">Bebida</option>
+                        <option value="snack">Snack</option>
+                        <option value="material">Material</option>
+                        <option value="servico">Serviço</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn" onclick="saveProduct()">Salvar Produto</button>
+        </div>
+    </div>
+
+    <!-- Sale Modal -->
+    <div id="saleModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('saleModal')">&times;</span>
+            <h2>Registrar Venda</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Produto:</label>
+                    <select id="saleProduct">
+                        <option value="">Selecione um produto</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Quantidade:</label>
+                    <input type="number" id="saleQuantity" min="1" value="1">
+                </div>
+                <div class="form-group">
+                    <label>Vendedor:</label>
+                    <select id="saleVendedor">
+                        <option value="">Selecione um vendedor</option>
+                        <option value="vendedor1">João Vendedor</option>
+                        <option value="vendedor2">Maria Vendedora</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Data:</label>
+                    <input type="date" id="saleDate">
+                </div>
+            </div>
+            <button class="btn" onclick="saveSale()">Registrar Venda</button>
         </div>
     </div>
 
@@ -857,12 +1247,56 @@
                     <label>Progresso (%):</label>
                     <input type="number" id="progressValue" min="0" max="100">
                 </div>
+                <div class="form-group">
+                    <label>Módulo Atual:</label>
+                    <input type="text" id="progressModule">
+                </div>
+                <div class="form-group">
+                    <label>Aula Atual:</label>
+                    <input type="text" id="progressLesson">
+                </div>
             </div>
             <div class="form-group">
                 <label>Observações:</label>
                 <textarea id="progressNotes" rows="3"></textarea>
             </div>
             <button class="btn" onclick="saveProgress()">Salvar</button>
+        </div>
+    </div>
+
+    <!-- Mission Modal -->
+    <div id="missionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('missionModal')">&times;</span>
+            <h2>Nova Missão</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Título da Missão:</label>
+                    <input type="text" id="missionTitle">
+                </div>
+                <div class="form-group">
+                    <label>Pontos de Recompensa:</label>
+                    <input type="number" id="missionPoints" min="1">
+                </div>
+                <div class="form-group">
+                    <label>Data de Expiração:</label>
+                    <input type="date" id="missionExpiry">
+                </div>
+                <div class="form-group">
+                    <label>Tipo:</label>
+                    <select id="missionType">
+                        <option value="presenca">Presença</option>
+                        <option value="entrega">Entrega de Projeto</option>
+                        <option value="participacao">Participação</option>
+                        <option value="nota">Nota Mínima</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Descrição:</label>
+                <textarea id="missionDescription" rows="3"></textarea>
+            </div>
+            <button class="btn" onclick="saveMission()">Criar Missão</button>
         </div>
     </div>
 
@@ -888,6 +1322,42 @@
                 <input type="text" id="pointsReason" placeholder="Ex: Participação em aula">
             </div>
             <button class="btn" onclick="givePoints()">Dar Pontos</button>
+        </div>
+    </div>
+
+    <!-- Store Item Modal -->
+    <div id="storeItemModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('storeItemModal')">&times;</span>
+            <h2>Novo Item da Loja</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Nome do Item:</label>
+                    <input type="text" id="storeItemName">
+                </div>
+                <div class="form-group">
+                    <label>Custo em Pontos:</label>
+                    <input type="number" id="storeItemCost" min="1">
+                </div>
+                <div class="form-group">
+                    <label>Categoria:</label>
+                    <select id="storeItemCategory">
+                        <option value="desconto">Desconto</option>
+                        <option value="material">Material Extra</option>
+                        <option value="certificado">Certificado</option>
+                        <option value="brinde">Brinde</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Estoque:</label>
+                    <input type="number" id="storeItemStock" min="0">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Descrição:</label>
+                <textarea id="storeItemDescription" rows="3"></textarea>
+            </div>
+            <button class="btn" onclick="saveStoreItem()">Salvar Item</button>
         </div>
     </div>
 
@@ -921,32 +1391,41 @@
         </div>
     </div>
 
-    <!-- Turma Modal -->
-    <div id="turmaModal" class="modal">
+    <!-- Commission Modal -->
+    <div id="commissionModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('turmaModal')">&times;</span>
-            <h2>Nova Turma</h2>
+            <span class="close" onclick="closeModal('commissionModal')">&times;</span>
+            <h2>Nova Comissão</h2>
             <div class="grid-2">
                 <div class="form-group">
-                    <label>Nome da Turma:</label>
-                    <input type="text" id="turmaName">
-                </div>
-                <div class="form-group">
-                    <label>Curso:</label>
-                    <select id="turmaCourse">
-                        <option value="">Selecione um curso</option>
+                    <label>Vendedor:</label>
+                    <select id="commissionVendedor">
+                        <option value="">Selecione um vendedor</option>
+                        <option value="vendedor1">João Vendedor</option>
+                        <option value="vendedor2">Maria Vendedora</option>
+                        <option value="gerente1">Carlos Gerente</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Data de Início:</label>
-                    <input type="date" id="turmaStart">
+                    <label>Tipo:</label>
+                    <select id="commissionType">
+                        <option value="matricula">Matrícula</option>
+                        <option value="bonus_dia">Bônus Diário</option>
+                        <option value="blackin">Blackin</option>
+                        <option value="black">Black</option>
+                        <option value="faturamento">Faturamento</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label>Data de Fim:</label>
-                    <input type="date" id="turmaEnd">
+                    <label>Valor da Venda:</label>
+                    <input type="number" id="commissionSaleValue" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label>Data:</label>
+                    <input type="date" id="commissionDate">
                 </div>
             </div>
-            <button class="btn" onclick="saveTurma()">Salvar</button>
+            <button class="btn" onclick="saveCommission()">Salvar</button>
         </div>
     </div>
 
@@ -959,8 +1438,14 @@
             turmas: [],
             attendance: [],
             achievements: [],
+            missions: [],
             storeItems: [],
             commissions: [],
+            cashFlow: [],
+            inventory: [],
+            sales: [],
+            boletos: [],
+            templates: {},
             currentUser: null
         };
 
@@ -970,6 +1455,10 @@
             initializeTabs();
             populateSelects();
             document.getElementById('attendanceDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('cashFlowDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('saleDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('paymentDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('commissionDate').value = new Date().toISOString().split('T')[0];
         });
 
         // Sistema de autenticação
@@ -1079,10 +1568,13 @@
             // Populate selects based on modal
             if (modalId === 'studentModal') {
                 populateCoursesSelect('studentCourse');
+                populateTurmasSelect('studentTurma');
             } else if (modalId === 'documentModal') {
                 populateStudentsSelect('documentStudent');
             } else if (modalId === 'paymentModal') {
                 populateStudentsSelect('paymentStudent');
+            } else if (modalId === 'boletoModal') {
+                populateStudentsSelect('boletoStudent');
             } else if (modalId === 'progressModal') {
                 populateStudentsSelect('progressStudent');
             } else if (modalId === 'pointsModal') {
@@ -1091,6 +1583,10 @@
                 populateStudentsSelect('statusStudent');
             } else if (modalId === 'turmaModal') {
                 populateCoursesSelect('turmaCourse');
+            } else if (modalId === 'saleModal') {
+                populateProductsSelect('saleProduct');
+            } else if (modalId === 'editTurmaStudentModal') {
+                populateTurmasSelect('editTurmaStudentNewTurma');
             }
         }
 
@@ -1131,6 +1627,8 @@
                 cpf: document.getElementById('studentCPF').value,
                 birth: document.getElementById('studentBirth').value,
                 course: document.getElementById('studentCourse').value,
+                turma: document.getElementById('studentTurma').value,
+                vendedor: document.getElementById('studentVendedor').value,
                 responsible: {
                     name: document.getElementById('responsibleName').value,
                     email: document.getElementById('responsibleEmail').value,
@@ -1140,7 +1638,14 @@
                 contract: {
                     value: parseFloat(document.getElementById('contractValue').value),
                     paymentMethod: document.getElementById('paymentMethod').value,
-                    installments: parseInt(document.getElementById('installments').value)
+                    installments: parseInt(document.getElementById('installments').value),
+                    startDate: document.getElementById('contractStartDate').value,
+                    duration: parseInt(document.getElementById('contractDuration').value),
+                    endDate: calculateEndDate(document.getElementById('contractStartDate').value, parseInt(document.getElementById('contractDuration').value))
+                },
+                academic: {
+                    currentModule: document.getElementById('currentModule').value || 'Módulo 1',
+                    currentLesson: 'Aula 1'
                 },
                 status: 'ativo',
                 progress: 0,
@@ -1148,7 +1653,7 @@
                 createdAt: new Date().toISOString()
             };
 
-            if (!studentData.name || !studentData.email || !studentData.course || !studentData.responsible.name) {
+            if (!studentData.name || !studentData.email || !studentData.course || !studentData.responsible.name || !studentData.turma) {
                 showNotification('Preencha todos os campos obrigatórios', 'error');
                 return;
             }
@@ -1165,23 +1670,52 @@
                 if (studentData.contract.installments > 1) {
                     createInstallments(studentData);
                 }
+                
+                // Registrar comissão para o vendedor
+                if (studentData.vendedor) {
+                    registerSaleCommission(studentData);
+                }
             }
 
             saveData();
             closeModal('studentModal');
             loadStudentsTable();
+            loadTurmas();
             updateDashboard();
+        }
+
+        function calculateEndDate(startDate, durationMonths) {
+            if (!startDate || !durationMonths) return '';
+            const start = new Date(startDate);
+            start.setMonth(start.getMonth() + durationMonths);
+            return start.toISOString().split('T')[0];
+        }
+
+        function registerSaleCommission(student) {
+            const commission = {
+                id: Date.now().toString(),
+                vendedor: student.vendedor,
+                type: 'matricula',
+                saleValue: student.contract.value,
+                studentId: student.id,
+                studentName: student.name,
+                date: new Date().toISOString().split('T')[0],
+                paymentMethod: student.contract.paymentMethod,
+                calculated: false
+            };
+            
+            data.commissions.push(commission);
         }
 
         function createInstallments(student) {
             const installmentValue = student.contract.value / student.contract.installments;
-            const today = new Date();
+            const startDate = new Date(student.contract.startDate || new Date());
             
             for (let i = 0; i < student.contract.installments; i++) {
-                const dueDate = new Date(today);
-                dueDate.setMonth(today.getMonth() + i);
+                const dueDate = new Date(startDate);
+                dueDate.setMonth(startDate.getMonth() + i);
                 
-                data.payments.push({
+                const payment = {
                     id: Date.now().toString() + i,
                     studentId: student.id,
                     studentName: student.name,
@@ -1191,8 +1725,34 @@
                     status: 'pendente',
                     paymentDate: null,
                     method: null
-                });
+                };
+                
+                data.payments.push(payment);
+                
+                // Criar boleto automaticamente
+                createBoleto(payment);
             }
+        }
+
+        function createBoleto(payment) {
+            const boleto = {
+                id: Date.now().toString() + '_' + Math.random().toString(36).substr(2, 9),
+                studentId: payment.studentId,
+                studentName: payment.studentName,
+                paymentId: payment.id,
+                value: payment.value,
+                dueDate: payment.dueDate,
+                installment: payment.installment,
+                status: 'pendente',
+                barcodeNumber: generateBarcodeNumber(),
+                createdAt: new Date().toISOString()
+            };
+            
+            data.boletos.push(boleto);
+        }
+
+        function generateBarcodeNumber() {
+            return '00190' + Math.random().toString().substr(2, 39);
         }
 
         function loadStudentsTable() {
@@ -1200,12 +1760,14 @@
             tbody.innerHTML = '';
 
             data.students.forEach(student => {
+                const turmaName = data.turmas.find(t => t.id === student.turma)?.name || 'Sem turma';
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${student.id}</td>
                     <td>${student.name}</td>
                     <td>${student.email}</td>
                     <td>${student.course}</td>
+                    <td>${turmaName}</td>
                     <td><span class="status-badge status-${student.status}">${student.status.toUpperCase()}</span></td>
                     <td>
                         <div class="progress-bar">
@@ -1235,6 +1797,8 @@
             document.getElementById('studentCPF').value = student.cpf || '';
             document.getElementById('studentBirth').value = student.birth || '';
             document.getElementById('studentCourse').value = student.course;
+            document.getElementById('studentTurma').value = student.turma || '';
+            document.getElementById('studentVendedor').value = student.vendedor || '';
             document.getElementById('responsibleName').value = student.responsible.name;
             document.getElementById('responsibleEmail').value = student.responsible.email;
             document.getElementById('responsiblePhone').value = student.responsible.phone || '';
@@ -1242,6 +1806,9 @@
             document.getElementById('contractValue').value = student.contract.value;
             document.getElementById('paymentMethod').value = student.contract.paymentMethod;
             document.getElementById('installments').value = student.contract.installments;
+            document.getElementById('contractStartDate').value = student.contract.startDate || '';
+            document.getElementById('contractDuration').value = student.contract.duration || 12;
+            document.getElementById('currentModule').value = student.academic?.currentModule || '';
 
             document.getElementById('studentModalTitle').textContent = 'Editar Participante';
             openModal('studentModal');
@@ -1251,6 +1818,7 @@
             if (confirm('Tem certeza que deseja excluir este participante?')) {
                 data.students = data.students.filter(s => s.id !== studentId);
                 data.payments = data.payments.filter(p => p.studentId !== studentId);
+                data.boletos = data.boletos.filter(b => b.studentId !== studentId);
                 saveData();
                 loadStudentsTable();
                 updateDashboard();
@@ -1263,19 +1831,1473 @@
             if (!student) return;
 
             const studentPayments = data.payments.filter(p => p.studentId === studentId);
+            const turmaName = data.turmas.find(t => t.id === student.turma)?.name || 'Sem turma';
             
             alert(`
 Detalhes do Participante:
 Nome: ${student.name}
 Email: ${student.email}
 Curso: ${student.course}
+Turma: ${turmaName}
 Status: ${student.status}
 Progresso: ${student.progress}%
 Pontos: ${student.points}
+Módulo Atual: ${student.academic?.currentModule || 'N/A'}
 Responsável: ${student.responsible.name}
 Valor do Contrato: R$ ${student.contract.value.toFixed(2)}
 Parcelas: ${studentPayments.length}
+Data de Início: ${student.contract.startDate ? new Date(student.contract.startDate).toLocaleDateString('pt-BR') : 'N/A'}
+Data de Término: ${student.contract.endDate ? new Date(student.contract.endDate).toLocaleDateString('pt-BR') : 'N/A'}
             `.trim());
+        }
+
+        // Sistema de turmas
+        function loadTurmas() {
+            const container = document.getElementById('turmasContainer');
+            container.innerHTML = '';
+
+            data.turmas.forEach(turma => {
+                const studentsInClass = data.students.filter(s => s.turma === turma.id);
+                const card = document.createElement('div');
+                card.className = 'turma-card';
+                card.innerHTML = `
+                    <div onclick="toggleTurmaStudents('${turma.id}')">
+                        <h4>${turma.name}</h4>
+                        <p>Curso: ${turma.course}</p>
+                        <p>Horário: ${turma.horario || 'Não definido'} - ${turma.dias ? turma.dias.join(', ') : 'Sem dias definidos'}</p>
+                        <p>Início: ${new Date(turma.startDate).toLocaleDateString('pt-BR')} - Fim: ${new Date(turma.endDate).toLocaleDateString('pt-BR')}</p>
+                        <p>Participantes: ${studentsInClass.length}</p>
+                        <div class="action-buttons">
+                            <button class="btn btn-small" onclick="event.stopPropagation(); editTurma('${turma.id}')">✏️ Editar</button>
+                            <button class="btn btn-small btn-danger" onclick="event.stopPropagation(); deleteTurma('${turma.id}')">🗑️ Excluir</button>
+                        </div>
+                    </div>
+                    <div id="students_${turma.id}" class="turma-students">
+                        <h5>Alunos da Turma:</h5>
+                        ${studentsInClass.map(student => `
+                            <div class="student-item">
+                                <span>${student.name} - ${student.email}</span>
+                                <div>
+                                    <button class="btn btn-small" onclick="editTurmaStudent('${student.id}')">✏️</button>
+                                    <button class="btn btn-small btn-warning" onclick="transferTurmaStudent('${student.id}')">🔄</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function toggleTurmaStudents(turmaId) {
+            const studentsDiv = document.getElementById(`students_${turmaId}`);
+            studentsDiv.style.display = studentsDiv.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function editTurmaStudent(studentId) {
+            const student = data.students.find(s => s.id === studentId);
+            if (!student) return;
+
+            document.getElementById('editTurmaStudentId').value = studentId;
+            document.getElementById('editTurmaStudentName').value = student.name;
+            document.getElementById('editTurmaStudentNewTurma').value = student.turma;
+            
+            openModal('editTurmaStudentModal');
+        }
+
+        function saveStudentTurmaEdit() {
+            const studentId = document.getElementById('editTurmaStudentId').value;
+            const newTurmaId = document.getElementById('editTurmaStudentNewTurma').value;
+            
+            const student = data.students.find(s => s.id === studentId);
+            if (student && newTurmaId) {
+                student.turma = newTurmaId;
+                saveData();
+                closeModal('editTurmaStudentModal');
+                loadTurmas();
+                loadStudentsTable();
+                showNotification('Aluno atualizado com sucesso!', 'success');
+            }
+        }
+
+        function transferStudent() {
+            saveStudentTurmaEdit();
+        }
+
+        function removeStudentFromTurma() {
+            const studentId = document.getElementById('editTurmaStudentId').value;
+            const student = data.students.find(s => s.id === studentId);
+            
+            if (student && confirm('Tem certeza que deseja remover este aluno da turma?')) {
+                student.turma = '';
+                saveData();
+                closeModal('editTurmaStudentModal');
+                loadTurmas();
+                loadStudentsTable();
+                showNotification('Aluno removido da turma!', 'success');
+            }
+        }
+
+        function saveTurma() {
+            const turmaData = {
+                id: document.getElementById('editingTurmaId').value || Date.now().toString(),
+                name: document.getElementById('turmaName').value,
+                course: document.getElementById('turmaCourse').value,
+                startDate: document.getElementById('turmaStart').value,
+                endDate: document.getElementById('turmaEnd').value,
+                horario: document.getElementById('turmaHorario').value,
+                dias: Array.from(document.getElementById('turmaDias').selectedOptions).map(option => option.value),
+                createdAt: new Date().toISOString()
+            };
+
+            if (!turmaData.name || !turmaData.course) {
+                showNotification('Preencha todos os campos obrigatórios', 'error');
+                return;
+            }
+
+            const existingIndex = data.turmas.findIndex(t => t.id === turmaData.id);
+            if (existingIndex !== -1) {
+                data.turmas[existingIndex] = { ...data.turmas[existingIndex], ...turmaData };
+                showNotification('Turma atualizada com sucesso!', 'success');
+            } else {
+                data.turmas.push(turmaData);
+                showNotification('Turma criada com sucesso!', 'success');
+            }
+
+            saveData();
+            closeModal('turmaModal');
+            loadTurmas();
+        }
+
+        function editTurma(turmaId) {
+            const turma = data.turmas.find(t => t.id === turmaId);
+            if (!turma) return;
+
+            document.getElementById('editingTurmaId').value = turma.id;
+            document.getElementById('turmaName').value = turma.name;
+            document.getElementById('turmaCourse').value = turma.course;
+            document.getElementById('turmaStart').value = turma.startDate;
+            document.getElementById('turmaEnd').value = turma.endDate;
+            document.getElementById('turmaHorario').value = turma.horario || '';
+            
+            // Select multiple days
+            const diasSelect = document.getElementById('turmaDias');
+            Array.from(diasSelect.options).forEach(option => {
+                option.selected = turma.dias && turma.dias.includes(option.value);
+            });
+
+            document.getElementById('turmaModalTitle').textContent = 'Editar Turma';
+            openModal('turmaModal');
+        }
+
+        function deleteTurma(turmaId) {
+            const studentsInTurma = data.students.filter(s => s.turma === turmaId);
+            
+            if (studentsInTurma.length > 0) {
+                if (!confirm(`Esta turma possui ${studentsInTurma.length} aluno(s). Tem certeza que deseja excluí-la? Os alunos ficarão sem turma.`)) {
+                    return;
+                }
+                // Remove turma dos alunos
+                studentsInTurma.forEach(student => {
+                    student.turma = '';
+                });
+            }
+            
+            data.turmas = data.turmas.filter(t => t.id !== turmaId);
+            saveData();
+            loadTurmas();
+            loadStudentsTable();
+            showNotification('Turma excluída com sucesso!', 'success');
+        }
+
+        // Sistema financeiro
+        function loadFinancialData() {
+            updateFinancialSummary();
+            loadPaymentsTable();
+            loadBoletos();
+            loadCashFlow();
+        }
+
+        function updateFinancialSummary() {
+            const totalReceita = data.payments.filter(p => p.status === 'pago').reduce((sum, p) => sum + p.value, 0);
+            const totalVencido = data.payments.filter(p => p.status === 'vencido').reduce((sum, p) => sum + p.value, 0);
+            const totalPendente = data.payments.filter(p => p.status === 'pendente').reduce((sum, p) => sum + p.value, 0);
+            
+            // Calcular próximo mês
+            const nextMonth = new Date();
+            nextMonth.setMonth(nextMonth.getMonth() + 1);
+            const nextMonthStart = new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1);
+            const nextMonthEnd = new Date(nextMonth.getFullYear(), nextMonth.getMonth() + 1, 0);
+            
+            const proximoMes = data.payments.filter(p => {
+                const dueDate = new Date(p.dueDate);
+                return dueDate >= nextMonthStart && dueDate <= nextMonthEnd && p.status === 'pendente';
+            }).reduce((sum, p) => sum + p.value, 0);
+
+            document.getElementById('totalReceita').textContent = `R$ ${totalReceita.toFixed(2)}`;
+            document.getElementById('totalVencido').textContent = `R$ ${totalVencido.toFixed(2)}`;
+            document.getElementById('totalPendente').textContent = `R$ ${totalPendente.toFixed(2)}`;
+            document.getElementById('proximoMes').textContent = `R$ ${proximoMes.toFixed(2)}`;
+            
+            // Duplicar para a aba financeira
+            document.getElementById('totalReceita2').textContent = `R$ ${totalReceita.toFixed(2)}`;
+            document.getElementById('totalVencido2').textContent = `R$ ${totalVencido.toFixed(2)}`;
+            document.getElementById('totalPendente2').textContent = `R$ ${totalPendente.toFixed(2)}`;
+        }
+
+        function loadPaymentsTable() {
+            const tbody = document.getElementById('paymentsTableBody');
+            tbody.innerHTML = '';
+
+            // Check for overdue payments
+            const today = new Date();
+            data.payments.forEach(payment => {
+                if (payment.status === 'pendente' && new Date(payment.dueDate) < today) {
+                    payment.status = 'vencido';
+                }
+            });
+
+            data.payments.forEach(payment => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${payment.studentName}</td>
+                    <td>${payment.installment}</td>
+                    <td>R$ ${payment.value.toFixed(2)}</td>
+                    <td>${new Date(payment.dueDate).toLocaleDateString('pt-BR')}</td>
+                    <td><span class="status-badge status-${payment.status}">${payment.status.toUpperCase()}</span></td>
+                    <td>
+                        <button class="btn btn-small btn-success" onclick="markAsPaid('${payment.id}')">💰</button>
+                        <button class="btn btn-small btn-warning" onclick="editPayment('${payment.id}')">✏️</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function loadBoletos() {
+            const container = document.getElementById('boletosContainer');
+            container.innerHTML = '';
+
+            data.boletos.forEach(boleto => {
+                const div = document.createElement('div');
+                div.className = 'boleto-item';
+                div.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>${boleto.studentName}</strong><br>
+                            Parcela ${boleto.installment} - R$ ${boleto.value.toFixed(2)}<br>
+                            Vencimento: ${new Date(boleto.dueDate).toLocaleDateString('pt-BR')}<br>
+                            <small>Código: ${boleto.barcodeNumber}</small>
+                        </div>
+                        <div class="action-buttons">
+                            <span class="status-badge status-${boleto.status}">${boleto.status.toUpperCase()}</span>
+                            <button class="btn btn-small" onclick="printBoleto('${boleto.id}')">🖨️</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function generateBoleto() {
+            const boletoData = {
+                id: Date.now().toString(),
+                studentId: document.getElementById('boletoStudent').value,
+                studentName: data.students.find(s => s.id === document.getElementById('boletoStudent').value)?.name || '',
+                value: parseFloat(document.getElementById('boletoValue').value),
+                dueDate: document.getElementById('boletoDueDate').value,
+                installment: parseInt(document.getElementById('boletoInstallment').value),
+                status: 'pendente',
+                barcodeNumber: generateBarcodeNumber(),
+                createdAt: new Date().toISOString()
+            };
+
+            if (!boletoData.studentId || !boletoData.value) {
+                showNotification('Preencha todos os campos obrigatórios', 'error');
+                return;
+            }
+
+            data.boletos.push(boletoData);
+            saveData();
+            closeModal('boletoModal');
+            loadBoletos();
+            showNotification('Boleto gerado com sucesso!', 'success');
+        }
+
+        function printBoleto(boletoId) {
+            const boleto = data.boletos.find(b => b.id === boletoId);
+            if (!boleto) return;
+
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                <head><title>Boleto - ${boleto.studentName}</title></head>
+                <body style="font-family: Arial, sans-serif; padding: 20px;">
+                    <h2>GameCreators - Boleto de Pagamento</h2>
+                    <p><strong>Beneficiário:</strong> GameCreators Instituto de Tecnologia</p>
+                    <p><strong>Pagador:</strong> ${boleto.studentName}</p>
+                    <p><strong>Valor:</strong> R$ ${boleto.value.toFixed(2)}</p>
+                    <p><strong>Vencimento:</strong> ${new Date(boleto.dueDate).toLocaleDateString('pt-BR')}</p>
+                    <p><strong>Parcela:</strong> ${boleto.installment}</p>
+                    <hr>
+                    <p><strong>Código de Barras:</strong></p>
+                    <p style="font-family: monospace; font-size: 12px;">${boleto.barcodeNumber}</p>
+                    <hr>
+                    <p><small>Após o vencimento cobrar multa de 2% + juros de 1% ao mês</small></p>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        function savePayment() {
+            const paymentData = {
+                id: Date.now().toString(),
+                studentId: document.getElementById('paymentStudent').value,
+                studentName: data.students.find(s => s.id === document.getElementById('paymentStudent').value)?.name || '',
+                value: parseFloat(document.getElementById('paymentValue').value),
+                paymentDate: document.getElementById('paymentDate').value,
+                method: document.getElementById('paymentMethodPayment').value,
+                notes: document.getElementById('paymentNotes').value,
+                status: 'pago',
+                installment: 1
+            };
+
+            if (!paymentData.studentId || !paymentData.value) {
+                showNotification('Preencha todos os campos obrigatórios', 'error');
+                return;
+            }
+
+            data.payments.push(paymentData);
+            
+            // Add to cash flow
+            data.cashFlow.push({
+                id: Date.now().toString(),
+                type: 'entrada',
+                value: paymentData.value,
+                category: 'mensalidade',
+                description: `Pagamento - ${paymentData.studentName}`,
+                date: paymentData.paymentDate
+            });
+
+            saveData();
+            closeModal('paymentModal');
+            loadPaymentsTable();
+            updateFinancialSummary();
+            loadCashFlow();
+            showNotification('Pagamento registrado com sucesso!', 'success');
+        }
+
+        function markAsPaid(paymentId) {
+            const payment = data.payments.find(p => p.id === paymentId);
+            if (payment) {
+                payment.status = 'pago';
+                payment.paymentDate = new Date().toISOString().split('T')[0];
+                
+                // Update boleto status
+                const boleto = data.boletos.find(b => b.paymentId === paymentId);
+                if (boleto) {
+                    boleto.status = 'pago';
+                }
+                
+                // Add to cash flow
+                data.cashFlow.push({
+                    id: Date.now().toString(),
+                    type: 'entrada',
+                    value: payment.value,
+                    category: 'mensalidade',
+                    description: `Pagamento - ${payment.studentName}`,
+                    date: payment.paymentDate
+                });
+                
+                saveData();
+                loadPaymentsTable();
+                loadBoletos();
+                updateFinancialSummary();
+                loadCashFlow();
+                showNotification('Pagamento marcado como pago!', 'success');
+            }
+        }
+
+        // Sistema de fluxo de caixa
+        function saveCashFlow() {
+            const cashFlowData = {
+                id: Date.now().toString(),
+                type: document.getElementById('cashFlowType').value,
+                value: parseFloat(document.getElementById('cashFlowValue').value),
+                category: document.getElementById('cashFlowCategory').value,
+                description: document.getElementById('cashFlowDescription').value,
+                date: document.getElementById('cashFlowDate').value
+            };
+
+            if (!cashFlowData.value || !cashFlowData.description) {
+                showNotification('Preencha todos os campos obrigatórios', 'error');
+                return;
+            }
+
+            data.cashFlow.push(cashFlowData);
+            saveData();
+            closeModal('cashFlowModal');
+            loadCashFlow();
+            showNotification('Registro de fluxo de caixa salvo!', 'success');
+        }
+
+        function loadCashFlow() {
+            const container = document.getElementById('cashFlowContainer');
+            container.innerHTML = '';
+
+            const sortedCashFlow = [...data.cashFlow].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            sortedCashFlow.forEach(item => {
+                const div = document.createElement('div');
+                div.className = `cash-flow-item ${item.type === 'saida' ? 'expense' : ''}`;
+                div.innerHTML = `
+                    <div>
+                        <strong>${item.type === 'entrada' ? '+' : '-'} R$ ${item.value.toFixed(2)}</strong><br>
+                        <span>${item.description}</span><br>
+                        <small>${item.category} - ${new Date(item.date).toLocaleDateString('pt-BR')}</small>
+                    </div>
+                    <button class="btn btn-small btn-danger" onclick="deleteCashFlow('${item.id}')">🗑️</button>
+                `;
+                container.appendChild(div);
+            });
+
+            // Calculate totals
+            const totalEntradas = data.cashFlow.filter(i => i.type === 'entrada').reduce((sum, i) => sum + i.value, 0);
+            const totalSaidas = data.cashFlow.filter(i => i.type === 'saida').reduce((sum, i) => sum + i.value, 0);
+            const saldo = totalEntradas - totalSaidas;
+
+            const summaryDiv = document.createElement('div');
+            summaryDiv.className = 'card';
+            summaryDiv.innerHTML = `
+                <h4>Resumo do Fluxo de Caixa</h4>
+                <div class="grid-3">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">
+                        <div class="stat-number">R$ ${totalEntradas.toFixed(2)}</div>
+                        <div class="stat-label">Total Entradas</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);">
+                        <div class="stat-number">R$ ${totalSaidas.toFixed(2)}</div>
+                        <div class="stat-label">Total Saídas</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, ${saldo >= 0 ? '#4CAF50' : '#f44336'} 0%, ${saldo >= 0 ? '#45a049' : '#d32f2f'} 100%);">
+                        <div class="stat-number">R$ ${saldo.toFixed(2)}</div>
+                        <div class="stat-label">Saldo</div>
+                    </div>
+                </div>
+            `;
+            container.insertBefore(summaryDiv, container.firstChild);
+        }
+
+        function deleteCashFlow(itemId) {
+            if (confirm('Tem certeza que deseja excluir este registro?')) {
+                data.cashFlow = data.cashFlow.filter(i => i.id !== itemId);
+                saveData();
+                loadCashFlow();
+                showNotification('Registro excluído com sucesso!', 'success');
+            }
+        }
+
+        // Sistema de estoque
+        function saveProduct() {
+            const productData = {
+                id: Date.now().toString(),
+                name: document.getElementById('productName').value,
+                price: parseFloat(document.getElementById('productPrice').value),
+                quantity: parseInt(document.getElementById('productQuantity').value),
+                category: document.getElementById('productCategory').value,
+                createdAt: new Date().toISOString()
+            };
+
+            if (!productData.name || !productData.price || productData.quantity < 0) {
+                showNotification('Preencha todos os campos corretamente', 'error');
+                return;
+            }
+
+            data.inventory.push(productData);
+            saveData();
+            closeModal('addProductModal');
+            loadInventory();
+            showNotification('Produto adicionado com sucesso!', 'success');
+        }
+
+        function loadInventory() {
+            const container = document.getElementById('inventoryList');
+            container.innerHTML = '';
+
+            data.inventory.forEach(product => {
+                const div = document.createElement('div');
+                div.className = 'inventory-item';
+                div.innerHTML = `
+                    <div>
+                        <strong>${product.name}</strong><br>
+                        <span>R$ ${product.price.toFixed(2)} - Estoque: ${product.quantity}</span><br>
+                        <small>${product.category}</small>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-small" onclick="addStock('${product.id}')">➕</button>
+                        <button class="btn btn-small btn-warning" onclick="editProduct('${product.id}')">✏️</button>
+                        <button class="btn btn-small btn-danger" onclick="deleteProduct('${product.id}')">🗑️</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function addStock(productId) {
+            const quantity = prompt('Quantidade a adicionar:');
+            if (quantity && !isNaN(quantity)) {
+                const product = data.inventory.find(p => p.id === productId);
+                if (product) {
+                    product.quantity += parseInt(quantity);
+                    saveData();
+                    loadInventory();
+                    showNotification('Estoque atualizado!', 'success');
+                }
+            }
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Tem certeza que deseja excluir este produto?')) {
+                data.inventory = data.inventory.filter(p => p.id !== productId);
+                saveData();
+                loadInventory();
+                showNotification('Produto excluído!', 'success');
+            }
+        }
+
+        function saveSale() {
+            const productId = document.getElementById('saleProduct').value;
+            const quantity = parseInt(document.getElementById('saleQuantity').value);
+            const vendedor = document.getElementById('saleVendedor').value;
+            const date = document.getElementById('saleDate').value;
+
+            const product = data.inventory.find(p => p.id === productId);
+            if (!product || !quantity || !vendedor) {
+                showNotification('Preencha todos os campos', 'error');
+                return;
+            }
+
+            if (product.quantity < quantity) {
+                showNotification('Estoque insuficiente!', 'error');
+                return;
+            }
+
+            const saleData = {
+                id: Date.now().toString(),
+                productId,
+                productName: product.name,
+                quantity,
+                unitPrice: product.price,
+                totalValue: product.price * quantity,
+                vendedor,
+                date,
+                createdAt: new Date().toISOString()
+            };
+
+            // Update stock
+            product.quantity -= quantity;
+
+            // Save sale
+            data.sales.push(saleData);
+
+            // Add to cash flow
+            data.cashFlow.push({
+                id: Date.now().toString(),
+                type: 'entrada',
+                value: saleData.totalValue,
+                category: 'material',
+                description: `Venda - ${saleData.productName} (${quantity}x)`,
+                date: date
+            });
+
+            saveData();
+            closeModal('saleModal');
+            loadInventory();
+            loadCashFlow();
+            showNotification('Venda registrada com sucesso!', 'success');
+        }
+
+        function populateProductsSelect(selectId) {
+            const select = document.getElementById(selectId);
+            if (!select) return;
+            
+            select.innerHTML = '<option value="">Selecione um produto</option>';
+            
+            data.inventory.filter(p => p.quantity > 0).forEach(product => {
+                const option = document.createElement('option');
+                option.value = product.id;
+                option.textContent = `${product.name} - R$ ${product.price.toFixed(2)} (${product.quantity} disponível)`;
+                select.appendChild(option);
+            });
+        }
+
+        // Sistema de progresso acadêmico
+        function loadProgressData() {
+            const container = document.getElementById('progressContainer');
+            container.innerHTML = '';
+
+            data.students.forEach(student => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                const startDate = student.contract?.startDate ? new Date(student.contract.startDate) : new Date();
+                const endDate = student.contract?.endDate ? new Date(student.contract.endDate) : new Date();
+                const today = new Date();
+                const totalDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
+                const elapsedDays = (today - startDate) / (1000 * 60 * 60 * 24);
+                const timeProgress = Math.max(0, Math.min(100, (elapsedDays / totalDays) * 100));
+
+                card.innerHTML = `
+                    <h4>${student.name}</h4>
+                    <p>Curso: ${student.course}</p>
+                    <p>Módulo Atual: ${student.academic?.currentModule || 'Módulo 1'}</p>
+                    <p>Aula Atual: ${student.academic?.currentLesson || 'Aula 1'}</p>
+                    <p>Início: ${startDate.toLocaleDateString('pt-BR')} - Término: ${endDate.toLocaleDateString('pt-BR')}</p>
+                    
+                    <div style="margin: 15px 0;">
+                        <label>Progresso Acadêmico:</label>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${student.progress}%"></div>
+                        </div>
+                        <span>${student.progress}%</span>
+                    </div>
+                    
+                    <div style="margin: 15px 0;">
+                        <label>Progresso Temporal:</label>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${timeProgress}%; background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%)"></div>
+                        </div>
+                        <span>${timeProgress.toFixed(1)}%</span>
+                    </div>
+                    
+                    <button class="btn btn-small" onclick="updateStudentProgress('${student.id}')">Atualizar</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function updateStudentProgress(studentId) {
+            const student = data.students.find(s => s.id === studentId);
+            if (student) {
+                document.getElementById('progressStudent').value = studentId;
+                document.getElementById('progressModule').value = student.academic?.currentModule || '';
+                document.getElementById('progressLesson').value = student.academic?.currentLesson || '';
+                openModal('progressModal');
+            }
+        }
+
+        function saveProgress() {
+            const studentId = document.getElementById('progressStudent').value;
+            const progress = parseInt(document.getElementById('progressValue').value);
+            const module = document.getElementById('progressModule').value;
+            const lesson = document.getElementById('progressLesson').value;
+            const notes = document.getElementById('progressNotes').value;
+
+            const student = data.students.find(s => s.id === studentId);
+            if (student) {
+                student.progress = progress;
+                if (!student.academic) student.academic = {};
+                student.academic.currentModule = module;
+                student.academic.currentLesson = lesson;
+                
+                saveData();
+                closeModal('progressModal');
+                loadProgressData();
+                loadStudentsTable();
+                showNotification('Progresso atualizado com sucesso!', 'success');
+            }
+        }
+
+        function generateProgressReport() {
+            const studentsWithProgress = data.students.map(student => ({
+                name: student.name,
+                course: student.course,
+                progress: student.progress,
+                status: student.status,
+                module: student.academic?.currentModule || 'N/A',
+                lesson: student.academic?.currentLesson || 'N/A',
+                startDate: student.contract?.startDate || 'N/A',
+                endDate: student.contract?.endDate || 'N/A'
+            }));
+
+            console.log('Relatório de Progresso:', studentsWithProgress);
+            
+            const reportWindow = window.open('', '_blank');
+            reportWindow.document.write(`
+                <html>
+                <head><title>Relatório de Progresso</title></head>
+                <body style="font-family: Arial, sans-serif; padding: 20px;">
+                    <h2>Relatório de Progresso Acadêmico</h2>
+                    <table border="1" style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: #f5f5f5;">
+                                <th>Nome</th>
+                                <th>Curso</th>
+                                <th>Progresso</th>
+                                <th>Módulo</th>
+                                <th>Aula</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${studentsWithProgress.map(student => `
+                                <tr>
+                                    <td>${student.name}</td>
+                                    <td>${student.course}</td>
+                                    <td>${student.progress}%</td>
+                                    <td>${student.module}</td>
+                                    <td>${student.lesson}</td>
+                                    <td>${student.status}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </body>
+                </html>
+            `);
+            reportWindow.document.close();
+        }
+
+        // Sistema de presença
+        function loadAttendanceClasses() {
+            const select = document.getElementById('attendanceClass');
+            select.innerHTML = '<option value="">Selecione uma turma</option>';
+            
+            data.turmas.forEach(turma => {
+                const option = document.createElement('option');
+                option.value = turma.id;
+                option.textContent = turma.name;
+                select.appendChild(option);
+            });
+        }
+
+        function loadAttendanceList() {
+            const classId = document.getElementById('attendanceClass').value;
+            const date = document.getElementById('attendanceDate').value;
+
+            if (!classId || !date) {
+                showNotification('Selecione uma turma e data', 'error');
+                return;
+            }
+
+            const studentsInClass = data.students.filter(s => s.turma === classId);
+            const attendanceContainer = document.getElementById('attendanceStudents');
+            
+            // Check if attendance already exists for this date
+            const existingAttendance = data.attendance.find(a => a.classId === classId && a.date === date);
+            
+            attendanceContainer.innerHTML = studentsInClass.map(student => {
+                const existingRecord = existingAttendance?.students.find(s => s.studentId === student.id);
+                const isPresent = existingRecord ? existingRecord.present : true;
+                
+                return `
+                    <div class="attendance-item">
+                        <span>${student.name}</span>
+                        <div class="attendance-controls">
+                            <label>
+                                <input type="radio" name="attendance_${student.id}" value="presente" ${isPresent ? 'checked' : ''}> Presente
+                            </label>
+                            <label>
+                                <input type="radio" name="attendance_${student.id}" value="falta" ${!isPresent ? 'checked' : ''}> Falta
+                            </label>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('attendanceList').classList.remove('hidden');
+        }
+
+        function saveAttendance() {
+            const classId = document.getElementById('attendanceClass').value;
+            const date = document.getElementById('attendanceDate').value;
+            const studentsInClass = data.students.filter(s => s.turma === classId);
+
+            const attendanceData = {
+                id: Date.now().toString(),
+                classId,
+                date,
+                students: []
+            };
+
+            studentsInClass.forEach(student => {
+                const presentRadio = document.querySelector(`input[name="attendance_${student.id}"][value="presente"]`);
+                const isPresent = presentRadio && presentRadio.checked;
+                
+                attendanceData.students.push({
+                    studentId: student.id,
+                    studentName: student.name,
+                    present: isPresent
+                });
+
+                // Send notification to parent if absent
+                if (!isPresent) {
+                    sendAbsenceNotification(student);
+                }
+            });
+
+            // Remove existing attendance for same date/class
+            data.attendance = data.attendance.filter(a => !(a.classId === classId && a.date === date));
+            data.attendance.push(attendanceData);
+
+            saveData();
+            showNotification('Presença salva com sucesso!', 'success');
+            loadAttendanceReport();
+            document.getElementById('attendanceList').classList.add('hidden');
+        }
+
+        function sendAbsenceNotification(student) {
+            // Simulate sending notification
+            console.log(`Notificação enviada para ${student.responsible.name} (${student.responsible.email}): ${student.name} faltou à aula de ${new Date().toLocaleDateString('pt-BR')}`);
+            showNotification(`Notificação de falta enviada para responsável de ${student.name}`, 'info');
+        }
+
+        function loadAttendanceReport() {
+            const container = document.getElementById('attendanceReport');
+            container.innerHTML = '';
+
+            // Calculate attendance statistics
+            const attendanceStats = data.students.map(student => {
+                const studentAttendances = data.attendance.reduce((total, attendance) => {
+                    const studentRecord = attendance.students.find(s => s.studentId === student.id);
+                    return total + (studentRecord ? 1 : 0);
+                }, 0);
+
+                const studentPresences = data.attendance.reduce((total, attendance) => {
+                    const studentRecord = attendance.students.find(s => s.studentId === student.id);
+                    return total + (studentRecord && studentRecord.present ? 1 : 0);
+                }, 0);
+
+                const attendanceRate = studentAttendances > 0 ? (studentPresences / studentAttendances) * 100 : 0;
+
+                return {
+                    ...student,
+                    totalClasses: studentAttendances,
+                    presences: studentPresences,
+                    absences: studentAttendances - studentPresences,
+                    attendanceRate
+                };
+            });
+
+            const table = document.createElement('table');
+            table.className = 'table';
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Aluno</th>
+                        <th>Total Aulas</th>
+                        <th>Presenças</th>
+                        <th>Faltas</th>
+                        <th>Taxa Presença</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${attendanceStats.map(student => `
+                        <tr>
+                            <td>${student.name}</td>
+                            <td>${student.totalClasses}</td>
+                            <td>${student.presences}</td>
+                            <td>${student.absences}</td>
+                            <td>${student.attendanceRate.toFixed(1)}%</td>
+                            <td>
+                                <span class="status-badge ${student.attendanceRate >= 75 ? 'status-ativo' : 'status-vencido'}">
+                                    ${student.attendanceRate >= 75 ? 'Regular' : 'Baixa Frequência'}
+                                </span>
+                            </td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            `;
+            container.appendChild(table);
+        }
+
+        // Sistema de gamificação
+        function loadGamificationData() {
+            loadRanking();
+            loadMissions();
+            loadStoreItems();
+        }
+
+        function loadRanking() {
+            const sortedStudents = [...data.students].sort((a, b) => b.points - a.points);
+            const container = document.getElementById('rankingList');
+            
+            container.innerHTML = sortedStudents.slice(0, 10).map((student, index) => `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: ${index < 3 ? '#fff3cd' : '#f8f9fa'}; margin: 5px 0; border-radius: 5px;">
+                    <span>${index + 1}º ${student.name}</span>
+                    <span class="points-display">${student.points} pts</span>
+                </div>
+            `).join('');
+        }
+
+        function loadMissions() {
+            const container = document.getElementById('missionsList');
+            container.innerHTML = '';
+
+            data.missions.forEach(mission => {
+                const div = document.createElement('div');
+                div.className = 'mission-card';
+                div.innerHTML = `
+                    <h4>${mission.title}</h4>
+                    <p>${mission.description}</p>
+                    <p><strong>Recompensa:</strong> ${mission.points} pontos</p>
+                    <p><strong>Expira em:</strong> ${new Date(mission.expiry).toLocaleDateString('pt-BR')}</p>
+                    <p><strong>Tipo:</strong> ${mission.type}</p>
+                    <button class="btn btn-small btn-danger" onclick="deleteMission('${mission.id}')">Excluir</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function saveMission() {
+            const missionData = {
+                id: Date.now().toString(),
+                title: document.getElementById('missionTitle').value,
+                description: document.getElementById('missionDescription').value,
+                points: parseInt(document.getElementById('missionPoints').value),
+                expiry: document.getElementById('missionExpiry').value,
+                type: document.getElementById('missionType').value,
+                active: true,
+                createdAt: new Date().toISOString()
+            };
+
+            if (!missionData.title || !missionData.description || !missionData.points) {
+                showNotification('Preencha todos os campos obrigatórios', 'error');
+                return;
+            }
+
+            data.missions.push(missionData);
+            saveData();
+            closeModal('missionModal');
+            loadMissions();
+            showNotification('Missão criada com sucesso!', 'success');
+        }
+
+        function deleteMission(missionId) {
+            if (confirm('Tem certeza que deseja excluir esta missão?')) {
+                data.missions = data.missions.filter(m => m.id !== missionId);
+                saveData();
+                loadMissions();
+                showNotification('Missão excluída!', 'success');
+            }
+        }
+
+        function loadStoreItems() {
+            const container = document.getElementById('storeItems');
+            container.innerHTML = '';
+
+            data.storeItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'store-item';
+                div.innerHTML = `
+                    <div>
+                        <h4>${item.name}</h4>
+                        <p>${item.description}</p>
+                        <small>Categoria: ${item.category} | Estoque: ${item.stock}</small>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="points-display">${item.cost} pts</span><br>
+                        <button class="btn btn-small" onclick="redeemItem('${item.id}')">Trocar</button>
+                        <button class="btn btn-small btn-warning" onclick="editStoreItem('${item.id}')">✏️</button>
+                        <button class="btn btn-small btn-danger" onclick="deleteStoreItem('${item.id}')">🗑️</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function saveStoreItem() {
+            const itemData = {
+                id: document.getElementById('editingStoreItemId')?.value || Date.now().toString(),
+                name: document.getElementById('storeItemName').value,
+                description: document.getElementById('storeItemDescription').value,
+                cost: parseInt(document.getElementById('storeItemCost').value),
+                category: document.getElementById('storeItemCategory').value,
+                stock: parseInt(document.getElementById('storeItemStock').value),
+                createdAt: new Date().toISOString()
+            };
+
+            if (!itemData.name || !itemData.cost || itemData.stock < 0) {
+                showNotification('Preencha todos os campos corretamente', 'error');
+                return;
+            }
+
+            const existingIndex = data.storeItems.findIndex(i => i.id === itemData.id);
+            if (existingIndex !== -1) {
+                data.storeItems[existingIndex] = itemData;
+                showNotification('Item atualizado com sucesso!', 'success');
+            } else {
+                data.storeItems.push(itemData);
+                showNotification('Item adicionado com sucesso!', 'success');
+            }
+
+            saveData();
+            closeModal('storeItemModal');
+            loadStoreItems();
+        }
+
+        function redeemItem(itemId) {
+            const item = data.storeItems.find(i => i.id === itemId);
+            if (!item) return;
+
+            const studentId = prompt('ID do estudante que quer trocar:');
+            const student = data.students.find(s => s.id === studentId);
+
+            if (!student) {
+                showNotification('Estudante não encontrado', 'error');
+                return;
+            }
+
+            if (student.points < item.cost) {
+                showNotification('Pontos insuficientes', 'error');
+                return;
+            }
+
+            if (item.stock <= 0) {
+                showNotification('Item fora de estoque', 'error');
+                return;
+            }
+
+            student.points -= item.cost;
+            item.stock -= 1;
+
+            saveData();
+            loadStoreItems();
+            loadRanking();
+            loadStudentsTable();
+            showNotification(`${student.name} trocou ${item.name} por ${item.cost} pontos!`, 'success');
+        }
+
+        function deleteStoreItem(itemId) {
+            if (confirm('Tem certeza que deseja excluir este item?')) {
+                data.storeItems = data.storeItems.filter(i => i.id !== itemId);
+                saveData();
+                loadStoreItems();
+                showNotification('Item excluído!', 'success');
+            }
+        }
+
+        function givePoints() {
+            const studentId = document.getElementById('pointsStudent').value;
+            const points = parseInt(document.getElementById('pointsValue').value);
+            const reason = document.getElementById('pointsReason').value;
+
+            if (!studentId || !points) {
+                showNotification('Preencha todos os campos', 'error');
+                return;
+            }
+
+            const student = data.students.find(s => s.id === studentId);
+            if (student) {
+                student.points += points;
+                saveData();
+                closeModal('pointsModal');
+                loadStudentsTable();
+                loadRanking();
+                showNotification(`${points} pontos dados para ${student.name}!`, 'success');
+            }
+        }
+
+        // Sistema de comissões (com cálculos corretos)
+        function loadCommissionsData() {
+            calculateAllCommissions();
+            displayCommissions();
+        }
+
+        function calculateAllCommissions() {
+            const currentMonth = new Date().getMonth();
+            const currentYear = new Date().getFullYear();
+            
+            // Group sales by salesperson and month
+            const salesBySalesperson = {};
+            
+            data.commissions.forEach(commission => {
+                const commissionDate = new Date(commission.date);
+                if (commissionDate.getMonth() === currentMonth && commissionDate.getFullYear() === currentYear) {
+                    if (!salesBySalesperson[commission.vendedor]) {
+                        salesBySalesperson[commission.vendedor] = {
+                            matriculas: 0,
+                            totalValue: 0,
+                            dailyBonus: 0,
+                            blackin: 0,
+                            black: 0,
+                            commission: 0
+                        };
+                    }
+                    
+                    if (commission.type === 'matricula') {
+                        salesBySalesperson[commission.vendedor].matriculas++;
+                        salesBySalesperson[commission.vendedor].totalValue += commission.saleValue;
+                    }
+                }
+            });
+
+            // Calculate commissions based on rules
+            Object.keys(salesBySalesperson).forEach(vendedor => {
+                const sales = salesBySalesperson[vendedor];
+                
+                // Determine salesperson type
+                const isGerente = vendedor.includes('gerente');
+                const isAssistente = vendedor.includes('assistente');
+                
+                if (isGerente) {
+                    // Gerência rules
+                    if (sales.matriculas >= 26) {
+                        if (sales.matriculas <= 52) {
+                            sales.commission = sales.matriculas * 50;
+                        } else if (sales.matriculas <= 78) {
+                            sales.commission = sales.matriculas * 80;
+                        } else {
+                            sales.commission = sales.matriculas * 80; // Continue with highest rate
+                        }
+                    }
+                } else if (isAssistente) {
+                    // Assistente Comercial rules
+                    if (sales.matriculas >= 10) {
+                        if (sales.matriculas <= 20) {
+                            sales.commission = sales.matriculas * 10;
+                        } else if (sales.matriculas <= 30) {
+                            sales.commission = sales.matriculas * 15;
+                        } else if (sales.matriculas <= 40) {
+                            sales.commission = sales.matriculas * 25;
+                        } else {
+                            sales.commission = sales.matriculas * 30;
+                        }
+                    }
+                } else {
+                    // Vendedor rules
+                    if (sales.matriculas >= 10) {
+                        if (sales.matriculas <= 20) {
+                            sales.commission = sales.matriculas * 35;
+                        } else if (sales.matriculas <= 30) {
+                            sales.commission = sales.matriculas * 50;
+                        } else if (sales.matriculas <= 40) {
+                            sales.commission = sales.matriculas * 60;
+                        } else {
+                            sales.commission = sales.matriculas * 70;
+                        }
+                    }
+                }
+                
+                salesBySalesperson[vendedor] = sales;
+            });
+            
+            return salesBySalesperson;
+        }
+
+        function displayCommissions() {
+            const commissions = calculateAllCommissions();
+            const container = document.getElementById('commissionsList');
+            container.innerHTML = '';
+
+            Object.keys(commissions).forEach(vendedor => {
+                const data = commissions[vendedor];
+                const div = document.createElement('div');
+                div.className = 'commission-card';
+                div.innerHTML = `
+                    <h4>${vendedor}</h4>
+                    <p>Matrículas: ${data.matriculas}</p>
+                    <p>Valor Total Vendas: R$ ${data.totalValue.toFixed(2)}</p>
+                    <p>Comissão: R$ ${data.commission.toFixed(2)}</p>
+                    <p>Status: ${data.matriculas >= 10 ? 'Qualificado' : 'Não Qualificado'}</p>
+                `;
+                container.appendChild(div);
+            });
+
+            // Summary
+            const totalCommissions = Object.values(commissions).reduce((sum, data) => sum + data.commission, 0);
+            const totalSales = Object.values(commissions).reduce((sum, data) => sum + data.totalValue, 0);
+            
+            document.getElementById('commissionSummary').innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">R$ ${totalSales.toFixed(2)}</div>
+                    <div class="stat-label">Total Vendas</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">
+                    <div class="stat-number">R$ ${totalCommissions.toFixed(2)}</div>
+                    <div class="stat-label">Total Comissões</div>
+                </div>
+            `;
+        }
+
+        function saveCommission() {
+            const commissionData = {
+                id: Date.now().toString(),
+                vendedor: document.getElementById('commissionVendedor').value,
+                type: document.getElementById('commissionType').value,
+                saleValue: parseFloat(document.getElementById('commissionSaleValue').value),
+                date: document.getElementById('commissionDate').value,
+                calculated: false
+            };
+
+            if (!commissionData.vendedor || !commissionData.saleValue) {
+                showNotification('Preencha todos os campos obrigatórios', 'error');
+                return;
+            }
+
+            data.commissions.push(commissionData);
+            saveData();
+            closeModal('commissionModal');
+            loadCommissionsData();
+            showNotification('Comissão registrada com sucesso!', 'success');
+        }
+
+        function calculateCommissions() {
+            loadCommissionsData();
+            showNotification('Comissões calculadas para o período!', 'success');
+        }
+
+        // Sistema de documentos e templates
+        function generateDocument() {
+            const studentId = document.getElementById('documentStudent').value;
+            const docType = document.getElementById('documentType').value;
+
+            if (!studentId) {
+                showNotification('Selecione um participante', 'error');
+                return;
+            }
+
+            const student = data.students.find(s => s.id === studentId);
+            if (!student) return;
+
+            let documentHTML = '';
+            const today = new Date().toLocaleDateString('pt-BR');
+
+            switch(docType) {
+                case 'declaracao':
+                    documentHTML = generateDeclaracao(student, today);
+                    break;
+                case 'contrato':
+                    documentHTML = generateContrato(student, today);
+                    break;
+                case 'certificado':
+                    documentHTML = generateCertificado(student, today);
+                    break;
+                case 'trancamento':
+                    documentHTML = generateTrancamento(student, today);
+                    break;
+                case 'cancelamento':
+                    documentHTML = generateCancelamento(student, today);
+                    break;
+            }
+
+            document.getElementById('documentPreview').innerHTML = documentHTML;
+            closeModal('documentModal');
+            showNotification('Documento gerado com sucesso!', 'success');
+        }
+
+        function generateDeclaracao(student, today) {
+            return `
+                <div class="document-preview">
+                    <div class="document-header">
+                        <h2>DECLARAÇÃO</h2>
+                        <p>GameCreators - Instituto de Tecnologia</p>
+                    </div>
+                    <p>Declaramos para os devidos fins que <strong>${student.name}</strong>, 
+                    portador do email ${student.email}, está regularmente matriculado(a) 
+                    no curso de <strong>${student.course}</strong> nesta instituição.</p>
+                    
+                    <p>O referido aluno encontra-se com situação acadêmica <strong>${student.status}</strong> 
+                    e progresso de <strong>${student.progress}%</strong> no curso.</p>
+                    
+                    <p>Módulo atual: <strong>${student.academic?.currentModule || 'Módulo 1'}</strong></p>
+                    <p>Aula atual: <strong>${student.academic?.currentLesson || 'Aula 1'}</strong></p>
+                    
+                    <p>Por ser verdade, firmamos a presente declaração.</p>
+                    
+                    <br><br>
+                    <p style="text-align: center;">
+                        _________________________________<br>
+                        GameCreators<br>
+                        ${today}
+                    </p>
+                </div>
+                <div class="no-print">
+                    <button class="btn" onclick="window.print()">🖨️ Imprimir</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('documentPreview').innerHTML=''">Fechar</button>
+                </div>
+            `;
+        }
+
+        function generateContrato(student, today) {
+            return `
+                <div class="document-preview">
+                    <div class="document-header">
+                        <h2>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</h2>
+                        <p>GameCreators - Instituto de Tecnologia</p>
+                    </div>
+                    <p><strong>CONTRATANTE:</strong> ${student.responsible.name}<br>
+                    <strong>CONTRATADO:</strong> GameCreators</p>
+                    
+                    <p><strong>PARTICIPANTE:</strong> ${student.name}<br>
+                    <strong>CURSO:</strong> ${student.course}<br>
+                    <strong>VALOR:</strong> R$ ${student.contract.value.toFixed(2)}<br>
+                    <strong>PARCELAS:</strong> ${student.contract.installments}x<br>
+                    <strong>DURAÇÃO:</strong> ${student.contract.duration || 12} meses</p>
+                    
+                    <p>O presente contrato tem por objetivo a prestação de serviços educacionais 
+                    na área de ${student.course}, conforme grade curricular estabelecida.</p>
+                    
+                    <p><strong>PERÍODO:</strong> ${student.contract.startDate ? new Date(student.contract.startDate).toLocaleDateString('pt-BR') : 'A definir'} 
+                    até ${student.contract.endDate ? new Date(student.contract.endDate).toLocaleDateString('pt-BR') : 'A definir'}</p>
+                    
+                    <br><br>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; text-align: center;">
+                        <div>
+                            _________________________________<br>
+                            ${student.responsible.name}<br>
+                            Contratante
+                        </div>
+                        <div>
+                            _________________________________<br>
+                            GameCreators<br>
+                            Contratado
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 20px;">${today}</p>
+                </div>
+                <div class="no-print">
+                    <button class="btn" onclick="window.print()">🖨️ Imprimir</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('documentPreview').innerHTML=''">Fechar</button>
+                </div>
+            `;
+        }
+
+        function generateCertificado(student, today) {
+            return `
+                <div class="document-preview">
+                    <div class="document-header">
+                        <h2>CERTIFICADO DE CONCLUSÃO</h2>
+                        <p>GameCreators - Instituto de Tecnologia</p>
+                    </div>
+                    <div style="text-align: center; margin: 40px 0;">
+                        <p style="font-size: 18px;">Certificamos que</p>
+                        <h3 style="font-size: 24px; margin: 20px 0;">${student.name}</h3>
+                        <p style="font-size: 18px;">concluiu com aproveitamento o curso de</p>
+                        <h3 style="font-size: 22px; margin: 20px 0;">${student.course}</h3>
+                        <p>com carga horária de 120 horas, realizado no período de 
+                        ${student.contract.startDate ? new Date(student.contract.startDate).toLocaleDateString('pt-BR') : 'N/A'} 
+                        a ${student.contract.endDate ? new Date(student.contract.endDate).toLocaleDateString('pt-BR') : 'N/A'}.</p>
+                    </div>
+                    
+                    <br><br>
+                    <p style="text-align: center;">
+                        _________________________________<br>
+                        GameCreators<br>
+                        ${today}
+                    </p>
+                </div>
+                <div class="no-print">
+                    <button class="btn" onclick="window.print()">🖨️ Imprimir</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('documentPreview').innerHTML=''">Fechar</button>
+                </div>
+            `;
+        }
+
+        function generateTrancamento(student, today) {
+            return `
+                <div class="document-preview">
+                    <div class="document-header">
+                        <h2>DECLARAÇÃO DE TRANCAMENTO</h2>
+                        <p>GameCreators - Instituto de Tecnologia</p>
+                    </div>
+                    <p>Declaramos que <strong>${student.name}</strong>, 
+                    regularmente matriculado(a) no curso de <strong>${student.course}</strong>, 
+                    solicitou o trancamento de sua matrícula nesta data.</p>
+                    
+                    <p>O aluno encontrava-se com <strong>${student.progress}%</strong> 
+                    de progresso no curso no momento do trancamento.</p>
+                    
+                    <p>Por ser verdade, firmamos a presente declaração.</p>
+                    
+                    <br><br>
+                    <p style="text-align: center;">
+                        _________________________________<br>
+                        GameCreators<br>
+                        ${today}
+                    </p>
+                </div>
+                <div class="no-print">
+                    <button class="btn" onclick="window.print()">🖨️ Imprimir</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('documentPreview').innerHTML=''">Fechar</button>
+                </div>
+            `;
+        }
+
+        function generateCancelamento(student, today) {
+            return `
+                <div class="document-preview">
+                    <div class="document-header">
+                        <h2>DECLARAÇÃO DE CANCELAMENTO</h2>
+                        <p>GameCreators - Instituto de Tecnologia</p>
+                    </div>
+                    <p>Declaramos que <strong>${student.name}</strong>, 
+                    que estava matriculado(a) no curso de <strong>${student.course}</strong>, 
+                    teve sua matrícula cancelada nesta data.</p>
+                    
+                    <p>O cancelamento foi solicitado pelo responsável 
+                    <strong>${student.responsible.name}</strong>.</p>
+                    
+                    <p>Por ser verdade, firmamos a presente declaração.</p>
+                    
+                    <br><br>
+                    <p style="text-align: center;">
+                        _________________________________<br>
+                        GameCreators<br>
+                        ${today}
+                    </p>
+                </div>
+                <div class="no-print">
+                    <button class="btn" onclick="window.print()">🖨️ Imprimir</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('documentPreview').innerHTML=''">Fechar</button>
+                </div>
+            `;
+        }
+
+        function useTemplate(templateType) {
+            const templates = {
+                contrato: `
+CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS
+
+CONTRATANTE: [NOME_RESPONSAVEL]
+CONTRATADO: GameCreators
+
+PARTICIPANTE: [NOME_ESTUDANTE]
+CURSO: [CURSO]
+VALOR: R$ [VALOR]
+PARCELAS: [PARCELAS]
+
+O presente contrato tem por objetivo...
+                `,
+                declaracao: `
+DECLARAÇÃO
+
+Declaramos que [NOME_ESTUDANTE] está regularmente matriculado(a) no curso de [CURSO].
+
+GameCreators
+                `,
+                certificado: `
+CERTIFICADO DE CONCLUSÃO
+
+Certificamos que [NOME_ESTUDANTE] concluiu o curso de [CURSO].
+
+GameCreators
+                `
+            };
+
+            document.getElementById('templateContent').value = templates[templateType] || '';
+        }
+
+        function saveTemplate() {
+            const content = document.getElementById('templateContent').value;
+            if (content.trim()) {
+                data.templates.custom = content;
+                saveData();
+                showNotification('Template salvo com sucesso!', 'success');
+            }
         }
 
         // Sistema de busca
@@ -1289,11 +3311,6 @@ Parcelas: ${studentPayments.length}
             }
         }
 
-        function advancedSearch() {
-            populateCoursesSelect('searchCourse');
-            openModal('advancedSearchModal');
-        }
-
         function performAdvancedSearch() {
             const searchCriteria = {
                 name: document.getElementById('searchName').value.toLowerCase(),
@@ -1303,9 +3320,23 @@ Parcelas: ${studentPayments.length}
             };
 
             const filteredStudents = data.students.filter(student => {
-                return (!searchCriteria.name || student.name.toLowerCase().includes(searchCriteria.name)) &&
-                       (!searchCriteria.status || student.status === searchCriteria.status) &&
-                       (!searchCriteria.course || student.course === searchCriteria.course);
+                const nameMatch = !searchCriteria.name || student.name.toLowerCase().includes(searchCriteria.name);
+                const statusMatch = !searchCriteria.status || student.status === searchCriteria.status;
+                const courseMatch = !searchCriteria.course || student.course === searchCriteria.course;
+                
+                let financialMatch = true;
+                if (searchCriteria.financial) {
+                    const studentPayments = data.payments.filter(p => p.studentId === student.id);
+                    if (searchCriteria.financial === 'pago') {
+                        financialMatch = studentPayments.every(p => p.status === 'pago');
+                    } else if (searchCriteria.financial === 'pendente') {
+                        financialMatch = studentPayments.some(p => p.status === 'pendente');
+                    } else if (searchCriteria.financial === 'vencido') {
+                        financialMatch = studentPayments.some(p => p.status === 'vencido');
+                    }
+                }
+
+                return nameMatch && statusMatch && courseMatch && financialMatch;
             });
 
             displayFilteredStudents(filteredStudents);
@@ -1325,12 +3356,14 @@ Parcelas: ${studentPayments.length}
             tbody.innerHTML = '';
 
             students.forEach(student => {
+                const turmaName = data.turmas.find(t => t.id === student.turma)?.name || 'Sem turma';
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${student.id}</td>
                     <td>${student.name}</td>
                     <td>${student.email}</td>
                     <td>${student.course}</td>
+                    <td>${turmaName}</td>
                     <td><span class="status-badge status-${student.status}">${student.status.toUpperCase()}</span></td>
                     <td>
                         <div class="progress-bar">
@@ -1347,6 +3380,28 @@ Parcelas: ${studentPayments.length}
                 `;
                 tbody.appendChild(row);
             });
+        }
+
+        // Sistema de status
+        function changeStatus() {
+            const studentId = document.getElementById('statusStudent').value;
+            const newStatus = document.getElementById('newStatus').value;
+            const reason = document.getElementById('statusReason').value;
+
+            if (!studentId || !newStatus) {
+                showNotification('Preencha todos os campos', 'error');
+                return;
+            }
+
+            const student = data.students.find(s => s.id === studentId);
+            if (student) {
+                student.status = newStatus;
+                saveData();
+                closeModal('statusModal');
+                loadStudentsTable();
+                updateDashboard();
+                showNotification(`Status alterado para ${newStatus}!`, 'success');
+            }
         }
 
         // Dashboard
@@ -1381,21 +3436,6 @@ Parcelas: ${studentPayments.length}
             loadRecentActivities();
         }
 
-        function updateFinancialSummary() {
-            const totalReceita = data.payments.filter(p => p.status === 'pago').reduce((sum, p) => sum + p.value, 0);
-            const totalVencido = data.payments.filter(p => p.status === 'vencido').reduce((sum, p) => sum + p.value, 0);
-            const totalPendente = data.payments.filter(p => p.status === 'pendente').reduce((sum, p) => sum + p.value, 0);
-
-            document.getElementById('totalReceita').textContent = `R$ ${totalReceita.toFixed(2)}`;
-            document.getElementById('totalVencido').textContent = `R$ ${totalVencido.toFixed(2)}`;
-            document.getElementById('totalPendente').textContent = `R$ ${totalPendente.toFixed(2)}`;
-            
-            // Duplicar para a aba financeira
-            document.getElementById('totalReceita2').textContent = `R$ ${totalReceita.toFixed(2)}`;
-            document.getElementById('totalVencido2').textContent = `R$ ${totalVencido.toFixed(2)}`;
-            document.getElementById('totalPendente2').textContent = `R$ ${totalPendente.toFixed(2)}`;
-        }
-
         function loadRecentActivities() {
             const activities = [
                 'Novo participante cadastrado: João Silva',
@@ -1411,71 +3451,6 @@ Parcelas: ${studentPayments.length}
             ).join('');
         }
 
-        // Sistema financeiro
-        function loadFinancialData() {
-            updateFinancialSummary();
-            loadPaymentsTable();
-        }
-
-        function loadPaymentsTable() {
-            const tbody = document.getElementById('paymentsTableBody');
-            tbody.innerHTML = '';
-
-            data.payments.forEach(payment => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${payment.studentName}</td>
-                    <td>${payment.installment}</td>
-                    <td>R$ ${payment.value.toFixed(2)}</td>
-                    <td>${new Date(payment.dueDate).toLocaleDateString('pt-BR')}</td>
-                    <td><span class="status-badge status-${payment.status}">${payment.status.toUpperCase()}</span></td>
-                    <td>
-                        <button class="btn btn-small btn-success" onclick="markAsPaid('${payment.id}')">💰</button>
-                        <button class="btn btn-small btn-warning" onclick="editPayment('${payment.id}')">✏️</button>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        function savePayment() {
-            const paymentData = {
-                id: Date.now().toString(),
-                studentId: document.getElementById('paymentStudent').value,
-                studentName: data.students.find(s => s.id === document.getElementById('paymentStudent').value)?.name || '',
-                value: parseFloat(document.getElementById('paymentValue').value),
-                paymentDate: document.getElementById('paymentDate').value,
-                method: document.getElementById('paymentMethodPayment').value,
-                notes: document.getElementById('paymentNotes').value,
-                status: 'pago',
-                installment: 1
-            };
-
-            if (!paymentData.studentId || !paymentData.value) {
-                showNotification('Preencha todos os campos obrigatórios', 'error');
-                return;
-            }
-
-            data.payments.push(paymentData);
-            saveData();
-            closeModal('paymentModal');
-            loadPaymentsTable();
-            updateFinancialSummary();
-            showNotification('Pagamento registrado com sucesso!', 'success');
-        }
-
-        function markAsPaid(paymentId) {
-            const payment = data.payments.find(p => p.id === paymentId);
-            if (payment) {
-                payment.status = 'pago';
-                payment.paymentDate = new Date().toISOString().split('T')[0];
-                saveData();
-                loadPaymentsTable();
-                updateFinancialSummary();
-                showNotification('Pagamento marcado como pago!', 'success');
-            }
-        }
-
         function generateFinancialReport() {
             const report = {
                 totalReceita: data.payments.filter(p => p.status === 'pago').reduce((sum, p) => sum + p.value, 0),
@@ -1485,404 +3460,22 @@ Parcelas: ${studentPayments.length}
                 activeStudents: data.students.filter(s => s.status === 'ativo').length
             };
 
-            alert(`
-RELATÓRIO FINANCEIRO
-====================
-Receita Total: R$ ${report.totalReceita.toFixed(2)}
-Valores Vencidos: R$ ${report.totalVencido.toFixed(2)}
-Valores Pendentes: R$ ${report.totalPendente.toFixed(2)}
-
-Total de Participantes: ${report.totalStudents}
-Participantes Ativos: ${report.activeStudents}
-            `.trim());
-        }
-
-        // Sistema de progresso
-        function loadProgressData() {
-            const container = document.getElementById('progressContainer');
-            container.innerHTML = '';
-
-            data.students.forEach(student => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <h4>${student.name}</h4>
-                    <p>Curso: ${student.course}</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${student.progress}%"></div>
-                    </div>
-                    <p>Progresso: ${student.progress}%</p>
-                    <button class="btn btn-small" onclick="updateStudentProgress('${student.id}')">Atualizar</button>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function updateStudentProgress(studentId) {
-            document.getElementById('progressStudent').value = studentId;
-            openModal('progressModal');
-        }
-
-        function saveProgress() {
-            const studentId = document.getElementById('progressStudent').value;
-            const progress = parseInt(document.getElementById('progressValue').value);
-            const notes = document.getElementById('progressNotes').value;
-
-            const student = data.students.find(s => s.id === studentId);
-            if (student) {
-                student.progress = progress;
-                saveData();
-                closeModal('progressModal');
-                loadProgressData();
-                loadStudentsTable();
-                showNotification('Progresso atualizado com sucesso!', 'success');
-            }
-        }
-
-        function generateProgressReport() {
-            const studentsWithProgress = data.students.map(student => ({
-                name: student.name,
-                course: student.course,
-                progress: student.progress,
-                status: student.status
-            }));
-
-            console.log('Relatório de Progresso:', studentsWithProgress);
-            alert('Relatório de progresso gerado! Verifique o console para detalhes.');
-        }
-
-        // Sistema de presença
-        function loadAttendanceClasses() {
-            const select = document.getElementById('attendanceClass');
-            select.innerHTML = '<option value="">Selecione uma turma</option>';
-            
-            data.turmas.forEach(turma => {
-                const option = document.createElement('option');
-                option.value = turma.id;
-                option.textContent = turma.name;
-                select.appendChild(option);
-            });
-        }
-
-        function loadAttendanceList() {
-            const classId = document.getElementById('attendanceClass').value;
-            const date = document.getElementById('attendanceDate').value;
-
-            if (!classId || !date) {
-                showNotification('Selecione uma turma e data', 'error');
-                return;
-            }
-
-            const turma = data.turmas.find(t => t.id === classId);
-            if (!turma) return;
-
-            const studentsInClass = data.students.filter(s => s.course === turma.course);
-            const attendanceContainer = document.getElementById('attendanceStudents');
-            
-            attendanceContainer.innerHTML = studentsInClass.map(student => `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border: 1px solid #e0e0e0; margin: 5px 0; border-radius: 5px;">
-                    <span>${student.name}</span>
-                    <label>
-                        <input type="checkbox" data-student-id="${student.id}" checked> Presente
-                    </label>
-                </div>
-            `).join('');
-
-            document.getElementById('attendanceList').classList.remove('hidden');
-        }
-
-        function saveAttendance() {
-            const classId = document.getElementById('attendanceClass').value;
-            const date = document.getElementById('attendanceDate').value;
-            const checkboxes = document.querySelectorAll('#attendanceStudents input[type="checkbox"]');
-
-            const attendanceData = {
-                id: Date.now().toString(),
-                classId,
-                date,
-                students: []
-            };
-
-            checkboxes.forEach(checkbox => {
-                attendanceData.students.push({
-                    studentId: checkbox.dataset.studentId,
-                    present: checkbox.checked
-                });
-            });
-
-            data.attendance.push(attendanceData);
-            saveData();
-            showNotification('Presença salva com sucesso!', 'success');
-            document.getElementById('attendanceList').classList.add('hidden');
-        }
-
-        // Sistema de gamificação
-        function loadGamificationData() {
-            loadRanking();
-            loadAchievements();
-            loadStoreItems();
-        }
-
-        function loadRanking() {
-            const sortedStudents = [...data.students].sort((a, b) => b.points - a.points);
-            const container = document.getElementById('rankingList');
-            
-            container.innerHTML = sortedStudents.slice(0, 10).map((student, index) => `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: ${index < 3 ? '#fff3cd' : '#f8f9fa'}; margin: 5px 0; border-radius: 5px;">
-                    <span>${index + 1}º ${student.name}</span>
-                    <span class="points-display">${student.points} pts</span>
-                </div>
-            `).join('');
-        }
-
-        function loadAchievements() {
-            const container = document.getElementById('achievementsList');
-            container.innerHTML = `
-                <div class="achievement-badge">🏆 Primeiro Login</div>
-                <div class="achievement-badge">📚 100% de Presença</div>
-                <div class="achievement-badge">⭐ Top 3 Ranking</div>
-                <div class="achievement-badge">🎯 Meta Mensal</div>
-            `;
-        }
-
-        function loadStoreItems() {
-            const container = document.getElementById('storeItems');
-            const items = [
-                { name: 'Desconto 10%', cost: 100, description: 'Desconto na próxima mensalidade' },
-                { name: 'Material Extra', cost: 50, description: 'Acesso a conteúdo adicional' },
-                { name: 'Certificado Premium', cost: 200, description: 'Certificado com selo especial' }
-            ];
-
-            container.innerHTML = items.map(item => `
-                <div class="store-item">
-                    <div>
-                        <h4>${item.name}</h4>
-                        <p>${item.description}</p>
-                    </div>
-                    <div>
-                        <span class="points-display">${item.cost} pts</span>
-                        <button class="btn btn-small">Trocar</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function givePoints() {
-            const studentId = document.getElementById('pointsStudent').value;
-            const points = parseInt(document.getElementById('pointsValue').value);
-            const reason = document.getElementById('pointsReason').value;
-
-            if (!studentId || !points) {
-                showNotification('Preencha todos os campos', 'error');
-                return;
-            }
-
-            const student = data.students.find(s => s.id === studentId);
-            if (student) {
-                student.points += points;
-                saveData();
-                closeModal('pointsModal');
-                loadStudentsTable();
-                loadRanking();
-                showNotification(`${points} pontos dados para ${student.name}!`, 'success');
-            }
-        }
-
-        // Sistema de turmas
-        function loadTurmas() {
-            const container = document.getElementById('turmasContainer');
-            container.innerHTML = '';
-
-            data.turmas.forEach(turma => {
-                const studentsInClass = data.students.filter(s => s.course === turma.course).length;
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <h4>${turma.name}</h4>
-                    <p>Curso: ${turma.course}</p>
-                    <p>Início: ${new Date(turma.startDate).toLocaleDateString('pt-BR')}</p>
-                    <p>Fim: ${new Date(turma.endDate).toLocaleDateString('pt-BR')}</p>
-                    <p>Participantes: ${studentsInClass}</p>
-                    <button class="btn btn-small btn-danger" onclick="deleteTurma('${turma.id}')">Excluir</button>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function saveTurma() {
-            const turmaData = {
-                id: Date.now().toString(),
-                name: document.getElementById('turmaName').value,
-                course: document.getElementById('turmaCourse').value,
-                startDate: document.getElementById('turmaStart').value,
-                endDate: document.getElementById('turmaEnd').value,
-                createdAt: new Date().toISOString()
-            };
-
-            if (!turmaData.name || !turmaData.course) {
-                showNotification('Preencha todos os campos obrigatórios', 'error');
-                return;
-            }
-
-            data.turmas.push(turmaData);
-            saveData();
-            closeModal('turmaModal');
-            loadTurmas();
-            showNotification('Turma criada com sucesso!', 'success');
-        }
-
-        function deleteTurma(turmaId) {
-            if (confirm('Tem certeza que deseja excluir esta turma?')) {
-                data.turmas = data.turmas.filter(t => t.id !== turmaId);
-                saveData();
-                loadTurmas();
-                showNotification('Turma excluída com sucesso!', 'success');
-            }
-        }
-
-        // Sistema de comissões
-        function loadCommissionsData() {
-            const container = document.getElementById('commissionsList');
-            container.innerHTML = `
-                <div class="commission-card">
-                    <h4>João Vendedor</h4>
-                    <p>Vendas: R$ 5.000,00</p>
-                    <p>Comissão (10%): R$ 500,00</p>
-                </div>
-                <div class="commission-card">
-                    <h4>Maria Vendedora</h4>
-                    <p>Vendas: R$ 3.200,00</p>
-                    <p>Comissão (10%): R$ 320,00</p>
-                </div>
-            `;
-
-            document.getElementById('commissionSummary').innerHTML = `
-                <div class="stat-card">
-                    <div class="stat-number">R$ 8.200,00</div>
-                    <div class="stat-label">Total Vendas</div>
-                </div>
-                <div class="stat-card" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">
-                    <div class="stat-number">R$ 820,00</div>
-                    <div class="stat-label">Total Comissões</div>
-                </div>
-            `;
-        }
-
-        function calculateCommissions() {
-            showNotification('Comissões calculadas para o período!', 'success');
-            loadCommissionsData();
-        }
-
-        // Sistema de status
-        function changeStatus() {
-            const studentId = document.getElementById('statusStudent').value;
-            const newStatus = document.getElementById('newStatus').value;
-            const reason = document.getElementById('statusReason').value;
-
-            if (!studentId || !newStatus) {
-                showNotification('Preencha todos os campos', 'error');
-                return;
-            }
-
-            const student = data.students.find(s => s.id === studentId);
-            if (student) {
-                student.status = newStatus;
-                saveData();
-                closeModal('statusModal');
-                loadStudentsTable();
-                updateDashboard();
-                showNotification(`Status alterado para ${newStatus}!`, 'success');
-            }
-        }
-
-        // Sistema de documentos
-        function generateDocument() {
-            const studentId = document.getElementById('documentStudent').value;
-            const docType = document.getElementById('documentType').value;
-
-            if (!studentId) {
-                showNotification('Selecione um participante', 'error');
-                return;
-            }
-
-            const student = data.students.find(s => s.id === studentId);
-            if (!student) return;
-
-            let documentHTML = '';
-            const today = new Date().toLocaleDateString('pt-BR');
-
-            switch(docType) {
-                case 'declaracao':
-                    documentHTML = `
-                        <div class="document-preview">
-                            <div class="document-header">
-                                <h2>DECLARAÇÃO</h2>
-                                <p>GameCreators - Instituto de Tecnologia</p>
-                            </div>
-                            <p>Declaramos para os devidos fins que <strong>${student.name}</strong>, 
-                            portador do email ${student.email}, está regularmente matriculado(a) 
-                            no curso de <strong>${student.course}</strong> nesta instituição.</p>
-                            
-                            <p>O referido aluno encontra-se com situação acadêmica <strong>${student.status}</strong> 
-                            e progresso de <strong>${student.progress}%</strong> no curso.</p>
-                            
-                            <p>Por ser verdade, firmamos a presente declaração.</p>
-                            
-                            <br><br>
-                            <p style="text-align: center;">
-                                _________________________________<br>
-                                GameCreators<br>
-                                ${today}
-                            </p>
-                        </div>
-                        <div class="no-print">
-                            <button class="btn" onclick="window.print()">🖨️ Imprimir</button>
-                            <button class="btn btn-secondary" onclick="document.getElementById('documentPreview').innerHTML=''">Fechar</button>
-                        </div>
-                    `;
-                    break;
-                case 'contrato':
-                    documentHTML = `
-                        <div class="document-preview">
-                            <div class="document-header">
-                                <h2>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</h2>
-                                <p>GameCreators - Instituto de Tecnologia</p>
-                            </div>
-                            <p><strong>CONTRATANTE:</strong> ${student.responsible.name}<br>
-                            <strong>CONTRATADO:</strong> GameCreators</p>
-                            
-                            <p><strong>PARTICIPANTE:</strong> ${student.name}<br>
-                            <strong>CURSO:</strong> ${student.course}<br>
-                            <strong>VALOR:</strong> R$ ${student.contract.value.toFixed(2)}<br>
-                            <strong>PARCELAS:</strong> ${student.contract.installments}x</p>
-                            
-                            <p>O presente contrato tem por objetivo a prestação de serviços educacionais 
-                            na área de ${student.course}, conforme grade curricular estabelecida.</p>
-                            
-                            <br><br>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; text-align: center;">
-                                <div>
-                                    _________________________________<br>
-                                    Contratante
-                                </div>
-                                <div>
-                                    _________________________________<br>
-                                    GameCreators
-                                </div>
-                            </div>
-                            <p style="text-align: center; margin-top: 20px;">${today}</p>
-                        </div>
-                        <div class="no-print">
-                            <button class="btn" onclick="window.print()">🖨️ Imprimir</button>
-                            <button class="btn btn-secondary" onclick="document.getElementById('documentPreview').innerHTML=''">Fechar</button>
-                        </div>
-                    `;
-                    break;
-            }
-
-            document.getElementById('documentPreview').innerHTML = documentHTML;
-            closeModal('documentModal');
-            showNotification('Documento gerado com sucesso!', 'success');
+            const reportWindow = window.open('', '_blank');
+            reportWindow.document.write(`
+                <html>
+                <head><title>Relatório Financeiro</title></head>
+                <body style="font-family: Arial, sans-serif; padding: 20px;">
+                    <h2>RELATÓRIO FINANCEIRO</h2>
+                    <p><strong>Receita Total:</strong> R$ ${report.totalReceita.toFixed(2)}</p>
+                    <p><strong>Valores Vencidos:</strong> R$ ${report.totalVencido.toFixed(2)}</p>
+                    <p><strong>Valores Pendentes:</strong> R$ ${report.totalPendente.toFixed(2)}</p>
+                    <hr>
+                    <p><strong>Total de Participantes:</strong> ${report.totalStudents}</p>
+                    <p><strong>Participantes Ativos:</strong> ${report.activeStudents}</p>
+                </body>
+                </html>
+            `);
+            reportWindow.document.close();
         }
 
         // Sistema de configuração
@@ -1931,7 +3524,7 @@ Participantes Ativos: ${report.activeStudents}
             const dataToExport = {
                 ...data,
                 exportDate: new Date().toISOString(),
-                version: '1.0'
+                version: '2.0'
             };
 
             const blob = new Blob([JSON.stringify(dataToExport, null, 2)], { type: 'application/json' });
@@ -1996,6 +3589,23 @@ Participantes Ativos: ${report.activeStudents}
             select.value = currentValue;
         }
 
+        function populateTurmasSelect(selectId) {
+            const select = document.getElementById(selectId);
+            if (!select) return;
+            
+            const currentValue = select.value;
+            select.innerHTML = '<option value="">Selecione uma turma</option>';
+            
+            data.turmas.forEach(turma => {
+                const option = document.createElement('option');
+                option.value = turma.id;
+                option.textContent = turma.name;
+                select.appendChild(option);
+            });
+            
+            select.value = currentValue;
+        }
+
         function populateStudentsSelect(selectId) {
             const select = document.getElementById(selectId);
             if (!select) return;
@@ -2012,115 +3622,61 @@ Participantes Ativos: ${report.activeStudents}
 
         // Sistema de armazenamento
         function saveData() {
-            // Em um ambiente real, isso seria enviado para um servidor
-            // Por enquanto, vamos simular o armazenamento local
-            console.log('Dados salvos:', data);
+            localStorage.setItem('gamecreators_data', JSON.stringify(data));
         }
 
         function loadStoredData() {
-            // Em um ambiente real, isso carregaria dados do servidor
-            // Por enquanto, vamos usar dados de exemplo
-            if (data.students.length === 0) {
-                // Dados de exemplo
-                data.students = [
-                    {
-                        id: '1',
-                        name: 'João Silva',
-                        email: 'joao@email.com',
-                        phone: '(11) 99999-9999',
-                        course: 'Desenvolvimento de Jogos',
-                        status: 'ativo',
-                        progress: 65,
-                        points: 120,
-                        responsible: {
-                            name: 'Maria Silva',
-                            email: 'maria@email.com'
-                        },
-                        contract: {
-                            value: 1200.00,
-                            paymentMethod: 'parcelado',
-                            installments: 12
-                        }
-                    },
-                    {
-                        id: '2',
-                        name: 'Ana Santos',
-                        email: 'ana@email.com',
-                        phone: '(11) 88888-8888',
-                        course: 'Design Gráfico',
-                        status: 'ativo',
-                        progress: 80,
-                        points: 200,
-                        responsible: {
-                            name: 'Carlos Santos',
-                            email: 'carlos@email.com'
-                        },
-                        contract: {
-                            value: 900.00,
-                            paymentMethod: 'parcelado',
-                            installments: 6
-                        }
-                    }
-                ];
-
-                data.payments = [
-                    {
-                        id: '1',
-                        studentId: '1',
-                        studentName: 'João Silva',
-                        installment: 1,
-                        value: 100.00,
-                        dueDate: '2024-01-15',
-                        status: 'pago'
-                    },
-                    {
-                        id: '2',
-                        studentId: '1',
-                        studentName: 'João Silva',
-                        installment: 2,
-                        value: 100.00,
-                        dueDate: '2024-02-15',
-                        status: 'pendente'
-                    },
-                    {
-                        id: '3',
-                        studentId: '2',
-                        studentName: 'Ana Santos',
-                        installment: 1,
-                        value: 150.00,
-                        dueDate: '2024-01-10',
-                        status: 'vencido'
-                    }
-                ];
-
-                data.turmas = [
-                    {
-                        id: '1',
-                        name: 'Turma A - Jogos 2024',
-                        course: 'Desenvolvimento de Jogos',
-                        startDate: '2024-01-15',
-                        endDate: '2024-12-15'
-                    }
-                ];
-            }
-        }
-
-        // Event listeners para Enter key
-        document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                if (document.getElementById('loginScreen').style.display !== 'none') {
-                    login();
+            const stored = localStorage.getItem('gamecreators_data');
+            if (stored) {
+                try {
+                    const parsedData = JSON.parse(stored);
+                    Object.assign(data, parsedData);
+                } catch (error) {
+                    console.error('Erro ao carregar dados:', error);
                 }
-            }
-        });
-
-        // Fechar modais ao clicar fora
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-                clearModalForms();
+            } else {
+                // Dados de exemplo apenas se não houver dados salvos
+                loadExampleData();
             }
         }
-    </script>
-</body>
-</html>
+
+        function loadExampleData() {
+            data.students = [
+                {
+                    id: '1',
+                    name: 'João Silva',
+                    email: 'joao@email.com',
+                    phone: '(11) 99999-9999',
+                    course: 'Desenvolvimento de Jogos',
+                    turma: '1',
+                    vendedor: 'vendedor1',
+                    status: 'ativo',
+                    progress: 65,
+                    points: 120,
+                    responsible: {
+                        name: 'Maria Silva',
+                        email: 'maria@email.com'
+                    },
+                    contract: {
+                        value: 1200.00,
+                        paymentMethod: 'parcelado',
+                        installments: 12,
+                        startDate: '2024-01-01',
+                        duration: 12,
+                        endDate: '2024-12-31'
+                    },
+                    academic: {
+                        currentModule: 'Módulo 1',
+                        currentLesson: 'Aula 5'
+                    }
+                },
+                {
+                    id: '2',
+                    name: 'Ana Santos',
+                    email: 'ana@email.com',
+                    phone: '(11) 88888-8888',
+                    course: 'Design Gráfico',
+                    turma: '2',
+                    vendedor: 'vendedor2',
+                    status: 'ativo',
+                    progress: 80,
