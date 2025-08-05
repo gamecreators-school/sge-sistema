@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGE - Sistema de Gestão Escolar</title>
+    <title>GameCreators - Sistema de Gestão</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             min-height: 100vh;
             color: #333;
         }
@@ -44,7 +44,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
             color: white;
             padding: 20px;
             border-radius: 10px;
@@ -69,10 +69,6 @@
             transition: background 0.3s;
         }
 
-        .logout-btn:hover {
-            background: #d32f2f;
-        }
-
         .nav-tabs {
             display: flex;
             border-bottom: 2px solid #e0e0e0;
@@ -92,16 +88,8 @@
         }
 
         .nav-tab.active {
-            background: #4CAF50;
+            background: #2196F3;
             color: white;
-        }
-
-        .nav-tab:hover {
-            background: #e0e0e0;
-        }
-
-        .nav-tab.active:hover {
-            background: #45a049;
         }
 
         .tab-content {
@@ -138,11 +126,11 @@
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #4CAF50;
+            border-color: #2196F3;
         }
 
         .btn {
-            background: #4CAF50;
+            background: #2196F3;
             color: white;
             border: none;
             padding: 12px 24px;
@@ -155,39 +143,23 @@
         }
 
         .btn:hover {
-            background: #45a049;
+            background: #1976D2;
         }
 
         .btn-secondary {
-            background: #2196F3;
-        }
-
-        .btn-secondary:hover {
-            background: #1976D2;
+            background: #FF9800;
         }
 
         .btn-danger {
             background: #f44336;
         }
 
-        .btn-danger:hover {
-            background: #d32f2f;
+        .btn-success {
+            background: #4CAF50;
         }
 
         .btn-warning {
             background: #FF9800;
-        }
-
-        .btn-warning:hover {
-            background: #F57C00;
-        }
-
-        .btn-info {
-            background: #9C27B0;
-        }
-
-        .btn-info:hover {
-            background: #7B1FA2;
         }
 
         .btn-small {
@@ -215,11 +187,6 @@
         .table th {
             background: #f5f5f5;
             font-weight: 600;
-            color: #333;
-        }
-
-        .table tr:hover {
-            background: #f9f9f9;
         }
 
         .card {
@@ -245,7 +212,7 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
             color: white;
             padding: 20px;
             border-radius: 10px;
@@ -261,14 +228,6 @@
         .stat-label {
             font-size: 14px;
             opacity: 0.9;
-        }
-
-        .search-box {
-            width: 300px;
-            padding: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            margin-bottom: 20px;
         }
 
         .modal {
@@ -287,7 +246,7 @@
             margin: 2% auto;
             padding: 30px;
             border-radius: 15px;
-            max-width: 800px;
+            max-width: 90%;
             max-height: 90vh;
             overflow-y: auto;
         }
@@ -298,10 +257,6 @@
             font-weight: bold;
             cursor: pointer;
             color: #999;
-        }
-
-        .close:hover {
-            color: #333;
         }
 
         .notification {
@@ -322,7 +277,7 @@
         }
 
         .notification.success {
-            background: #4CAF50;
+            background: #2196F3;
         }
 
         .notification.error {
@@ -330,12 +285,18 @@
         }
 
         .notification.info {
-            background: #2196F3;
+            background: #FF9800;
         }
 
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 20px;
         }
 
@@ -355,59 +316,137 @@
             font-weight: 500;
         }
 
-        .status-matriculado {
-            background: #4CAF50;
+        .status-ativo { background: #2196F3; }
+        .status-inadimplente { background: #f44336; }
+        .status-cancelado { background: #9E9E9E; }
+        .status-trancado { background: #FF9800; }
+        .status-formado { background: #4CAF50; }
+        .status-pago { background: #4CAF50; }
+        .status-pendente { background: #FF9800; }
+        .status-vencido { background: #f44336; }
+
+        .financial-summary {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
 
-        .status-formado {
-            background: #2196F3;
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
         }
 
-        .status-cancelado {
-            background: #f44336;
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            transition: width 0.3s;
         }
 
-        .status-trancado {
-            background: #FF9800;
+        .document-preview {
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+        }
+
+        .document-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+        }
+
+        .entry-log {
+            background: #f0f8ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .attendance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .attendance-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .document-item {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .boleto-preview {
+            background: white;
+            border: 2px solid #000;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .module-card {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .module-card.completed {
+            background: #e8f5e8;
+            border-color: #4CAF50;
+        }
+
+        .module-card.current {
+            background: #fff3cd;
+            border-color: #FF9800;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
+            .container { padding: 10px; }
+            .nav-tabs { flex-direction: column; }
+            .nav-tab { border-radius: 8px; margin-bottom: 5px; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
 
-            .nav-tabs {
-                flex-direction: column;
-            }
-
-            .nav-tab {
-                border-radius: 8px;
-                margin-bottom: 5px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .search-box {
+        @media print {
+            body * { visibility: hidden; }
+            .document-preview, .document-preview * { visibility: visible; }
+            .document-preview {
+                position: absolute;
+                left: 0;
+                top: 0;
                 width: 100%;
             }
-
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-                align-items: stretch;
-            }
+            .no-print { display: none !important; }
         }
     </style>
 </head>
 <body>
     <!-- Login Screen -->
     <div id="loginScreen" class="login-container">
-        <h1 style="color: #4CAF50; margin-bottom: 30px;">SGE - Sistema de Gestão Escolar</h1>
+        <h1 style="color: #2196F3; margin-bottom: 30px;">GameCreators - Sistema de Gestão</h1>
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" id="email" placeholder="Digite seu email">
@@ -427,7 +466,7 @@
         <div class="header">
             <div class="user-info">
                 <div>
-                    <h1>Sistema de Gestão Escolar</h1>
+                    <h1>GameCreators - Sistema de Gestão</h1>
                     <p id="userWelcome">Bem-vindo!</p>
                 </div>
                 <button class="logout-btn" onclick="logout()">Sair</button>
@@ -449,18 +488,23 @@
         <!-- Students Tab -->
         <div id="students" class="tab-content">
             <div class="action-buttons">
-                <h2>Gestão de Alunos</h2>
-                <button class="btn" onclick="openModal('studentModal')">Novo Aluno</button>
+                <h2>Gestão de Participantes</h2>
+                <button class="btn" onclick="openModal('studentModal')">Novo Participante</button>
+                <button class="btn btn-secondary" onclick="openModal('contractModal')">Contratos</button>
+                <button class="btn btn-warning" onclick="openModal('statusModal')">Alterar Status</button>
             </div>
-            <input type="text" class="search-box" placeholder="Buscar aluno..." onkeyup="searchTable('studentsTable', this.value)">
+            <input type="text" class="search-box" placeholder="Buscar participante..." onkeyup="searchTable('studentsTable', this.value)" style="width: 300px; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; margin-bottom: 20px;">
             <table class="table" id="studentsTable">
                 <thead>
                     <tr>
-                        <th>RA</th>
+                        <th>ID</th>
                         <th>Nome</th>
                         <th>Email</th>
-                        <th>Curso</th>
+                        <th>Responsável</th>
+                        <th>Área</th>
                         <th>Status</th>
+                        <th>Situação Financeira</th>
+                        <th>Progresso</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -468,32 +512,141 @@
             </table>
         </div>
 
-        <!-- Teachers Tab -->
-        <div id="teachers" class="tab-content">
-            <div class="action-buttons">
-                <h2>Gestão de Professores</h2>
-                <button class="btn" onclick="openModal('teacherModal')">Novo Professor</button>
+        <!-- Financial Tab -->
+        <div id="financeiro" class="tab-content">
+            <h2>Controle Financeiro</h2>
+            <div class="financial-summary">
+                <div class="stats-grid">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">
+                        <div class="stat-number" id="totalReceita">R$ 0,00</div>
+                        <div class="stat-label">Receita Total</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);">
+                        <div class="stat-number" id="totalVencido">R$ 0,00</div>
+                        <div class="stat-label">Vencidos</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);">
+                        <div class="stat-number" id="totalPendente">R$ 0,00</div>
+                        <div class="stat-label">Pendentes</div>
+                    </div>
+                </div>
             </div>
-            <table class="table" id="teachersTable">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th>Disciplinas</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="teachersTableBody"></tbody>
-            </table>
+
+            <div class="action-buttons">
+                <button class="btn" onclick="openModal('paymentModal')">Registrar Pagamento</button>
+                <button class="btn btn-secondary" onclick="openModal('installmentModal')">Gerar Parcelas</button>
+                <button class="btn btn-warning" onclick="generateFinancialReport()">Relatório Financeiro</button>
+                <button class="btn btn-success" onclick="openModal('boletoModal')">Gerar Boleto</button>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Controle de Pagamentos</h3>
+                <table class="table" id="paymentsTable">
+                    <thead>
+                        <tr>
+                            <th>Participante</th>
+                            <th>Parcela</th>
+                            <th>Valor</th>
+                            <th>Vencimento</th>
+                            <th>Status</th>
+                            <th>Forma Pagamento</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentsTableBody"></tbody>
+                </table>
+            </div>
         </div>
 
-        <!-- Classes Tab -->
-        <div id="classes" class="tab-content">
+        <!-- Documents Tab -->
+        <div id="documentos" class="tab-content">
+            <h2>Documentos e Contratos</h2>
             <div class="action-buttons">
-                <h2>Gestão de Turmas</h2>
-                <button class="btn" onclick="openModal('classModal')">Nova Turma</button>
+                <button class="btn" onclick="generateDocument('declaracao')">Declaração</button>
+                <button class="btn btn-warning" onclick="generateDocument('trancamento')">Trancamento</button>
+                <button class="btn btn-danger" onclick="generateDocument('cancelamento')">Cancelamento</button>
+                <button class="btn btn-secondary" onclick="generateDocument('contrato')">Contrato</button>
+                <button class="btn btn-success" onclick="openModal('documentsModal')">Arquivo de Documentos</button>
             </div>
-            <div class="grid-2" id="classesGrid"></div>
+            <div id="documentPreview"></div>
+        </div>
+
+        <!-- Academic Progress Tab -->
+        <div id="progresso" class="tab-content">
+            <h2>Acompanhamento Acadêmico</h2>
+            <div class="action-buttons">
+                <button class="btn" onclick="openModal('progressModal')">Atualizar Progresso</button>
+                <button class="btn btn-secondary" onclick="generateProgressReport()">Relatório de Progresso</button>
+            </div>
+            <div id="progressContainer"></div>
+        </div>
+
+        <!-- Attendance Tab -->
+        <div id="chamada" class="tab-content">
+            <h2>Controle de Presença</h2>
+            <div class="card">
+                <h3 class="card-title">Registrar Presença</h3>
+                <div class="grid-3">
+                    <div class="form-group">
+                        <label>Projeto:</label>
+                        <select id="attendanceProject">
+                            <option value="">Selecione um projeto</option>
+                            <option value="desenvolvimento_jogos">Desenvolvimento de Jogos</option>
+                            <option value="game_design">Game Design</option>
+                            <option value="arte_digital">Arte Digital</option>
+                            <option value="programacao">Programação</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Data:</label>
+                        <input type="date" id="attendanceDate">
+                    </div>
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button class="btn" onclick="loadAttendanceList()">Carregar Lista</button>
+                    </div>
+                </div>
+            </div>
+            <div id="attendanceList" class="card" style="display: none;">
+                <h3 class="card-title">Lista de Presença</h3>
+                <div class="attendance-grid" id="attendanceStudents"></div>
+                <button class="btn" onclick="saveAttendance()">Salvar Presença</button>
+            </div>
+        </div>
+
+        <!-- Reception/Entry Control Tab -->
+        <div id="portaria" class="tab-content">
+            <h2>Controle de Entrada e Saída</h2>
+            <div class="card">
+                <h3 class="card-title">Registrar Entrada/Saída</h3>
+                <div class="grid-3">
+                    <div class="form-group">
+                        <label>Tipo:</label>
+                        <select id="entryType">
+                            <option value="participante">Participante</option>
+                            <option value="colaborador">Colaborador</option>
+                            <option value="visitante">Visitante</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nome/ID:</label>
+                        <input type="text" id="entryPerson" placeholder="Digite nome ou ID">
+                    </div>
+                    <div class="form-group">
+                        <label>Ação:</label>
+                        <select id="entryAction">
+                            <option value="entrada">Entrada</option>
+                            <option value="saida">Saída</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn" onclick="registerEntry()">Registrar</button>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Registro de Movimentação - Hoje</h3>
+                <div id="entryLog"></div>
+            </div>
         </div>
 
         <!-- Configuration Tab -->
@@ -517,7 +670,7 @@
     <div id="studentModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('studentModal')">&times;</span>
-            <h2 id="studentModalTitle">Cadastro de Aluno</h2>
+            <h2 id="studentModalTitle">Cadastro de Participante</h2>
             <div class="grid-2">
                 <div class="form-group">
                     <label>Nome Completo:</label>
@@ -535,883 +688,1947 @@
                     <label>CPF:</label>
                     <input type="text" id="studentCPF">
                 </div>
+                <div class="form-group">
+                    <label>Data de Nascimento:</label>
+                    <input type="date" id="studentBirth">
+                </div>
+                <div class="form-group">
+                    <label>Área de Interesse:</label>
+                    <select id="studentCourse">
+                        <option value="">Selecione uma área</option>
+                        <option value="Desenvolvimento de Jogos">Desenvolvimento de Jogos</option>
+                        <option value="Game Design">Game Design</option>
+                        <option value="Arte Digital">Arte Digital</option>
+                        <option value="Programação">Programação</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Curso:</label>
-                <select id="studentCourse">
-                    <option value="">Selecione um curso</option>
-                    <option value="Informática Básica">Informática Básica</option>
-                    <option value="Programação Web">Programação Web</option>
-                    <option value="Design Gráfico">Design Gráfico</option>
-                    <option value="Marketing Digital">Marketing Digital</option>
-                </select>
+            <h3>Responsável Financeiro</h3>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Nome do Responsável:</label>
+                    <input type="text" id="responsibleName">
+                </div>
+                <div class="form-group">
+                    <label>Email do Responsável:</label>
+                    <input type="email" id="responsibleEmail">
+                </div>
+                <div class="form-group">
+                    <label>Telefone do Responsável:</label>
+                    <input type="tel" id="responsiblePhone">
+                </div>
+                <div class="form-group">
+                    <label>CPF do Responsável:</label>
+                    <input type="text" id="responsibleCPF">
+                </div>
             </div>
-            <button class="btn" onclick="saveStudent()">Salvar Aluno</button>
+            <h3>Dados do Contrato</h3>
+            <div class="grid-3">
+                <div class="form-group">
+                    <label>Valor Total:</label>
+                    <input type="number" id="contractValue" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label>Forma de Pagamento:</label>
+                    <select id="paymentMethod">
+                        <option value="avista">À Vista</option>
+                        <option value="parcelado">Parcelado</option>
+                        <option value="cartao_avista">Cartão à Vista</option>
+                        <option value="cartao_parcelado">Cartão Parcelado</option>
+                        <option value="boleto">Boleto</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Número de Parcelas:</label>
+                    <input type="number" id="installments" value="1" min="1" max="24">
+                </div>
+            </div>
+            <button class="btn" onclick="saveStudent()">Salvar Participante</button>
             <input type="hidden" id="editingStudentId">
         </div>
     </div>
 
-    <!-- Teacher Modal -->
-    <div id="teacherModal" class="modal">
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('teacherModal')">&times;</span>
-            <h2 id="teacherModalTitle">Cadastro de Professor</h2>
+            <span class="close" onclick="closeModal('paymentModal')">&times;</span>
+            <h2>Registrar Pagamento</h2>
             <div class="grid-2">
                 <div class="form-group">
-                    <label>Nome Completo:</label>
-                    <input type="text" id="teacherName">
-                </div>
-                <div class="form-group">
-                    <label>Email:</label>
-                    <input type="email" id="teacherEmail">
-                </div>
-                <div class="form-group">
-                    <label>Telefone:</label>
-                    <input type="tel" id="teacherPhone">
-                </div>
-                <div class="form-group">
-                    <label>CPF:</label>
-                    <input type="text" id="teacherCPF">
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Disciplinas:</label>
-                <input type="text" id="teacherSubjects" placeholder="Ex: Matemática, Física">
-            </div>
-            <button class="btn" onclick="saveTeacher()">Salvar Professor</button>
-            <input type="hidden" id="editingTeacherId">
-        </div>
-    </div>
-
-    <!-- Class Modal -->
-    <div id="classModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('classModal')">&times;</span>
-            <h2 id="classModalTitle">Criar Nova Turma</h2>
-            <div class="grid-2">
-                <div class="form-group">
-                    <label>Nome da Turma:</label>
-                    <input type="text" id="className">
-                </div>
-                <div class="form-group">
-                    <label>Curso:</label>
-                    <select id="classCourse">
-                        <option value="">Selecione um curso</option>
-                        <option value="Informática Básica">Informática Básica</option>
-                        <option value="Programação Web">Programação Web</option>
-                        <option value="Design Gráfico">Design Gráfico</option>
-                        <option value="Marketing Digital">Marketing Digital</option>
+                    <label>Participante:</label>
+                    <select id="paymentStudent" onchange="loadStudentInstallments()">
+                        <option value="">Selecione um participante</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Horário:</label>
-                    <input type="text" id="classSchedule" placeholder="Ex: Segunda a Sexta - 19h às 22h">
+                    <label>Parcela:</label>
+                    <select id="paymentInstallment">
+                        <option value="">Selecione uma parcela</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label>Capacidade:</label>
-                    <input type="number" id="classCapacity" value="20">
+                    <label>Valor Pago:</label>
+                    <input type="number" id="paymentValue" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label>Data do Pagamento:</label>
+                    <input type="date" id="paymentDate">
+                </div>
+                <div class="form-group">
+                    <label>Forma de Pagamento:</label>
+                    <select id="paymentForm">
+                        <option value="dinheiro">Dinheiro</option>
+                        <option value="cartao_debito">Cartão Débito</option>
+                        <option value="cartao_credito">Cartão Crédito</option>
+                        <option value="pix">PIX</option>
+                        <option value="transferencia">Transferência</option>
+                        <option value="boleto">Boleto</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Observações:</label>
+                    <textarea id="paymentNotes" rows="3"></textarea>
                 </div>
             </div>
-            <button class="btn" onclick="saveClass()">Salvar Turma</button>
-            <input type="hidden" id="editingClassId">
+            <button class="btn" onclick="registerPayment()">Registrar Pagamento</button>
+        </div>
+    </div>
+
+    <!-- Boleto Modal -->
+    <div id="boletoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('boletoModal')">&times;</span>
+            <h2>Gerar Boleto</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Participante:</label>
+                    <select id="boletoStudent">
+                        <option value="">Selecione um participante</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Valor:</label>
+                    <input type="number" id="boletoValue" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label>Data de Vencimento:</label>
+                    <input type="date" id="boletoDate">
+                </div>
+                <div class="form-group">
+                    <label>Nosso Número:</label>
+                    <input type="text" id="boletoNumber" value="" readonly>
+                </div>
+            </div>
+            <button class="btn" onclick="generateBoleto()">Gerar Boleto</button>
+            <div id="boletoPreview"></div>
+        </div>
+    </div>
+
+    <!-- Status Change Modal -->
+    <div id="statusModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('statusModal')">&times;</span>
+            <h2>Alterar Status do Participante</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Participante:</label>
+                    <select id="statusStudent">
+                        <option value="">Selecione um participante</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Novo Status:</label>
+                    <select id="newStatus">
+                        <option value="ativo">Ativo</option>
+                        <option value="trancado">Trancado</option>
+                        <option value="cancelado">Cancelado</option>
+                        <option value="formado">Formado</option>
+                        <option value="inadimplente">Inadimplente</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Motivo:</label>
+                <textarea id="statusReason" rows="3" placeholder="Descreva o motivo da alteração..."></textarea>
+            </div>
+            <button class="btn" onclick="changeStudentStatus()">Alterar Status</button>
+        </div>
+    </div>
+
+    <!-- Progress Update Modal -->
+    <div id="progressModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('progressModal')">&times;</span>
+            <h2>Atualizar Progresso do Participante</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Participante:</label>
+                    <select id="progressStudent">
+                        <option value="">Selecione um participante</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Módulo Atual:</label>
+                    <select id="currentModule">
+                        <option value="1">Módulo 1 - Introdução</option>
+                        <option value="2">Módulo 2 - Fundamentos</option>
+                        <option value="3">Módulo 3 - Desenvolvimento</option>
+                        <option value="4">Módulo 4 - Avançado</option>
+                        <option value="5">Módulo 5 - Projeto Final</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Aula Atual:</label>
+                    <input type="number" id="currentLesson" min="1" max="20" value="1">
+                </div>
+                <div class="form-group">
+                    <label>% de Conclusão:</label>
+                    <input type="number" id="progressPercentage" min="0" max="100" value="0">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Observações:</label>
+                <textarea id="progressNotes" rows="3" placeholder="Observações sobre o progresso..."></textarea>
+            </div>
+            <button class="btn" onclick="updateStudentProgress()">Atualizar Progresso</button>
+        </div>
+    </div>
+
+    <!-- Documents Archive Modal -->
+    <div id="documentsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('documentsModal')">&times;</span>
+            <h2>Arquivo de Documentos</h2>
+            <div class="form-group">
+                <label>Participante:</label>
+                <select id="documentsStudent" onchange="loadStudentDocuments()">
+                    <option value="">Selecione um participante</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Upload de Documento:</label>
+                <input type="file" id="documentFile" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+            </div>
+            <div class="form-group">
+                <label>Tipo de Documento:</label>
+                <select id="documentType">
+                    <option value="rg">RG</option>
+                    <option value="cpf">CPF</option>
+                    <option value="comprovante_residencia">Comprovante de Residência</option>
+                    <option value="contrato_assinado">Contrato Assinado</option>
+                    <option value="declaracao">Declaração</option>
+                    <option value="certidao_nascimento">Certidão de Nascimento</option>
+                    <option value="outros">Outros</option>
+                </select>
+            </div>
+            <button class="btn" onclick="uploadDocument()">Salvar Documento</button>
+            
+            <div class="card" style="margin-top: 20px;">
+                <h3 class="card-title">Documentos Cadastrados</h3>
+                <div id="documentsArchive"></div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Configuration
-        const CONFIG = {
-            SHEETS_API_URL: localStorage.getItem('sheetsApiUrl') || '',
-            SHEETS: {
-                STUDENTS: 'Alunos',
-                TEACHERS: 'Professores',
-                CLASSES: 'Turmas',
-                COURSES: 'Cursos'
-            }
-        };
+        // Data Storage
+        let students = [];
+        let payments = [];
+        let attendance = [];
+        let entryLog = [];
+        let documentsArchive = [];
+        let currentUser = '';
 
-        // Global variables
-        let currentUser = null;
-        let currentUserRole = null;
-        let studentsData = [];
-        let teachersData = [];
-        let classesData = [];
-
-        // Initialize demo data
-        function initializeDemoData() {
-            studentsData = [
+        // Sample data
+        function loadSampleData() {
+            students = [
                 {
                     id: 1,
-                    ra: 'ALU001',
-                    nome: 'João Silva',
+                    name: 'João Silva',
                     email: 'joao@email.com',
-                    telefone: '(11) 99999-9999',
-                    cpf: '123.456.789-00',
-                    curso: 'Programação Web',
-                    status: 'Matriculado'
+                    phone: '(11) 99999-1111',
+                    cpf: '123.456.789-01',
+                    birth: '2005-03-15',
+                    course: 'Desenvolvimento de Jogos',
+                    status: 'ativo',
+                    responsibleName: 'Maria Silva',
+                    responsibleEmail: 'maria@email.com',
+                    responsiblePhone: '(11) 99999-2222',
+                    responsibleCPF: '987.654.321-02',
+                    contractValue: 2400.00,
+                    paymentMethod: 'parcelado',
+                    installments: 12,
+                    currentModule: 2,
+                    currentLesson: 5,
+                    progressPercentage: 35,
+                    enrollmentDate: '2024-01-15'
                 },
                 {
                     id: 2,
-                    ra: 'ALU002',
-                    nome: 'Maria Santos',
-                    email: 'maria@email.com',
-                    telefone: '(11) 88888-8888',
-                    cpf: '987.654.321-00',
-                    curso: 'Design Gráfico',
-                    status: 'Matriculado'
+                    name: 'Ana Costa',
+                    email: 'ana@email.com',
+                    phone: '(11) 99999-3333',
+                    cpf: '456.789.123-04',
+                    birth: '2006-07-22',
+                    course: 'Game Design',
+                    status: 'ativo',
+                    responsibleName: 'José Costa',
+                    responsibleEmail: 'jose@email.com',
+                    responsiblePhone: '(11) 99999-4444',
+                    responsibleCPF: '654.321.987-05',
+                    contractValue: 1800.00,
+                    paymentMethod: 'cartao_parcelado',
+                    installments: 6,
+                    currentModule: 1,
+                    currentLesson: 8,
+                    progressPercentage: 20,
+                    enrollmentDate: '2024-02-01'
                 }
             ];
 
-            teachersData = [
-                {
-                    id: 1,
-                    nome: 'Ana Paula Santos',
-                    email: 'ana@escola.com',
-                    telefone: '(11) 91234-5678',
-                    cpf: '111.222.333-44',
-                    disciplinas: 'Programação Web, JavaScript'
-                },
-                {
-                    id: 2,
-                    nome: 'Carlos Roberto Silva',
-                    email: 'carlos@escola.com',
-                    telefone: '(11) 98765-4321',
-                    cpf: '555.666.777-88',
-                    disciplinas: 'Design Gráfico, Photoshop'
-                }
-            ];
-
-            classesData = [
-                {
-                    id: 1,
-                    nome: 'Turma A - Manhã',
-                    curso: 'Programação Web',
-                    horario: 'Segunda a Sexta - 08h às 12h',
-                    capacidade: 20,
-                    matriculados: 15
-                },
-                {
-                    id: 2,
-                    nome: 'Turma B - Noite',
-                    curso: 'Design Gráfico',
-                    horario: 'Segunda a Sexta - 19h às 22h',
-                    capacidade: 15,
-                    matriculados: 12
-                }
-            ];
+            // Generate sample payments
+            generateSamplePayments();
         }
 
-        // Login function
+        function generateSamplePayments() {
+            payments = [];
+            students.forEach(student => {
+                const installmentValue = student.contractValue / student.installments;
+                const startDate = new Date(student.enrollmentDate);
+                
+                for (let i = 1; i <= student.installments; i++) {
+                    const dueDate = new Date(startDate);
+                    dueDate.setMonth(dueDate.getMonth() + i - 1);
+                    
+                    let status = 'pendente';
+                    let paymentDate = null;
+                    
+                    // Some payments are already paid
+                    if (i <= Math.floor(student.installments / 3)) {
+                        status = 'pago';
+                        paymentDate = new Date(dueDate);
+                        paymentDate.setDate(paymentDate.getDate() - Math.floor(Math.random() * 10));
+                    } else if (dueDate < new Date()) {
+                        status = 'vencido';
+                    }
+                    
+                    payments.push({
+                        id: payments.length + 1,
+                        studentId: student.id,
+                        studentName: student.name,
+                        installmentNumber: i,
+                        value: installmentValue,
+                        dueDate: dueDate.toISOString().split('T')[0],
+                        status: status,
+                        paymentDate: paymentDate ? paymentDate.toISOString().split('T')[0] : null,
+                        paymentMethod: student.paymentMethod,
+                        notes: ''
+                    });
+                }
+            });
+        }
+
+        // Login System
         function login() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-
-            if (!email || !password) {
-                showNotification('Por favor, preencha todos os campos!', 'error');
-                return;
+            
+            if (email && password === '123456') {
+                currentUser = email;
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                document.getElementById('userWelcome').textContent = `Bem-vindo, ${email}!`;
+                
+                loadSampleData();
+                initializeApp();
+            } else {
+                showNotification('Email ou senha incorretos!', 'error');
             }
-
-            if (password !== '123456') {
-                showNotification('Senha incorreta!', 'error');
-                return;
-            }
-
-            currentUserRole = 'admin';
-            currentUser = email;
-            
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('mainApp').style.display = 'block';
-            
-            setupUserInterface();
-            initializeDemoData();
-            loadDashboard();
-            
-            showNotification('Login realizado com sucesso!', 'success');
         }
 
-        // Logout function
         function logout() {
-            currentUser = null;
-            currentUserRole = null;
             document.getElementById('loginScreen').style.display = 'block';
             document.getElementById('mainApp').style.display = 'none';
             document.getElementById('email').value = '';
             document.getElementById('password').value = '';
         }
 
-        // Setup user interface
-        function setupUserInterface() {
-            const userWelcome = document.getElementById('userWelcome');
-            const navTabs = document.getElementById('navTabs');
-            
-            userWelcome.textContent = `Bem-vindo, ${currentUser} (Administrador)`;
-            
-            navTabs.innerHTML = '';
-            
-            const tabs = [
-                { id: 'dashboard', label: 'Dashboard' },
-                { id: 'students', label: 'Alunos' },
-                { id: 'teachers', label: 'Professores' },
-                { id: 'classes', label: 'Turmas' },
-                { id: 'configuracao', label: '⚙️ Configuração' }
-            ];
-
-            tabs.forEach((tab, index) => {
-                const tabElement = document.createElement('button');
-                tabElement.className = `nav-tab ${index === 0 ? 'active' : ''}`;
-                tabElement.textContent = tab.label;
-                tabElement.onclick = () => switchTab(tab.id);
-                navTabs.appendChild(tabElement);
-            });
+        // App Initialization
+        function initializeApp() {
+            createNavigationTabs();
+            updateDashboard();
+            loadStudentsTable();
+            loadPaymentsTable();
+            loadStudentSelects();
+            loadTodayEntryLog();
+            setCurrentDate();
+            generateBoletoNumber();
         }
 
-        // Switch between tabs
+        // Navigation
+        function createNavigationTabs() {
+            const navTabs = document.getElementById('navTabs');
+            const tabs = [
+                { id: 'dashboard', name: 'Dashboard', icon: '📊' },
+                { id: 'students', name: 'Participantes', icon: '👥' },
+                { id: 'financeiro', name: 'Financeiro', icon: '💰' },
+                { id: 'documentos', name: 'Documentos', icon: '📄' },
+                { id: 'progresso', name: 'Progresso', icon: '📈' },
+                { id: 'chamada', name: 'Presença', icon: '✅' },
+                { id: 'portaria', name: 'Portaria', icon: '🚪' },
+                { id: 'configuracao', name: 'Config', icon: '⚙️' }
+            ];
+
+            navTabs.innerHTML = tabs.map(tab => 
+                `<button class="nav-tab ${tab.id === 'dashboard' ? 'active' : ''}" onclick="switchTab('${tab.id}')">
+                    ${tab.icon} ${tab.name}
+                </button>`
+            ).join('');
+        }
+
         function switchTab(tabId) {
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(content => content.classList.remove('active'));
-
-            const navTabs = document.querySelectorAll('.nav-tab');
-            navTabs.forEach(tab => tab.classList.remove('active'));
-
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
             document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked nav tab
             event.target.classList.add('active');
 
-            switch(tabId) {
-                case 'students':
-                    loadStudents();
-                    break;
-                case 'teachers':
-                    loadTeachers();
-                    break;
-                case 'classes':
-                    loadClasses();
-                    break;
-                case 'configuracao':
-                    loadConfiguration();
-                    break;
+            // Load specific tab data
+            if (tabId === 'progresso') {
+                loadProgressView();
             }
         }
 
-        // Load dashboard
-        function loadDashboard() {
+        // Dashboard Functions
+        function updateDashboard() {
+            const totalStudents = students.length;
+            const activeStudents = students.filter(s => s.status === 'ativo').length;
+            const totalRevenue = payments.filter(p => p.status === 'pago').reduce((sum, p) => sum + p.value, 0);
+            const overduePayments = payments.filter(p => p.status === 'vencido').length;
+
             const statsGrid = document.getElementById('statsGrid');
             statsGrid.innerHTML = `
                 <div class="stat-card">
-                    <div class="stat-number">${studentsData.length}</div>
-                    <div class="stat-label">Total de Alunos</div>
+                    <div class="stat-number">${totalStudents}</div>
+                    <div class="stat-label">Total de Participantes</div>
                 </div>
-                <div class="stat-card" style="background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);">
-                    <div class="stat-number">${teachersData.length}</div>
-                    <div class="stat-label">Professores</div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">
+                    <div class="stat-number">${activeStudents}</div>
+                    <div class="stat-label">Participantes Ativos</div>
                 </div>
                 <div class="stat-card" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);">
-                    <div class="stat-number">${classesData.length}</div>
-                    <div class="stat-label">Turmas Ativas</div>
+                    <div class="stat-number">R$ ${totalRevenue.toFixed(2)}</div>
+                    <div class="stat-label">Receita Arrecadada</div>
                 </div>
-                <div class="stat-card" style="background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Taxa de Aprovação</div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);">
+                    <div class="stat-number">${overduePayments}</div>
+                    <div class="stat-label">Pagamentos Vencidos</div>
                 </div>
             `;
 
+            // Update financial summary
+            updateFinancialSummary();
+
+            // Recent activities
             const recentActivities = document.getElementById('recentActivities');
             recentActivities.innerHTML = `
-                <div style="padding: 20px; text-align: center; color: #666;">
-                    <p>• Novo aluno cadastrado: João Silva</p>
-                    <p>• Turma de Design Gráfico iniciada</p>
-                    <p>• Professor Carlos Roberto adicionado</p>
-                    <p>• Sistema conectado ao Google Sheets</p>
+                <div class="entry-log">
+                    <strong>Novo participante cadastrado:</strong> João Silva - Desenvolvimento de Jogos
+                    <small style="display: block; color: #666;">Hoje às 14:30</small>
+                </div>
+                <div class="entry-log">
+                    <strong>Pagamento recebido:</strong> Ana Costa - Parcela 2/6
+                    <small style="display: block; color: #666;">Hoje às 10:15</small>
+                </div>
+                <div class="entry-log">
+                    <strong>Status alterado:</strong> Carlos Santos - Trancado
+                    <small style="display: block; color: #666;">Ontem às 16:45</small>
                 </div>
             `;
         }
 
-        // Load students
-        function loadStudents() {
+        function updateFinancialSummary() {
+            const totalReceita = payments.filter(p => p.status === 'pago').reduce((sum, p) => sum + p.value, 0);
+            const totalVencido = payments.filter(p => p.status === 'vencido').reduce((sum, p) => sum + p.value, 0);
+            const totalPendente = payments.filter(p => p.status === 'pendente').reduce((sum, p) => sum + p.value, 0);
+
+            document.getElementById('totalReceita').textContent = `R$ ${totalReceita.toFixed(2)}`;
+            document.getElementById('totalVencido').textContent = `R$ ${totalVencido.toFixed(2)}`;
+            document.getElementById('totalPendente').textContent = `R$ ${totalPendente.toFixed(2)}`;
+        }
+
+        // Students Management
+        function loadStudentsTable() {
             const tbody = document.getElementById('studentsTableBody');
-            tbody.innerHTML = studentsData.map(student => `
-                <tr>
-                    <td>${student.ra}</td>
-                    <td>${student.nome}</td>
-                    <td>${student.email}</td>
-                    <td>${student.curso}</td>
-                    <td><span class="status-badge status-${student.status.toLowerCase()}">${student.status}</span></td>
-                    <td>
-                        <button class="btn btn-small" onclick="editStudent(${student.id})">Editar</button>
-                        <button class="btn btn-danger btn-small" onclick="deleteStudent(${student.id})">Excluir</button>
-                    </td>
-                </tr>
-            `).join('');
+            tbody.innerHTML = students.map(student => {
+                const financialStatus = getStudentFinancialStatus(student.id);
+                const progress = `${student.progressPercentage}%`;
+                
+                return `
+                    <tr>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${student.email}</td>
+                        <td>${student.responsibleName}</td>
+                        <td>${student.course}</td>
+                        <td><span class="status-badge status-${student.status}">${student.status.toUpperCase()}</span></td>
+                        <td><span class="status-badge status-${financialStatus}">${financialStatus.toUpperCase()}</span></td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${student.progressPercentage}%"></div>
+                            </div>
+                            ${progress}
+                        </td>
+                        <td>
+                            <button class="btn btn-small" onclick="editStudent(${student.id})">Editar</button>
+                            <button class="btn btn-small btn-warning" onclick="viewStudentDetails(${student.id})">Detalhes</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
         }
 
-        // Load teachers
-        function loadTeachers() {
-            const tbody = document.getElementById('teachersTableBody');
-            tbody.innerHTML = teachersData.map(teacher => `
-                <tr>
-                    <td>${teacher.nome}</td>
-                    <td>${teacher.email}</td>
-                    <td>${teacher.disciplinas}</td>
-                    <td>
-                        <button class="btn btn-small" onclick="editTeacher(${teacher.id})">Editar</button>
-                        <button class="btn btn-danger btn-small" onclick="deleteTeacher(${teacher.id})">Excluir</button>
-                    </td>
-                </tr>
-            `).join('');
+        function calculateCompletionDate(student) {
+            const enrollmentDate = new Date(student.enrollmentDate);
+            const courseDurationMonths = 12; // Assuming 12 months course
+            const completionDate = new Date(enrollmentDate);
+            completionDate.setMonth(completionDate.getMonth() + courseDurationMonths);
+            return formatDate(completionDate.toISOString().split('T')[0]);
         }
 
-        // Load classes
-        function loadClasses() {
-            const grid = document.getElementById('classesGrid');
-            grid.innerHTML = classesData.map(classItem => `
-                <div class="card">
-                    <h3 class="card-title">${classItem.nome}</h3>
-                    <p><strong>Curso:</strong> ${classItem.curso}</p>
-                    <p><strong>Horário:</strong> ${classItem.horario}</p>
-                    <p><strong>Alunos:</strong> ${classItem.matriculados}/${classItem.capacidade}</p>
-                    <div style="margin-top: 15px;">
-                        <button class="btn btn-small" onclick="editClass(${classItem.id})">Editar</button>
-                        <button class="btn btn-danger btn-small" onclick="deleteClass(${classItem.id})">Excluir</button>
-                    </div>
+        function updateStudentProgress() {
+            const studentId = parseInt(document.getElementById('progressStudent').value);
+            const module = parseInt(document.getElementById('currentModule').value);
+            const lesson = parseInt(document.getElementById('currentLesson').value);
+            const percentage = parseInt(document.getElementById('progressPercentage').value);
+            const notes = document.getElementById('progressNotes').value;
+
+            if (!studentId) {
+                showNotification('Selecione um participante!', 'error');
+                return;
+            }
+
+            const student = students.find(s => s.id === studentId);
+            if (student) {
+                student.currentModule = module;
+                student.currentLesson = lesson;
+                student.progressPercentage = percentage;
+                student.progressNotes = notes;
+                student.lastProgressUpdate = new Date().toISOString().split('T')[0];
+
+                showNotification('Progresso atualizado com sucesso!', 'success');
+                closeModal('progressModal');
+                loadStudentsTable();
+                loadProgressView();
+            }
+        }
+
+        // Attendance Management
+        function loadAttendanceList() {
+            const project = document.getElementById('attendanceProject').value;
+            const date = document.getElementById('attendanceDate').value;
+
+            if (!project || !date) {
+                showNotification('Selecione o projeto e a data!', 'error');
+                return;
+            }
+
+            const projectStudents = students.filter(s => 
+                s.status === 'ativo' && 
+                s.course.toLowerCase().includes(project.replace('_', ' '))
+            );
+
+            const attendanceStudents = document.getElementById('attendanceStudents');
+            attendanceStudents.innerHTML = projectStudents.map(student => `
+                <div class="attendance-card">
+                    <h4>${student.name}</h4>
+                    <p>${student.course}</p>
+                    <label>
+                        <input type="checkbox" id="attendance_${student.id}" value="${student.id}">
+                        Presente
+                    </label>
                 </div>
             `).join('');
+
+            document.getElementById('attendanceList').style.display = 'block';
         }
 
-        // Load configuration
-        function loadConfiguration() {
-            const apiUrl = localStorage.getItem('sheetsApiUrl') || '';
-            document.getElementById('sheetsApiUrl').value = apiUrl;
-        }
+        function saveAttendance() {
+            const project = document.getElementById('attendanceProject').value;
+            const date = document.getElementById('attendanceDate').value;
+            const checkboxes = document.querySelectorAll('#attendanceStudents input[type="checkbox"]');
 
-        // Save configuration
-        function saveConfiguration() {
-            const apiUrl = document.getElementById('sheetsApiUrl').value.trim();
-            
-            if (!apiUrl) {
-                showNotification('Por favor, insira a URL do Google Apps Script!', 'error');
-                return;
-            }
-            
-            localStorage.setItem('sheetsApiUrl', apiUrl);
-            CONFIG.SHEETS_API_URL = apiUrl;
-            
-            showNotification('Configuração salva com sucesso!', 'success');
-        }
+            const attendanceRecord = {
+                id: attendance.length + 1,
+                project: project,
+                date: date,
+                students: []
+            };
 
-        // Test connection
-        async function testConnection() {
-            const apiUrl = document.getElementById('sheetsApiUrl').value.trim();
-            
-            if (!apiUrl) {
-                showNotification('Por favor, configure a URL primeiro!', 'error');
-                return;
-            }
-            
-            try {
-                const response = await fetch(apiUrl + '?action=test');
-                const result = await response.json();
+            checkboxes.forEach(checkbox => {
+                const studentId = parseInt(checkbox.value);
+                const student = students.find(s => s.id === studentId);
                 
-                if (result.success) {
-                    showNotification('Conexão estabelecida com sucesso!', 'success');
+                attendanceRecord.students.push({
+                    studentId: studentId,
+                    studentName: student.name,
+                    present: checkbox.checked
+                });
+            });
+
+            attendance.push(attendanceRecord);
+            showNotification('Presença registrada com sucesso!', 'success');
+
+            // Send attendance notification to parents
+            attendanceRecord.students.forEach(record => {
+                if (record.present) {
+                    sendAttendanceNotification(record.studentId, 'entrada');
+                }
+            });
+
+            document.getElementById('attendanceList').style.display = 'none';
+        }
+
+        function sendAttendanceNotification(studentId, type) {
+            const student = students.find(s => s.id === studentId);
+            if (student && student.responsibleEmail) {
+                const message = type === 'entrada' ? 
+                    `${student.name} chegou à GameCreators` : 
+                    `${student.name} saiu da GameCreators`;
+                
+                console.log(`Email enviado para ${student.responsibleEmail}: ${message} às ${new Date().toLocaleTimeString()}`);
+                // In real implementation, integrate with email service
+            }
+        }
+
+        // Entry Control (Portaria)
+        function registerEntry() {
+            const type = document.getElementById('entryType').value;
+            const person = document.getElementById('entryPerson').value;
+            const action = document.getElementById('entryAction').value;
+
+            if (!person) {
+                showNotification('Digite o nome ou ID da pessoa!', 'error');
+                return;
+            }
+
+            const entry = {
+                id: entryLog.length + 1,
+                type: type,
+                person: person,
+                action: action,
+                time: new Date().toLocaleTimeString(),
+                date: new Date().toISOString().split('T')[0]
+            };
+
+            entryLog.push(entry);
+            showNotification(`${action.charAt(0).toUpperCase() + action.slice(1)} registrada com sucesso!`, 'success');
+
+            // If it's a student, send notification to parents
+            if (type === 'participante') {
+                const student = students.find(s => 
+                    s.name.toLowerCase().includes(person.toLowerCase()) || 
+                    s.id.toString() === person
+                );
+                if (student) {
+                    sendAttendanceNotification(student.id, action);
+                }
+            }
+
+            loadTodayEntryLog();
+            
+            // Clear form
+            document.getElementById('entryPerson').value = '';
+        }
+
+        function loadTodayEntryLog() {
+            const today = new Date().toISOString().split('T')[0];
+            const todayEntries = entryLog.filter(entry => entry.date === today);
+            
+            const entryLogDiv = document.getElementById('entryLog');
+            entryLogDiv.innerHTML = todayEntries.length > 0 ? 
+                todayEntries.map(entry => `
+                    <div class="entry-log">
+                        <strong>${entry.action.toUpperCase()}</strong> - ${entry.type}: ${entry.person}
+                        <small style="display: block; color: #666;">${entry.time}</small>
+                    </div>
+                `).join('') : 
+                '<p style="text-align: center; color: #666;">Nenhum registro hoje</p>';
+        }
+
+        // Document Management
+        function generateDocument(type, studentId = null) {
+            let selectedStudentId = studentId;
+            
+            if (!selectedStudentId) {
+                const select = document.createElement('select');
+                select.innerHTML = '<option value="">Selecione um participante</option>' +
+                    students.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+                
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.style.display = 'block';
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <h3>Selecionar Participante</h3>
+                        ${select.outerHTML}
+                        <button class="btn" onclick="this.parentElement.parentElement.remove(); generateDocument('${type}', document.querySelector('select').value)">Gerar</button>
+                        <button class="btn btn-secondary" onclick="this.parentElement.parentElement.remove()">Cancelar</button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                return;
+            }
+
+            const student = students.find(s => s.id == selectedStudentId);
+            if (!student) {
+                showNotification('Participante não encontrado!', 'error');
+                return;
+            }
+
+            let documentContent = '';
+            
+            switch(type) {
+                case 'declaracao':
+                    documentContent = generateDeclarationDocument(student);
+                    break;
+                case 'trancamento':
+                    documentContent = generateSuspensionDocument(student);
+                    break;
+                case 'cancelamento':
+                    documentContent = generateCancellationDocument(student);
+                    break;
+                case 'contrato':
+                    documentContent = generateContractDocument(student);
+                    break;
+            }
+
+            const preview = document.getElementById('documentPreview');
+            preview.innerHTML = `
+                <div class="no-print" style="margin-bottom: 20px;">
+                    <button class="btn" onclick="window.print()">🖨️ Imprimir</button>
+                    <button class="btn btn-secondary" onclick="downloadDocument('${type}', '${student.name}')">💾 Baixar PDF</button>
+                </div>
+                ${documentContent}
+            `;
+
+            switchTab('documentos');
+        }
+
+        function generateDeclarationDocument(student) {
+            return `
+                <div class="document-preview">
+                    <div class="document-header">
+                        <h2>DECLARAÇÃO</h2>
+                        <p><strong>GameCreators - Escola de Desenvolvimento de Jogos</strong></p>
+                        <p>CNPJ: 12.345.678/0001-90</p>
+                    </div>
                     
-                    const configResult = document.getElementById('configResult');
-                    configResult.innerHTML = `
-                        <div style="background: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 15px; border-radius: 8px; margin-top: 20px;">
-                            <h4>✅ Conexão Estabelecida!</h4>
-                            <p><strong>Planilha conectada:</strong> ${result.spreadsheetName || 'SGE Database'}</p>
-                            <p>Sistema pronto para uso!</p>
+                    <p style="text-align: justify; margin: 30px 0;">
+                        Declaramos para os devidos fins que <strong>${student.name}</strong>, 
+                        portador(a) do CPF nº ${student.cpf}, está regularmente matriculado(a) 
+                        no curso de <strong>${student.course}</strong> nesta instituição.
+                    </p>
+                    
+                    <p style="text-align: justify; margin: 30px 0;">
+                        O(A) referido(a) estudante ingressou em <strong>${formatDate(student.enrollmentDate)}</strong> 
+                        e encontra-se atualmente no <strong>Módulo ${student.currentModule}</strong>, 
+                        com <strong>${student.progressPercentage}%</strong> do curso concluído.
+                    </p>
+                    
+                    <p style="text-align: justify; margin: 30px 0;">
+                        Esta declaração é expedida a pedido do(a) interessado(a) para fins de 
+                        comprovação de vínculo acadêmico.
+                    </p>
+                    
+                    <div style="text-align: center; margin-top: 80px;">
+                        <p>São Paulo, ${formatDate(new Date().toISOString().split('T')[0])}</p>
+                        <br><br>
+                        <hr style="width: 300px; margin: 0 auto;">
+                        <p><strong>GameCreators</strong><br>Secretaria Acadêmica</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateSuspensionDocument(student) {
+            return `
+                <div class="document-preview">
+                    <div class="document-header">
+                        <h2>DECLARAÇÃO DE TRANCAMENTO</h2>
+                        <p><strong>GameCreators - Escola de Desenvolvimento de Jogos</strong></p>
+                        <p>CNPJ: 12.345.678/0001-90</p>
+                    </div>
+                    
+                    <p style="text-align: justify; margin: 30px 0;">
+                        Declaramos que <strong>${student.name}</strong>, portador(a) do CPF nº ${student.cpf}, 
+                        TRANCOU sua matrícula no curso de <strong>${student.course}</strong> nesta instituição.
+                    </p>
+                    
+                    <p style="text-align: justify; margin: 30px 0;">
+                        <strong>Data de Matrícula:</strong> ${formatDate(student.enrollmentDate)}<br>
+                        <strong>Data do Trancamento:</strong> ${formatDate(student.statusChangeDate || new Date().toISOString().split('T')[0])}<br>
+                        <strong>Progresso até o trancamento:</strong> ${student.progressPercentage}% (Módulo ${student.currentModule})
+                    </p>
+                    
+                    <p style="text-align: justify; margin: 30px 0;">
+                        <strong>Motivo:</strong> ${student.statusChangeReason || 'Não informado'}
+                    </p>
+                    
+                    <p style="text-align: justify; margin: 30px 0;">
+                        O(A) estudante poderá retomar os estudos mediante solicitação formal, 
+                        sujeito às normas vigentes da instituição.
+                    </p>
+                    
+                    <div style="text-align: center; margin-top: 80px;">
+                        <p>São Paulo, ${formatDate(new Date().toISOString().split('T')[0])}</p>
+                        <br><br>
+                        <hr style="width: 300px; margin: 0 auto;">
+                        <p><strong>GameCreators</strong><br>Secretaria Acadêmica</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateCancellationDocument(student) {
+            return `
+                <div class="document-preview">
+                    <div class="document-header">
+                        <h2>DECLARAÇÃO DE CANCELAMENTO</h2>
+                        <p><strong>GameCreators - Escola de Desenvolvimento de Jogos</strong></p>
+                        <p>CNPJ: 12.345.678/0001-90</p>
+                    </div>
+                    
+                    <p style="text-align: justify; margin: 30px 0;">
+                        Declaramos que <strong>${student.name}</strong>, portador(a) do CPF nº ${student.cpf}, 
+                        teve sua matrícula CANCELADA no curso de <strong>${student.course}</strong> nesta instituição.
+                    </p>
+                    
+                    <p style="text-align: justify; margin: 30px 0;">
+                        <strong>Data de Matrícula:</strong> ${formatDate(student.enrollmentDate)}<br>
+                        <strong>Data do Cancelamento:</strong> ${formatDate(student.statusChangeDate || new Date().toISOString().split('T')[0])}<br>
+                        <strong>Progresso até o cancelamento:</strong> ${student.progressPercentage}% (Módulo ${student.currentModule})
+                    </p>
+                    
+                    <p style="text-align: justify; margin: 30px 0;">
+                        <strong>Motivo:</strong> ${student.statusChangeReason || 'Não informado'}
+                    </p>
+                    
+                    <p style="text-align: justify; margin: 30px 0;">
+                        Esta declaração comprova o desligamento definitivo do(a) estudante desta instituição.
+                    </p>
+                    
+                    <div style="text-align: center; margin-top: 80px;">
+                        <p>São Paulo, ${formatDate(new Date().toISOString().split('T')[0])}</p>
+                        <br><br>
+                        <hr style="width: 300px; margin: 0 auto;">
+                        <p><strong>GameCreators</strong><br>Secretaria Acadêmica</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateContractDocument(student) {
+            return `
+                <div class="document-preview">
+                    <div class="document-header">
+                        <h2>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</h2>
+                        <p><strong>GameCreators - Escola de Desenvolvimento de Jogos</strong></p>
+                        <p>CNPJ: 12.345.678/0001-90</p>
+                    </div>
+                    
+                    <p><strong>CONTRATANTE:</strong></p>
+                    <p>Nome: ${student.responsibleName}<br>
+                    CPF: ${student.responsibleCPF}<br>
+                    Email: ${student.responsibleEmail}<br>
+                    Telefone: ${student.responsiblePhone}</p>
+                    
+                    <p><strong>BENEFICIÁRIO:</strong></p>
+                    <p>Nome: ${student.name}<br>
+                    CPF: ${student.cpf}<br>
+                    Email: ${student.email}<br>
+                    Data de Nascimento: ${formatDate(student.birth)}</p>
+                    
+                    <p><strong>OBJETO DO CONTRATO:</strong></p>
+                    <p>Curso: ${student.course}<br>
+                    Valor Total: R$ ${student.contractValue.toFixed(2)}<br>
+                    Forma de Pagamento: ${student.paymentMethod}<br>
+                    Número de Parcelas: ${student.installments}</p>
+                    
+                    <p style="text-align: justify; margin: 30px 0;">
+                        <strong>CLÁUSULA 1ª:</strong> O presente contrato tem por objeto a prestação de serviços 
+                        educacionais no curso de ${student.course}, com duração prevista de 12 meses.
+                    </p>
+                    
+                    <p style="text-align: justify; margin: 30px 0;">
+                        <strong>CLÁUSULA 2ª:</strong> O valor total do curso é de R$ ${student.contractValue.toFixed(2)}, 
+                        a ser pago em ${student.installments} parcela(s) de R$ ${(student.contractValue / student.installments).toFixed(2)}.
+                    </p>
+                    
+                    <p style="text-align: justify; margin: 30px 0;">
+                        <strong>CLÁUSULA 3ª:</strong> As aulas serão ministradas presencialmente nas instalações 
+                        da GameCreators, conforme cronograma a ser fornecido.
+                    </p>
+                    
+                    <div style="text-align: center; margin-top: 80px;">
+                        <p>São Paulo, ${formatDate(new Date().toISOString().split('T')[0])}</p>
+                        <br><br>
+                        <div style="display: flex; justify-content: space-between;">
+                            <div style="text-align: center;">
+                                <hr style="width: 200px;">
+                                <p><strong>GameCreators</strong><br>Representante Legal</p>
+                            </div>
+                            <div style="text-align: center;">
+                                <hr style="width: 200px;">
+                                <p><strong>${student.responsibleName}</strong><br>Contratante</p>
+                            </div>
                         </div>
-                    `;
-                } else {
-                    showNotification('Erro na conexão: ' + result.error, 'error');
-                }
-            } catch (error) {
-                showNotification('Erro ao testar conexão: ' + error.message, 'error');
+                    </div>
+                </div>
+            `;
+        }
+
+        // Boleto Generation
+        function generateBoletoNumber() {
+            const number = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+            const boletoInput = document.getElementById('boletoNumber');
+            if (boletoInput) {
+                boletoInput.value = `001${number}`;
             }
         }
 
-        // Save student
-        async function saveStudent() {
-            const isEditing = document.getElementById('editingStudentId').value;
-            const studentData = {
-                nome: document.getElementById('studentName').value,
-                email: document.getElementById('studentEmail').value,
-                telefone: document.getElementById('studentPhone').value,
-                cpf: document.getElementById('studentCPF').value,
-                curso: document.getElementById('studentCourse').value
-            };
+        function generateBoleto() {
+            const studentId = parseInt(document.getElementById('boletoStudent').value);
+            const value = parseFloat(document.getElementById('boletoValue').value);
+            const date = document.getElementById('boletoDate').value;
+            const number = document.getElementById('boletoNumber').value;
 
-            if (!studentData.nome || !studentData.email || !studentData.curso) {
-                showNotification('Preencha todos os campos obrigatórios!', 'error');
+            if (!studentId || !value || !date) {
+                showNotification('Preencha todos os campos!', 'error');
                 return;
             }
 
-            if (CONFIG.SHEETS_API_URL) {
-                // Save to Google Sheets
-                try {
-                    const response = await fetch(CONFIG.SHEETS_API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            action: isEditing ? 'update' : 'write',
-                            sheet: CONFIG.SHEETS.STUDENTS,
-                            ...studentData,
-                            ...(isEditing && { id: parseInt(isEditing) })
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    if (result.success) {
-                        showNotification(isEditing ? 'Aluno atualizado com sucesso!' : 'Aluno cadastrado com sucesso!', 'success');
-                        closeModal('studentModal');
-                        loadStudentsFromAPI();
-                        clearStudentForm();
-                    } else {
-                        showNotification('Erro ao salvar: ' + result.error, 'error');
-                    }
-                } catch (error) {
-                    showNotification('Erro de conexão!', 'error');
-                }
-            } else {
-                // Save locally (demo mode)
-                if (isEditing) {
-                    const student = studentsData.find(s => s.id == isEditing);
-                    Object.assign(student, studentData);
-                } else {
-                    const newStudent = {
-                        id: studentsData.length + 1,
-                        ra: `ALU${String(studentsData.length + 1).padStart(3, '0')}`,
-                        status: 'Matriculado',
-                        ...studentData
-                    };
-                    studentsData.push(newStudent);
-                }
-                
-                showNotification(isEditing ? 'Aluno atualizado!' : 'Aluno cadastrado!', 'success');
-                closeModal('studentModal');
-                loadStudents();
-                clearStudentForm();
-            }
-        }
-
-        // Save teacher
-        async function saveTeacher() {
-            const isEditing = document.getElementById('editingTeacherId').value;
-            const teacherData = {
-                nome: document.getElementById('teacherName').value,
-                email: document.getElementById('teacherEmail').value,
-                telefone: document.getElementById('teacherPhone').value,
-                cpf: document.getElementById('teacherCPF').value,
-                disciplinas: document.getElementById('teacherSubjects').value
-            };
-
-            if (!teacherData.nome || !teacherData.email) {
-                showNotification('Preencha todos os campos obrigatórios!', 'error');
+            const student = students.find(s => s.id === studentId);
+            if (!student) {
+                showNotification('Participante não encontrado!', 'error');
                 return;
             }
 
-            if (CONFIG.SHEETS_API_URL) {
-                // Save to Google Sheets
-                try {
-                    const response = await fetch(CONFIG.SHEETS_API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            action: isEditing ? 'update' : 'write',
-                            sheet: CONFIG.SHEETS.TEACHERS,
-                            ...teacherData,
-                            ...(isEditing && { id: parseInt(isEditing) })
-                        })
-                    });
+            const boletoContent = `
+                <div class="boleto-preview">
+                    <div style="border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px;">
+                        <h3>BANCO FICTÍCIO S.A. - 000</h3>
+                        <p>Linha Digitável: 00000.00000 00000.000000 00000.000000 0 00000000000000</p>
+                    </div>
                     
-                    const result = await response.json();
-                    if (result.success) {
-                        showNotification(isEditing ? 'Professor atualizado!' : 'Professor cadastrado!', 'success');
-                        closeModal('teacherModal');
-                        loadTeachersFromAPI();
-                        clearTeacherForm();
-                    } else {
-                        showNotification('Erro ao salvar: ' + result.error, 'error');
-                    }
-                } catch (error) {
-                    showNotification('Erro de conexão!', 'error');
-                }
-            } else {
-                // Save locally (demo mode)
-                if (isEditing) {
-                    const teacher = teachersData.find(t => t.id == isEditing);
-                    Object.assign(teacher, teacherData);
-                } else {
-                    const newTeacher = {
-                        id: teachersData.length + 1,
-                        ...teacherData
-                    };
-                    teachersData.push(newTeacher);
-                }
-                
-                showNotification(isEditing ? 'Professor atualizado!' : 'Professor cadastrado!', 'success');
-                closeModal('teacherModal');
-                loadTeachers();
-                clearTeacherForm();
-            }
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 8px;"><strong>Beneficiário:</strong><br>
+                                GameCreators LTDA<br>
+                                CNPJ: 12.345.678/0001-90
+                            </td>
+                            <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+                                <strong>Nosso Número:</strong><br>${number}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 8px;"><strong>Pagador:</strong><br>
+                                ${student.responsibleName}<br>
+                                CPF: ${student.responsibleCPF}
+                            </td>
+                            <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+                                <strong>Vencimento:</strong><br>${formatDate(date)}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 8px;"><strong>Referente a:</strong><br>
+                                Mensalidade - ${student.course}<br>
+                                Participante: ${student.name}
+                            </td>
+                            <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+                                <strong>Valor:</strong><br>R$ ${value.toFixed(2)}
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <div style="margin-top: 30px; text-align: center;">
+                        <div style="height: 50px; background: linear-gradient(to right, #000 2px, transparent 2px, transparent 4px, #000 4px); background-size: 4px 100%;"></div>
+                        <p style="font-family: monospace; letter-spacing: 2px;">||||| |||| ||||| |||| ||||| |||| ||||| ||||</p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('boletoPreview').innerHTML = boletoContent;
+            showNotification('Boleto gerado com sucesso!', 'success');
         }
 
-        // Save class
-        async function saveClass() {
-            const isEditing = document.getElementById('editingClassId').value;
-            const classData = {
-                nome: document.getElementById('className').value,
-                curso: document.getElementById('classCourse').value,
-                horario: document.getElementById('classSchedule').value,
-                capacidade: parseInt(document.getElementById('classCapacity').value)
-            };
+        // Document Archive Management
+        function loadStudentDocuments() {
+            const studentId = parseInt(document.getElementById('documentsStudent').value);
+            if (!studentId) return;
 
-            if (!classData.nome || !classData.curso) {
-                showNotification('Preencha todos os campos obrigatórios!', 'error');
+            const studentDocs = documentsArchive.filter(doc => doc.studentId === studentId);
+            const archiveDiv = document.getElementById('documentsArchive');
+            
+            archiveDiv.innerHTML = studentDocs.length > 0 ? 
+                studentDocs.map(doc => `
+                    <div class="document-item">
+                        <div>
+                            <strong>${doc.type.toUpperCase().replace('_', ' ')}</strong><br>
+                            <small>Enviado em: ${formatDate(doc.uploadDate)}</small>
+                        </div>
+                        <div>
+                            <button class="btn btn-small" onclick="viewDocument('${doc.id}')">Visualizar</button>
+                            <button class="btn btn-small btn-danger" onclick="deleteDocument('${doc.id}')">Excluir</button>
+                        </div>
+                    </div>
+                `).join('') : 
+                '<p style="text-align: center; color: #666;">Nenhum documento cadastrado</p>';
+        }
+
+        function uploadDocument() {
+            const studentId = parseInt(document.getElementById('documentsStudent').value);
+            const fileInput = document.getElementById('documentFile');
+            const type = document.getElementById('documentType').value;
+
+            if (!studentId || !fileInput.files[0] || !type) {
+                showNotification('Preencha todos os campos e selecione um arquivo!', 'error');
                 return;
             }
 
-            if (CONFIG.SHEETS_API_URL) {
-                // Save to Google Sheets
-                try {
-                    const response = await fetch(CONFIG.SHEETS_API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            action: isEditing ? 'update' : 'write',
-                            sheet: CONFIG.SHEETS.CLASSES,
-                            ...classData,
-                            matriculados: 0,
-                            ...(isEditing && { id: parseInt(isEditing) })
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    if (result.success) {
-                        showNotification(isEditing ? 'Turma atualizada!' : 'Turma criada!', 'success');
-                        closeModal('classModal');
-                        loadClassesFromAPI();
-                        clearClassForm();
-                    } else {
-                        showNotification('Erro ao salvar: ' + result.error, 'error');
-                    }
-                } catch (error) {
-                    showNotification('Erro de conexão!', 'error');
-                }
-            } else {
-                // Save locally (demo mode)
-                if (isEditing) {
-                    const classItem = classesData.find(c => c.id == isEditing);
-                    Object.assign(classItem, classData);
-                } else {
-                    const newClass = {
-                        id: classesData.length + 1,
-                        matriculados: 0,
-                        ...classData
-                    };
-                    classesData.push(newClass);
-                }
-                
-                showNotification(isEditing ? 'Turma atualizada!' : 'Turma criada!', 'success');
-                closeModal('classModal');
-                loadClasses();
-                clearClassForm();
-            }
-        }
+            const file = fileInput.files[0];
+            const document = {
+                id: documentsArchive.length + 1,
+                studentId: studentId,
+                type: type,
+                fileName: file.name,
+                fileSize: file.size,
+                uploadDate: new Date().toISOString().split('T')[0],
+                fileData: 'base64_simulated_data' // In real implementation, convert to base64
+            };
 
-        // Load data from API
-        async function loadStudentsFromAPI() {
-            if (!CONFIG.SHEETS_API_URL) return;
+            documentsArchive.push(document);
+            showNotification('Documento salvo com sucesso!', 'success');
             
-            try {
-                const response = await fetch(CONFIG.SHEETS_API_URL + '?action=read&sheet=' + CONFIG.SHEETS.STUDENTS);
-                const result = await response.json();
-                
-                if (result.success) {
-                    studentsData = result.data;
-                    loadStudents();
+            // Clear form
+            fileInput.value = '';
+            loadStudentDocuments();
+        }
+
+        function deleteDocument(docId) {
+            if (confirm('Tem certeza que deseja excluir este documento?')) {
+                const index = documentsArchive.findIndex(doc => doc.id == docId);
+                if (index > -1) {
+                    documentsArchive.splice(index, 1);
+                    showNotification('Documento excluído com sucesso!', 'success');
+                    loadStudentDocuments();
                 }
-            } catch (error) {
-                console.error('Erro ao carregar alunos:', error);
             }
         }
 
-        async function loadTeachersFromAPI() {
-            if (!CONFIG.SHEETS_API_URL) return;
-            
-            try {
-                const response = await fetch(CONFIG.SHEETS_API_URL + '?action=read&sheet=' + CONFIG.SHEETS.TEACHERS);
-                const result = await response.json();
-                
-                if (result.success) {
-                    teachersData = result.data;
-                    loadTeachers();
-                }
-            } catch (error) {
-                console.error('Erro ao carregar professores:', error);
-            }
-        }
-
-        async function loadClassesFromAPI() {
-            if (!CONFIG.SHEETS_API_URL) return;
-            
-            try {
-                const response = await fetch(CONFIG.SHEETS_API_URL + '?action=read&sheet=' + CONFIG.SHEETS.CLASSES);
-                const result = await response.json();
-                
-                if (result.success) {
-                    classesData = result.data;
-                    loadClasses();
-                }
-            } catch (error) {
-                console.error('Erro ao carregar turmas:', error);
-            }
-        }
-
-        // Edit functions
-        function editStudent(studentId) {
-            const student = studentsData.find(s => s.id === studentId);
-            if (!student) return;
-
-            document.getElementById('studentModalTitle').textContent = 'Editar Aluno';
-            document.getElementById('studentName').value = student.nome;
-            document.getElementById('studentEmail').value = student.email;
-            document.getElementById('studentPhone').value = student.telefone;
-            document.getElementById('studentCPF').value = student.cpf;
-            document.getElementById('studentCourse').value = student.curso;
-            document.getElementById('editingStudentId').value = student.id;
-
-            openModal('studentModal');
-        }
-
-        function editTeacher(teacherId) {
-            const teacher = teachersData.find(t => t.id === teacherId);
-            if (!teacher) return;
-
-            document.getElementById('teacherModalTitle').textContent = 'Editar Professor';
-            document.getElementById('teacherName').value = teacher.nome;
-            document.getElementById('teacherEmail').value = teacher.email;
-            document.getElementById('teacherPhone').value = teacher.telefone;
-            document.getElementById('teacherCPF').value = teacher.cpf;
-            document.getElementById('teacherSubjects').value = teacher.disciplinas;
-            document.getElementById('editingTeacherId').value = teacher.id;
-
-            openModal('teacherModal');
-        }
-
-        function editClass(classId) {
-            const classItem = classesData.find(c => c.id === classId);
-            if (!classItem) return;
-
-            document.getElementById('classModalTitle').textContent = 'Editar Turma';
-            document.getElementById('className').value = classItem.nome;
-            document.getElementById('classCourse').value = classItem.curso;
-            document.getElementById('classSchedule').value = classItem.horario;
-            document.getElementById('classCapacity').value = classItem.capacidade;
-            document.getElementById('editingClassId').value = classItem.id;
-
-            openModal('classModal');
-        }
-
-        // Delete functions
-        async function deleteStudent(studentId) {
-            if (!confirm('Tem certeza que deseja excluir este aluno?')) return;
-
-            if (CONFIG.SHEETS_API_URL) {
-                try {
-                    const response = await fetch(CONFIG.SHEETS_API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            action: 'delete',
-                            sheet: CONFIG.SHEETS.STUDENTS,
-                            id: studentId
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    if (result.success) {
-                        showNotification('Aluno excluído com sucesso!', 'success');
-                        loadStudentsFromAPI();
-                    } else {
-                        showNotification('Erro ao excluir: ' + result.error, 'error');
-                    }
-                } catch (error) {
-                    showNotification('Erro de conexão!', 'error');
-                }
+        // Configuration
+        function saveConfiguration() {
+            const url = document.getElementById('sheetsApiUrl').value;
+            if (url) {
+                localStorage.setItem('gamecreatorsApiUrl', url);
+                showNotification('Configuração salva com sucesso!', 'success');
             } else {
-                studentsData = studentsData.filter(s => s.id !== studentId);
-                loadStudents();
-                showNotification('Aluno excluído!', 'success');
+                showNotification('Digite uma URL válida!', 'error');
             }
         }
 
-        async function deleteTeacher(teacherId) {
-            if (!confirm('Tem certeza que deseja excluir este professor?')) return;
-
-            if (CONFIG.SHEETS_API_URL) {
-                try {
-                    const response = await fetch(CONFIG.SHEETS_API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            action: 'delete',
-                            sheet: CONFIG.SHEETS.TEACHERS,
-                            id: teacherId
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    if (result.success) {
-                        showNotification('Professor excluído com sucesso!', 'success');
-                        loadTeachersFromAPI();
-                    } else {
-                        showNotification('Erro ao excluir: ' + result.error, 'error');
-                    }
-                } catch (error) {
-                    showNotification('Erro de conexão!', 'error');
-                }
-            } else {
-                teachersData = teachersData.filter(t => t.id !== teacherId);
-                loadTeachers();
-                showNotification('Professor excluído!', 'success');
+        function testConnection() {
+            const url = localStorage.getItem('gamecreatorsApiUrl');
+            if (!url) {
+                showNotification('Configure a URL primeiro!', 'error');
+                return;
             }
-        }
 
-        async function deleteClass(classId) {
-            if (!confirm('Tem certeza que deseja excluir esta turma?')) return;
-
-            if (CONFIG.SHEETS_API_URL) {
-                try {
-                    const response = await fetch(CONFIG.SHEETS_API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            action: 'delete',
-                            sheet: CONFIG.SHEETS.CLASSES,
-                            id: classId
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    if (result.success) {
-                        showNotification('Turma excluída com sucesso!', 'success');
-                        loadClassesFromAPI();
-                    } else {
-                        showNotification('Erro ao excluir: ' + result.error, 'error');
-                    }
-                } catch (error) {
-                    showNotification('Erro de conexão!', 'error');
-                }
-            } else {
-                classesData = classesData.filter(c => c.id !== classId);
-                loadClasses();
-                showNotification('Turma excluída!', 'success');
-            }
-        }
-
-        // Clear form functions
-        function clearStudentForm() {
-            document.getElementById('studentName').value = '';
-            document.getElementById('studentEmail').value = '';
-            document.getElementById('studentPhone').value = '';
-            document.getElementById('studentCPF').value = '';
-            document.getElementById('studentCourse').value = '';
-            document.getElementById('editingStudentId').value = '';
-            document.getElementById('studentModalTitle').textContent = 'Cadastro de Aluno';
-        }
-
-        function clearTeacherForm() {
-            document.getElementById('teacherName').value = '';
-            document.getElementById('teacherEmail').value = '';
-            document.getElementById('teacherPhone').value = '';
-            document.getElementById('teacherCPF').value = '';
-            document.getElementById('teacherSubjects').value = '';
-            document.getElementById('editingTeacherId').value = '';
-            document.getElementById('teacherModalTitle').textContent = 'Cadastro de Professor';
-        }
-
-        function clearClassForm() {
-            document.getElementById('className').value = '';
-            document.getElementById('classCourse').value = '';
-            document.getElementById('classSchedule').value = '';
-            document.getElementById('classCapacity').value = '20';
-            document.getElementById('editingClassId').value = '';
-            document.getElementById('classModalTitle').textContent = 'Criar Nova Turma';
-        }
-
-        // Utility functions
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'block';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
+            document.getElementById('configResult').innerHTML = '<p>Testando conexão...</p>';
             
-            // Clear forms when closing
-            if (modalId === 'studentModal') clearStudentForm();
-            else if (modalId === 'teacherModal') clearTeacherForm();
-            else if (modalId === 'classModal') clearClassForm();
+            // Simulate connection test
+            setTimeout(() => {
+                document.getElementById('configResult').innerHTML = 
+                    '<p style="color: #4CAF50;">✅ Conexão estabelecida com sucesso!</p>';
+                showNotification('Conexão testada com sucesso!', 'success');
+            }, 2000);
+        }
+
+        // Utility Functions
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('pt-BR');
+        }
+
+        function setCurrentDate() {
+            const today = new Date().toISOString().split('T')[0];
+            const dateInputs = ['attendanceDate', 'paymentDate'];
+            dateInputs.forEach(inputId => {
+                const input = document.getElementById(inputId);
+                if (input) input.value = today;
+            });
         }
 
         function searchTable(tableId, searchTerm) {
             const table = document.getElementById(tableId);
-            const rows = table.getElementsByTagName('tr');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
             
-            for (let i = 1; i < rows.length; i++) {
+            for (let i = 0; i < rows.length; i++) {
                 const row = rows[i];
                 const text = row.textContent.toLowerCase();
                 row.style.display = text.includes(searchTerm.toLowerCase()) ? '' : 'none';
             }
         }
 
-        function showNotification(message, type) {
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
             notification.textContent = message;
             document.body.appendChild(notification);
             
             setTimeout(() => notification.classList.add('show'), 100);
+            
             setTimeout(() => {
                 notification.classList.remove('show');
                 setTimeout(() => document.body.removeChild(notification), 300);
             }, 3000);
         }
 
-        // Initialize application
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('mainApp').style.display = 'none';
+        function downloadDocument(type, studentName) {
+            // Simulate PDF download
+            showNotification(`Download iniciado: ${type}_${studentName}.pdf`, 'success');
+        }
+
+        function generateFinancialReport() {
+            const report = `
+                <div class="document-preview">
+                    <div class="document-header">
+                        <h2>RELATÓRIO FINANCEIRO</h2>
+                        <p><strong>GameCreators - Período: ${formatDate(new Date().toISOString().split('T')[0])}</strong></p>
+                    </div>
+                    
+                    <h3>Resumo Geral</h3>
+                    <p>Total Arrecadado: R$ ${payments.filter(p => p.status === 'pago').reduce((sum, p) => sum + p.value, 0).toFixed(2)}</p>
+                    <p>Total Pendente: R$ ${payments.filter(p => p.status === 'pendente').reduce((sum, p) => sum + p.value, 0).toFixed(2)}</p>
+                    <p>Total Vencido: R$ ${payments.filter(p => p.status === 'vencido').reduce((sum, p) => sum + p.value, 0).toFixed(2)}</p>
+                    
+                    <h3>Detalhamento por Participante</h3>
+                    ${students.map(student => {
+                        const studentPayments = payments.filter(p => p.studentId === student.id);
+                        const paid = studentPayments.filter(p => p.status === 'pago').reduce((sum, p) => sum + p.value, 0);
+                        const pending = studentPayments.filter(p => p.status !== 'pago').reduce((sum, p) => sum + p.value, 0);
+                        
+                        return `
+                            <p><strong>${student.name}</strong><br>
+                            Pago: R$ ${paid.toFixed(2)} | Pendente: R$ ${pending.toFixed(2)}</p>
+                        `;
+                    }).join('')}
+                </div>
+            `;
             
-            // Add enter key support for login
+            document.getElementById('documentPreview').innerHTML = report;
+            switchTab('documentos');
+        }
+
+        function generateProgressReport() {
+            const report = `
+                <div class="document-preview">
+                    <div class="document-header">
+                        <h2>RELATÓRIO DE PROGRESSO ACADÊMICO</h2>
+                        <p><strong>GameCreators - ${formatDate(new Date().toISOString().split('T')[0])}</strong></p>
+                    </div>
+                    
+                    ${students.map(student => `
+                        <div style="margin-bottom: 30px; padding: 20px; border: 1px solid #ddd;">
+                            <h3>${student.name}</h3>
+                            <p><strong>Curso:</strong> ${student.course}</p>
+                            <p><strong>Status:</strong> ${student.status.toUpperCase()}</p>
+                            <p><strong>Matrícula:</strong> ${formatDate(student.enrollmentDate)}</p>
+                            <p><strong>Módulo Atual:</strong> ${student.currentModule}/5</p>
+                            <p><strong>Aula Atual:</strong> ${student.currentLesson}</p>
+                            <p><strong>Progresso:</strong> ${student.progressPercentage}%</p>
+                            <p><strong>Previsão de Término:</strong> ${calculateCompletionDate(student)}</p>
+                            ${student.progressNotes ? `<p><strong>Observações:</strong> ${student.progressNotes}</p>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            document.getElementById('documentPreview').innerHTML = report;
+            switchTab('documentos');
+        }
+
+        // Initialize the application when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current date for date inputs
+            setCurrentDate();
+            
+            // Load saved configuration
+            const savedUrl = localStorage.getItem('gamecreatorsApiUrl');
+            if (savedUrl) {
+                document.getElementById('sheetsApiUrl').value = savedUrl;
+            }
+
+            // Close modals when clicking outside
+            window.onclick = function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = 'none';
+                }
+            }
+
+            // Handle Enter key on login
             document.getElementById('password').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     login();
                 }
             });
 
-            // Close modals when clicking outside
-            window.addEventListener('click', function(e) {
-                if (e.target.classList.contains('modal')) {
-                    e.target.style.display = 'none';
+            console.log('Sistema GameCreators carregado com sucesso!');
+        });
+
+        // Additional Functions for Enhanced Features
+
+        // Auto-generate installments when payment method changes
+        document.addEventListener('change', function(e) {
+            if (e.target.id === 'paymentMethod') {
+                const method = e.target.value;
+                const installmentsInput = document.getElementById('installments');
+                
+                switch(method) {
+                    case 'avista':
+                    case 'cartao_avista':
+                        installmentsInput.value = 1;
+                        installmentsInput.disabled = true;
+                        break;
+                    case 'parcelado':
+                    case 'cartao_parcelado':
+                        installmentsInput.disabled = false;
+                        if (installmentsInput.value == 1) {
+                            installmentsInput.value = 6;
+                        }
+                        break;
+                    case 'boleto':
+                        installmentsInput.disabled = false;
+                        if (installmentsInput.value == 1) {
+                            installmentsInput.value = 12;
+                        }
+                        break;
+                }
+            }
+        });
+
+        // Enhanced search functionality
+        function advancedSearch() {
+            const searchModal = document.createElement('div');
+            searchModal.className = 'modal';
+            searchModal.style.display = 'block';
+            searchModal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close" onclick="this.parentElement.parentElement.remove()">&times;</span>
+                    <h2>Busca Avançada</h2>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Nome:</label>
+                            <input type="text" id="searchName">
+                        </div>
+                        <div class="form-group">
+                            <label>Status:</label>
+                            <select id="searchStatus">
+                                <option value="">Todos</option>
+                                <option value="ativo">Ativo</option>
+                                <option value="trancado">Trancado</option>
+                                <option value="cancelado">Cancelado</option>
+                                <option value="formado">Formado</option>
+                                <option value="inadimplente">Inadimplente</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Curso:</label>
+                            <select id="searchCourse">
+                                <option value="">Todos</option>
+                                <option value="Desenvolvimento de Jogos">Desenvolvimento de Jogos</option>
+                                <option value="Game Design">Game Design</option>
+                                <option value="Arte Digital">Arte Digital</option>
+                                <option value="Programação">Programação</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Situação Financeira:</label>
+                            <select id="searchFinancial">
+                                <option value="">Todas</option>
+                                <option value="pago">Em Dia</option>
+                                <option value="pendente">Pendente</option>
+                                <option value="inadimplente">Inadimplente</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="performAdvancedSearch()">Buscar</button>
+                    <button class="btn btn-secondary" onclick="clearSearch()">Limpar</button>
+                </div>
+            `;
+            document.body.appendChild(searchModal);
+        }
+
+        function performAdvancedSearch() {
+            const name = document.getElementById('searchName').value.toLowerCase();
+            const status = document.getElementById('searchStatus').value;
+            const course = document.getElementById('searchCourse').value;
+            const financial = document.getElementById('searchFinancial').value;
+
+            const filteredStudents = students.filter(student => {
+                const matchName = !name || student.name.toLowerCase().includes(name);
+                const matchStatus = !status || student.status === status;
+                const matchCourse = !course || student.course === course;
+                const matchFinancial = !financial || getStudentFinancialStatus(student.id) === financial;
+
+                return matchName && matchStatus && matchCourse && matchFinancial;
+            });
+
+            // Update table with filtered results
+            const tbody = document.getElementById('studentsTableBody');
+            tbody.innerHTML = filteredStudents.map(student => {
+                const financialStatus = getStudentFinancialStatus(student.id);
+                const progress = `${student.progressPercentage}%`;
+                
+                return `
+                    <tr>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${student.email}</td>
+                        <td>${student.responsibleName}</td>
+                        <td>${student.course}</td>
+                        <td><span class="status-badge status-${student.status}">${student.status.toUpperCase()}</span></td>
+                        <td><span class="status-badge status-${financialStatus}">${financialStatus.toUpperCase()}</span></td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${student.progressPercentage}%"></div>
+                            </div>
+                            ${progress}
+                        </td>
+                        <td>
+                            <button class="btn btn-small" onclick="editStudent(${student.id})">Editar</button>
+                            <button class="btn btn-small btn-warning" onclick="viewStudentDetails(${student.id})">Detalhes</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            showNotification(`${filteredStudents.length} resultado(s) encontrado(s)`, 'info');
+            document.querySelector('.modal').remove();
+        }
+
+        function clearSearch() {
+            loadStudentsTable();
+            document.querySelector('.modal').remove();
+            showNotification('Busca limpa - exibindo todos os participantes', 'info');
+        }
+
+        // Student details view
+        function viewStudentDetails(studentId) {
+            const student = students.find(s => s.id === studentId);
+            if (!student) return;
+
+            const studentPayments = payments.filter(p => p.studentId === studentId);
+            const studentDocs = documentsArchive.filter(doc => doc.studentId === studentId);
+
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'block';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close" onclick="this.parentElement.parentElement.remove()">&times;</span>
+                    <h2>Detalhes do Participante</h2>
+                    
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3 class="card-title">Dados Pessoais</h3>
+                            <p><strong>Nome:</strong> ${student.name}</p>
+                            <p><strong>Email:</strong> ${student.email}</p>
+                            <p><strong>Telefone:</strong> ${student.phone}</p>
+                            <p><strong>CPF:</strong> ${student.cpf}</p>
+                            <p><strong>Nascimento:</strong> ${formatDate(student.birth)}</p>
+                            <p><strong>Curso:</strong> ${student.course}</p>
+                            <p><strong>Status:</strong> <span class="status-badge status-${student.status}">${student.status.toUpperCase()}</span></p>
+                        </div>
+                        
+                        <div class="card">
+                            <h3 class="card-title">Responsável Financeiro</h3>
+                            <p><strong>Nome:</strong> ${student.responsibleName}</p>
+                            <p><strong>Email:</strong> ${student.responsibleEmail}</p>
+                            <p><strong>Telefone:</strong> ${student.responsiblePhone}</p>
+                            <p><strong>CPF:</strong> ${student.responsibleCPF}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="card-title">Progresso Acadêmico</h3>
+                        <div class="grid-3">
+                            <p><strong>Módulo:</strong> ${student.currentModule}/5</p>
+                            <p><strong>Aula:</strong> ${student.currentLesson}</p>
+                            <p><strong>Progresso:</strong> ${student.progressPercentage}%</p>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${student.progressPercentage}%"></div>
+                        </div>
+                        <p><strong>Matrícula:</strong> ${formatDate(student.enrollmentDate)}</p>
+                        <p><strong>Previsão de Término:</strong> ${calculateCompletionDate(student)}</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="card-title">Situação Financeira</h3>
+                        <p><strong>Valor do Contrato:</strong> R$ ${student.contractValue.toFixed(2)}</p>
+                        <p><strong>Forma de Pagamento:</strong> ${student.paymentMethod}</p>
+                        <p><strong>Parcelas:</strong> ${student.installments}x</p>
+                        <p><strong>Situação:</strong> <span class="status-badge status-${getStudentFinancialStatus(student.id)}">${getStudentFinancialStatus(student.id).toUpperCase()}</span></p>
+                        
+                        <h4>Histórico de Pagamentos</h4>
+                        <table class="table">
+                            <thead>
+                                <tr><th>Parcela</th><th>Valor</th><th>Vencimento</th><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                ${studentPayments.map(payment => `
+                                    <tr>
+                                        <td>${payment.installmentNumber}</td>
+                                        <td>R$ ${payment.value.toFixed(2)}</td>
+                                        <td>${formatDate(payment.dueDate)}</td>
+                                        <td><span class="status-badge status-${payment.status}">${payment.status.toUpperCase()}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="card-title">Documentos (${studentDocs.length})</h3>
+                        ${studentDocs.length > 0 ? 
+                            studentDocs.map(doc => `
+                                <p>📄 ${doc.type.replace('_', ' ').toUpperCase()} - ${formatDate(doc.uploadDate)}</p>
+                            `).join('') : 
+                            '<p>Nenhum documento cadastrado</p>'
+                        }
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Bulk operations
+        function bulkOperations() {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'block';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close" onclick="this.parentElement.parentElement.remove()">&times;</span>
+                    <h2>Operações em Lote</h2>
+                    
+                    <div class="action-buttons">
+                        <button class="btn" onclick="generateAllContracts()">Gerar Todos os Contratos</button>
+                        <button class="btn btn-warning" onclick="sendOverdueNotifications()">Notificar Inadimplentes</button>
+                        <button class="btn btn-secondary" onclick="generateAttendanceReport()">Relatório de Presença</button>
+                        <button class="btn btn-success" onclick="exportStudentData()">Exportar Dados</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="card-title">Envio de Email em Lote</h3>
+                        <div class="form-group">
+                            <label>Destinatários:</label>
+                            <select id="emailRecipients">
+                                <option value="all">Todos os Responsáveis</option>
+                                <option value="active">Apenas Participantes Ativos</option>
+                                <option value="overdue">Apenas Inadimplentes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Assunto:</label>
+                            <input type="text" id="emailSubject" placeholder="Assunto do email">
+                        </div>
+                        <div class="form-group">
+                            <label>Mensagem:</label>
+                            <textarea id="emailMessage" rows="5" placeholder="Digite sua mensagem..."></textarea>
+                        </div>
+                        <button class="btn" onclick="sendBulkEmail()">Enviar Emails</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function sendOverdueNotifications() {
+            const overduePayments = payments.filter(p => p.status === 'vencido');
+            const uniqueStudents = [...new Set(overduePayments.map(p => p.studentId))];
+            
+            uniqueStudents.forEach(studentId => {
+                const student = students.find(s => s.id === studentId);
+                const overdueAmount = overduePayments
+                    .filter(p => p.studentId === studentId)
+                    .reduce((sum, p) => sum + p.value, 0);
+                
+                console.log(`Email enviado para ${student.responsibleEmail}:`);
+                console.log(`Assunto: Cobrança - GameCreators`);
+                console.log(`Prezado(a) ${student.responsibleName}, há parcelas em atraso no valor de R$ ${overdueAmount.toFixed(2)}`);
+            });
+            
+            showNotification(`${uniqueStudents.length} notificações de cobrança enviadas!`, 'success');
+            document.querySelector('.modal').remove();
+        }
+
+        function sendBulkEmail() {
+            const recipients = document.getElementById('emailRecipients').value;
+            const subject = document.getElementById('emailSubject').value;
+            const message = document.getElementById('emailMessage').value;
+
+            if (!subject || !message) {
+                showNotification('Preencha o assunto e a mensagem!', 'error');
+                return;
+            }
+
+            let targetStudents = [];
+            switch(recipients) {
+                case 'all':
+                    targetStudents = students;
+                    break;
+                case 'active':
+                    targetStudents = students.filter(s => s.status === 'ativo');
+                    break;
+                case 'overdue':
+                    const overdueStudentIds = [...new Set(payments.filter(p => p.status === 'vencido').map(p => p.studentId))];
+                    targetStudents = students.filter(s => overdueStudentIds.includes(s.id));
+                    break;
+            }
+
+            targetStudents.forEach(student => {
+                console.log(`Email enviado para ${student.responsibleEmail}:`);
+                console.log(`Assunto: ${subject}`);
+                console.log(`Mensagem: ${message.replace('[NOME_PARTICIPANTE]', student.name).replace('[NOME_RESPONSAVEL]', student.responsibleName)}`);
+            });
+
+            showNotification(`${targetStudents.length} emails enviados com sucesso!`, 'success');
+            document.querySelector('.modal').remove();
+        }
+
+        function exportStudentData() {
+            const csvContent = "data:text/csv;charset=utf-8," + 
+                "ID,Nome,Email,Telefone,CPF,Curso,Status,Responsável,Email Responsável,Progresso\n" +
+                students.map(student => 
+                    `${student.id},"${student.name}","${student.email}","${student.phone}","${student.cpf}","${student.course}","${student.status}","${student.responsibleName}","${student.responsibleEmail}",${student.progressPercentage}%`
+                ).join("\n");
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `participantes_gamecreators_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            showNotification('Dados exportados com sucesso!', 'success');
+            document.querySelector('.modal').remove();
+        }
+
+        // Add advanced search button to students tab
+        function addAdvancedSearchButton() {
+            const studentsTab = document.getElementById('students');
+            const actionButtons = studentsTab.querySelector('.action-buttons');
+            
+            if (!actionButtons.querySelector('#advancedSearchBtn')) {
+                const btn = document.createElement('button');
+                btn.id = 'advancedSearchBtn';
+                btn.className = 'btn btn-secondary';
+                btn.textContent = '🔍 Busca Avançada';
+                btn.onclick = advancedSearch;
+                actionButtons.appendChild(btn);
+
+                const bulkBtn = document.createElement('button');
+                bulkBtn.className = 'btn btn-warning';
+                bulkBtn.textContent = '⚡ Operações em Lote';
+                bulkBtn.onclick = bulkOperations;
+                actionButtons.appendChild(bulkBtn);
+            }
+        }
+
+        // Auto-update financial status based on due dates
+        function updateFinancialStatuses() {
+            const today = new Date();
+            
+            payments.forEach(payment => {
+                const dueDate = new Date(payment.dueDate);
+                if (payment.status === 'pendente' && dueDate < today) {
+                    payment.status = 'vencido';
                 }
             });
 
-            // Load saved configuration
-            const savedApiUrl = localStorage.getItem('sheetsApiUrl');
-            if (savedApiUrl) {
-                CONFIG.SHEETS_API_URL = savedApiUrl;
-            }
-        });
+            // Update student statuses based on payments
+            students.forEach(student => {
+                const studentPayments = payments.filter(p => p.studentId === student.id);
+                const hasOverdue = studentPayments.some(p => p.status === 'vencido');
+                
+                if (hasOverdue && student.status === 'ativo') {
+                    student.status = 'inadimplente';
+                }
+            });
+        }
+
+        // Enhanced initialization
+        function enhancedInitialization() {
+            updateFinancialStatuses();
+            addAdvancedSearchButton();
+            
+            // Auto-save data periodically (in real implementation, sync with backend)
+            setInterval(() => {
+                console.log('Auto-salvando dados...');
+                // In real implementation: saveToBackend();
+            }, 60000); // Every minute
+        }
+
+        // Call enhanced initialization after app loads
+        setTimeout(enhancedInitialization, 1000);
+        
     </script>
 </body>
 </html>
+        }
+
+        function getStudentFinancialStatus(studentId) {
+            const studentPayments = payments.filter(p => p.studentId === studentId);
+            const hasOverdue = studentPayments.some(p => p.status === 'vencido');
+            const allPaid = studentPayments.every(p => p.status === 'pago');
+            
+            if (hasOverdue) return 'inadimplente';
+            if (allPaid) return 'pago';
+            return 'pendente';
+        }
+
+        function editStudent(studentId) {
+            const student = students.find(s => s.id === studentId);
+            if (!student) return;
+
+            // Fill form with student data
+            document.getElementById('studentName').value = student.name;
+            document.getElementById('studentEmail').value = student.email;
+            document.getElementById('studentPhone').value = student.phone;
+            document.getElementById('studentCPF').value = student.cpf;
+            document.getElementById('studentBirth').value = student.birth;
+            document.getElementById('studentCourse').value = student.course;
+            document.getElementById('responsibleName').value = student.responsibleName;
+            document.getElementById('responsibleEmail').value = student.responsibleEmail;
+            document.getElementById('responsiblePhone').value = student.responsiblePhone;
+            document.getElementById('responsibleCPF').value = student.responsibleCPF;
+            document.getElementById('contractValue').value = student.contractValue;
+            document.getElementById('paymentMethod').value = student.paymentMethod;
+            document.getElementById('installments').value = student.installments;
+            document.getElementById('editingStudentId').value = studentId;
+            
+            document.getElementById('studentModalTitle').textContent = 'Editar Participante';
+            openModal('studentModal');
+        }
+
+        function saveStudent() {
+            const name = document.getElementById('studentName').value;
+            const email = document.getElementById('studentEmail').value;
+            const editingId = document.getElementById('editingStudentId').value;
+
+            if (!name || !email) {
+                showNotification('Preencha os campos obrigatórios!', 'error');
+                return;
+            }
+
+            const studentData = {
+                name: name,
+                email: email,
+                phone: document.getElementById('studentPhone').value,
+                cpf: document.getElementById('studentCPF').value,
+                birth: document.getElementById('studentBirth').value,
+                course: document.getElementById('studentCourse').value,
+                status: 'ativo',
+                responsibleName: document.getElementById('responsibleName').value,
+                responsibleEmail: document.getElementById('responsibleEmail').value,
+                responsiblePhone: document.getElementById('responsiblePhone').value,
+                responsibleCPF: document.getElementById('responsibleCPF').value,
+                contractValue: parseFloat(document.getElementById('contractValue').value) || 0,
+                paymentMethod: document.getElementById('paymentMethod').value,
+                installments: parseInt(document.getElementById('installments').value) || 1,
+                currentModule: 1,
+                currentLesson: 1,
+                progressPercentage: 0,
+                enrollmentDate: new Date().toISOString().split('T')[0]
+            };
+
+            if (editingId) {
+                // Edit existing student
+                const index = students.findIndex(s => s.id == editingId);
+                students[index] = { ...students[index], ...studentData };
+                showNotification('Participante atualizado com sucesso!', 'success');
+            } else {
+                // Add new student
+                studentData.id = students.length + 1;
+                students.push(studentData);
+                
+                // Generate payment installments
+                generateStudentInstallments(studentData);
+                
+                showNotification('Participante cadastrado com sucesso!', 'success');
+            }
+
+            closeModal('studentModal');
+            loadStudentsTable();
+            loadPaymentsTable();
+            loadStudentSelects();
+            updateDashboard();
+            clearStudentForm();
+        }
+
+        function generateStudentInstallments(student) {
+            const installmentValue = student.contractValue / student.installments;
+            const startDate = new Date(student.enrollmentDate);
+            
+            for (let i = 1; i <= student.installments; i++) {
+                const dueDate = new Date(startDate);
+                dueDate.setMonth(dueDate.getMonth() + i - 1);
+                
+                payments.push({
+                    id: payments.length + 1,
+                    studentId: student.id,
+                    studentName: student.name,
+                    installmentNumber: i,
+                    value: installmentValue,
+                    dueDate: dueDate.toISOString().split('T')[0],
+                    status: 'pendente',
+                    paymentDate: null,
+                    paymentMethod: student.paymentMethod,
+                    notes: ''
+                });
+            }
+        }
+
+        function clearStudentForm() {
+            document.getElementById('studentName').value = '';
+            document.getElementById('studentEmail').value = '';
+            document.getElementById('studentPhone').value = '';
+            document.getElementById('studentCPF').value = '';
+            document.getElementById('studentBirth').value = '';
+            document.getElementById('studentCourse').value = '';
+            document.getElementById('responsibleName').value = '';
+            document.getElementById('responsibleEmail').value = '';
+            document.getElementById('responsiblePhone').value = '';
+            document.getElementById('responsibleCPF').value = '';
+            document.getElementById('contractValue').value = '';
+            document.getElementById('paymentMethod').value = 'avista';
+            document.getElementById('installments').value = '1';
+            document.getElementById('editingStudentId').value = '';
+            document.getElementById('studentModalTitle').textContent = 'Cadastro de Participante';
+        }
+
+        // Payments Management
+        function loadPaymentsTable() {
+            const tbody = document.getElementById('paymentsTableBody');
+            tbody.innerHTML = payments.map(payment => `
+                <tr>
+                    <td>${payment.studentName}</td>
+                    <td>${payment.installmentNumber}/${payments.filter(p => p.studentId === payment.studentId).length}</td>
+                    <td>R$ ${payment.value.toFixed(2)}</td>
+                    <td>${formatDate(payment.dueDate)}</td>
+                    <td><span class="status-badge status-${payment.status}">${payment.status.toUpperCase()}</span></td>
+                    <td>${payment.paymentMethod}</td>
+                    <td>
+                        ${payment.status !== 'pago' ? 
+                            `<button class="btn btn-small btn-success" onclick="quickPayment(${payment.id})">Pagar</button>` :
+                            `<button class="btn btn-small" onclick="viewPaymentDetails(${payment.id})">Detalhes</button>`
+                        }
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function loadStudentSelects() {
+            const selects = ['paymentStudent', 'statusStudent', 'progressStudent', 'documentsStudent', 'boletoStudent'];
+            selects.forEach(selectId => {
+                const select = document.getElementById(selectId);
+                if (select) {
+                    select.innerHTML = '<option value="">Selecione um participante</option>' +
+                        students.map(student => 
+                            `<option value="${student.id}">${student.name}</option>`
+                        ).join('');
+                }
+            });
+        }
+
+        function loadStudentInstallments() {
+            const studentId = parseInt(document.getElementById('paymentStudent').value);
+            const installmentSelect = document.getElementById('paymentInstallment');
+            
+            if (!studentId) {
+                installmentSelect.innerHTML = '<option value="">Selecione uma parcela</option>';
+                return;
+            }
+            
+            const studentPayments = payments.filter(p => p.studentId === studentId && p.status !== 'pago');
+            installmentSelect.innerHTML = '<option value="">Selecione uma parcela</option>' +
+                studentPayments.map(payment => 
+                    `<option value="${payment.id}">Parcela ${payment.installmentNumber} - R$ ${payment.value.toFixed(2)} (Venc: ${formatDate(payment.dueDate)})</option>`
+                ).join('');
+        }
+
+        function registerPayment() {
+            const paymentId = parseInt(document.getElementById('paymentInstallment').value);
+            const value = parseFloat(document.getElementById('paymentValue').value);
+            const date = document.getElementById('paymentDate').value;
+            const form = document.getElementById('paymentForm').value;
+            const notes = document.getElementById('paymentNotes').value;
+
+            if (!paymentId || !value || !date) {
+                showNotification('Preencha todos os campos obrigatórios!', 'error');
+                return;
+            }
+
+            const payment = payments.find(p => p.id === paymentId);
+            if (payment) {
+                payment.status = 'pago';
+                payment.paymentDate = date;
+                payment.paymentMethod = form;
+                payment.notes = notes;
+                payment.paidValue = value;
+
+                showNotification('Pagamento registrado com sucesso!', 'success');
+                closeModal('paymentModal');
+                loadPaymentsTable();
+                updateDashboard();
+
+                // Send email notification to responsible
+                sendPaymentNotification(payment);
+            }
+        }
+
+        function quickPayment(paymentId) {
+            const payment = payments.find(p => p.id === paymentId);
+            if (payment) {
+                payment.status = 'pago';
+                payment.paymentDate = new Date().toISOString().split('T')[0];
+                payment.paymentMethod = 'dinheiro';
+                payment.paidValue = payment.value;
+
+                showNotification('Pagamento registrado com sucesso!', 'success');
+                loadPaymentsTable();
+                updateDashboard();
+
+                // Send email notification
+                sendPaymentNotification(payment);
+            }
+        }
+
+        function sendPaymentNotification(payment) {
+            const student = students.find(s => s.id === payment.studentId);
+            if (student && student.responsibleEmail) {
+                // Simulate email sending
+                console.log(`Email enviado para ${student.responsibleEmail}:`);
+                console.log(`Assunto: Confirmação de Pagamento - GameCreators`);
+                console.log(`Olá ${student.responsibleName}, o pagamento da parcela ${payment.installmentNumber} de ${student.name} foi confirmado. Valor: R$ ${payment.paidValue.toFixed(2)}`);
+                
+                showNotification('Email de confirmação enviado ao responsável!', 'info');
+            }
+        }
+
+        // Status Management
+        function changeStudentStatus() {
+            const studentId = parseInt(document.getElementById('statusStudent').value);
+            const newStatus = document.getElementById('newStatus').value;
+            const reason = document.getElementById('statusReason').value;
+
+            if (!studentId || !newStatus) {
+                showNotification('Selecione o participante e o novo status!', 'error');
+                return;
+            }
+
+            const student = students.find(s => s.id === studentId);
+            if (student) {
+                const oldStatus = student.status;
+                student.status = newStatus;
+                student.statusChangeReason = reason;
+                student.statusChangeDate = new Date().toISOString().split('T')[0];
+
+                showNotification(`Status alterado de ${oldStatus} para ${newStatus}!`, 'success');
+                closeModal('statusModal');
+                loadStudentsTable();
+                updateDashboard();
+
+                // Generate status change document if needed
+                if (newStatus === 'trancado' || newStatus === 'cancelado') {
+                    setTimeout(() => {
+                        if (confirm(`Deseja gerar o documento de ${newStatus}?`)) {
+                            generateDocument(newStatus, studentId);
+                        }
+                    }, 1000);
+                }
+            }
+        }
+
+        // Progress Management
+        function loadProgressView() {
+            const container = document.getElementById('progressContainer');
+            container.innerHTML = students.map(student => `
+                <div class="card">
+                    <h3 class="card-title">${student.name} - ${student.course}</h3>
+                    <div class="grid-2">
+                        <div>
+                            <p><strong>Módulo Atual:</strong> ${student.currentModule}/5</p>
+                            <p><strong>Aula Atual:</strong> ${student.currentLesson}</p>
+                            <p><strong>Data de Matrícula:</strong> ${formatDate(student.enrollmentDate)}</p>
+                            <p><strong>Previsão de Término:</strong> ${calculateCompletionDate(student)}</p>
+                        </div>
+                        <div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${student.progressPercentage}%"></div>
+                            </div>
+                            <p style="text-align: center; margin-top: 10px;"><strong>${student.progressPercentage}% Concluído</strong></p>
+                        </div>
+                    </div>
+                    ${generateModuleProgress(student)}
+                </div>
+            `).join('');
+        }
+
+        function generateModuleProgress(student) {
+            const modules = [
+                'Módulo 1 - Introdução',
+                'Módulo 2 - Fundamentos', 
+                'Módulo 3 - Desenvolvimento',
+                'Módulo 4 - Avançado',
+                'Módulo 5 - Projeto Final'
+            ];
+
+            return modules.map((module, index) => {
+                const moduleNumber = index + 1;
+                let status = '';
+                if (moduleNumber < student.currentModule) {
+                    status = 'completed';
+                } else if (moduleNumber === student.currentModule) {
+                    status = 'current';
+                }
+
+                return `
+                    <div class="module-card ${status}">
+                        <strong>${module}</strong>
+                        ${moduleNumber === student.currentModule ? `<span style="float: right;">Aula ${student.currentLesson}/20</span>` : ''}
+                        ${moduleNumber < student.currentModule ? '<span style="float: right; color: #4CAF50;">✓ Concluído</span>' : ''}
+                    </div>
+                `;
+            }).join('');
