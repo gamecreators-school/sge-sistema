@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameCreators - Sistema de Gestão</title>
+    <title>GameCreators - Sistema de Gestão Escolar Completo</title>
     <style>
         * {
             margin: 0;
@@ -11,11 +11,24 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #2196F3;
+            --primary-dark: #1976D2;
+            --success: #4CAF50;
+            --success-dark: #45a049;
+            --warning: #FF9800;
+            --danger: #f44336;
+            --info: #2196F3;
+            --light: #f5f5f5;
+            --dark: #333;
+            --border: #e0e0e0;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             min-height: 100vh;
-            color: #333;
+            color: var(--dark);
         }
 
         .login-screen {
@@ -66,7 +79,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             padding: 20px;
             border-radius: 10px;
@@ -74,20 +87,36 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-role {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
         }
 
         .nav-tabs {
             display: flex;
-            border-bottom: 2px solid #e0e0e0;
+            border-bottom: 2px solid var(--border);
             margin-bottom: 30px;
             flex-wrap: wrap;
             gap: 5px;
             overflow-x: auto;
+            padding-bottom: 10px;
         }
 
         .nav-tab {
             padding: 12px 20px;
-            background: #f5f5f5;
+            background: var(--light);
             border: none;
             border-radius: 10px 10px 0 0;
             cursor: pointer;
@@ -95,16 +124,17 @@
             font-weight: 500;
             font-size: 14px;
             white-space: nowrap;
+            min-width: 120px;
         }
 
         .nav-tab.active {
-            background: #2196F3;
+            background: var(--primary);
             color: white;
             transform: translateY(-2px);
         }
 
         .nav-tab:hover {
-            background: #1976D2;
+            background: var(--primary-dark);
             color: white;
         }
 
@@ -139,7 +169,7 @@
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--border);
             border-radius: 8px;
             font-size: 16px;
             transition: all 0.3s;
@@ -149,12 +179,18 @@
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #2196F3;
+            border-color: var(--primary);
             box-shadow: 0 0 10px rgba(33, 150, 243, 0.3);
         }
 
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
         .btn {
-            background: #2196F3;
+            background: var(--primary);
             color: white;
             border: none;
             padding: 12px 24px;
@@ -167,10 +203,11 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            text-decoration: none;
         }
 
         .btn:hover {
-            background: #1976D2;
+            background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
         }
@@ -182,10 +219,14 @@
             box-shadow: none;
         }
 
-        .btn-danger { background: #f44336; }
+        .btn-danger { background: var(--danger); }
         .btn-danger:hover { background: #d32f2f; }
-        .btn-success { background: #4CAF50; }
-        .btn-success:hover { background: #45a049; }
+        .btn-success { background: var(--success); }
+        .btn-success:hover { background: var(--success-dark); }
+        .btn-warning { background: var(--warning); }
+        .btn-warning:hover { background: #F57C00; }
+        .btn-secondary { background: #6c757d; }
+        .btn-secondary:hover { background: #5a6268; }
 
         .card {
             background: white;
@@ -200,6 +241,15 @@
             transform: translateY(-2px);
         }
 
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -208,16 +258,33 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
             transition: transform 0.3s;
+            cursor: pointer;
         }
 
         .stat-card:hover {
             transform: scale(1.05);
+        }
+
+        .stat-card.success {
+            background: linear-gradient(135deg, var(--success) 0%, var(--success-dark) 100%);
+        }
+
+        .stat-card.warning {
+            background: linear-gradient(135deg, var(--warning) 0%, #F57C00 100%);
+        }
+
+        .stat-card.danger {
+            background: linear-gradient(135deg, var(--danger) 0%, #d32f2f 100%);
+        }
+
+        .stat-card.purple {
+            background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
         }
 
         .stat-number {
@@ -229,6 +296,96 @@
         .stat-label {
             font-size: 14px;
             opacity: 0.9;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table th {
+            background: var(--light);
+            font-weight: 600;
+        }
+
+        .table tr:hover {
+            background: rgba(33, 150, 243, 0.05);
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .badge.success { background: var(--success); color: white; }
+        .badge.danger { background: var(--danger); color: white; }
+        .badge.warning { background: var(--warning); color: white; }
+        .badge.info { background: var(--info); color: white; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            opacity: 0.7;
         }
 
         .notification {
@@ -249,9 +406,10 @@
             transform: translateX(0);
         }
 
-        .notification.success { background: #4CAF50; }
-        .notification.error { background: #f44336; }
-        .notification.info { background: #2196F3; }
+        .notification.success { background: var(--success); }
+        .notification.error { background: var(--danger); }
+        .notification.info { background: var(--info); }
+        .notification.warning { background: var(--warning); }
 
         .demo-badge {
             background: #FF5722;
@@ -265,7 +423,7 @@
         }
 
         .welcome-message {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
+            background: linear-gradient(135deg, var(--success), var(--success-dark));
             color: white;
             padding: 20px;
             border-radius: 10px;
@@ -302,12 +460,11 @@
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 20px;
-            border-left: 4px solid #2196F3;
-            display: none; /* Oculto por padrão */
+            border-left: 4px solid var(--primary);
         }
 
         .login-info h4 {
-            color: #1976D2;
+            color: var(--primary-dark);
             margin-bottom: 10px;
         }
 
@@ -317,10 +474,159 @@
             color: #555;
         }
 
+        .search-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-filter input,
+        .search-filter select {
+            min-width: 200px;
+            flex: 1;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.3s;
+        }
+
+        .financial-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .financial-item {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .financial-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--success);
+        }
+
+        .financial-value.negative {
+            color: var(--danger);
+        }
+
+        .gamification-points {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .points-display {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .store-item {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .store-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        .store-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .attendance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .attendance-day {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .attendance-day.present {
+            background: var(--success);
+            color: white;
+        }
+
+        .attendance-day.absent {
+            background: var(--danger);
+            color: white;
+        }
+
+        .attendance-day.pending {
+            background: var(--border);
+            color: var(--dark);
+        }
+
         @media (max-width: 768px) {
-            .nav-tabs { flex-direction: column; }
-            .nav-tab { border-radius: 8px; margin-bottom: 5px; }
+            .nav-tabs { 
+                flex-direction: column; 
+                overflow-x: visible;
+            }
+            .nav-tab { 
+                border-radius: 8px; 
+                margin-bottom: 5px; 
+                min-width: auto;
+            }
             .login-container { padding: 30px 20px; }
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .search-filter {
+                flex-direction: column;
+            }
+            .search-filter input,
+            .search-filter select {
+                min-width: auto;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
         }
     </style>
 </head>
@@ -329,8 +635,8 @@
     <div id="loginScreen" class="login-screen">
         <div class="login-container">
             <div class="demo-badge">DEMO</div>
-            <h1 style="color: #2196F3; margin-bottom: 10px;">🎮 GameCreators</h1>
-            <p style="color: #666; margin-bottom: 20px;">Sistema de Gestão Educacional</p>
+            <h1 style="color: var(--primary); margin-bottom: 10px;">🎮 GameCreators</h1>
+            <p style="color: #666; margin-bottom: 20px;">Sistema de Gestão Escolar Completo</p>
             
 
             
@@ -353,9 +659,12 @@
     <!-- Main Application -->
     <div id="mainApp" class="main-app">
         <div class="header">
-            <div>
-                <h1>🎮 GameCreators - Sistema de Gestão</h1>
-                <p id="userWelcome">Bem-vindo!</p>
+            <div class="header-info">
+                <div>
+                    <h1>🎮 GameCreators - Sistema de Gestão</h1>
+                    <p id="userWelcome">Bem-vindo!</p>
+                </div>
+                <div class="user-role" id="userRole">Admin</div>
             </div>
             <button class="btn btn-danger" onclick="logout()">🚪 Sair</button>
         </div>
@@ -371,28 +680,50 @@
             </div>
 
             <div class="stats-grid">
-                <div class="stat-card">
+                <div class="stat-card" onclick="switchTabById('students')">
                     <div class="stat-number" id="totalStudents">0</div>
-                    <div class="stat-label">👥 Participantes</div>
+                    <div class="stat-label">👥 Alunos</div>
                 </div>
-                <div class="stat-card" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">
+                <div class="stat-card success" onclick="switchTabById('students')">
                     <div class="stat-number" id="activeStudents">0</div>
                     <div class="stat-label">✅ Ativos</div>
                 </div>
-                <div class="stat-card" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);">
+                <div class="stat-card warning" onclick="switchTabById('turmas')">
                     <div class="stat-number" id="totalClasses">0</div>
                     <div class="stat-label">🏫 Turmas</div>
                 </div>
-                <div class="stat-card" style="background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);">
+                <div class="stat-card purple" onclick="switchTabById('pedagogico')">
                     <div class="stat-number" id="totalCourses">4</div>
                     <div class="stat-label">📚 Cursos</div>
+                </div>
+                <div class="stat-card danger" onclick="switchTabById('financeiro')">
+                    <div class="stat-number" id="overduePayments">0</div>
+                    <div class="stat-label">⚠️ Inadimplentes</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📈 Resumo Financeiro</h3>
+                <div class="financial-summary">
+                    <div class="financial-item">
+                        <div class="financial-value" id="totalRevenue">R$ 0,00</div>
+                        <div>Faturado</div>
+                    </div>
+                    <div class="financial-item">
+                        <div class="financial-value" id="expectedRevenue">R$ 0,00</div>
+                        <div>Previsto</div>
+                    </div>
+                    <div class="financial-item">
+                        <div class="financial-value negative" id="overdueAmount">R$ 0,00</div>
+                        <div>Em Atraso</div>
+                    </div>
                 </div>
             </div>
 
             <div class="card">
                 <h3>📈 Status do Sistema</h3>
                 <p>✅ Sistema funcionando corretamente</p>
-                <p>👥 Usuários: <span id="totalUsers">2</span></p>
+                <p>👥 Usuários: <span id="totalUsers">5</span></p>
                 <p>💾 Dados salvos automaticamente</p>
                 <p>🕐 Último login: <span id="lastLogin">-</span></p>
             </div>
@@ -401,350 +732,168 @@
         <!-- Students Tab -->
         <div id="students" class="tab-content">
             <div class="card">
-                <h2>👥 Gestão de Participantes</h2>
-                <div class="empty-state">
-                    <h3>📚 Área de Participantes</h3>
-                    <p>Sistema pronto para gerenciar participantes</p>
-                    <p><strong>Status:</strong> Funcionalidade ativa ✅</p>
+                <div class="card-header">
+                    <h2>👥 Gestão de Alunos</h2>
+                    <button class="btn btn-success" onclick="openModal('studentModal')">
+                        ➕ Novo Aluno
+                    </button>
                 </div>
+
+                <div class="search-filter">
+                    <input type="text" id="studentSearch" placeholder="🔍 Buscar por nome, email ou RA..." 
+                           onkeyup="filterStudents()">
+                    <select id="studentStatusFilter" onchange="filterStudents()">
+                        <option value="">Todos os Status</option>
+                        <option value="ativo">Ativo</option>
+                        <option value="inadimplente">Inadimplente</option>
+                        <option value="trancado">Trancado</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                    <select id="studentCourseFilter" onchange="filterStudents()">
+                        <option value="">Todos os Cursos</option>
+                    </select>
+                </div>
+
+                <div id="studentsTable"></div>
             </div>
         </div>
 
         <!-- Classes Tab -->
         <div id="turmas" class="tab-content">
             <div class="card">
-                <h2>🏫 Gestão de Turmas</h2>
-                <div class="empty-state">
-                    <h3>🏫 Área de Turmas</h3>
-                    <p>Sistema pronto para gerenciar turmas</p>
-                    <p><strong>Status:</strong> Funcionalidade ativa ✅</p>
+                <div class="card-header">
+                    <h2>🏫 Gestão de Turmas</h2>
+                    <button class="btn btn-success" onclick="openModal('classModal')">
+                        ➕ Nova Turma
+                    </button>
                 </div>
+                <div id="classesTable"></div>
             </div>
         </div>
 
         <!-- Financial Tab -->
         <div id="financeiro" class="tab-content">
             <div class="card">
-                <h2>💰 Controle Financeiro</h2>
-                <div class="empty-state">
-                    <h3>💳 Painel Financeiro</h3>
-                    <p>Sistema pronto para controle financeiro</p>
-                    <p><strong>Status:</strong> Funcionalidade ativa ✅</p>
+                <div class="card-header">
+                    <h2>💰 Controle Financeiro</h2>
+                    <div>
+                        <button class="btn btn-success" onclick="openModal('paymentPlanModal')">
+                            💳 Novo Plano
+                        </button>
+                        <button class="btn btn-info" onclick="generateFinancialReport()">
+                            📊 Relatório
+                        </button>
+                    </div>
                 </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card success">
+                        <div class="stat-number" id="monthlyRevenue">R$ 0</div>
+                        <div class="stat-label">💰 Receita Mensal</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="pendingPayments">0</div>
+                        <div class="stat-label">⏳ Pagamentos Pendentes</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-number" id="thisMonthDue">R$ 0</div>
+                        <div class="stat-label">📅 Vence Este Mês</div>
+                    </div>
+                </div>
+
+                <div id="financialTable"></div>
             </div>
         </div>
 
-        <!-- Gamification Tab -->
-        <div id="gamificacao" class="tab-content">
+        <!-- Pedagogical Tab -->
+        <div id="pedagogico" class="tab-content">
             <div class="card">
-                <h2>🎮 Centro de Gamificação</h2>
-                <div class="empty-state">
-                    <h3>🏆 Sistema de Conquistas</h3>
-                    <p>Sistema pronto para gamificação</p>
-                    <p><strong>Status:</strong> Funcionalidade ativa ✅</p>
+                <div class="card-header">
+                    <h2>📚 Gestão Pedagógica</h2>
+                    <button class="btn btn-success" onclick="openModal('courseModal')">
+                        ➕ Novo Curso
+                    </button>
                 </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card purple">
+                        <div class="stat-number" id="coursesCount">4</div>
+                        <div class="stat-label">📚 Cursos Ativos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="studentsInProgress">0</div>
+                        <div class="stat-label">📖 Em Andamento</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-number" id="completedCourses">0</div>
+                        <div class="stat-label">✅ Concluídos</div>
+                    </div>
+                </div>
+
+                <div id="coursesTable"></div>
             </div>
         </div>
 
-        <!-- Configuration Tab -->
-        <div id="configuracao" class="tab-content">
+        <!-- Attendance Tab -->
+        <div id="chamada" class="tab-content">
             <div class="card">
-                <h2>⚙️ Configurações do Sistema</h2>
-                <div class="empty-state">
-                    <h3>🔧 Painel de Configurações</h3>
-                    <p>Sistema pronto para configurações</p>
-                    <p><strong>Status:</strong> Funcionalidade ativa ✅</p>
+                <div class="card-header">
+                    <h2>🗓️ Controle de Frequência</h2>
+                    <div>
+                        <button class="btn btn-success" onclick="openAttendanceModal()">
+                            ✅ Fazer Chamada
+                        </button>
+                        <button class="btn btn-info" onclick="generateAttendanceReport()">
+                            📊 Relatório
+                        </button>
+                    </div>
                 </div>
+
+                <div class="search-filter">
+                    <select id="attendanceClassFilter" onchange="loadAttendanceData()">
+                        <option value="">Selecionar Turma</option>
+                    </select>
+                    <input type="date" id="attendanceDate" onchange="loadAttendanceData()">
+                </div>
+
+                <div id="attendanceTable"></div>
             </div>
         </div>
-    </div>
 
-    <script>
-        // Sistema de dados local - inicializado corretamente
-        const gameCreatorsData = {
-            students: [],
-            courses: ['Desenvolvimento de Jogos', 'Design Gráfico', 'Programação Web', 'Mobile Development'],
-            payments: [],
-            turmas: [],
-            currentUser: null,
-            activities: [],
-            users: [
-                {
-                    id: 'admin',
-                    name: 'Administrador',
-                    email: 'admin@gamecreators.com',
-                    password: '123456',
-                    role: 'admin',
-                    permissions: ['dashboard', 'students', 'classes', 'financial', 'gamification', 'admin', 'users', 'custom_tabs'],
-                    active: true,
-                    createdAt: new Date().toISOString()
-                },
-                {
-                    id: 'teacher',
-                    name: 'Professor Demo',
-                    email: 'professor@gamecreators.com',
-                    password: '123456',
-                    role: 'teacher',
-                    permissions: ['dashboard', 'students', 'classes', 'gamification'],
-                    active: true,
-                    createdAt: new Date().toISOString()
-                }
-            ],
-            systemInfo: {
-                lastLogin: null,
-                totalSessions: 0
-            }
-        };
+        <!-- Portal Tab -->
+        <div id="portaria" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>🚪 Portaria Digital</h2>
+                    <button class="btn btn-info" onclick="generatePortalReport()">
+                        📊 Relatório de Entrada/Saída
+                    </button>
+                </div>
 
-        // Função principal de login com validação melhorada
-        function handleLogin(event) {
-            event.preventDefault(); // Previne o submit padrão do form
-            
-            const loginBtn = document.getElementById('loginBtn');
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-            
-            console.log('🔐 Iniciando processo de login...', { email, passwordLength: password.length });
-            
-            // Validações básicas
-            if (!email || !password) {
-                showNotification('❌ Por favor, preencha email e senha', 'error');
-                return false;
-            }
-            
-            // Validação de formato de email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showNotification('❌ Formato de email inválido', 'error');
-                return false;
-            }
-            
-            // Mostrar loading
-            loginBtn.disabled = true;
-            loginBtn.innerHTML = '<div class="loading"></div> Entrando...';
-            
-            // Simular delay de autenticação
-            setTimeout(() => {
-                performLogin(email, password, loginBtn);
-            }, 1000);
-            
-            return false;
-        }
+                <div class="stats-grid">
+                    <div class="stat-card success">
+                        <div class="stat-number" id="todayEntries">0</div>
+                        <div class="stat-label">📥 Entradas Hoje</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="currentlyInside">0</div>
+                        <div class="stat-label">🏢 Dentro da Escola</div>
+                    </div>
+                </div>
 
-        // Função que executa o login
-        function performLogin(email, password, loginBtn) {
-            try {
-                console.log('🔍 Procurando usuário:', email);
-                
-                const user = gameCreatorsData.users.find(u => u.email === email && u.active);
-                console.log('👤 Usuário encontrado:', user ? user.name : 'Não encontrado');
-                
-                if (!user) {
-                    showNotification('❌ Email não encontrado ou usuário inativo', 'error');
-                    resetLoginButton(loginBtn);
-                    return;
-                }
-                
-                if (user.password !== password) {
-                    showNotification('❌ Senha incorreta', 'error');
-                    resetLoginButton(loginBtn);
-                    return;
-                }
-                
-                // Login bem-sucedido
-                console.log('✅ Login realizado com sucesso!');
-                gameCreatorsData.currentUser = user;
-                gameCreatorsData.systemInfo.lastLogin = new Date().toLocaleString('pt-BR');
-                gameCreatorsData.systemInfo.totalSessions++;
-                
-                // Atualizar interface
-                document.getElementById('userWelcome').textContent = `Bem-vindo, ${user.name}! 👋`;
-                document.getElementById('loginScreen').style.display = 'none';
-                document.getElementById('mainApp').style.display = 'block';
-                
-                // Inicializar sistema
-                initializeTabs();
-                updateDashboard();
-                addActivity(`${user.name} fez login no sistema`);
-                showNotification(`🎉 Login realizado com sucesso! Bem-vindo, ${user.name}!`, 'success');
-                
-                resetLoginButton(loginBtn);
-                
-            } catch (error) {
-                console.error('❌ Erro durante login:', error);
-                showNotification('❌ Erro interno do sistema. Tente novamente.', 'error');
-                resetLoginButton(loginBtn);
-            }
-        }
+                <div class="form-group">
+                    <label for="raInput">RA da Carteirinha:</label>
+                    <input type="text" id="raInput" placeholder="Digite o RA ou escaneie a carteirinha" 
+                           onkeyup="handleRAInput(event)">
+                </div>
 
-        // Resetar botão de login
-        function resetLoginButton(loginBtn) {
-            loginBtn.disabled = false;
-            loginBtn.innerHTML = '🔐 Entrar';
-        }
+                <div id="portalTable"></div>
+            </div>
+        </div>
 
-        // Função de logout melhorada
-        function logout() {
-            if (confirm('🚪 Deseja realmente sair do sistema?')) {
-                const userName = gameCreatorsData.currentUser?.name || 'Usuário';
-                gameCreatorsData.currentUser = null;
-                
-                document.getElementById('loginScreen').style.display = 'flex';
-                document.getElementById('mainApp').style.display = 'none';
-                
-                // Limpar campos
-                document.getElementById('email').value = '';
-                document.getElementById('password').value = '';
-                
-                showNotification(`👋 Logout realizado! Até logo, ${userName}!`, 'info');
-                console.log('🚪 Logout realizado com sucesso');
-            }
-        }
-
-        // Sistema de tabs melhorado
-        function initializeTabs() {
-            const baseTabs = [
-                { id: 'dashboard', label: '📊 Dashboard', permission: 'dashboard' },
-                { id: 'students', label: '👥 Participantes', permission: 'students' },
-                { id: 'turmas', label: '🏫 Turmas', permission: 'classes' },
-                { id: 'financeiro', label: '💰 Financeiro', permission: 'financial' },
-                { id: 'gamificacao', label: '🎮 Gamificação', permission: 'gamification' },
-                { id: 'configuracao', label: '⚙️ Configurações', permission: 'admin' }
-            ];
-
-            const availableTabs = gameCreatorsData.currentUser ? 
-                baseTabs.filter(tab => hasPermission(tab.permission)) : 
-                baseTabs;
-            
-            const tabsContainer = document.getElementById('navTabs');
-            tabsContainer.innerHTML = '';
-            
-            availableTabs.forEach((tab, index) => {
-                const button = document.createElement('button');
-                button.className = 'nav-tab';
-                button.textContent = tab.label;
-                button.onclick = () => switchTab(tab.id, button);
-                if (index === 0) button.classList.add('active');
-                tabsContainer.appendChild(button);
-            });
-
-            console.log('📋 Tabs inicializadas:', availableTabs.length);
-        }
-
-        // Função para trocar de aba
-        function switchTab(tabId, tabElement) {
-            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
-            tabElement.classList.add('active');
-            const targetTab = document.getElementById(tabId);
-            if (targetTab) {
-                targetTab.classList.add('active');
-            }
-            
-            // Carregar conteúdo específico da aba
-            if (tabId === 'dashboard') {
-                updateDashboard();
-            }
-            
-            console.log('📑 Aba alterada para:', tabId);
-        }
-
-        // Sistema de permissões
-        function hasPermission(permission) {
-            if (!gameCreatorsData.currentUser) return false;
-            if (gameCreatorsData.currentUser.role === 'admin') return true;
-            return gameCreatorsData.currentUser.permissions && 
-                   gameCreatorsData.currentUser.permissions.includes(permission);
-        }
-
-        // Função para mostrar notificações melhorada
-        function showNotification(message, type = 'info') {
-            // Remove notificações existentes
-            document.querySelectorAll('.notification').forEach(n => n.remove());
-            
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => notification.classList.add('show'), 100);
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    if (document.body.contains(notification)) {
-                        notification.remove();
-                    }
-                }, 300);
-            }, 4000);
-
-            console.log('📢 Notificação:', type, message);
-        }
-
-        // Atualizar dashboard
-        function updateDashboard() {
-            document.getElementById('totalStudents').textContent = gameCreatorsData.students.length;
-            document.getElementById('activeStudents').textContent = 
-                gameCreatorsData.students.filter(s => s.status === 'ativo').length;
-            document.getElementById('totalClasses').textContent = gameCreatorsData.turmas.length;
-            document.getElementById('totalUsers').textContent = gameCreatorsData.users.length;
-            document.getElementById('lastLogin').textContent = 
-                gameCreatorsData.systemInfo.lastLogin || 'Primeiro acesso';
-        }
-
-        // Função para adicionar atividade
-        function addActivity(action) {
-            gameCreatorsData.activities.push({
-                action,
-                timestamp: new Date().toISOString(),
-                user: gameCreatorsData.currentUser?.name || 'Sistema'
-            });
-            
-            // Manter apenas as últimas 100 atividades
-            if (gameCreatorsData.activities.length > 100) {
-                gameCreatorsData.activities = gameCreatorsData.activities.slice(-100);
-            }
-            
-            console.log('📝 Atividade adicionada:', action);
-        }
-
-        // Inicialização quando a página carrega
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🎮 GameCreators Sistema iniciando...');
-            
-            // Inicializar sistema
-            initializeTabs();
-            updateDashboard();
-            
-            // Focar no campo de email
-            document.getElementById('email').focus();
-            
-            console.log('✅ Sistema inicializado com sucesso!');
-            console.log('👥 Usuários disponíveis:', gameCreatorsData.users.length);
-            
-            showNotification('🎮 Sistema GameCreators carregado!', 'success');
-        });
-
-        // Permitir login com Enter
-        document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') {
-                const loginForm = document.getElementById('loginForm');
-                if (loginForm) {
-                    handleLogin(e);
-                }
-            }
-        });
-
-        // Log de debug para ajudar no desenvolvimento
-        window.gameCreatorsDebug = {
-            data: gameCreatorsData,
-            login: (email, password) => handleLogin({preventDefault: () => {}}),
-            users: () => gameCreatorsData.users,
-            currentUser: () => gameCreatorsData.currentUser
-        };
-
-        console.log('🎮 GameCreators Sistema carregado!');
-        console.log('🔧 Debug disponível em: window.gameCreatorsDebug');
-    </script>
-</body>
-</html>
+        <!-- HR Tab -->
+        <div id="rh" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>👨‍💼 Recursos Humanos</h2>
+                    <button class="btn btn-success" onclick="openModal('employeeModal')">
