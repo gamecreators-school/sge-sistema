@@ -24,6 +24,7 @@
             --border: #e0e0e0;
             --purple: #9C27B0;
             --gold: #FFD700;
+            --orange: #FF5722;
         }
 
         body {
@@ -51,11 +52,31 @@
             border-radius: 15px;
             padding: 40px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 500px;
+            max-width: 400px;
             width: 90%;
             text-align: center;
             animation: fadeInUp 0.5s ease-out;
             position: relative;
+        }
+
+        .login-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+            text-align: left;
+        }
+
+        .login-info h4 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .login-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
         }
 
         @keyframes fadeInUp {
@@ -187,7 +208,7 @@
 
         .form-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
         }
 
@@ -229,15 +250,6 @@
         .btn-warning:hover { background: #F57C00; }
         .btn-secondary { background: #6c757d; }
         .btn-secondary:hover { background: #5a6268; }
-        .btn-purple { background: var(--purple); }
-        .btn-purple:hover { background: #7B1FA2; }
-        .btn-gold { background: var(--gold); color: var(--dark); }
-        .btn-gold:hover { background: #FFA500; }
-        .btn-sm {
-            padding: 6px 12px;
-            font-size: 12px;
-            margin-right: 5px;
-        }
 
         .card {
             background: white;
@@ -259,8 +271,6 @@
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 1px solid var(--border);
-            flex-wrap: wrap;
-            gap: 10px;
         }
 
         .stats-grid {
@@ -302,7 +312,6 @@
 
         .stat-card.gold {
             background: linear-gradient(135deg, var(--gold) 0%, #FFA500 100%);
-            color: var(--dark);
         }
 
         .stat-number {
@@ -350,7 +359,6 @@
         .badge.danger { background: var(--danger); color: white; }
         .badge.warning { background: var(--warning); color: white; }
         .badge.info { background: var(--info); color: white; }
-        .badge.purple { background: var(--purple); color: white; }
 
         .modal {
             display: none;
@@ -366,12 +374,12 @@
 
         .modal-content {
             background-color: white;
-            margin: 2% auto;
+            margin: 5% auto;
             padding: 0;
             border-radius: 10px;
-            width: 95%;
-            max-width: 800px;
-            max-height: 95vh;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
             overflow-y: auto;
             animation: slideIn 0.3s;
         }
@@ -397,6 +405,7 @@
 
         .close {
             color: white;
+            float: right;
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
@@ -417,7 +426,7 @@
             z-index: 10001;
             transform: translateX(400px);
             transition: transform 0.3s;
-            max-width: 350px;
+            max-width: 300px;
         }
 
         .notification.show {
@@ -430,7 +439,7 @@
         .notification.warning { background: var(--warning); }
 
         .demo-badge {
-            background: #FF5722;
+            background: var(--orange);
             color: white;
             padding: 4px 8px;
             border-radius: 4px;
@@ -459,24 +468,18 @@
             margin-bottom: 10px;
         }
 
-        .login-info {
-            background: #e3f2fd;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--primary);
-            text-align: left;
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
         }
 
-        .login-info h4 {
-            color: var(--primary-dark);
-            margin-bottom: 10px;
-        }
-
-        .login-info p {
-            margin: 5px 0;
-            font-size: 14px;
-            color: #555;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         .search-filter {
@@ -493,9 +496,24 @@
             flex: 1;
         }
 
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.3s;
+        }
+
         .financial-summary {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
             margin-bottom: 20px;
         }
@@ -508,318 +526,175 @@
         }
 
         .financial-value {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: var(--success);
-            margin-bottom: 5px;
         }
 
         .financial-value.negative {
             color: var(--danger);
         }
 
-        .course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .course-card {
-            background: white;
-            padding: 20px;
+        .gamification-points {
+            background: linear-gradient(135deg, var(--gold), #FFA500);
+            color: white;
+            padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            border-left: 4px solid var(--primary);
-        }
-
-        .course-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .course-stats {
-            margin-top: 15px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .method-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .method-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .method-icon {
-            font-size: 32px;
-        }
-
-        .method-value {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--success);
-        }
-
-        .method-label {
-            font-size: 14px;
-            color: #666;
-        }
-
-        .leaderboard {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .leaderboard h3 {
-            color: var(--gold);
             margin-bottom: 20px;
             text-align: center;
         }
 
-        .ranking-list {
-            list-style: none;
+        .points-display {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .store-item {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .store-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        .store-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 10px;
+        }
+
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .hall-of-fame {
+            background: linear-gradient(135deg, var(--gold), #FFA500);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
         .ranking-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            margin-bottom: 10px;
-            background: var(--light);
-            border-radius: 8px;
-            border-left: 4px solid var(--primary);
-        }
-
-        .ranking-position {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary);
-            min-width: 40px;
-        }
-
-        .ranking-position.first { color: var(--gold); }
-        .ranking-position.second { color: #C0C0C0; }
-        .ranking-position.third { color: #CD7F32; }
-
-        .theme-toggle {
-            background: none;
-            border: 2px solid rgba(255,255,255,0.3);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .theme-toggle:hover {
+            padding: 10px;
+            margin: 5px 0;
             background: rgba(255,255,255,0.1);
+            border-radius: 5px;
         }
 
-        .alert {
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border-left: 4px solid;
-        }
-
-        .alert-warning {
-            background: rgba(255, 152, 0, 0.1);
-            border-left-color: var(--warning);
-            color: #F57C00;
-        }
-
-        .alert-danger {
-            background: rgba(244, 67, 54, 0.1);
-            border-left-color: var(--danger);
-            color: var(--danger);
-        }
-
-        .entry-controls {
-            background: var(--light);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-
-        .portal-entry {
-            background: linear-gradient(135deg, var(--success), var(--success-dark));
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .portal-exit {
-            background: linear-gradient(135deg, var(--warning), #F57C00);
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .table-container {
-            overflow-x: auto;
-            margin-top: 15px;
-        }
-
-        .attendance-selector {
-            background: var(--light);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-
-        .config-sections {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .config-section {
-            background: var(--light);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid var(--primary);
-        }
-
-        .config-section h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .backup-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px;
-            background: rgba(76, 175, 80, 0.1);
-            border: 1px solid var(--success);
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .reports-grid {
+        .attendance-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .report-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            cursor: pointer;
-            border-left: 4px solid var(--primary);
-        }
-
-        .report-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .checkbox-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 5px;
             margin-top: 10px;
         }
 
-        .checkbox-group label {
+        .attendance-day {
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
             cursor: pointer;
-            padding: 5px;
         }
 
-        .form-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: flex-end;
-            flex-wrap: wrap;
+        .attendance-day.present {
+            background: var(--success);
+            color: white;
         }
 
-        .file-upload {
+        .attendance-day.absent {
+            background: var(--danger);
+            color: white;
+        }
+
+        .attendance-day.pending {
+            background: var(--border);
+            color: var(--dark);
+        }
+
+        .document-upload {
             border: 2px dashed var(--border);
+            border-radius: 8px;
             padding: 20px;
             text-align: center;
-            border-radius: 8px;
-            margin: 10px 0;
-            transition: all 0.3s;
             cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 0;
         }
 
-        .file-upload:hover {
+        .document-upload:hover {
             border-color: var(--primary);
             background: rgba(33, 150, 243, 0.05);
         }
 
-        /* Dark mode styles */
-        .dark-mode {
-            --light: #2d2d2d;
-            --dark: #e0e0e0;
-            --border: #444;
-        }
-
-        .dark-mode body {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            color: var(--dark);
-        }
-
-        .dark-mode .main-app {
-            background: #1e1e1e;
-        }
-
-        .dark-mode .card {
-            background: #2d2d2d;
+        .document-list {
+            max-height: 200px;
+            overflow-y: auto;
             border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
         }
 
-        .dark-mode .table th {
-            background: #333;
+        .document-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border);
         }
 
-        .dark-mode .table tr:hover {
-            background: rgba(255,255,255,0.05);
+        .document-item:last-child {
+            border-bottom: none;
         }
 
-        .dark-mode .config-section {
-            background: #333;
+        .calculation-details {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
         }
 
-        .dark-mode .attendance-selector,
-        .dark-mode .entry-controls {
-            background: #333;
+        .calculation-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
         }
 
-        .dark-mode .leaderboard {
-            background: #2d2d2d;
+        .calculation-total {
+            font-weight: bold;
+            font-size: 18px;
+            color: var(--primary);
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+            margin-top: 10px;
         }
 
-        .dark-mode .method-card {
-            background: #2d2d2d;
-        }
-
-        /* Responsive design */
         @media (max-width: 768px) {
             .nav-tabs { 
                 flex-direction: column; 
@@ -830,10 +705,7 @@
                 margin-bottom: 5px; 
                 min-width: auto;
             }
-            .login-container { 
-                padding: 30px 20px; 
-                margin: 10px;
-            }
+            .login-container { padding: 30px 20px; }
             .header {
                 flex-direction: column;
                 text-align: center;
@@ -844,46 +716,16 @@
             .search-filter input,
             .search-filter select {
                 min-width: auto;
-                width: 100%;
             }
             .form-row {
                 grid-template-columns: 1fr;
             }
             .modal-content {
-                width: 98%;
-                margin: 5% auto;
+                width: 95%;
+                margin: 10% auto;
             }
-            .stats-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-            .card-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .financial-summary {
-                grid-template-columns: 1fr;
-            }
-            .method-stats {
-                grid-template-columns: 1fr;
-            }
-            .reports-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .btn {
-                width: 100%;
-                margin-bottom: 8px;
-                justify-content: center;
-            }
-            
-            .form-actions {
-                flex-direction: column;
+            .store-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
         }
     </style>
@@ -896,573 +738,21 @@
             <h1 style="color: var(--primary); margin-bottom: 10px;">🎮 GameCreators</h1>
             <p style="color: #666; margin-bottom: 20px;">Sistema de Gestão Escolar Completo</p>
             
-            <div class="login-info">
-                <h4>👥 Usuários de Demonstração:</h4>
-                <p><strong>Admin:</strong> admin@gamecreators.com / 123456</p>
-                <p><strong>Professor:</strong> professor@gamecreators.com / 123456</p>
-                <p><strong>Financeiro:</strong> financeiro@gamecreators.com / 123456</p>
-                <p><strong>RH:</strong> rh@gamecreators.com / 123456</p>
-                <p><strong>Portaria:</strong> portaria@gamecreators.com / 123456</p>
-                <p><strong>Aluno:</strong> aluno@gamecreators.com / 123456</p>
-            </div>
+
             
             <form id="loginForm" onsubmit="return handleLogin(event)">
-                <div class="stat-card gold" onclick="switchTabById('gamificacao')">
-                    <div class="stat-number" id="totalXP">0</div>
-                    <div class="stat-label">🏆 XP Total Sistema</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>💰 Resumo Financeiro Mensal</h3>
-                <div class="financial-summary">
-                    <div class="financial-item">
-                        <div class="financial-value" id="totalRevenue">R$ 45.600,00</div>
-                        <div>💵 Faturamento</div>
-                    </div>
-                    <div class="financial-item">
-                        <div class="financial-value" id="totalExpected">R$ 52.000,00</div>
-                        <div>📈 Previsto</div>
-                    </div>
-                    <div class="financial-item">
-                        <div class="financial-value negative" id="totalOverdue">R$ 6.400,00</div>
-                        <div>⚠️ Em Atraso</div>
-                    </div>
-                    <div class="financial-item">
-                        <div class="financial-value" id="nextDue">R$ 28.800,00</div>
-                        <div>📅 A Vencer</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>🚨 Alertas e Notificações Importantes</h3>
-                <div id="alertsList">
-                    <div class="alert alert-warning">
-                        <strong>⏰ Alunos próximos da conclusão:</strong> 8 alunos terminam o curso em menos de 2 meses
-                    </div>
-                    <div class="alert alert-danger">
-                        <strong>💳 Parcelas vencidas:</strong> 5 alunos com parcelas em atraso há mais de 15 dias
-                    </div>
-                    <div class="alert alert-warning">
-                        <strong>📚 Chamadas pendentes:</strong> 3 turmas sem chamada registrada nos últimos 2 dias
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>📊 Atividades Recentes do Sistema</h3>
-                <div id="recentActivities">
-                    <div style="padding: 10px; border-bottom: 1px solid var(--border);">
-                        <strong>🆕 Novo aluno:</strong> Ana Clara Silva matriculada em Game Design às 14:30
-                    </div>
-                    <div style="padding: 10px; border-bottom: 1px solid var(--border);">
-                        <strong>💰 Pagamento recebido:</strong> João Santos - Parcela 3/6 - R$ 400,00 às 13:15
-                    </div>
-                    <div style="padding: 10px; border-bottom: 1px solid var(--border);">
-                        <strong>📋 Chamada realizada:</strong> Turma Programação Noturno - 18 presentes às 12:45
-                    </div>
-                    <div style="padding: 10px;">
-                        <strong>🎮 XP atribuído:</strong> Maria Santos ganhou 150 XP por entrega antecipada às 11:30
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gestão de Alunos -->
-        <div id="students" class="tab-content">
-            <div class="card">
-                <div class="card-header">
-                    <h2>👥 Gestão Completa de Alunos</h2>
-                    <button class="btn" onclick="openModal('studentModal')">➕ Cadastrar Novo Aluno</button>
-                </div>
-
-                <div class="search-filter">
-                    <input type="text" id="studentSearch" placeholder="🔍 Buscar por nome, email ou RA..." onkeyup="filterStudents()">
-                    <select id="statusFilter" onchange="filterStudents()">
-                        <option value="">📊 Todos os Status</option>
-                        <option value="ativo">✅ Ativo</option>
-                        <option value="inadimplente">⚠️ Inadimplente</option>
-                        <option value="trancado">⏸️ Trancado</option>
-                        <option value="cancelado">❌ Cancelado</option>
-                    </select>
-                    <select id="courseFilter" onchange="filterStudents()">
-                        <option value="">📚 Todos os Cursos</option>
-                        <option value="game-design">🎮 Game Design</option>
-                        <option value="programacao">💻 Programação</option>
-                        <option value="3d-modeling">🎨 Modelagem 3D</option>
-                        <option value="marketing-digital">📱 Marketing Digital</option>
-                    </select>
-                    <button class="btn btn-success" onclick="exportStudents()">📤 Exportar Lista</button>
-                </div>
-
-                <div class="table-container">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>📋 RA</th>
-                                <th>👤 Nome Completo</th>
-                                <th>📧 Email</th>
-                                <th>📚 Curso</th>
-                                <th>🏫 Turma</th>
-                                <th>📊 Status</th>
-                                <th>👨‍👩‍👧‍👦 Responsável</th>
-                                <th>⚙️ Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody id="studentsTableBody">
-                            <!-- Dados dos alunos serão carregados aqui -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gestão de Turmas -->
-        <div id="turmas" class="tab-content">
-            <div class="card">
-                <div class="card-header">
-                    <h2>🏫 Gestão de Turmas e Horários</h2>
-                    <button class="btn" onclick="openModal('classModal')">➕ Criar Nova Turma</button>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number" id="totalClassesDetail">0</div>
-                        <div class="stat-label">📚 Turmas Ativas</div>
-                    </div>
-                    <div class="stat-card success">
-                        <div class="stat-number" id="totalStudentsInClasses">0</div>
-                        <div class="stat-label">👥 Alunos Matriculados</div>
-                    </div>
-                    <div class="stat-card warning">
-                        <div class="stat-number" id="totalTeachers">5</div>
-                        <div class="stat-label">👨‍🏫 Professores Ativos</div>
-                    </div>
-                    <div class="stat-card purple">
-                        <div class="stat-number" id="averageCapacity">85%</div>
-                        <div class="stat-label">📈 Ocupação Média</div>
-                    </div>
-                </div>
-
-                <div id="classesGrid" class="course-grid">
-                    <!-- Cards das turmas serão carregados aqui -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Gestão Pedagógica -->
-        <div id="pedagogico" class="tab-content">
-            <div class="card">
-                <div class="card-header">
-                    <h2>📚 Gestão Pedagógica e Cursos</h2>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn" onclick="openModal('courseModal')">➕ Novo Curso</button>
-                        <button class="btn btn-success" onclick="openModal('progressModal')">📊 Acompanhar Progresso</button>
-                        <button class="btn btn-purple" onclick="openModal('moduleModal')">📖 Gerenciar Módulos</button>
-                    </div>
-                </div>
-
-                <div class="course-grid">
-                    <div class="course-card">
-                        <h3>🎮 Game Design Completo</h3>
-                        <p><strong>⏱️ Carga horária:</strong> 120 horas</p>
-                        <p><strong>📖 Módulos:</strong> 6 módulos interativos</p>
-                        <p><strong>💰 Valor:</strong> R$ 2.400,00</p>
-                        <p><strong>📅 Duração:</strong> 6 meses</p>
-                        <div class="course-stats">
-                            <span class="badge success">24 Alunos</span>
-                            <span class="badge info">3 Turmas</span>
-                            <span class="badge warning">85% Ocupação</span>
-                        </div>
-                        <div style="margin-top: 15px;">
-                            <button class="btn btn-sm">✏️ Editar</button>
-                            <button class="btn btn-sm btn-success">👥 Ver Alunos</button>
-                        </div>
-                    </div>
-                    
-                    <div class="course-card">
-                        <h3>💻 Programação Full Stack</h3>
-                        <p><strong>⏱️ Carga horária:</strong> 150 horas</p>
-                        <p><strong>📖 Módulos:</strong> 8 módulos práticos</p>
-                        <p><strong>💰 Valor:</strong> R$ 3.000,00</p>
-                        <p><strong>📅 Duração:</strong> 8 meses</p>
-                        <div class="course-stats">
-                            <span class="badge success">18 Alunos</span>
-                            <span class="badge info">2 Turmas</span>
-                            <span class="badge success">90% Ocupação</span>
-                        </div>
-                        <div style="margin-top: 15px;">
-                            <button class="btn btn-sm">✏️ Editar</button>
-                            <button class="btn btn-sm btn-success">👥 Ver Alunos</button>
-                        </div>
-                    </div>
-                    
-                    <div class="course-card">
-                        <h3>🎨 Modelagem 3D Avançada</h3>
-                        <p><strong>⏱️ Carga horária:</strong> 100 horas</p>
-                        <p><strong>📖 Módulos:</strong> 5 módulos especializados</p>
-                        <p><strong>💰 Valor:</strong> R$ 2.000,00</p>
-                        <p><strong>📅 Duração:</strong> 5 meses</p>
-                        <div class="course-stats">
-                            <span class="badge success">15 Alunos</span>
-                            <span class="badge info">2 Turmas</span>
-                            <span class="badge warning">75% Ocupação</span>
-                        </div>
-                        <div style="margin-top: 15px;">
-                            <button class="btn btn-sm">✏️ Editar</button>
-                            <button class="btn btn-sm btn-success">👥 Ver Alunos</button>
-                        </div>
-                    </div>
-                    
-                    <div class="course-card">
-                        <h3>📱 Marketing Digital 360</h3>
-                        <p><strong>⏱️ Carga horária:</strong> 80 horas</p>
-                        <p><strong>📖 Módulos:</strong> 4 módulos estratégicos</p>
-                        <p><strong>💰 Valor:</strong> R$ 1.600,00</p>
-                        <p><strong>📅 Duração:</strong> 4 meses</p>
-                        <div class="course-stats">
-                            <span class="badge success">12 Alunos</span>
-                            <span class="badge info">1 Turma</span>
-                            <span class="badge success">100% Ocupação</span>
-                        </div>
-                        <div style="margin-top: 15px;">
-                            <button class="btn btn-sm">✏️ Editar</button>
-                            <button class="btn btn-sm btn-success">👥 Ver Alunos</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 30px;">
-                    <h3>📈 Desempenho Pedagógico por Curso</h3>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number">92%</div>
-                            <div class="stat-label">📊 Taxa de Conclusão</div>
-                        </div>
-                        <div class="stat-card success">
-                            <div class="stat-number">4.8/5</div>
-                            <div class="stat-label">⭐ Satisfação Média</div>
-                        </div>
-                        <div class="stat-card warning">
-                            <div class="stat-number">2.3</div>
-                            <div class="stat-label">📅 Meses Médios</div>
-                        </div>
-                        <div class="stat-card purple">
-                            <div class="stat-number">89%</div>
-                            <div class="stat-label">🎯 Taxa de Presença</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gestão Financeira -->
-        <div id="financeiro" class="tab-content">
-            <div class="card">
-                <div class="card-header">
-                    <h2>💰 Gestão Financeira Completa</h2>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn" onclick="openModal('paymentModal')">➕ Registrar Pagamento</button>
-                        <button class="btn btn-success" onclick="generateFinancialReport()">📊 Relatório Completo</button>
-                        <button class="btn btn-warning" onclick="openModal('installmentModal')">💳 Planos de Pagamento</button>
-                    </div>
-                </div>
-
-                <div class="financial-summary">
-                    <div class="financial-item">
-                        <div class="financial-value" id="monthlyRevenue">R$ 45.600,00</div>
-                        <div>💵 Faturamento Mensal</div>
-                    </div>
-                    <div class="financial-item">
-                        <div class="financial-value" id="monthlyExpected">R$ 52.000,00</div>
-                        <div>📈 Receita Prevista</div>
-                    </div>
-                    <div class="financial-item">
-                        <div class="financial-value negative" id="monthlyOverdue">R$ 6.400,00</div>
-                        <div>⚠️ Parcelas Vencidas</div>
-                    </div>
-                    <div class="financial-item">
-                        <div class="financial-value" id="nextDue">R$ 28.800,00</div>
-                        <div>📅 Próximo Vencimento</div>
-                    </div>
-                    <div class="financial-item">
-                        <div class="financial-value" id="totalReceived">R$ 342.150,00</div>
-                        <div>✅ Total Recebido (Ano)</div>
-                    </div>
-                    <div class="financial-item">
-                        <div class="financial-value negative" id="totalPending">R$ 18.750,00</div>
-                        <div>⏳ Total Pendente</div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>💳 Métodos de Pagamento - Preferências dos Alunos</h3>
-                    <div class="method-stats">
-                        <div class="method-card">
-                            <div class="method-icon">💳</div>
-                            <div class="method-data">
-                                <div class="method-value">R$ 18.240,00</div>
-                                <div class="method-label">Cartão de Crédito</div>
-                                <div style="font-size: 12px; color: #666;">40% do total</div>
-                            </div>
-                        </div>
-                        <div class="method-card">
-                            <div class="method-icon">📱</div>
-                            <div class="method-data">
-                                <div class="method-value">R$ 15.360,00</div>
-                                <div class="method-label">PIX Instantâneo</div>
-                                <div style="font-size: 12px; color: #666;">34% do total</div>
-                            </div>
-                        </div>
-                        <div class="method-card">
-                            <div class="method-icon">🧾</div>
-                            <div class="method-data">
-                                <div class="method-value">R$ 12.000,00</div>
-                                <div class="method-label">Boleto Bancário</div>
-                                <div style="font-size: 12px; color: #666;">26% do total</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>⚠️ Gestão de Inadimplência - Ação Necessária</h3>
-                    <div class="table-container">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>👤 Aluno</th>
-                                    <th>📚 Curso</th>
-                                    <th>💳 Parcelas em Atraso</th>
-                                    <th>💰 Valor Total</th>
-                                    <th>📅 Dias em Atraso</th>
-                                    <th>📞 Último Contato</th>
-                                    <th>⚙️ Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody id="overdueStudentsBody">
-                                <tr>
-                                    <td><strong>João Silva</strong><br><small>joao.silva@email.com</small></td>
-                                    <td>🎮 Game Design</td>
-                                    <td><span class="badge danger">2 parcelas</span></td>
-                                    <td><strong>R$ 800,00</strong></td>
-                                    <td><span class="badge danger">15 dias</span></td>
-                                    <td>Há 3 dias</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-warning" onclick="contactStudent('joao')">📞 Contatar</button>
-                                        <button class="btn btn-sm btn-danger" onclick="suspendStudent('joao')">⏸️ Suspender</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Maria Santos</strong><br><small>maria.santos@email.com</small></td>
-                                    <td>💻 Programação</td>
-                                    <td><span class="badge warning">1 parcela</span></td>
-                                    <td><strong>R$ 500,00</strong></td>
-                                    <td><span class="badge warning">8 dias</span></td>
-                                    <td>Hoje</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-warning" onclick="contactStudent('maria')">📞 Contatar</button>
-                                        <button class="btn btn-sm btn-success" onclick="negotiatePayment('maria')">🤝 Negociar</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Pedro Costa</strong><br><small>pedro.costa@email.com</small></td>
-                                    <td>🎨 Modelagem 3D</td>
-                                    <td><span class="badge danger">3 parcelas</span></td>
-                                    <td><strong>R$ 1.200,00</strong></td>
-                                    <td><span class="badge danger">25 dias</span></td>
-                                    <td>Há 7 dias</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-danger" onclick="urgentAction('pedro')">🚨 Ação Urgente</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Chamada e Frequência -->
-        <div id="chamada" class="tab-content">
-            <div class="card">
-                <div class="card-header">
-                    <h2>📋 Sistema de Chamada e Frequência</h2>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn" onclick="openModal('attendanceModal')">✅ Fazer Chamada</button>
-                        <button class="btn btn-success" onclick="generateAttendanceReport()">📊 Relatório de Frequência</button>
-                        <button class="btn btn-purple" onclick="openModal('scheduleModal')">📅 Agendar Chamada</button>
-                    </div>
-                </div>
-
-                <div class="attendance-selector">
-                    <h3>🎯 Seleção de Turma e Data</h3>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>🏫 Turma:</label>
-                            <select id="attendanceClassSelect">
-                                <option value="">Selecione uma turma</option>
-                                <option value="game-design-noite">🎮 Game Design - Noturno</option>
-                                <option value="programacao-integral">💻 Programação - Integral</option>
-                                <option value="3d-tarde">🎨 Modelagem 3D - Tarde</option>
-                                <option value="marketing-noite">📱 Marketing - Noturno</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>📅 Data da Aula:</label>
-                            <input type="date" id="attendanceDate" value="">
-                        </div>
-                        <div class="form-group" style="display: flex; align-items: end;">
-                            <button class="btn" onclick="loadAttendanceForClass()">📋 Carregar Lista</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="attendanceList" class="card">
-                    <div class="empty-state">
-                        <h3>📋 Selecione uma turma e data</h3>
-                        <p>Escolha uma turma e data para fazer a chamada dos alunos</p>
-                        <p style="margin-top: 10px; font-size: 14px; color: #666;">
-                            ✨ O sistema registrará automaticamente presença, faltas e calculará estatísticas
-                        </p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>📊 Resumo de Frequência - Hoje</h3>
-                    <div class="stats-grid">
-                        <div class="stat-card success">
-                            <div class="stat-number" id="presentToday">42</div>
-                            <div class="stat-label">✅ Presentes Hoje</div>
-                        </div>
-                        <div class="stat-card danger">
-                            <div class="stat-number" id="absentToday">8</div>
-                            <div class="stat-label">❌ Faltas Hoje</div>
-                        </div>
-                        <div class="stat-card warning">
-                            <div class="stat-number" id="attendanceRate">84%</div>
-                            <div class="stat-label">📈 Taxa de Presença</div>
-                        </div>
-                        <div class="stat-card purple">
-                            <div class="stat-number" id="lateStudents">3</div>
-                            <div class="stat-label">⏰ Chegaram Atrasados</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>🔍 Análise de Frequência por Período</h3>
-                    <div class="form-row" style="margin-bottom: 20px;">
-                        <div class="form-group">
-                            <label>📊 Período de Análise:</label>
-                            <select id="frequencyPeriod">
-                                <option value="week">📅 Esta Semana</option>
-                                <option value="month">🗓️ Este Mês</option>
-                                <option value="semester">📚 Este Semestre</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>🏫 Filtrar por Turma:</label>
-                            <select id="frequencyClass">
-                                <option value="">Todas as Turmas</option>
-                                <option value="game-design">🎮 Game Design</option>
-                                <option value="programacao">💻 Programação</option>
-                                <option value="3d-modeling">🎨 Modelagem 3D</option>
-                                <option value="marketing">📱 Marketing Digital</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number">89%</div>
-                            <div class="stat-label">📈 Frequência Geral</div>
-                        </div>
-                        <div class="stat-card success">
-                            <div class="stat-number">156</div>
-                            <div class="stat-label">✅ Total de Presenças</div>
-                        </div>
-                        <div class="stat-card warning">
-                            <div class="stat-number">23</div>
-                            <div class="stat-label">❌ Total de Faltas</div>
-                        </div>
-                        <div class="stat-card danger">
-                            <div class="stat-number">5</div>
-                            <div class="stat-label">⚠️ Alunos em Risco</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Portaria Digital -->
-        <div id="portaria" class="tab-content">
-            <div class="card">
-                <div class="card-header">
-                    <h2>🚪 Portaria Digital - Controle de Acesso</h2>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn" onclick="toggleQRScanner()">📱 Ativar Scanner QR</button>
-                        <button class="btn btn-success" onclick="openModal('visitorModal')">👥 Registrar Visitante</button>
-                        <button class="btn btn-purple" onclick="exportMovementReport()">📋 Relatório de Movimento</button>
-                    </div>
-                </div>
-
-                <div class="entry-controls">
-                    <h3>🎯 Registro de Entrada/Saída</h3>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>🆔 RA do Aluno ou Código do Funcionário:</label>
-                            <input type="text" id="studentRA" placeholder="Digite ou escaneie o código de acesso" style="font-size: 18px; text-align: center;">
-                        </div>
-                        <div class="form-group" style="display: flex; gap: 10px; align-items: end;">
-                            <button class="btn btn-success" onclick="registerEntry()" style="min-width: 140px;">
-                                🟢 ENTRADA
-                            </button>
-                            <button class="btn btn-warning" onclick="registerExit()" style="min-width: 140px;">
-                                🔴 SAÍDA
-                            </button>
-                        </div>
-                    </div>
-                    <div style="margin-top: 15px; padding: 10px; background: rgba(33, 150, 243, 0.1); border-radius: 8px; text-align: center;">
-                        <p style="color: var(--primary); font-weight: 500;">
-                            ✨ Sistema integrado com câmeras de segurança e controle biométrico
-                        </p>
-                    </div>
-                </div>
-
-                <div id="qrScanner" class="card" style="display: none; text-align: center;">
-                    <h3>📱 Scanner QR Code Ativo</h3>
-                    <div style="width: 300px; height: 200px; border: 3px dashed var(--primary); border-radius: 8px; background: var(--light); display: flex; align-items: center; justify-content: center; margin: 20px auto; font-size: 48px;">
-                        📱
-                    </div>
-                    <p style="color: var(--primary);">Aponte a câmera para o QR Code da carteirinha digital</p>
-                    <button class="btn btn-secondary" onclick="toggleQRScanner()" style="margin-top: 15px;">❌ Fechar Scanner</button>
-                </div>
-
-                <div class="card">
-                    <h3>📅 Movimentação de Hoje - <span id="currentDate"></span></h3>
-                    <div class="stats-grid" style="margin-bottom: 20px;">
-                        <div class="stat-card success">
-                            <div class="stat-number">28</div>
-                            <div class="stat-label">🟢 Entradas</div>
-                        </div>
-                        <div class="stat-card warning">
-                            <div class="stat-="form-group">
-                    <label for="email">📧 Email:</label>
+                <div class="form-group">
+                    <label for="email">Email:</label>
                     <input type="email" id="email" name="email" placeholder="Digite seu email" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">🔒 Senha:</label>
+                    <label for="password">Senha:</label>
                     <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
                 </div>
-                <button type="submit" class="btn" id="loginBtn" style="width: 100%; margin: 0;">
-                    🔐 Entrar no Sistema
+                <button type="submit" class="btn" id="loginBtn">
+                    🔐 Entrar
                 </button>
             </form>
-            
-            <div style="margin-top: 20px; font-size: 12px; color: #666;">
-                <p>✨ Sistema demonstrativo completo com todos os módulos funcionais</p>
-            </div>
         </div>
     </div>
 
@@ -1476,8 +766,9 @@
                 </div>
                 <div class="user-role" id="userRole">Admin</div>
             </div>
-            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                <button class="theme-toggle" onclick="toggleTheme()">🌓 Tema</button>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <button class="btn btn-secondary" onclick="toggleTheme()">🌙 Tema</button>
+                <button class="btn btn-warning" onclick="exportBackup()">💾 Backup</button>
                 <button class="btn btn-danger" onclick="logout()">🚪 Sair</button>
             </div>
         </div>
@@ -1488,29 +779,129 @@
         <!-- Dashboard Tab -->
         <div id="dashboard" class="tab-content active">
             <div class="welcome-message">
-                <h2>📊 Dashboard - Visão Geral do Sistema</h2>
-                <p>Acompanhe as principais métricas e atividades da sua instituição de ensino</p>
+                <h2>📊 Dashboard - Visão Geral</h2>
+                <p>Acompanhe as principais métricas e atividades da sua instituição</p>
             </div>
 
             <div class="stats-grid">
                 <div class="stat-card" onclick="switchTabById('students')">
-                    <div class="stat-number" id="totalStudents">0</div>
-                    <div class="stat-label">👥 Total Alunos</div>
+                    <div class="stat-number" id="totalStudents">127</div>
+                    <div class="stat-label">👥 Total de Alunos</div>
                 </div>
                 <div class="stat-card success" onclick="switchTabById('students')">
-                    <div class="stat-number" id="activeStudents">0</div>
+                    <div class="stat-number" id="activeStudents">98</div>
                     <div class="stat-label">✅ Alunos Ativos</div>
                 </div>
                 <div class="stat-card warning" onclick="switchTabById('turmas')">
-                    <div class="stat-number" id="totalClasses">0</div>
+                    <div class="stat-number" id="totalClasses">12</div>
                     <div class="stat-label">🏫 Turmas Ativas</div>
                 </div>
                 <div class="stat-card purple" onclick="switchTabById('pedagogico')">
-                    <div class="stat-number" id="totalCourses">4</div>
+                    <div class="stat-number" id="totalCourses">8</div>
                     <div class="stat-label">📚 Cursos Oferecidos</div>
                 </div>
                 <div class="stat-card danger" onclick="switchTabById('financeiro')">
-                    <div class="stat-number" id="overduePayments">0</div>
+                    <div class="stat-number" id="overduePayments">15</div>
                     <div class="stat-label">⚠️ Inadimplentes</div>
                 </div>
-                <div class
+                <div class="stat-card gold">
+                    <div class="stat-number" id="totalEmployees">25</div>
+                    <div class="stat-label">👨‍💼 Colaboradores</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>💰 Resumo Financeiro Mensal</h3>
+                <div class="financial-summary">
+                    <div class="financial-item">
+                        <div class="financial-value" id="totalRevenue">R$ 89.450,00</div>
+                        <div>💰 Faturado</div>
+                    </div>
+                    <div class="financial-item">
+                        <div class="financial-value" id="expectedRevenue">R$ 120.300,00</div>
+                        <div>📊 Previsto</div>
+                    </div>
+                    <div class="financial-item">
+                        <div class="financial-value negative" id="overdueAmount">R$ 18.750,00</div>
+                        <div>⚠️ Em Atraso</div>
+                    </div>
+                    <div class="financial-item">
+                        <div class="financial-value" id="nextMonthDue">R$ 95.200,00</div>
+                        <div>📅 Próximo Mês</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📈 Status do Sistema</h3>
+                <p>✅ Sistema funcionando corretamente</p>
+                <p>📱 Modo responsivo ativo</p>
+                <p>🌙 Tema: <span id="currentTheme">Claro</span></p>
+                <p>👥 Usuários logados: <span id="activeUsers">3</span></p>
+                <p>💾 Último backup: <span id="lastBackup">Hoje às 14:30</span></p>
+                <p>🔄 Sincronização Google Sheets: ✅ Ativa</p>
+            </div>
+        </div>
+
+        <!-- Students Tab -->
+        <div id="students" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>👥 Gestão de Alunos</h2>
+                    <div>
+                        <button class="btn btn-success" onclick="openModal('studentModal')">
+                            ➕ Novo Aluno
+                        </button>
+                        <button class="btn btn-info" onclick="exportStudentsReport()">
+                            📊 Relatório
+                        </button>
+                    </div>
+                </div>
+
+                <div class="search-filter">
+                    <input type="text" id="studentSearch" placeholder="🔍 Buscar por nome, email ou RA..." 
+                           onkeyup="filterStudents()">
+                    <select id="studentStatusFilter" onchange="filterStudents()">
+                        <option value="">Todos os Status</option>
+                        <option value="ativo">✅ Ativo</option>
+                        <option value="inadimplente">⚠️ Inadimplente</option>
+                        <option value="trancado">⏸️ Trancado</option>
+                        <option value="cancelado">❌ Cancelado</option>
+                        <option value="pausado">⏳ Pausado</option>
+                    </select>
+                    <select id="studentCourseFilter" onchange="filterStudents()">
+                        <option value="">Todos os Cursos</option>
+                        <option value="unity">Unity Game Development</option>
+                        <option value="unreal">Unreal Engine</option>
+                        <option value="blender">Blender 3D</option>
+                        <option value="programming">Programação</option>
+                    </select>
+                </div>
+
+                <div id="studentsTable"></div>
+            </div>
+        </div>
+
+        <!-- Classes Tab -->
+        <div id="turmas" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>🏫 Gestão de Turmas</h2>
+                    <button class="btn btn-success" onclick="openModal('classModal')">
+                        ➕ Nova Turma
+                    </button>
+                </div>
+                <div id="classesTable"></div>
+            </div>
+        </div>
+
+        <!-- Financial Tab -->
+        <div id="financeiro" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>💰 Controle Financeiro</h2>
+                    <div>
+                        <button class="btn btn-success" onclick="openModal('paymentPlanModal')">
+                            💳 Novo Plano
+                        </button>
+                        <button class="btn btn-warning" onclick="openModal('cashFlowModal')">
