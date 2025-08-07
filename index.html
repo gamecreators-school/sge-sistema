@@ -206,12 +206,6 @@
             box-shadow: 0 0 10px rgba(33, 150, 243, 0.3);
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
         .btn {
             background: var(--primary);
             color: white;
@@ -360,59 +354,24 @@
         .badge.warning { background: var(--warning); color: white; }
         .badge.info { background: var(--info); color: white; }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            animation: fadeIn 0.3s;
+        .demo-badge {
+            background: var(--orange);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
         }
 
-        .modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 0;
+        .welcome-message {
+            background: linear-gradient(135deg, var(--success), var(--success-dark));
+            color: white;
+            padding: 20px;
             border-radius: 10px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: slideIn 0.3s;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .modal-header {
-            background: var(--primary);
-            color: white;
-            padding: 20px;
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        .close {
-            color: white;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover {
-            opacity: 0.7;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         .notification {
@@ -438,263 +397,6 @@
         .notification.info { background: var(--info); }
         .notification.warning { background: var(--warning); }
 
-        .demo-badge {
-            background: var(--orange);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
-        .welcome-message {
-            background: linear-gradient(135deg, var(--success), var(--success-dark));
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-
-        .empty-state h3 {
-            margin-bottom: 10px;
-        }
-
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .search-filter {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .search-filter input,
-        .search-filter select {
-            min-width: 200px;
-            flex: 1;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 5px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--success);
-            transition: width 0.3s;
-        }
-
-        .financial-summary {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .financial-item {
-            background: var(--light);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .financial-value {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--success);
-        }
-
-        .financial-value.negative {
-            color: var(--danger);
-        }
-
-        .gamification-points {
-            background: linear-gradient(135deg, var(--gold), #FFA500);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .points-display {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .store-item {
-            background: white;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            transition: transform 0.3s;
-            cursor: pointer;
-            margin-bottom: 15px;
-        }
-
-        .store-item:hover {
-            transform: translateY(-2px);
-            border-color: var(--primary);
-        }
-
-        .store-item img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            background: var(--light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            margin: 0 auto 10px;
-        }
-
-        .store-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .hall-of-fame {
-            background: linear-gradient(135deg, var(--gold), #FFA500);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .ranking-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            margin: 5px 0;
-            background: rgba(255,255,255,0.1);
-            border-radius: 5px;
-        }
-
-        .attendance-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-            gap: 5px;
-            margin-top: 10px;
-        }
-
-        .attendance-day {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .attendance-day.present {
-            background: var(--success);
-            color: white;
-        }
-
-        .attendance-day.absent {
-            background: var(--danger);
-            color: white;
-        }
-
-        .attendance-day.pending {
-            background: var(--border);
-            color: var(--dark);
-        }
-
-        .document-upload {
-            border: 2px dashed var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin: 10px 0;
-        }
-
-        .document-upload:hover {
-            border-color: var(--primary);
-            background: rgba(33, 150, 243, 0.05);
-        }
-
-        .document-list {
-            max-height: 200px;
-            overflow-y: auto;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 10px;
-            margin-top: 10px;
-        }
-
-        .document-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .document-item:last-child {
-            border-bottom: none;
-        }
-
-        .calculation-details {
-            background: var(--light);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-
-        .calculation-item {
-            display: flex;
-            justify-content: space-between;
-            margin: 5px 0;
-        }
-
-        .calculation-total {
-            font-weight: bold;
-            font-size: 18px;
-            color: var(--primary);
-            border-top: 1px solid var(--border);
-            padding-top: 10px;
-            margin-top: 10px;
-        }
-
         @media (max-width: 768px) {
             .nav-tabs { 
                 flex-direction: column; 
@@ -709,23 +411,6 @@
             .header {
                 flex-direction: column;
                 text-align: center;
-            }
-            .search-filter {
-                flex-direction: column;
-            }
-            .search-filter input,
-            .search-filter select {
-                min-width: auto;
-            }
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            .modal-content {
-                width: 95%;
-                margin: 10% auto;
-            }
-            .store-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
         }
     </style>
@@ -774,7 +459,14 @@
         </div>
 
         <!-- Navigation Tabs -->
-        <div class="nav-tabs" id="navTabs"></div>
+        <div class="nav-tabs" id="navTabs">
+            <button class="nav-tab active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+            <button class="nav-tab" onclick="switchTab('students')">👥 Alunos</button>
+            <button class="nav-tab" onclick="switchTab('turmas')">🏫 Turmas</button>
+            <button class="nav-tab" onclick="switchTab('financeiro')">💰 Financeiro</button>
+            <button class="nav-tab" onclick="switchTab('pedagogico')">📚 Pedagógico</button>
+            <button class="nav-tab" onclick="switchTab('relatorios')">📊 Relatórios</button>
+        </div>
 
         <!-- Dashboard Tab -->
         <div id="dashboard" class="tab-content active">
@@ -784,23 +476,23 @@
             </div>
 
             <div class="stats-grid">
-                <div class="stat-card" onclick="switchTabById('students')">
+                <div class="stat-card" onclick="switchTab('students')">
                     <div class="stat-number" id="totalStudents">127</div>
                     <div class="stat-label">👥 Total de Alunos</div>
                 </div>
-                <div class="stat-card success" onclick="switchTabById('students')">
+                <div class="stat-card success" onclick="switchTab('students')">
                     <div class="stat-number" id="activeStudents">98</div>
                     <div class="stat-label">✅ Alunos Ativos</div>
                 </div>
-                <div class="stat-card warning" onclick="switchTabById('turmas')">
+                <div class="stat-card warning" onclick="switchTab('turmas')">
                     <div class="stat-number" id="totalClasses">12</div>
                     <div class="stat-label">🏫 Turmas Ativas</div>
                 </div>
-                <div class="stat-card purple" onclick="switchTabById('pedagogico')">
+                <div class="stat-card purple" onclick="switchTab('pedagogico')">
                     <div class="stat-number" id="totalCourses">8</div>
                     <div class="stat-label">📚 Cursos Oferecidos</div>
                 </div>
-                <div class="stat-card danger" onclick="switchTabById('financeiro')">
+                <div class="stat-card danger" onclick="switchTab('financeiro')">
                     <div class="stat-number" id="overduePayments">15</div>
                     <div class="stat-label">⚠️ Inadimplentes</div>
                 </div>
@@ -812,21 +504,21 @@
 
             <div class="card">
                 <h3>💰 Resumo Financeiro Mensal</h3>
-                <div class="financial-summary">
-                    <div class="financial-item">
-                        <div class="financial-value" id="totalRevenue">R$ 89.450,00</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px;">
+                    <div style="background: var(--light); padding: 15px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 18px; font-weight: bold; color: var(--success);">R$ 89.450,00</div>
                         <div>💰 Faturado</div>
                     </div>
-                    <div class="financial-item">
-                        <div class="financial-value" id="expectedRevenue">R$ 120.300,00</div>
+                    <div style="background: var(--light); padding: 15px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 18px; font-weight: bold; color: var(--primary);">R$ 120.300,00</div>
                         <div>📊 Previsto</div>
                     </div>
-                    <div class="financial-item">
-                        <div class="financial-value negative" id="overdueAmount">R$ 18.750,00</div>
+                    <div style="background: var(--light); padding: 15px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 18px; font-weight: bold; color: var(--danger);">R$ 18.750,00</div>
                         <div>⚠️ Em Atraso</div>
                     </div>
-                    <div class="financial-item">
-                        <div class="financial-value" id="nextMonthDue">R$ 95.200,00</div>
+                    <div style="background: var(--light); padding: 15px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 18px; font-weight: bold; color: var(--warning);">R$ 95.200,00</div>
                         <div>📅 Próximo Mês</div>
                     </div>
                 </div>
@@ -839,7 +531,7 @@
                 <p>🌙 Tema: <span id="currentTheme">Claro</span></p>
                 <p>👥 Usuários logados: <span id="activeUsers">3</span></p>
                 <p>💾 Último backup: <span id="lastBackup">Hoje às 14:30</span></p>
-                <p>🔄 Sincronização Google Sheets: ✅ Ativa</p>
+                <p>🔄 Sincronização: ✅ Ativa</p>
             </div>
         </div>
 
@@ -849,36 +541,73 @@
                 <div class="card-header">
                     <h2>👥 Gestão de Alunos</h2>
                     <div>
-                        <button class="btn btn-success" onclick="openModal('studentModal')">
+                        <button class="btn btn-success" onclick="showMessage('Funcionalidade de cadastro em desenvolvimento', 'info')">
                             ➕ Novo Aluno
                         </button>
-                        <button class="btn btn-info" onclick="exportStudentsReport()">
+                        <button class="btn btn-info" onclick="showMessage('Relatório exportado com sucesso!', 'success')">
                             📊 Relatório
                         </button>
                     </div>
                 </div>
 
-                <div class="search-filter">
-                    <input type="text" id="studentSearch" placeholder="🔍 Buscar por nome, email ou RA..." 
-                           onkeyup="filterStudents()">
-                    <select id="studentStatusFilter" onchange="filterStudents()">
+                <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                    <input type="text" placeholder="🔍 Buscar por nome, email ou RA..." style="min-width: 250px; flex: 1; padding: 12px; border: 2px solid var(--border); border-radius: 8px;">
+                    <select style="min-width: 150px; padding: 12px; border: 2px solid var(--border); border-radius: 8px;">
                         <option value="">Todos os Status</option>
                         <option value="ativo">✅ Ativo</option>
                         <option value="inadimplente">⚠️ Inadimplente</option>
                         <option value="trancado">⏸️ Trancado</option>
                         <option value="cancelado">❌ Cancelado</option>
-                        <option value="pausado">⏳ Pausado</option>
-                    </select>
-                    <select id="studentCourseFilter" onchange="filterStudents()">
-                        <option value="">Todos os Cursos</option>
-                        <option value="unity">Unity Game Development</option>
-                        <option value="unreal">Unreal Engine</option>
-                        <option value="blender">Blender 3D</option>
-                        <option value="programming">Programação</option>
                     </select>
                 </div>
 
-                <div id="studentsTable"></div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Curso</th>
+                            <th>Status</th>
+                            <th>Mensalidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>João Silva</td>
+                            <td>joao@email.com</td>
+                            <td>Unity Game Dev</td>
+                            <td><span class="badge success">Ativo</span></td>
+                            <td>R$ 299,00</td>
+                            <td>
+                                <button class="btn btn-success" onclick="showMessage('Editando aluno...', 'info')" style="padding: 6px 12px; font-size: 12px;">✏️ Editar</button>
+                                <button class="btn btn-info" onclick="showMessage('Visualizando dados...', 'info')" style="padding: 6px 12px; font-size: 12px;">👁️ Ver</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Maria Santos</td>
+                            <td>maria@email.com</td>
+                            <td>Blender 3D</td>
+                            <td><span class="badge warning">Inadimplente</span></td>
+                            <td>R$ 199,00</td>
+                            <td>
+                                <button class="btn btn-success" onclick="showMessage('Editando aluno...', 'info')" style="padding: 6px 12px; font-size: 12px;">✏️ Editar</button>
+                                <button class="btn btn-info" onclick="showMessage('Visualizando dados...', 'info')" style="padding: 6px 12px; font-size: 12px;">👁️ Ver</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Carlos Oliveira</td>
+                            <td>carlos@email.com</td>
+                            <td>Programação</td>
+                            <td><span class="badge success">Ativo</span></td>
+                            <td>R$ 349,00</td>
+                            <td>
+                                <button class="btn btn-success" onclick="showMessage('Editando aluno...', 'info')" style="padding: 6px 12px; font-size: 12px;">✏️ Editar</button>
+                                <button class="btn btn-info" onclick="showMessage('Visualizando dados...', 'info')" style="padding: 6px 12px; font-size: 12px;">👁️ Ver</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -887,11 +616,33 @@
             <div class="card">
                 <div class="card-header">
                     <h2>🏫 Gestão de Turmas</h2>
-                    <button class="btn btn-success" onclick="openModal('classModal')">
+                    <button class="btn btn-success" onclick="showMessage('Nova turma em desenvolvimento', 'info')">
                         ➕ Nova Turma
                     </button>
                 </div>
-                <div id="classesTable"></div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="card">
+                        <h4>🎮 Unity Básico - Manhã</h4>
+                        <p><strong>Horário:</strong> 08:00 - 10:00</p>
+                        <p><strong>Alunos:</strong> 12/15</p>
+                        <p><strong>Professor:</strong> Prof. Ricardo</p>
+                        <p><strong>Status:</strong> <span class="badge success">Ativa</span></p>
+                    </div>
+                    <div class="card">
+                        <h4>🚀 Unreal Engine - Tarde</h4>
+                        <p><strong>Horário:</strong> 14:00 - 16:00</p>
+                        <p><strong>Alunos:</strong> 8/12</p>
+                        <p><strong>Professor:</strong> Prof. Ana</p>
+                        <p><strong>Status:</strong> <span class="badge success">Ativa</span></p>
+                    </div>
+                    <div class="card">
+                        <h4>🎨 Blender 3D - Noite</h4>
+                        <p><strong>Horário:</strong> 19:00 - 21:00</p>
+                        <p><strong>Alunos:</strong> 15/15</p>
+                        <p><strong>Professor:</strong> Prof. Carlos</p>
+                        <p><strong>Status:</strong> <span class="badge warning">Lotada</span></p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -900,8 +651,411 @@
             <div class="card">
                 <div class="card-header">
                     <h2>💰 Controle Financeiro</h2>
-                    <div>
-                        <button class="btn btn-success" onclick="openModal('paymentPlanModal')">
-                            💳 Novo Plano
-                        </button>
-                        <button class="btn btn-warning" onclick="openModal('cashFlowModal')">
+                    <button class="btn btn-success" onclick="showMessage('Plano de pagamento em desenvolvimento', 'info')">
+                        💳 Novo Plano
+                    </button>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    <div class="stat-card success">
+                        <div class="stat-number">R$ 45.200</div>
+                        <div class="stat-label">💰 Receita Mensal</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-number">R$ 8.750</div>
+                        <div class="stat-label">⚠️ Em Atraso</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">🔔 Vencendo Hoje</div>
+                    </div>
+                    <div class="stat-card purple">
+                        <div class="stat-number">92%</div>
+                        <div class="stat-label">📊 Taxa de Cobrança</div>
+                    </div>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Aluno</th>
+                            <th>Vencimento</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>João Silva</td>
+                            <td>07/08/2025</td>
+                            <td>R$ 299,00</td>
+                            <td><span class="badge warning">Vence Hoje</span></td>
+                            <td>
+                                <button class="btn btn-success" onclick="showMessage('Pagamento registrado!', 'success')" style="padding: 6px 12px; font-size: 12px;">✅ Pagar</button>
+                                <button class="btn btn-warning" onclick="showMessage('Cobrança enviada!', 'info')" style="padding: 6px 12px; font-size: 12px;">📧 Cobrar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Maria Santos</td>
+                            <td>01/08/2025</td>
+                            <td>R$ 199,00</td>
+                            <td><span class="badge danger">Atrasado</span></td>
+                            <td>
+                                <button class="btn btn-success" onclick="showMessage('Pagamento registrado!', 'success')" style="padding: 6px 12px; font-size: 12px;">✅ Pagar</button>
+                                <button class="btn btn-danger" onclick="showMessage('Negociação iniciada!', 'info')" style="padding: 6px 12px; font-size: 12px;">⚡ Negociar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Carlos Oliveira</td>
+                            <td>10/08/2025</td>
+                            <td>R$ 349,00</td>
+                            <td><span class="badge success">Em Dia</span></td>
+                            <td>
+                                <button class="btn btn-info" onclick="showMessage('Histórico visualizado!', 'info')" style="padding: 6px 12px; font-size: 12px;">📊 Histórico</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pedagogical Tab -->
+        <div id="pedagogico" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>📚 Gestão Pedagógica</h2>
+                    <button class="btn btn-success" onclick="showMessage('Novo curso em desenvolvimento', 'info')">
+                        ➕ Novo Curso
+                    </button>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                    <div class="card">
+                        <h4>🎮 Unity Game Development</h4>
+                        <p><strong>Duração:</strong> 6 meses</p>
+                        <p><strong>Alunos:</strong> 45</p>
+                        <p><strong>Módulos:</strong> 12</p>
+                        <div style="background: var(--border); height: 8px; border-radius: 4px; margin: 10px 0;">
+                            <div style="background: var(--success); height: 100%; width: 75%; border-radius: 4px;"></div>
+                        </div>
+                        <p><small>75% dos alunos completaram</small></p>
+                    </div>
+                    <div class="card">
+                        <h4>🚀 Unreal Engine</h4>
+                        <p><strong>Duração:</strong> 8 meses</p>
+                        <p><strong>Alunos:</strong> 28</p>
+                        <p><strong>Módulos:</strong> 16</p>
+                        <div style="background: var(--border); height: 8px; border-radius: 4px; margin: 10px 0;">
+                            <div style="background: var(--warning); height: 100%; width: 60%; border-radius: 4px;"></div>
+                        </div>
+                        <p><small>60% dos alunos completaram</small></p>
+                    </div>
+                    <div class="card">
+                        <h4>🎨 Blender 3D</h4>
+                        <p><strong>Duração:</strong> 4 meses</p>
+                        <p><strong>Alunos:</strong> 32</p>
+                        <p><strong>Módulos:</strong> 8</p>
+                        <div style="background: var(--border); height: 8px; border-radius: 4px; margin: 10px 0;">
+                            <div style="background: var(--success); height: 100%; width: 85%; border-radius: 4px;"></div>
+                        </div>
+                        <p><small>85% dos alunos completaram</small></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📋 Atividades Recentes</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Aluno</th>
+                                <th>Curso</th>
+                                <th>Atividade</th>
+                                <th>Nota</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>João Silva</td>
+                                <td>Unity</td>
+                                <td>Projeto Final - Plataforma 2D</td>
+                                <td><span class="badge success">9.5</span></td>
+                                <td>05/08/2025</td>
+                            </tr>
+                            <tr>
+                                <td>Maria Santos</td>
+                                <td>Blender</td>
+                                <td>Modelagem 3D - Casa</td>
+                                <td><span class="badge warning">7.0</span></td>
+                                <td>04/08/2025</td>
+                            </tr>
+                            <tr>
+                                <td>Carlos Oliveira</td>
+                                <td>Programação</td>
+                                <td>Sistema de Inventário</td>
+                                <td><span class="badge success">8.8</span></td>
+                                <td>03/08/2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Tab -->
+        <div id="relatorios" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>📊 Relatórios e Análises</h2>
+                    <button class="btn btn-success" onclick="showMessage('Relatório personalizado em desenvolvimento', 'info')">
+                        📋 Novo Relatório
+                    </button>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                    <div class="card" style="cursor: pointer;" onclick="showMessage('Gerando relatório financeiro...', 'info')">
+                        <h4>💰 Relatório Financeiro</h4>
+                        <p>Receitas, despesas e inadimplência</p>
+                        <button class="btn btn-primary" style="margin-top: 10px;">📈 Gerar</button>
+                    </div>
+                    <div class="card" style="cursor: pointer;" onclick="showMessage('Gerando relatório acadêmico...', 'info')">
+                        <h4>📚 Relatório Acadêmico</h4>
+                        <p>Notas, frequência e desempenho</p>
+                        <button class="btn btn-primary" style="margin-top: 10px;">📊 Gerar</button>
+                    </div>
+                    <div class="card" style="cursor: pointer;" onclick="showMessage('Gerando relatório de frequência...', 'info')">
+                        <h4>👥 Relatório de Frequência</h4>
+                        <p>Presença e faltas por turma</p>
+                        <button class="btn btn-primary" style="margin-top: 10px;">📋 Gerar</button>
+                    </div>
+                    <div class="card" style="cursor: pointer;" onclick="showMessage('Gerando dashboard executivo...', 'info')">
+                        <h4>📈 Dashboard Executivo</h4>
+                        <p>Visão geral para gestão</p>
+                        <button class="btn btn-primary" style="margin-top: 10px;">🎯 Gerar</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📊 Métricas Rápidas</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: var(--success);">89%</div>
+                            <div style="font-size: 14px;">Taxa de Retenção</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: var(--primary);">4.7</div>
+                            <div style="font-size: 14px;">Nota Média</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: var(--warning);">92%</div>
+                            <div style="font-size: 14px;">Frequência Média</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: var(--purple);">67%</div>
+                            <div style="font-size: 14px;">Taxa de Conclusão</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Global Variables
+        let currentUser = null;
+        let isDarkMode = false;
+
+        // Login Handler
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            // Show loading
+            loginBtn.innerHTML = '<span class="loading"></span> Entrando...';
+            loginBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // For demo, accept any credentials
+                if (email && password) {
+                    currentUser = {
+                        email: email,
+                        name: email.split('@')[0],
+                        role: email.includes('admin') ? 'Admin' : 'User'
+                    };
+                    
+                    // Hide login screen and show main app
+                    document.getElementById('loginScreen').style.display = 'none';
+                    document.getElementById('mainApp').style.display = 'block';
+                    
+                    // Update user info
+                    document.getElementById('userWelcome').textContent = `Bem-vindo, ${currentUser.name}!`;
+                    document.getElementById('userRole').textContent = currentUser.role;
+                    
+                    showMessage('Login realizado com sucesso!', 'success');
+                } else {
+                    showMessage('Por favor, preencha todos os campos!', 'error');
+                    loginBtn.innerHTML = '🔐 Entrar';
+                    loginBtn.disabled = false;
+                }
+            }, 1500);
+            
+            return false;
+        }
+
+        // Logout Handler
+        function logout() {
+            if (confirm('Deseja realmente sair do sistema?')) {
+                currentUser = null;
+                document.getElementById('loginScreen').style.display = 'flex';
+                document.getElementById('mainApp').style.display = 'none';
+                document.getElementById('email').value = '';
+                document.getElementById('password').value = '';
+                showMessage('Logout realizado com sucesso!', 'info');
+            }
+        }
+
+        // Tab Switching
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            const selectedTab = document.getElementById(tabId);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            const body = document.body;
+            
+            if (isDarkMode) {
+                body.style.filter = 'invert(1) hue-rotate(180deg)';
+                document.getElementById('currentTheme').textContent = 'Escuro';
+                showMessage('Tema escuro ativado!', 'info');
+            } else {
+                body.style.filter = 'none';
+                document.getElementById('currentTheme').textContent = 'Claro';
+                showMessage('Tema claro ativado!', 'info');
+            }
+        }
+
+        // Backup Export
+        function exportBackup() {
+            showMessage('Iniciando backup...', 'info');
+            
+            setTimeout(() => {
+                const backupData = {
+                    timestamp: new Date().toISOString(),
+                    students: 127,
+                    classes: 12,
+                    courses: 8,
+                    revenue: 'R$ 89.450,00'
+                };
+                
+                const dataStr = JSON.stringify(backupData, null, 2);
+                const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(dataBlob);
+                link.download = `gamecreators-backup-${new Date().toISOString().split('T')[0]}.json`;
+                link.click();
+                
+                showMessage('Backup exportado com sucesso!', 'success');
+            }, 1000);
+        }
+
+        // Notification System
+        function showMessage(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Update Dashboard Stats (demo data)
+        function updateDashboardStats() {
+            const stats = {
+                totalStudents: Math.floor(Math.random() * 50) + 100,
+                activeStudents: Math.floor(Math.random() * 30) + 80,
+                totalClasses: Math.floor(Math.random() * 5) + 10,
+                totalCourses: Math.floor(Math.random() * 3) + 6,
+                overduePayments: Math.floor(Math.random() * 10) + 5,
+                totalEmployees: Math.floor(Math.random() * 10) + 20
+            };
+            
+            Object.keys(stats).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = stats[key];
+                }
+            });
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Focus on email field
+            document.getElementById('email').focus();
+            
+            // Update stats every 30 seconds (for demo)
+            setInterval(updateDashboardStats, 30000);
+            
+            // Add enter key support for login
+            document.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') {
+                    handleLogin(e);
+                }
+            });
+        });
+
+        // Responsive menu toggle for mobile
+        function toggleMobileMenu() {
+            const navTabs = document.getElementById('navTabs');
+            navTabs.style.display = navTabs.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        // Auto-logout after inactivity (30 minutes)
+        let inactivityTimer;
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            if (currentUser) {
+                inactivityTimer = setTimeout(() => {
+                    showMessage('Sessão expirada por inatividade', 'warning');
+                    setTimeout(logout, 2000);
+                }, 30 * 60 * 1000); // 30 minutes
+            }
+        }
+
+        // Add event listeners for user activity
+        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+            document.addEventListener(event, resetInactivityTimer, true);
+        });
+    </script>
+</body>
+</html>
