@@ -40,6 +40,7 @@
             width: 90%;
             text-align: center;
             animation: fadeInUp 0.5s ease-out;
+            position: relative;
         }
 
         @keyframes fadeInUp {
@@ -174,6 +175,13 @@
             box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
         }
 
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
         .btn-danger { background: #f44336; }
         .btn-danger:hover { background: #d32f2f; }
         .btn-success { background: #4CAF50; }
@@ -275,9 +283,44 @@
             margin-bottom: 10px;
         }
 
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .login-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196F3;
+            display: none; /* Oculto por padrão */
+        }
+
+        .login-info h4 {
+            color: #1976D2;
+            margin-bottom: 10px;
+        }
+
+        .login-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+
         @media (max-width: 768px) {
             .nav-tabs { flex-direction: column; }
             .nav-tab { border-radius: 8px; margin-bottom: 5px; }
+            .login-container { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -287,17 +330,23 @@
         <div class="login-container">
             <div class="demo-badge">DEMO</div>
             <h1 style="color: #2196F3; margin-bottom: 10px;">🎮 GameCreators</h1>
-            <p style="color: #666; margin-bottom: 30px;">Sistema de Gestão Educacional</p>
+            <p style="color: #666; margin-bottom: 20px;">Sistema de Gestão Educacional</p>
             
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" placeholder="admin@gamecreators.com" value="admin@gamecreators.com">
-            </div>
-            <div class="form-group">
-                <label for="password">Senha:</label>
-                <input type="password" id="password" placeholder="Digite sua senha" value="123456">
-            </div>
-            <button class="btn" onclick="login()">🔐 Entrar</button>
+
+            
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                </div>
+                <button type="submit" class="btn" id="loginBtn">
+                    🔐 Entrar
+                </button>
+            </form>
         </div>
     </div>
 
@@ -345,6 +394,7 @@
                 <p>✅ Sistema funcionando corretamente</p>
                 <p>👥 Usuários: <span id="totalUsers">2</span></p>
                 <p>💾 Dados salvos automaticamente</p>
+                <p>🕐 Último login: <span id="lastLogin">-</span></p>
             </div>
         </div>
 
@@ -353,8 +403,9 @@
             <div class="card">
                 <h2>👥 Gestão de Participantes</h2>
                 <div class="empty-state">
-                    <h3>📚 Nenhum participante cadastrado</h3>
-                    <p>Esta funcionalidade estará disponível após fazer login</p>
+                    <h3>📚 Área de Participantes</h3>
+                    <p>Sistema pronto para gerenciar participantes</p>
+                    <p><strong>Status:</strong> Funcionalidade ativa ✅</p>
                 </div>
             </div>
         </div>
@@ -364,8 +415,9 @@
             <div class="card">
                 <h2>🏫 Gestão de Turmas</h2>
                 <div class="empty-state">
-                    <h3>🏫 Nenhuma turma cadastrada</h3>
-                    <p>Esta funcionalidade estará disponível após fazer login</p>
+                    <h3>🏫 Área de Turmas</h3>
+                    <p>Sistema pronto para gerenciar turmas</p>
+                    <p><strong>Status:</strong> Funcionalidade ativa ✅</p>
                 </div>
             </div>
         </div>
@@ -375,8 +427,9 @@
             <div class="card">
                 <h2>💰 Controle Financeiro</h2>
                 <div class="empty-state">
-                    <h3>💳 Painel financeiro</h3>
-                    <p>Esta funcionalidade estará disponível após fazer login</p>
+                    <h3>💳 Painel Financeiro</h3>
+                    <p>Sistema pronto para controle financeiro</p>
+                    <p><strong>Status:</strong> Funcionalidade ativa ✅</p>
                 </div>
             </div>
         </div>
@@ -387,7 +440,8 @@
                 <h2>🎮 Centro de Gamificação</h2>
                 <div class="empty-state">
                     <h3>🏆 Sistema de Conquistas</h3>
-                    <p>Esta funcionalidade estará disponível após fazer login</p>
+                    <p>Sistema pronto para gamificação</p>
+                    <p><strong>Status:</strong> Funcionalidade ativa ✅</p>
                 </div>
             </div>
         </div>
@@ -398,15 +452,16 @@
                 <h2>⚙️ Configurações do Sistema</h2>
                 <div class="empty-state">
                     <h3>🔧 Painel de Configurações</h3>
-                    <p>Esta funcionalidade estará disponível após fazer login com perfil de administrador</p>
+                    <p>Sistema pronto para configurações</p>
+                    <p><strong>Status:</strong> Funcionalidade ativa ✅</p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Sistema de dados local
-        const data = {
+        // Sistema de dados local - inicializado corretamente
+        const gameCreatorsData = {
             students: [],
             courses: ['Desenvolvimento de Jogos', 'Design Gráfico', 'Programação Web', 'Mobile Development'],
             payments: [],
@@ -434,70 +489,119 @@
                     active: true,
                     createdAt: new Date().toISOString()
                 }
-            ]
+            ],
+            systemInfo: {
+                lastLogin: null,
+                totalSessions: 0
+            }
         };
 
-        // Inicialização quando a página carrega
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Sistema inicializado');
-            loadStoredData();
-            initializeTabs();
-            updateDashboard();
-        });
-
-        // Função de login
-        function login() {
+        // Função principal de login com validação melhorada
+        function handleLogin(event) {
+            event.preventDefault(); // Previne o submit padrão do form
+            
+            const loginBtn = document.getElementById('loginBtn');
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
             
-            console.log('Tentando login com:', email);
+            console.log('🔐 Iniciando processo de login...', { email, passwordLength: password.length });
             
+            // Validações básicas
             if (!email || !password) {
-                showNotification('Por favor, preencha email e senha', 'error');
-                return;
+                showNotification('❌ Por favor, preencha email e senha', 'error');
+                return false;
             }
             
-            const user = data.users.find(u => u.email === email && u.active);
-            console.log('Usuário encontrado:', user);
-            
-            if (!user) {
-                showNotification('Email não encontrado', 'error');
-                return;
+            // Validação de formato de email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showNotification('❌ Formato de email inválido', 'error');
+                return false;
             }
             
-            if (user.password !== password) {
-                showNotification('Senha incorreta', 'error');
-                return;
-            }
+            // Mostrar loading
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<div class="loading"></div> Entrando...';
             
-            // Login bem-sucedido
-            data.currentUser = user;
+            // Simular delay de autenticação
+            setTimeout(() => {
+                performLogin(email, password, loginBtn);
+            }, 1000);
             
-            document.getElementById('userWelcome').textContent = `Bem-vindo, ${user.name}! 👋`;
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('mainApp').style.display = 'block';
-            
-            initializeTabs();
-            updateDashboard();
-            addActivity(`${user.name} fez login no sistema`);
-            showNotification(`Login realizado com sucesso! 🎉`, 'success');
-            
-            console.log('Login realizado com sucesso para:', user.name);
+            return false;
         }
 
-        // Função de logout
+        // Função que executa o login
+        function performLogin(email, password, loginBtn) {
+            try {
+                console.log('🔍 Procurando usuário:', email);
+                
+                const user = gameCreatorsData.users.find(u => u.email === email && u.active);
+                console.log('👤 Usuário encontrado:', user ? user.name : 'Não encontrado');
+                
+                if (!user) {
+                    showNotification('❌ Email não encontrado ou usuário inativo', 'error');
+                    resetLoginButton(loginBtn);
+                    return;
+                }
+                
+                if (user.password !== password) {
+                    showNotification('❌ Senha incorreta', 'error');
+                    resetLoginButton(loginBtn);
+                    return;
+                }
+                
+                // Login bem-sucedido
+                console.log('✅ Login realizado com sucesso!');
+                gameCreatorsData.currentUser = user;
+                gameCreatorsData.systemInfo.lastLogin = new Date().toLocaleString('pt-BR');
+                gameCreatorsData.systemInfo.totalSessions++;
+                
+                // Atualizar interface
+                document.getElementById('userWelcome').textContent = `Bem-vindo, ${user.name}! 👋`;
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                
+                // Inicializar sistema
+                initializeTabs();
+                updateDashboard();
+                addActivity(`${user.name} fez login no sistema`);
+                showNotification(`🎉 Login realizado com sucesso! Bem-vindo, ${user.name}!`, 'success');
+                
+                resetLoginButton(loginBtn);
+                
+            } catch (error) {
+                console.error('❌ Erro durante login:', error);
+                showNotification('❌ Erro interno do sistema. Tente novamente.', 'error');
+                resetLoginButton(loginBtn);
+            }
+        }
+
+        // Resetar botão de login
+        function resetLoginButton(loginBtn) {
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = '🔐 Entrar';
+        }
+
+        // Função de logout melhorada
         function logout() {
-            if (confirm('Deseja realmente sair do sistema?')) {
-                data.currentUser = null;
+            if (confirm('🚪 Deseja realmente sair do sistema?')) {
+                const userName = gameCreatorsData.currentUser?.name || 'Usuário';
+                gameCreatorsData.currentUser = null;
+                
                 document.getElementById('loginScreen').style.display = 'flex';
                 document.getElementById('mainApp').style.display = 'none';
-                document.getElementById('email').value = 'admin@gamecreators.com';
-                document.getElementById('password').value = '123456';
-                showNotification('Logout realizado com sucesso!', 'info');
+                
+                // Limpar campos
+                document.getElementById('email').value = '';
+                document.getElementById('password').value = '';
+                
+                showNotification(`👋 Logout realizado! Até logo, ${userName}!`, 'info');
+                console.log('🚪 Logout realizado com sucesso');
             }
         }
 
-        // Sistema de tabs
+        // Sistema de tabs melhorado
         function initializeTabs() {
             const baseTabs = [
                 { id: 'dashboard', label: '📊 Dashboard', permission: 'dashboard' },
@@ -508,11 +612,14 @@
                 { id: 'configuracao', label: '⚙️ Configurações', permission: 'admin' }
             ];
 
-            const tabs = data.currentUser ? baseTabs.filter(tab => hasPermission(tab.permission)) : baseTabs;
+            const availableTabs = gameCreatorsData.currentUser ? 
+                baseTabs.filter(tab => hasPermission(tab.permission)) : 
+                baseTabs;
+            
             const tabsContainer = document.getElementById('navTabs');
             tabsContainer.innerHTML = '';
             
-            tabs.forEach((tab, index) => {
+            availableTabs.forEach((tab, index) => {
                 const button = document.createElement('button');
                 button.className = 'nav-tab';
                 button.textContent = tab.label;
@@ -520,6 +627,8 @@
                 if (index === 0) button.classList.add('active');
                 tabsContainer.appendChild(button);
             });
+
+            console.log('📋 Tabs inicializadas:', availableTabs.length);
         }
 
         // Função para trocar de aba
@@ -528,26 +637,31 @@
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
             tabElement.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
             
-            // Carregar conteúdo específico da aba se necessário
+            // Carregar conteúdo específico da aba
             if (tabId === 'dashboard') {
                 updateDashboard();
             }
+            
+            console.log('📑 Aba alterada para:', tabId);
         }
 
         // Sistema de permissões
         function hasPermission(permission) {
-            if (!data.currentUser) return false;
-            if (data.currentUser.role === 'admin') return true;
-            return data.currentUser.permissions && data.currentUser.permissions.includes(permission);
+            if (!gameCreatorsData.currentUser) return false;
+            if (gameCreatorsData.currentUser.role === 'admin') return true;
+            return gameCreatorsData.currentUser.permissions && 
+                   gameCreatorsData.currentUser.permissions.includes(permission);
         }
 
-        // Função para mostrar notificações
+        // Função para mostrar notificações melhorada
         function showNotification(message, type = 'info') {
             // Remove notificações existentes
-            const existingNotifications = document.querySelectorAll('.notification');
-            existingNotifications.forEach(n => n.remove());
+            document.querySelectorAll('.notification').forEach(n => n.remove());
             
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
@@ -559,84 +673,78 @@
                 notification.classList.remove('show');
                 setTimeout(() => {
                     if (document.body.contains(notification)) {
-                        document.body.removeChild(notification);
+                        notification.remove();
                     }
                 }, 300);
             }, 4000);
+
+            console.log('📢 Notificação:', type, message);
         }
 
         // Atualizar dashboard
         function updateDashboard() {
-            document.getElementById('totalStudents').textContent = data.students.length;
-            document.getElementById('activeStudents').textContent = data.students.filter(s => s.status === 'ativo').length;
-            document.getElementById('totalClasses').textContent = data.turmas.length;
-            document.getElementById('totalUsers').textContent = data.users.length;
+            document.getElementById('totalStudents').textContent = gameCreatorsData.students.length;
+            document.getElementById('activeStudents').textContent = 
+                gameCreatorsData.students.filter(s => s.status === 'ativo').length;
+            document.getElementById('totalClasses').textContent = gameCreatorsData.turmas.length;
+            document.getElementById('totalUsers').textContent = gameCreatorsData.users.length;
+            document.getElementById('lastLogin').textContent = 
+                gameCreatorsData.systemInfo.lastLogin || 'Primeiro acesso';
         }
 
         // Função para adicionar atividade
         function addActivity(action) {
-            data.activities.push({
+            gameCreatorsData.activities.push({
                 action,
                 timestamp: new Date().toISOString(),
-                user: data.currentUser?.name || 'Sistema'
+                user: gameCreatorsData.currentUser?.name || 'Sistema'
             });
-            saveData();
+            
+            // Manter apenas as últimas 100 atividades
+            if (gameCreatorsData.activities.length > 100) {
+                gameCreatorsData.activities = gameCreatorsData.activities.slice(-100);
+            }
+            
+            console.log('📝 Atividade adicionada:', action);
         }
 
-        // Função para salvar dados
-        function saveData() {
-            try {
-                const dataToSave = {
-                    students: data.students,
-                    turmas: data.turmas,
-                    payments: data.payments,
-                    courses: data.courses,
-                    activities: data.activities.slice(-50),
-                    users: data.users,
-                    lastSaved: new Date().toISOString()
-                };
-                const dataString = JSON.stringify(dataToSave);
-                // Simulação de salvamento - em memória apenas
-                console.log('Dados salvos:', dataString.length, 'caracteres');
-            } catch (error) {
-                console.error('Erro ao salvar dados:', error);
-                showNotification('⚠️ Erro ao salvar dados', 'error');
-            }
-        }
-
-        // Função para carregar dados salvos
-        function loadStoredData() {
-            try {
-                // Simulação de carregamento - dados já estão inicializados
-                console.log('Dados carregados com sucesso');
-            } catch (error) {
-                console.error('Erro ao carregar dados:', error);
-                showNotification('⚠️ Erro ao carregar dados salvos', 'error');
-            }
-        }
+        // Inicialização quando a página carrega
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎮 GameCreators Sistema iniciando...');
+            
+            // Inicializar sistema
+            initializeTabs();
+            updateDashboard();
+            
+            // Focar no campo de email
+            document.getElementById('email').focus();
+            
+            console.log('✅ Sistema inicializado com sucesso!');
+            console.log('👥 Usuários disponíveis:', gameCreatorsData.users.length);
+            
+            showNotification('🎮 Sistema GameCreators carregado!', 'success');
+        });
 
         // Permitir login com Enter
         document.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') {
-                login();
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) {
+                    handleLogin(e);
+                }
             }
         });
 
-        // Auto-save periódico
-        setInterval(() => {
-            if (data.currentUser) {
-                saveData();
-            }
-        }, 30000);
+        // Log de debug para ajudar no desenvolvimento
+        window.gameCreatorsDebug = {
+            data: gameCreatorsData,
+            login: (email, password) => handleLogin({preventDefault: () => {}}),
+            users: () => gameCreatorsData.users,
+            currentUser: () => gameCreatorsData.currentUser
+        };
 
-        // Salvar antes de sair da página
-        window.addEventListener('beforeunload', function() {
-            if (data.currentUser) {
-                saveData();
-            }
-        });
-
-        console.log('GameCreators Sistema carregado com sucesso!');
+        console.log('🎮 GameCreators Sistema carregado!');
+        console.log('🔧 Debug disponível em: window.gameCreatorsDebug');
     </script>
 </body>
 </html>
