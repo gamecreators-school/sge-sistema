@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameCreators - Sistema de Gestão Escolar Completo</title>
+    <title>GameCreators - Sistema de Gestão Escolar</title>
     <style>
         * {
             margin: 0;
@@ -14,6 +14,7 @@
         :root {
             --primary: #2196F3;
             --primary-dark: #1976D2;
+            --primary-light: #BBDEFB;
             --success: #4CAF50;
             --success-dark: #45a049;
             --warning: #FF9800;
@@ -25,177 +26,142 @@
             --purple: #9C27B0;
             --gold: #FFD700;
             --orange: #FF5722;
+            --background: #fafafa;
+            --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --hover-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: var(--dark);
+            line-height: 1.6;
         }
 
-        .login-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-
+        /* Login Screen Styles */
         .login-container {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            animation: fadeInUp 0.5s ease-out;
-            position: relative;
-        }
-
-        .login-info {
-            background: #e3f2fd;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--primary);
-            text-align: left;
-        }
-
-        .login-info h4 {
-            color: var(--primary-dark);
-            margin-bottom: 10px;
-        }
-
-        .login-info p {
-            margin: 5px 0;
-            font-size: 14px;
-            color: #555;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .main-app {
-            display: none;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            border-radius: 10px 10px 0 0;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
-        }
-
-        .header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
             padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .header-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .user-role {
-            background: rgba(255,255,255,0.2);
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-        }
-
-        .nav-tabs {
-            display: flex;
-            border-bottom: 2px solid var(--border);
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 5px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-        }
-
-        .nav-tab {
-            padding: 12px 20px;
-            background: var(--light);
-            border: none;
-            border-radius: 10px 10px 0 0;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-            font-size: 14px;
-            white-space: nowrap;
-            min-width: 120px;
-        }
-
-        .nav-tab.active {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .nav-tab:hover {
-            background: var(--primary-dark);
-            color: white;
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.5s ease-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .tab-content.active {
-            display: block;
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(33, 150, 243, 0.05), transparent);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-header h1 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .login-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            background: var(--light);
+            border-radius: 12px;
+            padding: 4px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-tab {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+            transition: var(--transition);
+        }
+
+        .login-tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .login-form {
+            position: relative;
+            z-index: 1;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             text-align: left;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
+            margin-bottom: 8px;
+            font-weight: 600;
             color: #555;
+            font-size: 14px;
         }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
+            padding: 14px 16px;
             border: 2px solid var(--border);
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 16px;
-            transition: all 0.3s;
+            transition: var(--transition);
+            background: white;
+            font-family: inherit;
         }
 
         .form-group input:focus,
@@ -203,30 +169,58 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(33, 150, 243, 0.3);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+            font-size: 20px;
+            background: none;
+            border: none;
         }
 
         .btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
+            padding: 14px 28px;
+            border-radius: 12px;
             cursor: pointer;
             font-size: 16px;
-            transition: all 0.3s;
-            margin-right: 10px;
-            margin-bottom: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-right: 12px;
+            margin-bottom: 12px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-full {
+            width: 100%;
+            justify-content: center;
         }
 
         .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+            transform: translateY(-3px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
         }
 
         .btn:disabled {
@@ -236,56 +230,154 @@
             box-shadow: none;
         }
 
-        .btn-danger { background: var(--danger); }
-        .btn-danger:hover { background: #d32f2f; }
-        .btn-success { background: var(--success); }
-        .btn-success:hover { background: var(--success-dark); }
-        .btn-warning { background: var(--warning); }
-        .btn-warning:hover { background: #F57C00; }
-        .btn-secondary { background: #6c757d; }
-        .btn-secondary:hover { background: #5a6268; }
+        .btn-danger { background: linear-gradient(135deg, var(--danger), #d32f2f); }
+        .btn-success { background: linear-gradient(135deg, var(--success), var(--success-dark)); }
+        .btn-warning { background: linear-gradient(135deg, var(--warning), #F57C00); }
+        .btn-secondary { background: linear-gradient(135deg, #6c757d, #5a6268); }
+        .btn-info { background: linear-gradient(135deg, var(--info), #1976D2); }
 
-        .card {
-            background: white;
-            border-radius: 10px;
+        /* Main App Styles */
+        .main-app {
+            display: none;
+            max-width: 1600px;
+            margin: 0 auto;
             padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            background: var(--background);
+            min-height: 100vh;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -20px 40px rgba(0,0,0,0.15);
         }
 
-        .card:hover {
-            transform: translateY(-2px);
+        .main-app.active {
+            display: block;
+            animation: slideIn 0.5s ease-out;
         }
 
-        .card-header {
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .header-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .user-role {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 3px solid var(--border);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+        }
+
+        .nav-tab {
+            padding: 14px 22px;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+            min-width: 130px;
+            text-align: center;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .nav-tab:hover:not(.active) {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--hover-shadow);
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
         }
 
         .stat-card {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 28px;
+            border-radius: 16px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: var(--transition);
             cursor: pointer;
         }
 
         .stat-card:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
         }
 
         .stat-card.success {
@@ -300,144 +392,190 @@
             background: linear-gradient(135deg, var(--danger) 0%, #d32f2f 100%);
         }
 
-        .stat-card.purple {
-            background: linear-gradient(135deg, var(--purple) 0%, #7B1FA2 100%);
-        }
-
-        .stat-card.gold {
-            background: linear-gradient(135deg, var(--gold) 0%, #FFA500 100%);
-        }
-
         .stat-number {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 8px;
         }
 
         .stat-label {
             font-size: 14px;
-            opacity: 0.9;
+            opacity: 0.95;
+            font-weight: 500;
         }
 
         .table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 24px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
         }
 
         .table th,
         .table td {
-            padding: 12px;
+            padding: 16px;
             text-align: left;
             border-bottom: 1px solid var(--border);
         }
 
         .table th {
             background: var(--light);
-            font-weight: 600;
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .table tr:hover {
-            background: rgba(33, 150, 243, 0.05);
-        }
-
-        .badge {
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-
-        .badge.success { background: var(--success); color: white; }
-        .badge.danger { background: var(--danger); color: white; }
-        .badge.warning { background: var(--warning); color: white; }
-        .badge.info { background: var(--info); color: white; }
-
-        .demo-badge {
-            background: var(--orange);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
-        .welcome-message {
-            background: linear-gradient(135deg, var(--success), var(--success-dark));
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
+            background: rgba(33, 150, 243, 0.04);
         }
 
         .notification {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 8px;
+            top: 24px;
+            right: 24px;
+            padding: 18px 24px;
+            border-radius: 12px;
             color: white;
-            font-weight: 500;
+            font-weight: 600;
             z-index: 10001;
             transform: translateX(400px);
-            transition: transform 0.3s;
-            max-width: 300px;
+            transition: var(--transition);
+            max-width: 350px;
+            box-shadow: var(--hover-shadow);
         }
 
         .notification.show {
             transform: translateX(0);
         }
 
-        .notification.success { background: var(--success); }
-        .notification.error { background: var(--danger); }
-        .notification.info { background: var(--info); }
-        .notification.warning { background: var(--warning); }
+        .notification.success { background: linear-gradient(135deg, var(--success), var(--success-dark)); }
+        .notification.error { background: linear-gradient(135deg, var(--danger), #d32f2f); }
+        .notification.info { background: linear-gradient(135deg, var(--info), var(--primary-dark)); }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            color: var(--dark);
+        }
+
+        .modal-footer {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
 
         @media (max-width: 768px) {
-            .nav-tabs { 
-                flex-direction: column; 
-                overflow-x: visible;
+            .login-card {
+                padding: 30px 20px;
             }
-            .nav-tab { 
-                border-radius: 8px; 
-                margin-bottom: 5px; 
-                min-width: auto;
-            }
-            .login-container { padding: 30px 20px; }
-            .header {
+            
+            .nav-tabs {
                 flex-direction: column;
-                text-align: center;
+            }
+            
+            .nav-tab {
+                width: 100%;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
 </head>
 <body>
     <!-- Login Screen -->
-    <div id="loginScreen" class="login-screen">
-        <div class="login-container">
-            <div class="demo-badge">DEMO</div>
-            <h1 style="color: var(--primary); margin-bottom: 10px;">🎮 GameCreators</h1>
-            <p style="color: #666; margin-bottom: 20px;">Sistema de Gestão Escolar Completo</p>
-            
+    <div id="loginScreen" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>🎮 GameCreators</h1>
+                <p>Sistema de Gestão Escolar</p>
+            </div>
 
-            
-            <form id="loginForm" onsubmit="return handleLogin(event)">
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+            <div class="login-tabs">
+                <button class="login-tab active" onclick="switchLoginType('student')">👨‍🎓 Aluno</button>
+                <button class="login-tab" onclick="switchLoginType('employee')">👨‍💼 Colaborador</button>
+            </div>
+
+            <!-- Student Login Form -->
+            <div id="studentLogin" class="login-form">
+                <form onsubmit="handleStudentLogin(event)">
+                    <div class="form-group">
+                        <label for="studentRA">RA do Aluno</label>
+                        <input type="text" id="studentRA" placeholder="Digite seu RA (ex: 2024001)" required>
+                    </div>
+                    <button type="submit" class="btn btn-full">
+                        🔑 Entrar como Aluno
+                    </button>
+                </form>
+                <div style="margin-top: 20px; text-align: center; color: #666; font-size: 14px;">
+                    <p>RA de exemplo: 2024001, 2024002, 2024003</p>
                 </div>
-                <div class="form-group">
-                    <label for="password">Senha:</label>
-                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+            </div>
+
+            <!-- Employee Login Form -->
+            <div id="employeeLogin" class="login-form" style="display: none;">
+                <form onsubmit="handleEmployeeLogin(event)">
+                    <div class="form-group">
+                        <label for="employeeUsername">Usuário</label>
+                        <input type="text" id="employeeUsername" placeholder="Digite seu usuário" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="employeePassword">Senha</label>
+                        <div class="password-toggle">
+                            <input type="password" id="employeePassword" placeholder="Digite sua senha" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword('employeePassword')">
+                                👁️
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-full">
+                        🔑 Entrar como Colaborador
+                    </button>
+                </form>
+                <div style="margin-top: 20px; text-align: center; color: #666; font-size: 14px;">
+                    <p>Usuário: admin | Senha: admin123</p>
+                    <p>Usuário: professor | Senha: prof123</p>
                 </div>
-                <button type="submit" class="btn" id="loginBtn">
-                    🔐 Entrar
-                </button>
-            </form>
+            </div>
         </div>
     </div>
 
@@ -446,616 +584,867 @@
         <div class="header">
             <div class="header-info">
                 <div>
-                    <h1>🎮 GameCreators - Sistema de Gestão</h1>
+                    <h1>🎮 GameCreators</h1>
                     <p id="userWelcome">Bem-vindo!</p>
                 </div>
-                <div class="user-role" id="userRole">Admin</div>
+                <div class="user-role" id="userRole">Usuário</div>
             </div>
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <button class="btn btn-secondary" onclick="toggleTheme()">🌙 Tema</button>
-                <button class="btn btn-warning" onclick="exportBackup()">💾 Backup</button>
+            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                <button class="btn btn-info" onclick="openProfileModal()">👤 Perfil</button>
                 <button class="btn btn-danger" onclick="logout()">🚪 Sair</button>
             </div>
         </div>
 
         <!-- Navigation Tabs -->
         <div class="nav-tabs" id="navTabs">
-            <button class="nav-tab active" onclick="switchTab('dashboard')">📊 Dashboard</button>
-            <button class="nav-tab" onclick="switchTab('students')">👥 Alunos</button>
-            <button class="nav-tab" onclick="switchTab('turmas')">🏫 Turmas</button>
-            <button class="nav-tab" onclick="switchTab('financeiro')">💰 Financeiro</button>
-            <button class="nav-tab" onclick="switchTab('pedagogico')">📚 Pedagógico</button>
-            <button class="nav-tab" onclick="switchTab('relatorios')">📊 Relatórios</button>
+            <!-- Tabs will be dynamically generated based on user type -->
         </div>
 
         <!-- Dashboard Tab -->
         <div id="dashboard" class="tab-content active">
-            <div class="welcome-message">
-                <h2>📊 Dashboard - Visão Geral</h2>
-                <p>Acompanhe as principais métricas e atividades da sua instituição</p>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card" onclick="switchTab('students')">
-                    <div class="stat-number" id="totalStudents">127</div>
-                    <div class="stat-label">👥 Total de Alunos</div>
-                </div>
-                <div class="stat-card success" onclick="switchTab('students')">
-                    <div class="stat-number" id="activeStudents">98</div>
-                    <div class="stat-label">✅ Alunos Ativos</div>
-                </div>
-                <div class="stat-card warning" onclick="switchTab('turmas')">
-                    <div class="stat-number" id="totalClasses">12</div>
-                    <div class="stat-label">🏫 Turmas Ativas</div>
-                </div>
-                <div class="stat-card purple" onclick="switchTab('pedagogico')">
-                    <div class="stat-number" id="totalCourses">8</div>
-                    <div class="stat-label">📚 Cursos Oferecidos</div>
-                </div>
-                <div class="stat-card danger" onclick="switchTab('financeiro')">
-                    <div class="stat-number" id="overduePayments">15</div>
-                    <div class="stat-label">⚠️ Inadimplentes</div>
-                </div>
-                <div class="stat-card gold">
-                    <div class="stat-number" id="totalEmployees">25</div>
-                    <div class="stat-label">👨‍💼 Colaboradores</div>
-                </div>
-            </div>
-
             <div class="card">
-                <h3>💰 Resumo Financeiro Mensal</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px;">
-                    <div style="background: var(--light); padding: 15px; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 18px; font-weight: bold; color: var(--success);">R$ 89.450,00</div>
-                        <div>💰 Faturado</div>
-                    </div>
-                    <div style="background: var(--light); padding: 15px; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 18px; font-weight: bold; color: var(--primary);">R$ 120.300,00</div>
-                        <div>📊 Previsto</div>
-                    </div>
-                    <div style="background: var(--light); padding: 15px; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 18px; font-weight: bold; color: var(--danger);">R$ 18.750,00</div>
-                        <div>⚠️ Em Atraso</div>
-                    </div>
-                    <div style="background: var(--light); padding: 15px; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 18px; font-weight: bold; color: var(--warning);">R$ 95.200,00</div>
-                        <div>📅 Próximo Mês</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>📈 Status do Sistema</h3>
-                <p>✅ Sistema funcionando corretamente</p>
-                <p>📱 Modo responsivo ativo</p>
-                <p>🌙 Tema: <span id="currentTheme">Claro</span></p>
-                <p>👥 Usuários logados: <span id="activeUsers">3</span></p>
-                <p>💾 Último backup: <span id="lastBackup">Hoje às 14:30</span></p>
-                <p>🔄 Sincronização: ✅ Ativa</p>
+                <h2>📊 Dashboard</h2>
+                <p id="dashboardContent">Carregando...</p>
             </div>
         </div>
 
-        <!-- Students Tab -->
-        <div id="students" class="tab-content">
+        <!-- Student View -->
+        <div id="studentView" class="tab-content">
             <div class="card">
-                <div class="card-header">
-                    <h2>👥 Gestão de Alunos</h2>
-                    <div>
-                        <button class="btn btn-success" onclick="showMessage('Funcionalidade de cadastro em desenvolvimento', 'info')">
-                            ➕ Novo Aluno
-                        </button>
-                        <button class="btn btn-info" onclick="showMessage('Relatório exportado com sucesso!', 'success')">
-                            📊 Relatório
-                        </button>
+                <h2>📚 Área do Aluno</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">85</div>
+                        <div class="stat-label">📊 Média Geral</div>
                     </div>
-                </div>
-
-                <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-                    <input type="text" placeholder="🔍 Buscar por nome, email ou RA..." style="min-width: 250px; flex: 1; padding: 12px; border: 2px solid var(--border); border-radius: 8px;">
-                    <select style="min-width: 150px; padding: 12px; border: 2px solid var(--border); border-radius: 8px;">
-                        <option value="">Todos os Status</option>
-                        <option value="ativo">✅ Ativo</option>
-                        <option value="inadimplente">⚠️ Inadimplente</option>
-                        <option value="trancado">⏸️ Trancado</option>
-                        <option value="cancelado">❌ Cancelado</option>
-                    </select>
-                </div>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Curso</th>
-                            <th>Status</th>
-                            <th>Mensalidade</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>João Silva</td>
-                            <td>joao@email.com</td>
-                            <td>Unity Game Dev</td>
-                            <td><span class="badge success">Ativo</span></td>
-                            <td>R$ 299,00</td>
-                            <td>
-                                <button class="btn btn-success" onclick="showMessage('Editando aluno...', 'info')" style="padding: 6px 12px; font-size: 12px;">✏️ Editar</button>
-                                <button class="btn btn-info" onclick="showMessage('Visualizando dados...', 'info')" style="padding: 6px 12px; font-size: 12px;">👁️ Ver</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Maria Santos</td>
-                            <td>maria@email.com</td>
-                            <td>Blender 3D</td>
-                            <td><span class="badge warning">Inadimplente</span></td>
-                            <td>R$ 199,00</td>
-                            <td>
-                                <button class="btn btn-success" onclick="showMessage('Editando aluno...', 'info')" style="padding: 6px 12px; font-size: 12px;">✏️ Editar</button>
-                                <button class="btn btn-info" onclick="showMessage('Visualizando dados...', 'info')" style="padding: 6px 12px; font-size: 12px;">👁️ Ver</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Carlos Oliveira</td>
-                            <td>carlos@email.com</td>
-                            <td>Programação</td>
-                            <td><span class="badge success">Ativo</span></td>
-                            <td>R$ 349,00</td>
-                            <td>
-                                <button class="btn btn-success" onclick="showMessage('Editando aluno...', 'info')" style="padding: 6px 12px; font-size: 12px;">✏️ Editar</button>
-                                <button class="btn btn-info" onclick="showMessage('Visualizando dados...', 'info')" style="padding: 6px 12px; font-size: 12px;">👁️ Ver</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Classes Tab -->
-        <div id="turmas" class="tab-content">
-            <div class="card">
-                <div class="card-header">
-                    <h2>🏫 Gestão de Turmas</h2>
-                    <button class="btn btn-success" onclick="showMessage('Nova turma em desenvolvimento', 'info')">
-                        ➕ Nova Turma
-                    </button>
-                </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                    <div class="card">
-                        <h4>🎮 Unity Básico - Manhã</h4>
-                        <p><strong>Horário:</strong> 08:00 - 10:00</p>
-                        <p><strong>Alunos:</strong> 12/15</p>
-                        <p><strong>Professor:</strong> Prof. Ricardo</p>
-                        <p><strong>Status:</strong> <span class="badge success">Ativa</span></p>
-                    </div>
-                    <div class="card">
-                        <h4>🚀 Unreal Engine - Tarde</h4>
-                        <p><strong>Horário:</strong> 14:00 - 16:00</p>
-                        <p><strong>Alunos:</strong> 8/12</p>
-                        <p><strong>Professor:</strong> Prof. Ana</p>
-                        <p><strong>Status:</strong> <span class="badge success">Ativa</span></p>
-                    </div>
-                    <div class="card">
-                        <h4>🎨 Blender 3D - Noite</h4>
-                        <p><strong>Horário:</strong> 19:00 - 21:00</p>
-                        <p><strong>Alunos:</strong> 15/15</p>
-                        <p><strong>Professor:</strong> Prof. Carlos</p>
-                        <p><strong>Status:</strong> <span class="badge warning">Lotada</span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Financial Tab -->
-        <div id="financeiro" class="tab-content">
-            <div class="card">
-                <div class="card-header">
-                    <h2>💰 Controle Financeiro</h2>
-                    <button class="btn btn-success" onclick="showMessage('Plano de pagamento em desenvolvimento', 'info')">
-                        💳 Novo Plano
-                    </button>
-                </div>
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
                     <div class="stat-card success">
-                        <div class="stat-number">R$ 45.200</div>
-                        <div class="stat-label">💰 Receita Mensal</div>
-                    </div>
-                    <div class="stat-card danger">
-                        <div class="stat-number">R$ 8.750</div>
-                        <div class="stat-label">⚠️ Em Atraso</div>
+                        <div class="stat-number">92%</div>
+                        <div class="stat-label">✅ Frequência</div>
                     </div>
                     <div class="stat-card warning">
-                        <div class="stat-number">15</div>
-                        <div class="stat-label">🔔 Vencendo Hoje</div>
-                    </div>
-                    <div class="stat-card purple">
-                        <div class="stat-number">92%</div>
-                        <div class="stat-label">📊 Taxa de Cobrança</div>
+                        <div class="stat-number">1250</div>
+                        <div class="stat-label">🏆 Pontos GameCreators</div>
                     </div>
                 </div>
+            </div>
 
+            <div class="card">
+                <h3>📚 Minhas Disciplinas</h3>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Aluno</th>
-                            <th>Vencimento</th>
-                            <th>Valor</th>
-                            <th>Status</th>
-                            <th>Ações</th>
+                            <th>Disciplina</th>
+                            <th>Professor</th>
+                            <th>Média</th>
+                            <th>Frequência</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>João Silva</td>
-                            <td>07/08/2025</td>
-                            <td>R$ 299,00</td>
-                            <td><span class="badge warning">Vence Hoje</span></td>
-                            <td>
-                                <button class="btn btn-success" onclick="showMessage('Pagamento registrado!', 'success')" style="padding: 6px 12px; font-size: 12px;">✅ Pagar</button>
-                                <button class="btn btn-warning" onclick="showMessage('Cobrança enviada!', 'info')" style="padding: 6px 12px; font-size: 12px;">📧 Cobrar</button>
-                            </td>
+                            <td>Matemática</td>
+                            <td>Prof. Silva</td>
+                            <td>8.5</td>
+                            <td>95%</td>
                         </tr>
                         <tr>
-                            <td>Maria Santos</td>
-                            <td>01/08/2025</td>
-                            <td>R$ 199,00</td>
-                            <td><span class="badge danger">Atrasado</span></td>
-                            <td>
-                                <button class="btn btn-success" onclick="showMessage('Pagamento registrado!', 'success')" style="padding: 6px 12px; font-size: 12px;">✅ Pagar</button>
-                                <button class="btn btn-danger" onclick="showMessage('Negociação iniciada!', 'info')" style="padding: 6px 12px; font-size: 12px;">⚡ Negociar</button>
-                            </td>
+                            <td>Português</td>
+                            <td>Prof. Santos</td>
+                            <td>9.0</td>
+                            <td>100%</td>
                         </tr>
                         <tr>
-                            <td>Carlos Oliveira</td>
-                            <td>10/08/2025</td>
-                            <td>R$ 349,00</td>
-                            <td><span class="badge success">Em Dia</span></td>
-                            <td>
-                                <button class="btn btn-info" onclick="showMessage('Histórico visualizado!', 'info')" style="padding: 6px 12px; font-size: 12px;">📊 Histórico</button>
-                            </td>
+                            <td>História</td>
+                            <td>Prof. Costa</td>
+                            <td>7.8</td>
+                            <td>88%</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Pedagogical Tab -->
-        <div id="pedagogico" class="tab-content">
+        <!-- Grades Tab -->
+        <div id="grades" class="tab-content">
             <div class="card">
-                <div class="card-header">
-                    <h2>📚 Gestão Pedagógica</h2>
-                    <button class="btn btn-success" onclick="showMessage('Novo curso em desenvolvimento', 'info')">
-                        ➕ Novo Curso
-                    </button>
-                </div>
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 20px;">
-                    <div class="card">
-                        <h4>🎮 Unity Game Development</h4>
-                        <p><strong>Duração:</strong> 6 meses</p>
-                        <p><strong>Alunos:</strong> 45</p>
-                        <p><strong>Módulos:</strong> 12</p>
-                        <div style="background: var(--border); height: 8px; border-radius: 4px; margin: 10px 0;">
-                            <div style="background: var(--success); height: 100%; width: 75%; border-radius: 4px;"></div>
-                        </div>
-                        <p><small>75% dos alunos completaram</small></p>
-                    </div>
-                    <div class="card">
-                        <h4>🚀 Unreal Engine</h4>
-                        <p><strong>Duração:</strong> 8 meses</p>
-                        <p><strong>Alunos:</strong> 28</p>
-                        <p><strong>Módulos:</strong> 16</p>
-                        <div style="background: var(--border); height: 8px; border-radius: 4px; margin: 10px 0;">
-                            <div style="background: var(--warning); height: 100%; width: 60%; border-radius: 4px;"></div>
-                        </div>
-                        <p><small>60% dos alunos completaram</small></p>
-                    </div>
-                    <div class="card">
-                        <h4>🎨 Blender 3D</h4>
-                        <p><strong>Duração:</strong> 4 meses</p>
-                        <p><strong>Alunos:</strong> 32</p>
-                        <p><strong>Módulos:</strong> 8</p>
-                        <div style="background: var(--border); height: 8px; border-radius: 4px; margin: 10px 0;">
-                            <div style="background: var(--success); height: 100%; width: 85%; border-radius: 4px;"></div>
-                        </div>
-                        <p><small>85% dos alunos completaram</small></p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>📋 Atividades Recentes</h3>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Aluno</th>
-                                <th>Curso</th>
-                                <th>Atividade</th>
-                                <th>Nota</th>
-                                <th>Data</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>João Silva</td>
-                                <td>Unity</td>
-                                <td>Projeto Final - Plataforma 2D</td>
-                                <td><span class="badge success">9.5</span></td>
-                                <td>05/08/2025</td>
-                            </tr>
-                            <tr>
-                                <td>Maria Santos</td>
-                                <td>Blender</td>
-                                <td>Modelagem 3D - Casa</td>
-                                <td><span class="badge warning">7.0</span></td>
-                                <td>04/08/2025</td>
-                            </tr>
-                            <tr>
-                                <td>Carlos Oliveira</td>
-                                <td>Programação</td>
-                                <td>Sistema de Inventário</td>
-                                <td><span class="badge success">8.8</span></td>
-                                <td>03/08/2025</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <h2>📝 Notas e Avaliações</h2>
+                <p>Suas notas detalhadas aparecerão aqui.</p>
             </div>
         </div>
 
-        <!-- Reports Tab -->
-        <div id="relatorios" class="tab-content">
+        <!-- Schedule Tab -->
+        <div id="schedule" class="tab-content">
             <div class="card">
-                <div class="card-header">
-                    <h2>📊 Relatórios e Análises</h2>
-                    <button class="btn btn-success" onclick="showMessage('Relatório personalizado em desenvolvimento', 'info')">
-                        📋 Novo Relatório
-                    </button>
-                </div>
+                <h2>📅 Horário de Aulas</h2>
+                <p>Seu horário semanal aparecerá aqui.</p>
+            </div>
+        </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 20px;">
-                    <div class="card" style="cursor: pointer;" onclick="showMessage('Gerando relatório financeiro...', 'info')">
-                        <h4>💰 Relatório Financeiro</h4>
-                        <p>Receitas, despesas e inadimplência</p>
-                        <button class="btn btn-primary" style="margin-top: 10px;">📈 Gerar</button>
-                    </div>
-                    <div class="card" style="cursor: pointer;" onclick="showMessage('Gerando relatório acadêmico...', 'info')">
-                        <h4>📚 Relatório Acadêmico</h4>
-                        <p>Notas, frequência e desempenho</p>
-                        <button class="btn btn-primary" style="margin-top: 10px;">📊 Gerar</button>
-                    </div>
-                    <div class="card" style="cursor: pointer;" onclick="showMessage('Gerando relatório de frequência...', 'info')">
-                        <h4>👥 Relatório de Frequência</h4>
-                        <p>Presença e faltas por turma</p>
-                        <button class="btn btn-primary" style="margin-top: 10px;">📋 Gerar</button>
-                    </div>
-                    <div class="card" style="cursor: pointer;" onclick="showMessage('Gerando dashboard executivo...', 'info')">
-                        <h4>📈 Dashboard Executivo</h4>
-                        <p>Visão geral para gestão</p>
-                        <button class="btn btn-primary" style="margin-top: 10px;">🎯 Gerar</button>
-                    </div>
-                </div>
+        <!-- Financial Tab (Student) -->
+        <div id="financial" class="tab-content">
+            <div class="card">
+                <h2>💰 Situação Financeira</h2>
+                <p>Informações sobre mensalidades aparecerão aqui.</p>
+            </div>
+        </div>
 
-                <div class="card">
-                    <h3>📊 Métricas Rápidas</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 8px;">
-                            <div style="font-size: 24px; font-weight: bold; color: var(--success);">89%</div>
-                            <div style="font-size: 14px;">Taxa de Retenção</div>
-                        </div>
-                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 8px;">
-                            <div style="font-size: 24px; font-weight: bold; color: var(--primary);">4.7</div>
-                            <div style="font-size: 14px;">Nota Média</div>
-                        </div>
-                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 8px;">
-                            <div style="font-size: 24px; font-weight: bold; color: var(--warning);">92%</div>
-                            <div style="font-size: 14px;">Frequência Média</div>
-                        </div>
-                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 8px;">
-                            <div style="font-size: 24px; font-weight: bold; color: var(--purple);">67%</div>
-                            <div style="font-size: 14px;">Taxa de Conclusão</div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Admin Tabs -->
+        <div id="students" class="tab-content">
+            <div class="card">
+                <h2>👥 Gestão de Alunos</h2>
+                <button class="btn btn-success" onclick="openStudentModal()">➕ Cadastrar Aluno</button>
+                <table class="table" id="studentsTable">
+                    <thead>
+                        <tr>
+                            <th>RA</th>
+                            <th>Nome</th>
+                            <th>Turma</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsTableBody">
+                        <!-- Will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="employees" class="tab-content">
+            <div class="card">
+                <h2>👨‍💼 Gestão de Colaboradores</h2>
+                <button class="btn btn-success" onclick="openEmployeeModal()">➕ Cadastrar Colaborador</button>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Cargo</th>
+                            <th>Usuário</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employeesTableBody">
+                        <!-- Will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="reports" class="tab-content">
+            <div class="card">
+                <h2>📊 Relatórios</h2>
+                <p>Relatórios gerenciais aparecerão aqui.</p>
             </div>
         </div>
     </div>
 
-    <!-- Notification Container -->
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>👤 Editar Perfil</h2>
+            </div>
+            <form id="profileForm" onsubmit="updateProfile(event)">
+                <div id="profileFields">
+                    <!-- Fields will be populated based on user type -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('profileModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">💾 Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Student Registration Modal -->
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>👨‍🎓 Cadastrar Novo Aluno</h2>
+            </div>
+            <form onsubmit="saveStudent(event)">
+                <div class="form-group">
+                    <label>RA do Aluno</label>
+                    <input type="text" id="newStudentRA" placeholder="Ex: 2024010" required>
+                </div>
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="newStudentName" placeholder="Nome do aluno" required>
+                </div>
+                <div class="form-group">
+                    <label>Turma</label>
+                    <select id="newStudentClass" required>
+                        <option value="">Selecione...</option>
+                        <option value="1A">1º Ano A</option>
+                        <option value="1B">1º Ano B</option>
+                        <option value="2A">2º Ano A</option>
+                        <option value="2B">2º Ano B</option>
+                        <option value="3A">3º Ano A</option>
+                        <option value="3B">3º Ano B</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="newStudentEmail" placeholder="email@exemplo.com" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('studentModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">💾 Cadastrar Aluno</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Employee Registration Modal -->
+    <div id="employeeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>👨‍💼 Cadastrar Novo Colaborador</h2>
+            </div>
+            <form onsubmit="saveEmployee(event)">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="newEmployeeName" placeholder="Nome do colaborador" required>
+                </div>
+                <div class="form-group">
+                    <label>Cargo</label>
+                    <select id="newEmployeeRole" required>
+                        <option value="">Selecione...</option>
+                        <option value="admin">Administrador</option>
+                        <option value="professor">Professor</option>
+                        <option value="coordenador">Coordenador</option>
+                        <option value="secretaria">Secretaria</option>
+                        <option value="portaria">Portaria</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Usuário de Login</label>
+                    <input type="text" id="newEmployeeUsername" placeholder="usuario.login" required>
+                </div>
+                <div class="form-group">
+                    <label>Senha Inicial</label>
+                    <input type="password" id="newEmployeePassword" placeholder="Senha inicial" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="newEmployeeEmail" placeholder="email@exemplo.com" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('employeeModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">💾 Cadastrar Colaborador</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Element -->
     <div id="notification" class="notification"></div>
 
     <script>
-        // Global Variables
+        // Database simulation (in production, this would be a real database)
+        let database = {
+            students: [
+                { ra: '2024001', name: 'João Silva', class: '3A', email: 'joao@email.com', status: 'Ativo' },
+                { ra: '2024002', name: 'Maria Santos', class: '3B', email: 'maria@email.com', status: 'Ativo' },
+                { ra: '2024003', name: 'Pedro Costa', class: '2A', email: 'pedro@email.com', status: 'Ativo' }
+            ],
+            employees: [
+                { id: 1, name: 'Admin Master', role: 'admin', username: 'admin', password: 'admin123', email: 'admin@gamecreators.com' },
+                { id: 2, name: 'Professor Silva', role: 'professor', username: 'professor', password: 'prof123', email: 'professor@gamecreators.com' },
+                { id: 3, name: 'Coordenador Santos', role: 'coordenador', username: 'coord', password: 'coord123', email: 'coord@gamecreators.com' }
+            ]
+        };
+
+        // Current user session
         let currentUser = null;
-        let isDarkMode = false;
 
-        // Login Handler
-        function handleLogin(event) {
-            event.preventDefault();
+        // Initialize the application
+        function init() {
+            // Load data from localStorage if available
+            const savedData = localStorage.getItem('gamecreators_db');
+            if (savedData) {
+                database = JSON.parse(savedData);
+            }
             
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const loginBtn = document.getElementById('loginBtn');
-            
-            // Show loading
-            loginBtn.innerHTML = '<span class="loading"></span> Entrando...';
-            loginBtn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                // For demo, accept any credentials
-                if (email && password) {
-                    currentUser = {
-                        email: email,
-                        name: email.split('@')[0],
-                        role: email.includes('admin') ? 'Admin' : 'User'
-                    };
-                    
-                    // Hide login screen and show main app
-                    document.getElementById('loginScreen').style.display = 'none';
-                    document.getElementById('mainApp').style.display = 'block';
-                    
-                    // Update user info
-                    document.getElementById('userWelcome').textContent = `Bem-vindo, ${currentUser.name}!`;
-                    document.getElementById('userRole').textContent = currentUser.role;
-                    
-                    showMessage('Login realizado com sucesso!', 'success');
-                } else {
-                    showMessage('Por favor, preencha todos os campos!', 'error');
-                    loginBtn.innerHTML = '🔐 Entrar';
-                    loginBtn.disabled = false;
-                }
-            }, 1500);
-            
-            return false;
-        }
-
-        // Logout Handler
-        function logout() {
-            if (confirm('Deseja realmente sair do sistema?')) {
-                currentUser = null;
-                document.getElementById('loginScreen').style.display = 'flex';
-                document.getElementById('mainApp').style.display = 'none';
-                document.getElementById('email').value = '';
-                document.getElementById('password').value = '';
-                showMessage('Logout realizado com sucesso!', 'info');
+            // Check if user is already logged in
+            const savedSession = sessionStorage.getItem('currentUser');
+            if (savedSession) {
+                currentUser = JSON.parse(savedSession);
+                showMainApp();
             }
         }
 
-        // Tab Switching
-        function switchTab(tabId) {
-            // Hide all tab contents
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(content => {
-                content.classList.remove('active');
-            });
+        // Save database to localStorage
+        function saveDatabase() {
+            localStorage.setItem('gamecreators_db', JSON.stringify(database));
+        }
+
+        // Switch between student and employee login
+        function switchLoginType(type) {
+            const tabs = document.querySelectorAll('.login-tab');
+            const studentForm = document.getElementById('studentLogin');
+            const employeeForm = document.getElementById('employeeLogin');
             
-            // Remove active class from all tabs
-            const navTabs = document.querySelectorAll('.nav-tab');
-            navTabs.forEach(tab => {
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            if (type === 'student') {
+                tabs[0].classList.add('active');
+                studentForm.style.display = 'block';
+                employeeForm.style.display = 'none';
+            } else {
+                tabs[1].classList.add('active');
+                studentForm.style.display = 'none';
+                employeeForm.style.display = 'block';
+            }
+        }
+
+        // Handle student login
+        function handleStudentLogin(event) {
+            event.preventDefault();
+            const ra = document.getElementById('studentRA').value;
+            
+            const student = database.students.find(s => s.ra === ra);
+            
+            if (student) {
+                currentUser = {
+                    type: 'student',
+                    ra: student.ra,
+                    name: student.name,
+                    class: student.class,
+                    email: student.email
+                };
+                sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+                showMainApp();
+                showMessage(`Bem-vindo(a), ${student.name}!`, 'success');
+            } else {
+                showMessage('RA não encontrado. Verifique e tente novamente.', 'error');
+            }
+        }
+
+        // Handle employee login
+        function handleEmployeeLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('employeeUsername').value;
+            const password = document.getElementById('employeePassword').value;
+            
+            const employee = database.employees.find(e => 
+                e.username === username && e.password === password
+            );
+            
+            if (employee) {
+                currentUser = {
+                    type: 'employee',
+                    id: employee.id,
+                    name: employee.name,
+                    role: employee.role,
+                    username: employee.username,
+                    email: employee.email
+                };
+                sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+                showMainApp();
+                showMessage(`Bem-vindo(a), ${employee.name}!`, 'success');
+            } else {
+                showMessage('Usuário ou senha incorretos.', 'error');
+            }
+        }
+
+        // Show main application
+        function showMainApp() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('mainApp').classList.add('active');
+            
+            // Update welcome message
+            document.getElementById('userWelcome').textContent = 
+                `Bem-vindo(a), ${currentUser.name}!`;
+            
+            // Update user role badge
+            const roleText = currentUser.type === 'student' ? 
+                `Aluno - ${currentUser.class}` : 
+                `${currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1)}`;
+            document.getElementById('userRole').textContent = roleText;
+            
+            // Generate navigation tabs based on user type
+            generateNavTabs();
+            
+            // Load initial content
+            if (currentUser.type === 'student') {
+                loadStudentDashboard();
+            } else {
+                loadAdminDashboard();
+            }
+        }
+
+        // Generate navigation tabs based on user type
+        function generateNavTabs() {
+            const navTabs = document.getElementById('navTabs');
+            navTabs.innerHTML = '';
+            
+            if (currentUser.type === 'student') {
+                // Student tabs
+                const studentTabs = [
+                    { id: 'dashboard', label: '📊 Dashboard', active: true },
+                    { id: 'studentView', label: '📚 Área do Aluno' },
+                    { id: 'grades', label: '📝 Notas' },
+                    { id: 'schedule', label: '📅 Horário' },
+                    { id: 'financial', label: '💰 Financeiro' }
+                ];
+                
+                studentTabs.forEach(tab => {
+                    const button = document.createElement('button');
+                    button.className = `nav-tab ${tab.active ? 'active' : ''}`;
+                    button.textContent = tab.label;
+                    button.onclick = () => switchTab(tab.id);
+                    navTabs.appendChild(button);
+                });
+            } else {
+                // Admin/Employee tabs
+                const adminTabs = [
+                    { id: 'dashboard', label: '📊 Dashboard', active: true },
+                    { id: 'students', label: '👥 Alunos' },
+                    { id: 'employees', label: '👨‍💼 Colaboradores' },
+                    { id: 'reports', label: '📊 Relatórios' }
+                ];
+                
+                adminTabs.forEach(tab => {
+                    const button = document.createElement('button');
+                    button.className = `nav-tab ${tab.active ? 'active' : ''}`;
+                    button.textContent = tab.label;
+                    button.onclick = () => switchTab(tab.id);
+                    navTabs.appendChild(button);
+                });
+            }
+        }
+
+        // Switch between tabs
+        function switchTab(tabId) {
+            // Update nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
+            event.target?.classList.add('active');
             
-            // Show selected tab content
-            const selectedTab = document.getElementById(tabId);
-            if (selectedTab) {
-                selectedTab.classList.add('active');
+            // Update content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            
+            // Load specific content if needed
+            if (tabId === 'students') {
+                loadStudentsTable();
+            } else if (tabId === 'employees') {
+                loadEmployeesTable();
             }
-            
-            // Add active class to clicked tab
-            event.target.classList.add('active');
         }
 
-        // Theme Toggle
-        function toggleTheme() {
-            isDarkMode = !isDarkMode;
-            const body = document.body;
+        // Load student dashboard
+        function loadStudentDashboard() {
+            const content = document.getElementById('dashboardContent');
+            content.innerHTML = `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">8.5</div>
+                        <div class="stat-label">📊 Média Geral</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-number">92%</div>
+                        <div class="stat-label">✅ Frequência</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">📚 Tarefas Pendentes</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">⚠️ Avaliações Próximas</div>
+                    </div>
+                </div>
+                <h3 style="margin-top: 30px;">📅 Próximas Atividades</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 10px; background: #f5f5f5; margin: 5px 0; border-radius: 8px;">
+                        📝 Prova de Matemática - Segunda-feira, 14:00
+                    </li>
+                    <li style="padding: 10px; background: #f5f5f5; margin: 5px 0; border-radius: 8px;">
+                        📚 Entrega de Trabalho de História - Quarta-feira
+                    </li>
+                    <li style="padding: 10px; background: #f5f5f5; margin: 5px 0; border-radius: 8px;">
+                        🏆 Torneio GameCreators - Sexta-feira, 15:00
+                    </li>
+                </ul>
+            `;
+        }
+
+        // Load admin dashboard
+        function loadAdminDashboard() {
+            const content = document.getElementById('dashboardContent');
+            content.innerHTML = `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">${database.students.length}</div>
+                        <div class="stat-label">👥 Total de Alunos</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-number">${database.employees.length}</div>
+                        <div class="stat-label">👨‍💼 Colaboradores</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">🏫 Turmas Ativas</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">⚠️ Pendências</div>
+                    </div>
+                </div>
+                <h3 style="margin-top: 30px;">📊 Resumo do Sistema</h3>
+                <p>Sistema operando normalmente. Última atualização: ${new Date().toLocaleString('pt-BR')}</p>
+            `;
+        }
+
+        // Load students table
+        function loadStudentsTable() {
+            const tbody = document.getElementById('studentsTableBody');
+            tbody.innerHTML = '';
             
-            if (isDarkMode) {
-                body.style.filter = 'invert(1) hue-rotate(180deg)';
-                document.getElementById('currentTheme').textContent = 'Escuro';
-                showMessage('Tema escuro ativado!', 'info');
+            database.students.forEach(student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.ra}</td>
+                    <td>${student.name}</td>
+                    <td>${student.class}</td>
+                    <td><span class="badge success">${student.status}</span></td>
+                    <td>
+                        <button class="btn btn-info" style="padding: 8px 16px; font-size: 14px;" 
+                                onclick="editStudent('${student.ra}')">✏️ Editar</button>
+                        <button class="btn btn-danger" style="padding: 8px 16px; font-size: 14px;" 
+                                onclick="deleteStudent('${student.ra}')">🗑️ Excluir</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Load employees table
+        function loadEmployeesTable() {
+            const tbody = document.getElementById('employeesTableBody');
+            tbody.innerHTML = '';
+            
+            database.employees.forEach(employee => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${employee.id}</td>
+                    <td>${employee.name}</td>
+                    <td>${employee.role}</td>
+                    <td>${employee.username}</td>
+                    <td>
+                        <button class="btn btn-info" style="padding: 8px 16px; font-size: 14px;" 
+                                onclick="editEmployee(${employee.id})">✏️ Editar</button>
+                        <button class="btn btn-danger" style="padding: 8px 16px; font-size: 14px;" 
+                                onclick="deleteEmployee(${employee.id})">🗑️ Excluir</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Open profile modal
+        function openProfileModal() {
+            const modal = document.getElementById('profileModal');
+            const fields = document.getElementById('profileFields');
+            
+            if (currentUser.type === 'student') {
+                fields.innerHTML = `
+                    <div class="form-group">
+                        <label>RA do Aluno</label>
+                        <input type="text" id="profileRA" value="${currentUser.ra}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" value="${currentUser.name}" disabled style="background: #f5f5f5;">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="profileEmail" value="${currentUser.email}" required>
+                    </div>
+                `;
             } else {
-                body.style.filter = 'none';
-                document.getElementById('currentTheme').textContent = 'Claro';
-                showMessage('Tema claro ativado!', 'info');
+                const employee = database.employees.find(e => e.id === currentUser.id);
+                fields.innerHTML = `
+                    <div class="form-group">
+                        <label>Nome de Usuário</label>
+                        <input type="text" id="profileUsername" value="${employee.username}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nova Senha (deixe em branco para manter a atual)</label>
+                        <input type="password" id="profilePassword" placeholder="Nova senha">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirmar Nova Senha</label>
+                        <input type="password" id="profilePasswordConfirm" placeholder="Confirme a nova senha">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="profileEmail" value="${currentUser.email}" required>
+                    </div>
+                `;
+            }
+            
+            modal.classList.add('active');
+        }
+
+        // Update profile
+        function updateProfile(event) {
+            event.preventDefault();
+            
+            if (currentUser.type === 'student') {
+                const newRA = document.getElementById('profileRA').value;
+                const newEmail = document.getElementById('profileEmail').value;
+                
+                // Check if new RA is already in use
+                const existingStudent = database.students.find(s => 
+                    s.ra === newRA && s.ra !== currentUser.ra
+                );
+                
+                if (existingStudent) {
+                    showMessage('Este RA já está em uso!', 'error');
+                    return;
+                }
+                
+                // Update student data
+                const studentIndex = database.students.findIndex(s => s.ra === currentUser.ra);
+                if (studentIndex !== -1) {
+                    database.students[studentIndex].ra = newRA;
+                    database.students[studentIndex].email = newEmail;
+                    currentUser.ra = newRA;
+                    currentUser.email = newEmail;
+                }
+            } else {
+                const newUsername = document.getElementById('profileUsername').value;
+                const newPassword = document.getElementById('profilePassword').value;
+                const confirmPassword = document.getElementById('profilePasswordConfirm').value;
+                const newEmail = document.getElementById('profileEmail').value;
+                
+                // Validate password if provided
+                if (newPassword && newPassword !== confirmPassword) {
+                    showMessage('As senhas não coincidem!', 'error');
+                    return;
+                }
+                
+                // Check if username is already in use
+                const existingEmployee = database.employees.find(e => 
+                    e.username === newUsername && e.id !== currentUser.id
+                );
+                
+                if (existingEmployee) {
+                    showMessage('Este nome de usuário já está em uso!', 'error');
+                    return;
+                }
+                
+                // Update employee data
+                const employeeIndex = database.employees.findIndex(e => e.id === currentUser.id);
+                if (employeeIndex !== -1) {
+                    database.employees[employeeIndex].username = newUsername;
+                    if (newPassword) {
+                        database.employees[employeeIndex].password = newPassword;
+                    }
+                    database.employees[employeeIndex].email = newEmail;
+                    currentUser.username = newUsername;
+                    currentUser.email = newEmail;
+                }
+            }
+            
+            // Save changes
+            saveDatabase();
+            sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+            closeModal('profileModal');
+            showMessage('Perfil atualizado com sucesso!', 'success');
+        }
+
+        // Open student modal
+        function openStudentModal() {
+            document.getElementById('studentModal').classList.add('active');
+        }
+
+        // Save new student
+        function saveStudent(event) {
+            event.preventDefault();
+            
+            const ra = document.getElementById('newStudentRA').value;
+            const name = document.getElementById('newStudentName').value;
+            const studentClass = document.getElementById('newStudentClass').value;
+            const email = document.getElementById('newStudentEmail').value;
+            
+            // Check if RA already exists
+            if (database.students.find(s => s.ra === ra)) {
+                showMessage('Este RA já está cadastrado!', 'error');
+                return;
+            }
+            
+            // Add new student
+            database.students.push({
+                ra: ra,
+                name: name,
+                class: studentClass,
+                email: email,
+                status: 'Ativo'
+            });
+            
+            saveDatabase();
+            closeModal('studentModal');
+            loadStudentsTable();
+            showMessage('Aluno cadastrado com sucesso!', 'success');
+            
+            // Clear form
+            document.getElementById('newStudentRA').value = '';
+            document.getElementById('newStudentName').value = '';
+            document.getElementById('newStudentClass').value = '';
+            document.getElementById('newStudentEmail').value = '';
+        }
+
+        // Edit student
+        function editStudent(ra) {
+            const student = database.students.find(s => s.ra === ra);
+            if (student) {
+                // For simplicity, we'll use prompt. In production, use a proper modal
+                const newName = prompt('Nome do aluno:', student.name);
+                if (newName && newName !== student.name) {
+                    student.name = newName;
+                    saveDatabase();
+                    loadStudentsTable();
+                    showMessage('Aluno atualizado com sucesso!', 'success');
+                }
             }
         }
 
-        // Backup Export
-        function exportBackup() {
-            showMessage('Iniciando backup...', 'info');
-            
-            setTimeout(() => {
-                const backupData = {
-                    timestamp: new Date().toISOString(),
-                    students: 127,
-                    classes: 12,
-                    courses: 8,
-                    revenue: 'R$ 89.450,00'
-                };
-                
-                const dataStr = JSON.stringify(backupData, null, 2);
-                const dataBlob = new Blob([dataStr], {type: 'application/json'});
-                
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(dataBlob);
-                link.download = `gamecreators-backup-${new Date().toISOString().split('T')[0]}.json`;
-                link.click();
-                
-                showMessage('Backup exportado com sucesso!', 'success');
-            }, 1000);
+        // Delete student
+        function deleteStudent(ra) {
+            if (confirm('Tem certeza que deseja excluir este aluno?')) {
+                const index = database.students.findIndex(s => s.ra === ra);
+                if (index !== -1) {
+                    database.students.splice(index, 1);
+                    saveDatabase();
+                    loadStudentsTable();
+                    showMessage('Aluno excluído com sucesso!', 'success');
+                }
+            }
         }
 
-        // Notification System
+        // Open employee modal
+        function openEmployeeModal() {
+            document.getElementById('employeeModal').classList.add('active');
+        }
+
+        // Save new employee
+        function saveEmployee(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('newEmployeeName').value;
+            const role = document.getElementById('newEmployeeRole').value;
+            const username = document.getElementById('newEmployeeUsername').value;
+            const password = document.getElementById('newEmployeePassword').value;
+            const email = document.getElementById('newEmployeeEmail').value;
+            
+            // Check if username already exists
+            if (database.employees.find(e => e.username === username)) {
+                showMessage('Este nome de usuário já está em uso!', 'error');
+                return;
+            }
+            
+            // Generate new ID
+            const newId = Math.max(...database.employees.map(e => e.id)) + 1;
+            
+            // Add new employee
+            database.employees.push({
+                id: newId,
+                name: name,
+                role: role,
+                username: username,
+                password: password,
+                email: email
+            });
+            
+            saveDatabase();
+            closeModal('employeeModal');
+            loadEmployeesTable();
+            showMessage('Colaborador cadastrado com sucesso!', 'success');
+            
+            // Clear form
+            document.getElementById('newEmployeeName').value = '';
+            document.getElementById('newEmployeeRole').value = '';
+            document.getElementById('newEmployeeUsername').value = '';
+            document.getElementById('newEmployeePassword').value = '';
+            document.getElementById('newEmployeeEmail').value = '';
+        }
+
+        // Edit employee
+        function editEmployee(id) {
+            const employee = database.employees.find(e => e.id === id);
+            if (employee) {
+                const newName = prompt('Nome do colaborador:', employee.name);
+                if (newName && newName !== employee.name) {
+                    employee.name = newName;
+                    saveDatabase();
+                    loadEmployeesTable();
+                    showMessage('Colaborador atualizado com sucesso!', 'success');
+                }
+            }
+        }
+
+        // Delete employee
+        function deleteEmployee(id) {
+            if (id === 1) {
+                showMessage('Não é possível excluir o administrador principal!', 'error');
+                return;
+            }
+            
+            if (confirm('Tem certeza que deseja excluir este colaborador?')) {
+                const index = database.employees.findIndex(e => e.id === id);
+                if (index !== -1) {
+                    database.employees.splice(index, 1);
+                    saveDatabase();
+                    loadEmployeesTable();
+                    showMessage('Colaborador excluído com sucesso!', 'success');
+                }
+            }
+        }
+
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Toggle password visibility
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            field.type = field.type === 'password' ? 'text' : 'password';
+        }
+
+        // Show notification message
         function showMessage(message, type = 'info') {
             const notification = document.getElementById('notification');
             notification.textContent = message;
-            notification.className = `notification ${type}`;
-            notification.classList.add('show');
+            notification.className = `notification ${type} show`;
             
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 3000);
         }
 
-        // Update Dashboard Stats (demo data)
-        function updateDashboardStats() {
-            const stats = {
-                totalStudents: Math.floor(Math.random() * 50) + 100,
-                activeStudents: Math.floor(Math.random() * 30) + 80,
-                totalClasses: Math.floor(Math.random() * 5) + 10,
-                totalCourses: Math.floor(Math.random() * 3) + 6,
-                overduePayments: Math.floor(Math.random() * 10) + 5,
-                totalEmployees: Math.floor(Math.random() * 10) + 20
-            };
-            
-            Object.keys(stats).forEach(key => {
-                const element = document.getElementById(key);
-                if (element) {
-                    element.textContent = stats[key];
-                }
-            });
-        }
-
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            // Focus on email field
-            document.getElementById('email').focus();
-            
-            // Update stats every 30 seconds (for demo)
-            setInterval(updateDashboardStats, 30000);
-            
-            // Add enter key support for login
-            document.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') {
-                    handleLogin(e);
-                }
-            });
-        });
-
-        // Responsive menu toggle for mobile
-        function toggleMobileMenu() {
-            const navTabs = document.getElementById('navTabs');
-            navTabs.style.display = navTabs.style.display === 'none' ? 'flex' : 'none';
-        }
-
-        // Auto-logout after inactivity (30 minutes)
-        let inactivityTimer;
-        function resetInactivityTimer() {
-            clearTimeout(inactivityTimer);
-            if (currentUser) {
-                inactivityTimer = setTimeout(() => {
-                    showMessage('Sessão expirada por inatividade', 'warning');
-                    setTimeout(logout, 2000);
-                }, 30 * 60 * 1000); // 30 minutes
+        // Logout
+        function logout() {
+            if (confirm('Deseja realmente sair do sistema?')) {
+                currentUser = null;
+                sessionStorage.removeItem('currentUser');
+                document.getElementById('mainApp').classList.remove('active');
+                document.getElementById('loginScreen').style.display = 'flex';
+                showMessage('Logout realizado com sucesso!', 'success');
+                
+                // Clear login forms
+                document.getElementById('studentRA').value = '';
+                document.getElementById('employeeUsername').value = '';
+                document.getElementById('employeePassword').value = '';
             }
         }
 
-        // Add event listeners for user activity
-        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-            document.addEventListener(event, resetInactivityTimer, true);
-        });
-    </script>
-</body>
-</html>
+        // Initialize on page load
+        window.onload = init;
