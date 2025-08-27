@@ -41,7 +41,6 @@
             overflow-x: hidden;
         }
 
-        /* Login Screen */
         .login-container {
             display: flex;
             justify-content: center;
@@ -228,7 +227,6 @@
             text-decoration: underline;
         }
 
-        /* Main App */
         .main-app {
             display: none;
             max-width: 1600px;
@@ -512,37 +510,6 @@
         .notification.info { background: linear-gradient(135deg, var(--info), var(--primary-dark)); }
         .notification.warning { background: linear-gradient(135deg, var(--warning), #F57C00); }
 
-        .welcome-message {
-            background: linear-gradient(135deg, var(--success), var(--success-dark));
-            color: white;
-            padding: 28px;
-            border-radius: 16px;
-            margin-bottom: 24px;
-            text-align: center;
-            box-shadow: var(--card-shadow);
-        }
-
-        .welcome-message h2 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .progress-bar {
-            background: var(--border);
-            height: 12px;
-            border-radius: 6px;
-            overflow: hidden;
-            margin: 12px 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            border-radius: 6px;
-            transition: var(--transition);
-            background: linear-gradient(90deg, var(--success), var(--success-dark));
-        }
-
         .modal {
             display: none;
             position: fixed;
@@ -561,7 +528,7 @@
             padding: 30px;
             border-radius: 16px;
             width: 90%;
-            max-width: 600px;
+            max-width: 800px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             transform: translateY(-50px);
             transition: var(--transition);
@@ -571,6 +538,102 @@
 
         .modal.show .modal-content {
             transform: translateY(0);
+        }
+
+        .financial-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: var(--light);
+            border-radius: 12px;
+            padding: 4px;
+        }
+
+        .financial-tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .financial-tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .payment-plan-item {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .payment-plan-item.overdue {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 4px solid var(--danger);
+        }
+
+        .payment-plan-item.paid {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid var(--success);
+        }
+
+        .store-item-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .store-item-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--primary);
+        }
+
+        .store-item-card.low-stock {
+            border-color: var(--danger);
+            background: rgba(244, 67, 54, 0.05);
+        }
+
+        .stock-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .progress-bar {
+            background: var(--border);
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 12px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: var(--transition);
+            background: linear-gradient(90deg, var(--success), var(--success-dark));
         }
 
         .student-dashboard {
@@ -611,23 +674,13 @@
             margin-bottom: 4px;
         }
 
-        .search-container {
-            position: relative;
-            display: inline-block;
-            width: 100%;
+        .form-row {
+            display: flex;
+            gap: 16px;
         }
 
-        .search-input {
-            padding-left: 45px !important;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-            font-size: 18px;
+        .form-row .form-group {
+            flex: 1;
         }
 
         .connection-status {
@@ -652,7 +705,6 @@
             color: white;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .login-card {
                 padding: 30px 20px;
@@ -729,16 +781,22 @@
                 margin: 2% auto;
                 padding: 20px;
             }
+
+            .financial-tabs {
+                flex-direction: column;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Connection Status -->
     <div id="connectionStatus" class="connection-status disconnected">
         🔴 Modo Demo
     </div>
 
-    <!-- Login Screen -->
     <div id="loginScreen" class="login-container">
         <div class="login-card">
             <div class="login-logo">🎮</div>
@@ -750,7 +808,6 @@
                 <button class="login-tab" onclick="switchLoginTab('aluno')">👨‍🎓 Aluno</button>
             </div>
 
-            <!-- Login Colaborador -->
             <form id="colaboradorLogin" class="login-form">
                 <div class="form-group">
                     <label for="loginUsuario">Usuário</label>
@@ -768,7 +825,6 @@
                 </p>
             </form>
 
-            <!-- Login Aluno -->
             <form id="alunoLogin" class="login-form" style="display: none;">
                 <div class="form-group">
                     <label for="loginRA">RA (Registro Acadêmico)</label>
@@ -788,9 +844,7 @@
         </div>
     </div>
 
-    <!-- Main App -->
     <div id="mainApp" class="main-app">
-        <!-- Header -->
         <div class="header">
             <div class="header-info">
                 <div>
@@ -807,63 +861,45 @@
             </div>
         </div>
 
-        <!-- Navigation -->
         <div class="nav-tabs" id="navTabs">
             <button class="nav-tab active" onclick="switchTab('dashboard')" data-role="all">📊 Dashboard</button>
             <button class="nav-tab" onclick="switchTab('students')" data-role="admin,professor" id="studentsTab">👥 Alunos</button>
-            <button class="nav-tab" onclick="switchTab('turmas')" data-role="admin,professor" id="turmasTab">🏫 Turmas</button>
-            <button class="nav-tab" onclick="switchTab('portaria')" data-role="admin" id="portariaTab">🚪 Portaria</button>
+            <button class="nav-tab" onclick="switchTab('courses')" data-role="admin,professor" id="coursesTab">📚 Cursos</button>
             <button class="nav-tab" onclick="switchTab('financial')" data-role="admin" id="financialTab">💰 Financeiro</button>
-            <button class="nav-tab" onclick="switchTab('store')" data-role="admin" id="storeTab">🛒 Loja</button>
-            <button class="nav-tab" onclick="switchTab('courses')" data-role="admin" id="coursesTab">📚 Cursos</button>
-            <button class="nav-tab" onclick="switchTab('reports')" data-role="admin,professor" id="reportsTab">📊 Relatórios</button>
+            <button class="nav-tab" onclick="switchTab('pedagogical')" data-role="admin,professor" id="pedagogicalTab">📝 Pedagógico</button>
+            <button class="nav-tab" onclick="switchTab('store')" data-role="admin" id="storeTab">🏪 Loja</button>
         </div>
 
         <!-- Dashboard Tab -->
-        <div class="tab-content active" id="dashboardTab">
+        <div id="dashboard" class="tab-content active">
             <div class="stats-grid">
                 <div class="stat-card" onclick="switchTab('students')">
                     <div class="stat-number" id="totalStudents">3</div>
-                    <div class="stat-label">Total de Alunos</div>
+                    <div class="stat-label">👥 Total de Alunos</div>
                 </div>
                 <div class="stat-card success" onclick="switchTab('students')">
                     <div class="stat-number" id="activeStudents">2</div>
-                    <div class="stat-label">Alunos Ativos</div>
+                    <div class="stat-label">✅ Alunos Ativos</div>
                 </div>
-                <div class="stat-card danger">
-                    <div class="stat-number" id="lateStudents">1</div>
-                    <div class="stat-label">Inadimplentes</div>
+                <div class="stat-card danger" onclick="switchTab('financial')">
+                    <div class="stat-number" id="overdueStudents">1</div>
+                    <div class="stat-label">⚠️ Inadimplentes</div>
                 </div>
-                <div class="stat-card purple">
-                    <div class="stat-number" id="totalCourses">3</div>
-                    <div class="stat-label">Cursos Ativos</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2>📋 Atividades Recentes</h2>
-                </div>
-                <div id="recentActivities">
-                    <p>• Novo aluno João Silva matriculado em Unity (15/01/2025)</p>
-                    <p>• Maria Santos completou módulo Blender Básico (12/01/2025)</p>
-                    <p>• Pagamento de Carlos Oliveira confirmado (10/01/2025)</p>
+                <div class="stat-card warning" onclick="switchTab('store')">
+                    <div class="stat-number" id="lowStockItems">2</div>
+                    <div class="stat-label">📦 Estoque Baixo</div>
                 </div>
             </div>
         </div>
 
         <!-- Students Tab -->
-        <div class="tab-content" id="studentsTab">
+        <div id="students" class="tab-content">
             <div class="card">
                 <div class="card-header">
-                    <h2>👥 Gerenciamento de Alunos</h2>
+                    <h2>👥 Gestão de Alunos</h2>
                     <button class="btn btn-success" onclick="openStudentModal()">➕ Novo Aluno</button>
                 </div>
-                <div class="search-container">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" class="form-group input search-input" id="studentSearch" placeholder="Buscar alunos..." onkeyup="filterStudents()">
-                </div>
-                <table class="table" id="studentsTable">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>RA</th>
@@ -881,11 +917,1881 @@
             </div>
         </div>
 
-        <!-- Other tabs (simplified for demo) -->
-        <div class="tab-content" id="turmasTab">
+        <!-- Courses Tab -->
+        <div id="courses" class="tab-content">
             <div class="card">
                 <div class="card-header">
-                    <h2>🏫 Gerenciamento de Turmas</h2>
-                    <button class="btn btn-success">➕ Nova Turma</button>
+                    <h2>📚 Gestão de Cursos</h2>
+                    <button class="btn btn-success" onclick="openCourseModal()">➕ Novo Curso</button>
                 </div>
-                <p>Funcionalidade em desenvolvimento...</p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Código</th>
+                            <th>Carga Horária</th>
+                            <th>Mensalidade</th>
+                            <th>Duração</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="coursesTableBody">
+                        <!-- Courses loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Financial Tab -->
+        <div id="financial" class="tab-content">
+            <div class="financial-tabs">
+                <button class="financial-tab active" onclick="switchFinancialTab('transactions')">💰 Transações</button>
+                <button class="financial-tab" onclick="switchFinancialTab('tuitions')">📅 Mensalidades</button>
+                <button class="financial-tab" onclick="switchFinancialTab('reports')">📊 Relatórios</button>
+            </div>
+
+            <!-- Transactions Tab -->
+            <div id="financialTransactions" class="financial-content active">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>💰 Transações Financeiras</h2>
+                        <button class="btn btn-success" onclick="openTransactionModal()">➕ Nova Transação</button>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Tipo</th>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsTableBody">
+                            <!-- Transactions loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tuitions Tab -->
+            <div id="financialTuitions" class="financial-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📅 Controle de Mensalidades</h2>
+                        <div>
+                            <select id="tuitionMonthFilter" onchange="filterTuitions()">
+                                <option value="">Todos os meses</option>
+                                <option value="2025-01">Janeiro 2025</option>
+                                <option value="2025-02">Fevereiro 2025</option>
+                                <option value="2025-03">Março 2025</option>
+                                <option value="2025-04">Abril 2025</option>
+                                <option value="2025-05">Maio 2025</option>
+                                <option value="2025-06">Junho 2025</option>
+                                <option value="2025-07">Julho 2025</option>
+                                <option value="2025-08">Agosto 2025</option>
+                                <option value="2025-09">Setembro 2025</option>
+                                <option value="2025-10">Outubro 2025</option>
+                                <option value="2025-11">Novembro 2025</option>
+                                <option value="2025-12">Dezembro 2025</option>
+                            </select>
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Aluno</th>
+                                <th>Curso</th>
+                                <th>Vencimento</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tuitionsTableBody">
+                            <!-- Tuitions loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Reports Tab -->
+            <div id="financialReports" class="financial-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📊 Relatórios Financeiros</h2>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card success">
+                            <div class="stat-number" id="monthlyRevenue">R$ 0</div>
+                            <div class="stat-label">💰 Receita Mensal</div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-number" id="pendingPayments">R$ 0</div>
+                            <div class="stat-label">⏰ Pagamentos Pendentes</div>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-number" id="overduePayments">R$ 0</div>
+                            <div class="stat-label">⚠️ Pagamentos Atrasados</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pedagogical Tab -->
+        <div id="pedagogical" class="tab-content">
+            <div class="financial-tabs">
+                <button class="financial-tab active" onclick="switchPedagogicalTab('schedule')">📅 Cronograma</button>
+                <button class="financial-tab" onclick="switchPedagogicalTab('preparation')">🎯 Preparação de Aulas</button>
+            </div>
+
+            <!-- Schedule Tab -->
+            <div id="pedagogicalSchedule" class="pedagogical-content active">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📅 Cronograma de Início de Aulas</h2>
+                        <button class="btn btn-success" onclick="openScheduleModal()">➕ Nova Entrada</button>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Aluno</th>
+                                <th>Curso</th>
+                                <th>Data de Início</th>
+                                <th>Primeira Aula</th>
+                                <th>Professor</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scheduleTableBody">
+                            <!-- Schedule loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Preparation Tab -->
+            <div id="pedagogicalPreparation" class="pedagogical-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>🎯 Preparação de Aulas</h2>
+                    </div>
+                    <div id="preparationList">
+                        <!-- Preparation items loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Store Tab -->
+        <div id="store" class="tab-content">
+            <div class="financial-tabs">
+                <button class="financial-tab active" onclick="switchStoreTab('items')">🏪 Itens</button>
+                <button class="financial-tab" onclick="switchStoreTab('stock')">📦 Estoque</button>
+                <button class="financial-tab" onclick="switchStoreTab('uniforms')">👕 Uniformes</button>
+            </div>
+
+            <!-- Store Items Tab -->
+            <div id="storeItems" class="store-content active">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>🏪 Itens da Loja</h2>
+                        <button class="btn btn-success" onclick="openStoreItemModal()">➕ Novo Item</button>
+                    </div>
+                    <div class="stats-grid" id="storeItemsGrid">
+                        <!-- Store items loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stock Tab -->
+            <div id="storeStock" class="store-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📦 Gerenciar Estoque</h2>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Categoria</th>
+                                <th>Estoque Atual</th>
+                                <th>Estoque Mínimo</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTableBody">
+                            <!-- Stock loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Uniforms Tab -->
+            <div id="storeUniforms" class="store-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>👕 Controle de Uniformes</h2>
+                        <button class="btn btn-success" onclick="openUniformDistributionModal()">👕 Distribuir Uniforme</button>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalUniforms">50</div>
+                            <div class="stat-label">👕 Total de Uniformes</div>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-number" id="distributedUniforms">5</div>
+                            <div class="stat-label">✅ Distribuídos</div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-number" id="pendingUniforms">2</div>
+                            <div class="stat-label">⏰ Pendentes</div>
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Aluno</th>
+                                <th>Tamanho</th>
+                                <th>Status</th>
+                                <th>Data de Entrega</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="uniformsTableBody">
+                            <!-- Uniforms loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    
+    <!-- Student Modal -->
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <h3 id="studentModalTitle">Novo Aluno</h3>
+            <form id="studentForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="studentRA">RA (Registro Acadêmico)</label>
+                        <input type="text" id="studentRA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentName">Nome Completo</label>
+                        <input type="text" id="studentName" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="studentEmail">Email</label>
+                        <input type="email" id="studentEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentPhone">Telefone</label>
+                        <input type="tel" id="studentPhone" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="studentCourse">Curso</label>
+                        <select id="studentCourse" required>
+                            <option value="">Selecione um curso</option>
+                            <option value="unity">Unity Game Development</option>
+                            <option value="blender">Blender 3D</option>
+                            <option value="csharp">C# Programming</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentTuition">Mensalidade (R$)</label>
+                        <input type="number" id="studentTuition" step="0.01" min="0" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="studentEnrollmentDate">Data de Matrícula</label>
+                        <input type="date" id="studentEnrollmentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentStartDate">Data de Início do Curso</label>
+                        <input type="date" id="studentStartDate" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="studentDurationMonths">Duração (meses)</label>
+                        <input type="number" id="studentDurationMonths" min="1" max="24" value="12" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentStatus">Status</label>
+                        <select id="studentStatus" required>
+                            <option value="ativo">Ativo</option>
+                            <option value="inadimplente">Inadimplente</option>
+                            <option value="suspenso">Suspenso</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('studentModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar Aluno</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Course Modal -->
+    <div id="courseModal" class="modal">
+        <div class="modal-content">
+            <h3 id="courseModalTitle">Novo Curso</h3>
+            <form id="courseForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="courseName">Nome do Curso</label>
+                        <input type="text" id="courseName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseCode">Código do Curso</label>
+                        <input type="text" id="courseCode" placeholder="ex: unity, unreal, blender" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="courseDescription">Descrição</label>
+                    <textarea id="courseDescription" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="courseHours">Carga Horária</label>
+                        <input type="number" id="courseHours" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="coursePrice">Mensalidade (R$)</label>
+                        <input type="number" id="coursePrice" step="0.01" min="0" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="courseDuration">Duração (meses)</label>
+                    <input type="number" id="courseDuration" min="1" max="24" value="12" required>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('courseModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar Curso</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Transaction Modal -->
+    <div id="transactionModal" class="modal">
+        <div class="modal-content">
+            <h3 id="transactionModalTitle">Nova Transação</h3>
+            <form id="transactionForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="transactionDate">Data</label>
+                        <input type="date" id="transactionDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transactionType">Tipo</label>
+                        <select id="transactionType" required>
+                            <option value="">Selecione</option>
+                            <option value="receita">Receita</option>
+                            <option value="despesa">Despesa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="transactionDescription">Descrição</label>
+                    <input type="text" id="transactionDescription" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="transactionValue">Valor (R$)</label>
+                        <input type="number" id="transactionValue" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transactionStatus">Status</label>
+                        <select id="transactionStatus" required>
+                            <option value="pendente">Pendente</option>
+                            <option value="pago">Pago</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('transactionModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar Transação</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Store Item Modal -->
+    <div id="storeItemModal" class="modal">
+        <div class="modal-content">
+            <h3 id="storeItemModalTitle">Novo Item da Loja</h3>
+            <form id="storeItemForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="itemName">Nome do Item</label>
+                        <input type="text" id="itemName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemCategory">Categoria</label>
+                        <select id="itemCategory" required>
+                            <option value="">Selecione uma categoria</option>
+                            <option value="vestuario">👕 Vestuário</option>
+                            <option value="material">📚 Material Didático</option>
+                            <option value="acessorio">🎮 Acessório</option>
+                            <option value="uniforme">🎯 Uniforme (Gratuito)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="itemDescription">Descrição</label>
+                    <textarea id="itemDescription" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="itemPrice">Preço (R$)</label>
+                        <input type="number" id="itemPrice" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemStock">Estoque Inicial</label>
+                        <input type="number" id="itemStock" min="0" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="itemMinStock">Estoque Mínimo</label>
+                    <input type="number" id="itemMinStock" min="0" value="5">
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('storeItemModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Stock Adjustment Modal -->
+    <div id="stockAdjustModal" class="modal">
+        <div class="modal-content">
+            <h3>📦 Ajustar Estoque</h3>
+            <form id="stockAdjustForm">
+                <div class="form-group">
+                    <label for="stockItemName">Item</label>
+                    <input type="text" id="stockItemName" readonly>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="stockCurrentQuantity">Estoque Atual</label>
+                        <input type="number" id="stockCurrentQuantity" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="stockAdjustmentType">Tipo de Ajuste</label>
+                        <select id="stockAdjustmentType" required>
+                            <option value="">Selecione</option>
+                            <option value="entrada">Entrada</option>
+                            <option value="saida">Saída</option>
+                            <option value="correcao">Correção</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="stockAdjustmentQuantity">Quantidade</label>
+                        <input type="number" id="stockAdjustmentQuantity" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stockNewMinimum">Novo Estoque Mínimo</label>
+                        <input type="number" id="stockNewMinimum" min="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="stockAdjustmentReason">Motivo</label>
+                    <textarea id="stockAdjustmentReason" rows="2" placeholder="Motivo do ajuste..."></textarea>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('stockAdjustModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Aplicar Ajuste</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Uniform Distribution Modal -->
+    <div id="uniformDistributionModal" class="modal">
+        <div class="modal-content">
+            <h3>👕 Distribuição de Uniformes</h3>
+            <form id="uniformDistributionForm">
+                <div class="form-group">
+                    <label for="uniformStudent">Selecionar Aluno:</label>
+                    <select id="uniformStudent" onchange="updateUniformInfo()" required>
+                        <option value="">Selecione um aluno</option>
+                    </select>
+                </div>
+                <div id="uniformStudentInfo" style="display: none; background: var(--light); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <!-- Student uniform info loaded dynamically -->
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="uniformSize">Tamanho:</label>
+                        <select id="uniformSize" required>
+                            <option value="">Selecione o tamanho</option>
+                            <option value="PP">PP</option>
+                            <option value="P">P</option>
+                            <option value="M">M</option>
+                            <option value="G">G</option>
+                            <option value="GG">GG</option>
+                            <option value="XG">XG</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="uniformQuantity">Quantidade:</label>
+                        <input type="number" id="uniformQuantity" min="1" max="3" value="1" required>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('uniformDistributionModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">👕 Entregar Uniforme</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Schedule Modal -->
+    <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+            <h3>📅 Nova Entrada no Cronograma</h3>
+            <form id="scheduleForm">
+                <div class="form-group">
+                    <label for="scheduleStudent">Aluno</label>
+                    <select id="scheduleStudent" required>
+                        <option value="">Selecione um aluno</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="scheduleStartDate">Data de Início</label>
+                        <input type="date" id="scheduleStartDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="scheduleFirstClass">Data da Primeira Aula</label>
+                        <input type="date" id="scheduleFirstClass" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="scheduleTeacher">Professor Responsável</label>
+                    <select id="scheduleTeacher" required>
+                        <option value="">Selecione um professor</option>
+                        <option value="ricardo">Prof. Ricardo Santos</option>
+                        <option value="ana">Prof. Ana Costa</option>
+                        <option value="carlos">Prof. Carlos Lima</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="scheduleNotes">Observações para Preparação</label>
+                    <textarea id="scheduleNotes" rows="3" placeholder="Material necessário, configurações especiais, etc."></textarea>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('scheduleModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar Entrada</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Transaction Details Modal -->
+    <div id="transactionDetailsModal" class="modal">
+        <div class="modal-content">
+            <h3 id="transactionDetailsTitle">Detalhes da Transação</h3>
+            <div id="transactionDetailsContent">
+                <!-- Transaction details loaded dynamically -->
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                <button type="button" class="btn btn-info" onclick="editTransaction()">✏️ Editar</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('transactionDetailsModal')">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentUser = null;
+        let currentEditingId = null;
+        let currentEditingType = null;
+
+        // Demo data with expanded functionality
+        const demoData = {
+            users: [
+                { id: 1, username: 'admin', password: 'admin123', name: 'Administrador do Sistema', email: 'admin@gamecreators.com', role: 'admin' },
+                { id: 2, username: 'ricardo', password: 'prof123', name: 'Prof. Ricardo Santos', email: 'ricardo@gamecreators.com', role: 'professor' },
+                { id: 3, username: 'ana', password: 'prof123', name: 'Prof. Ana Costa', email: 'ana@gamecreators.com', role: 'professor' }
+            ],
+            students: [
+                { 
+                    id: 1, ra: '2025001', name: 'João Silva', email: 'joao@email.com', phone: '(11) 99999-9999', 
+                    course: 'unity', status: 'ativo', tuition: 299.00, progress: 75, xp: 12450, level: 42, coins: 450, 
+                    enrollmentDate: '2025-01-15', startDate: '2025-02-01', durationMonths: 12, endDate: '2026-02-01',
+                    uniformReceived: false, uniformSize: '', uniformDate: ''
+                },
+                { 
+                    id: 2, ra: '2025002', name: 'Maria Santos', email: 'maria@email.com', phone: '(11) 88888-8888', 
+                    course: 'blender', status: 'inadimplente', tuition: 199.00, progress: 60, xp: 10200, level: 38, coins: 380, 
+                    enrollmentDate: '2025-01-20', startDate: '2025-02-10', durationMonths: 10, endDate: '2025-12-10',
+                    uniformReceived: true, uniformSize: 'M', uniformDate: '2025-02-10'
+                },
+                { 
+                    id: 3, ra: '2025003', name: 'Carlos Oliveira', email: 'carlos@email.com', phone: '(11) 77777-7777', 
+                    course: 'csharp', status: 'ativo', tuition: 349.00, progress: 85, xp: 9800, level: 35, coins: 320, 
+                    enrollmentDate: '2025-02-01', startDate: '2025-02-15', durationMonths: 8, endDate: '2025-10-15',
+                    uniformReceived: false, uniformSize: '', uniformDate: ''
+                }
+            ],
+            courses: [
+                { id: 1, name: 'Unity Game Development', code: 'unity', description: 'Desenvolvimento completo de jogos com Unity', hours: 180, price: 299.00, duration: 12 },
+                { id: 2, name: 'Blender 3D', code: 'blender', description: 'Modelagem e animação 3D profissional', hours: 120, price: 199.00, duration: 10 },
+                { id: 3, name: 'C# Programming', code: 'csharp', description: 'Programação avançada em C#', hours: 160, price: 349.00, duration: 8 },
+                { id: 4, name: 'Unreal Engine', code: 'unreal', description: 'Desenvolvimento de jogos com Unreal Engine', hours: 200, price: 399.00, duration: 14 }
+            ],
+            transactions: [
+                { id: 1, date: '2025-08-01', type: 'receita', description: 'Mensalidade João Silva - Agosto', value: 299.00, status: 'pago', studentId: 1 },
+                { id: 2, date: '2025-08-01', type: 'receita', description: 'Mensalidade Carlos Oliveira - Agosto', value: 349.00, status: 'pago', studentId: 3 },
+                { id: 3, date: '2025-08-01', type: 'receita', description: 'Mensalidade Maria Santos - Agosto', value: 199.00, status: 'pendente', studentId: 2 },
+                { id: 4, date: '2025-07-15', type: 'despesa', description: 'Licença Unity Pro', value: 1500.00, status: 'pago' },
+                { id: 5, date: '2025-07-20', type: 'despesa', description: 'Material Didático', value: 850.00, status: 'pago' }
+            ],
+            storeItems: [
+                { id: 1, name: 'Camiseta GameCreators', category: 'vestuario', description: 'Camiseta oficial da escola', price: 45.00, stock: 25, minStock: 10 },
+                { id: 2, name: 'Apostila Unity Básico', category: 'material', description: 'Material didático impresso', price: 35.00, stock: 3, minStock: 5 },
+                { id: 3, name: 'Mouse Gamer RGB', category: 'acessorio', description: 'Mouse gamer profissional', price: 120.00, stock: 8, minStock: 3 },
+                { id: 4, name: 'Uniforme Escolar', category: 'uniforme', description: 'Uniforme oficial gratuito', price: 0.00, stock: 50, minStock: 10 },
+                { id: 5, name: 'Caneca GameCreators', category: 'acessorio', description: 'Caneca personalizada', price: 25.00, stock: 2, minStock: 5 }
+            ],
+            scheduleEntries: [
+                { id: 1, studentId: 1, startDate: '2025-02-01', firstClassDate: '2025-02-03', teacher: 'ricardo', status: 'agendado', notes: 'Preparar ambiente Unity, verificar licenças' },
+                { id: 2, studentId: 3, startDate: '2025-02-15', firstClassDate: '2025-02-17', teacher: 'ana', status: 'em_andamento', notes: 'Instalar Visual Studio, configurar .NET' }
+            ]
+        };
+
+        // Utility functions
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(value);
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString + 'T00:00:00');
+            return date.toLocaleDateString('pt-BR');
+        }
+
+        function showMessage(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'block';
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        // Login functions
+        function switchLoginTab(type) {
+            const colaboradorTab = document.querySelector('.login-tab:first-child');
+            const alunoTab = document.querySelector('.login-tab:last-child');
+            const colaboradorForm = document.getElementById('colaboradorLogin');
+            const alunoForm = document.getElementById('alunoLogin');
+
+            if (type === 'colaborador') {
+                colaboradorTab.classList.add('active');
+                alunoTab.classList.remove('active');
+                colaboradorForm.style.display = 'block';
+                alunoForm.style.display = 'none';
+            } else {
+                alunoTab.classList.add('active');
+                colaboradorTab.classList.remove('active');
+                alunoForm.style.display = 'block';
+                colaboradorForm.style.display = 'none';
+            }
+        }
+
+        // Main login logic
+        document.getElementById('colaboradorLogin').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsuario').value;
+            const password = document.getElementById('loginSenha').value;
+
+            const user = demoData.users.find(u => u.username === username && u.password === password);
+            if (user) {
+                currentUser = user;
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                document.getElementById('userWelcome').textContent = `Bem-vindo, ${user.name}!`;
+                document.getElementById('userRole').textContent = user.role === 'admin' ? 'Administrador' : 'Professor';
+                
+                setupUserInterface();
+                loadDashboard();
+                showMessage('Login realizado com sucesso!', 'success');
+            } else {
+                showMessage('Usuário ou senha incorretos!', 'error');
+            }
+        });
+
+        document.getElementById('alunoLogin').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const ra = document.getElementById('loginRA').value;
+            
+            const student = demoData.students.find(s => s.ra === ra);
+            if (student) {
+                currentUser = { ...student, role: 'student' };
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                document.getElementById('userWelcome').textContent = `Bem-vindo, ${student.name}!`;
+                document.getElementById('userRole').textContent = 'Aluno';
+                
+                setupStudentInterface();
+                showMessage('Login realizado com sucesso!', 'success');
+            } else {
+                showMessage('RA não encontrado!', 'error');
+            }
+        });
+
+        function setupUserInterface() {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const userRole = currentUser.role;
+
+            tabs.forEach(tab => {
+                const allowedRoles = tab.getAttribute('data-role');
+                if (allowedRoles === 'all' || allowedRoles.includes(userRole)) {
+                    tab.style.display = 'block';
+                } else {
+                    tab.style.display = 'none';
+                }
+            });
+        }
+
+        function setupStudentInterface() {
+            // Hide all tabs except dashboard for students
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                const allowedRoles = tab.getAttribute('data-role');
+                if (allowedRoles !== 'all') {
+                    tab.style.display = 'none';
+                }
+            });
+            
+            // Show student-specific dashboard
+            loadStudentDashboard();
+        }
+
+        function loadStudentDashboard() {
+            const dashboard = document.getElementById('dashboard');
+            dashboard.innerHTML = `
+                <div class="student-dashboard">
+                    <div class="student-profile">
+                        <div class="student-avatar">${currentUser.name.charAt(0)}</div>
+                        <div class="student-info">
+                            <h2>${currentUser.name}</h2>
+                            <p><strong>RA:</strong> ${currentUser.ra}</p>
+                            <p><strong>Curso:</strong> ${getCourseNameByCode(currentUser.course)}</p>
+                            <p><strong>Status:</strong> <span class="badge ${currentUser.status === 'ativo' ? 'success' : 'danger'}">${currentUser.status}</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card purple">
+                            <div class="stat-number">${currentUser.progress}%</div>
+                            <div class="stat-label">Progresso do Curso</div>
+                        </div>
+                        <div class="stat-card gold">
+                            <div class="stat-number">${currentUser.xp}</div>
+                            <div class="stat-label">XP Total</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${currentUser.level}</div>
+                            <div class="stat-label">Nível Atual</div>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-number">${currentUser.coins}</div>
+                            <div class="stat-label">Moedas</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Informações do Curso</h2>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${currentUser.progress}%"></div>
+                        </div>
+                        <p><strong>Data de Início:</strong> ${formatDate(currentUser.startDate)}</p>
+                        <p><strong>Duração:</strong> ${currentUser.durationMonths} meses</p>
+                        <p><strong>Data de Término:</strong> ${formatDate(currentUser.endDate)}</p>
+                        <p><strong>Mensalidade:</strong> ${formatCurrency(currentUser.tuition)}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getCourseNameByCode(code) {
+            const course = demoData.courses.find(c => c.code === code);
+            return course ? course.name : code;
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+
+            // Load tab content
+            switch(tabName) {
+                case 'dashboard':
+                    loadDashboard();
+                    break;
+                case 'students':
+                    loadStudents();
+                    break;
+                case 'courses':
+                    loadCourses();
+                    break;
+                case 'financial':
+                    loadFinancial();
+                    break;
+                case 'pedagogical':
+                    loadPedagogical();
+                    break;
+                case 'store':
+                    loadStore();
+                    break;
+            }
+        }
+
+        // Financial tab switching
+        function switchFinancialTab(tabName) {
+            const tabs = document.querySelectorAll('.financial-tab');
+            const contents = document.querySelectorAll('.financial-content');
+
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById('financial' + tabName.charAt(0).toUpperCase() + tabName.slice(1)).classList.add('active');
+
+            if (tabName === 'tuitions') {
+                loadTuitions();
+            } else if (tabName === 'reports') {
+                loadFinancialReports();
+            }
+        }
+
+        // Pedagogical tab switching
+        function switchPedagogicalTab(tabName) {
+            const tabs = document.querySelectorAll('.financial-tab');
+            const contents = document.querySelectorAll('.pedagogical-content');
+
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById('pedagogical' + tabName.charAt(0).toUpperCase() + tabName.slice(1)).classList.add('active');
+
+            if (tabName === 'preparation') {
+                loadPreparation();
+            }
+        }
+
+        // Store tab switching
+        function switchStoreTab(tabName) {
+            const tabs = document.querySelectorAll('.financial-tab');
+            const contents = document.querySelectorAll('.store-content');
+
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById('store' + tabName.charAt(0).toUpperCase() + tabName.slice(1)).classList.add('active');
+
+            if (tabName === 'stock') {
+                loadStock();
+            } else if (tabName === 'uniforms') {
+                loadUniforms();
+            }
+        }
+
+        // Dashboard loading
+        function loadDashboard() {
+            if (currentUser?.role === 'student') {
+                loadStudentDashboard();
+                return;
+            }
+
+            const totalStudents = demoData.students.length;
+            const activeStudents = demoData.students.filter(s => s.status === 'ativo').length;
+            const overdueStudents = demoData.students.filter(s => s.status === 'inadimplente').length;
+            const lowStockItems = demoData.storeItems.filter(item => item.stock <= item.minStock).length;
+
+            document.getElementById('totalStudents').textContent = totalStudents;
+            document.getElementById('activeStudents').textContent = activeStudents;
+            document.getElementById('overdueStudents').textContent = overdueStudents;
+            document.getElementById('lowStockItems').textContent = lowStockItems;
+        }
+
+        // Students management
+        function loadStudents() {
+            const tbody = document.getElementById('studentsTableBody');
+            tbody.innerHTML = '';
+
+            demoData.students.forEach(student => {
+                const course = demoData.courses.find(c => c.code === student.course);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.ra}</td>
+                    <td>${student.name}</td>
+                    <td>${course ? course.name : student.course}</td>
+                    <td><span class="badge ${student.status === 'ativo' ? 'success' : 'danger'}">${student.status}</span></td>
+                    <td>${formatCurrency(student.tuition)}</td>
+                    <td>
+                        <button class="btn btn-info" onclick="editStudent(${student.id})" style="font-size: 12px; padding: 8px 12px;">✏️ Editar</button>
+                        <button class="btn btn-danger" onclick="deleteStudent(${student.id})" style="font-size: 12px; padding: 8px 12px;">🗑️ Excluir</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function openStudentModal() {
+            currentEditingId = null;
+            currentEditingType = 'student';
+            document.getElementById('studentModalTitle').textContent = 'Novo Aluno';
+            document.getElementById('studentForm').reset();
+            openModal('studentModal');
+        }
+
+        function editStudent(id) {
+            const student = demoData.students.find(s => s.id === id);
+            if (!student) return;
+
+            currentEditingId = id;
+            currentEditingType = 'student';
+            
+            document.getElementById('studentModalTitle').textContent = 'Editar Aluno';
+            document.getElementById('studentRA').value = student.ra;
+            document.getElementById('studentName').value = student.name;
+            document.getElementById('studentEmail').value = student.email;
+            document.getElementById('studentPhone').value = student.phone;
+            document.getElementById('studentCourse').value = student.course;
+            document.getElementById('studentTuition').value = student.tuition;
+            document.getElementById('studentEnrollmentDate').value = student.enrollmentDate;
+            document.getElementById('studentStartDate').value = student.startDate;
+            document.getElementById('studentDurationMonths').value = student.durationMonths;
+            document.getElementById('studentStatus').value = student.status;
+            
+            openModal('studentModal');
+        }
+
+        function deleteStudent(id) {
+            if (confirm('Tem certeza que deseja excluir este aluno?')) {
+                const index = demoData.students.findIndex(s => s.id === id);
+                if (index > -1) {
+                    demoData.students.splice(index, 1);
+                    loadStudents();
+                    loadDashboard();
+                    showMessage('Aluno excluído com sucesso!', 'success');
+                }
+            }
+        }
+
+        document.getElementById('studentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const studentData = {
+                ra: document.getElementById('studentRA').value,
+                name: document.getElementById('studentName').value,
+                email: document.getElementById('studentEmail').value,
+                phone: document.getElementById('studentPhone').value,
+                course: document.getElementById('studentCourse').value,
+                tuition: parseFloat(document.getElementById('studentTuition').value),
+                enrollmentDate: document.getElementById('studentEnrollmentDate').value,
+                startDate: document.getElementById('studentStartDate').value,
+                durationMonths: parseInt(document.getElementById('studentDurationMonths').value),
+                status: document.getElementById('studentStatus').value,
+                progress: 0,
+                xp: 0,
+                level: 1,
+                coins: 0,
+                uniformReceived: false,
+                uniformSize: '',
+                uniformDate: ''
+            };
+
+            // Calculate end date
+            const startDate = new Date(studentData.startDate);
+            const endDate = new Date(startDate);
+            endDate.setMonth(endDate.getMonth() + studentData.durationMonths);
+            studentData.endDate = endDate.toISOString().split('T')[0];
+
+            if (currentEditingId) {
+                const index = demoData.students.findIndex(s => s.id === currentEditingId);
+                if (index > -1) {
+                    demoData.students[index] = { ...demoData.students[index], ...studentData };
+                    showMessage('Aluno atualizado com sucesso!', 'success');
+                }
+            } else {
+                const newId = Math.max(...demoData.students.map(s => s.id), 0) + 1;
+                demoData.students.push({ id: newId, ...studentData });
+                showMessage('Aluno cadastrado com sucesso!', 'success');
+            }
+
+            closeModal('studentModal');
+            loadStudents();
+            loadDashboard();
+        });
+
+        // Courses management
+        function loadCourses() {
+            const tbody = document.getElementById('coursesTableBody');
+            tbody.innerHTML = '';
+
+            demoData.courses.forEach(course => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${course.name}</td>
+                    <td>${course.code}</td>
+                    <td>${course.hours}h</td>
+                    <td>${formatCurrency(course.price)}</td>
+                    <td>${course.duration} meses</td>
+                    <td>
+                        <button class="btn btn-info" onclick="editCourse(${course.id})" style="font-size: 12px; padding: 8px 12px;">✏️ Editar</button>
+                        <button class="btn btn-danger" onclick="deleteCourse(${course.id})" style="font-size: 12px; padding: 8px 12px;">🗑️ Excluir</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function openCourseModal() {
+            currentEditingId = null;
+            currentEditingType = 'course';
+            document.getElementById('courseModalTitle').textContent = 'Novo Curso';
+            document.getElementById('courseForm').reset();
+            openModal('courseModal');
+        }
+
+        function editCourse(id) {
+            const course = demoData.courses.find(c => c.id === id);
+            if (!course) return;
+
+            currentEditingId = id;
+            currentEditingType = 'course';
+            
+            document.getElementById('courseModalTitle').textContent = 'Editar Curso';
+            document.getElementById('courseName').value = course.name;
+            document.getElementById('courseCode').value = course.code;
+            document.getElementById('courseDescription').value = course.description || '';
+            document.getElementById('courseHours').value = course.hours;
+            document.getElementById('coursePrice').value = course.price;
+            document.getElementById('courseDuration').value = course.duration;
+            
+            openModal('courseModal');
+        }
+
+        function deleteCourse(id) {
+            if (confirm('Tem certeza que deseja excluir este curso?')) {
+                const index = demoData.courses.findIndex(c => c.id === id);
+                if (index > -1) {
+                    demoData.courses.splice(index, 1);
+                    loadCourses();
+                    showMessage('Curso excluído com sucesso!', 'success');
+                }
+            }
+        }
+
+        document.getElementById('courseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const courseData = {
+                name: document.getElementById('courseName').value,
+                code: document.getElementById('courseCode').value,
+                description: document.getElementById('courseDescription').value,
+                hours: parseInt(document.getElementById('courseHours').value),
+                price: parseFloat(document.getElementById('coursePrice').value),
+                duration: parseInt(document.getElementById('courseDuration').value)
+            };
+
+            if (currentEditingId) {
+                const index = demoData.courses.findIndex(c => c.id === currentEditingId);
+                if (index > -1) {
+                    demoData.courses[index] = { ...demoData.courses[index], ...courseData };
+                    showMessage('Curso atualizado com sucesso!', 'success');
+                }
+            } else {
+                const newId = Math.max(...demoData.courses.map(c => c.id), 0) + 1;
+                demoData.courses.push({ id: newId, ...courseData });
+                showMessage('Curso cadastrado com sucesso!', 'success');
+            }
+
+            closeModal('courseModal');
+            loadCourses();
+            
+            // Update course options in student form
+            updateCourseOptions();
+        });
+
+        function updateCourseOptions() {
+            const courseSelect = document.getElementById('studentCourse');
+            courseSelect.innerHTML = '<option value="">Selecione um curso</option>';
+            
+            demoData.courses.forEach(course => {
+                const option = document.createElement('option');
+                option.value = course.code;
+                option.textContent = course.name;
+                courseSelect.appendChild(option);
+            });
+        }
+
+        // Financial management
+        function loadFinancial() {
+            loadTransactions();
+        }
+
+        function loadTransactions() {
+            const tbody = document.getElementById('transactionsTableBody');
+            tbody.innerHTML = '';
+
+            demoData.transactions.forEach(transaction => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatDate(transaction.date)}</td>
+                    <td><span class="badge ${transaction.type === 'receita' ? 'success' : 'warning'}">${transaction.type}</span></td>
+                    <td>${transaction.description}</td>
+                    <td>${formatCurrency(transaction.value)}</td>
+                    <td><span class="badge ${transaction.status === 'pago' ? 'success' : transaction.status === 'pendente' ? 'warning' : 'secondary'}">${transaction.status}</span></td>
+                    <td>
+                        <button class="btn btn-info" onclick="viewTransactionDetails(${transaction.id})" style="font-size: 12px; padding: 8px 12px;">👁️ Ver</button>
+                        <button class="btn btn-warning" onclick="editTransaction(${transaction.id})" style="font-size: 12px; padding: 8px 12px;">✏️ Editar</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function loadTuitions() {
+            const tbody = document.getElementById('tuitionsTableBody');
+            tbody.innerHTML = '';
+
+            demoData.students.forEach(student => {
+                const course = demoData.courses.find(c => c.code === student.course);
+                const startDate = new Date(student.startDate);
+                
+                // Generate tuitions for each month of the course
+                for (let i = 0; i < student.durationMonths; i++) {
+                    const dueDate = new Date(startDate);
+                    dueDate.setMonth(dueDate.getMonth() + i);
+                    
+                    const monthKey = `${dueDate.getFullYear()}-${String(dueDate.getMonth() + 1).padStart(2, '0')}`;
+                    const isPaid = demoData.transactions.some(t => 
+                        t.studentId === student.id && 
+                        t.date.startsWith(monthKey) && 
+                        t.status === 'pago'
+                    );
+                    
+                    const currentDate = new Date();
+                    const isOverdue = dueDate < currentDate && !isPaid;
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${student.name}</td>
+                        <td>${course ? course.name : student.course}</td>
+                        <td>${dueDate.toLocaleDateString('pt-BR')}</td>
+                        <td>${formatCurrency(student.tuition)}</td>
+                        <td><span class="badge ${isPaid ? 'success' : isOverdue ? 'danger' : 'warning'}">${isPaid ? 'Pago' : isOverdue ? 'Atrasado' : 'Pendente'}</span></td>
+                        <td>
+                            ${!isPaid ? `<button class="btn btn-success" onclick="markAsPaid(${student.id}, '${monthKey}')" style="font-size: 12px; padding: 8px 12px;">✅ Marcar como Pago</button>` : ''}
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                }
+            });
+        }
+
+        function markAsPaid(studentId, monthKey) {
+            const student = demoData.students.find(s => s.id === studentId);
+            if (!student) return;
+
+            const newTransaction = {
+                id: Math.max(...demoData.transactions.map(t => t.id), 0) + 1,
+                date: `${monthKey}-05`,
+                type: 'receita',
+                description: `Mensalidade ${student.name} - ${monthKey}`,
+                value: student.tuition,
+                status: 'pago',
+                studentId: studentId
+            };
+
+            demoData.transactions.push(newTransaction);
+            loadTuitions();
+            loadFinancialReports();
+            showMessage('Pagamento registrado com sucesso!', 'success');
+        }
+
+        function loadFinancialReports() {
+            const currentMonth = new Date().toISOString().slice(0, 7);
+            
+            const monthlyRevenue = demoData.transactions
+                .filter(t => t.type === 'receita' && t.status === 'pago' && t.date.startsWith(currentMonth))
+                .reduce((sum, t) => sum + t.value, 0);
+            
+            const pendingPayments = demoData.transactions
+                .filter(t => t.type === 'receita' && t.status === 'pendente')
+                .reduce((sum, t) => sum + t.value, 0);
+            
+            const overduePayments = demoData.students
+                .filter(s => s.status === 'inadimplente')
+                .reduce((sum, s) => sum + s.tuition, 0);
+
+            document.getElementById('monthlyRevenue').textContent = formatCurrency(monthlyRevenue);
+            document.getElementById('pendingPayments').textContent = formatCurrency(pendingPayments);
+            document.getElementById('overduePayments').textContent = formatCurrency(overduePayments);
+        }
+
+        function filterTuitions() {
+            const selectedMonth = document.getElementById('tuitionMonthFilter').value;
+            const rows = document.querySelectorAll('#tuitionsTableBody tr');
+            
+            rows.forEach(row => {
+                if (!selectedMonth) {
+                    row.style.display = '';
+                } else {
+                    const dueDate = row.children[2].textContent;
+                    const [day, month, year] = dueDate.split('/');
+                    const rowMonth = `${year}-${month.padStart(2, '0')}`;
+                    row.style.display = rowMonth === selectedMonth ? '' : 'none';
+                }
+            });
+        }
+
+        function openTransactionModal() {
+            currentEditingId = null;
+            currentEditingType = 'transaction';
+            document.getElementById('transactionModalTitle').textContent = 'Nova Transação';
+            document.getElementById('transactionForm').reset();
+            document.getElementById('transactionDate').value = new Date().toISOString().split('T')[0];
+            openModal('transactionModal');
+        }
+
+        function editTransaction(id) {
+            const transaction = demoData.transactions.find(t => t.id === id);
+            if (!transaction) return;
+
+            currentEditingId = id;
+            currentEditingType = 'transaction';
+            
+            document.getElementById('transactionModalTitle').textContent = 'Editar Transação';
+            document.getElementById('transactionDate').value = transaction.date;
+            document.getElementById('transactionType').value = transaction.type;
+            document.getElementById('transactionDescription').value = transaction.description;
+            document.getElementById('transactionValue').value = transaction.value;
+            document.getElementById('transactionStatus').value = transaction.status;
+            
+            openModal('transactionModal');
+        }
+
+        function viewTransactionDetails(id) {
+            const transaction = demoData.transactions.find(t => t.id === id);
+            if (!transaction) return;
+
+            currentEditingId = id;
+            
+            document.getElementById('transactionDetailsTitle').textContent = 'Detalhes da Transação';
+            document.getElementById('transactionDetailsContent').innerHTML = `
+                <div style="background: var(--light); padding: 20px; border-radius: 12px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <div>
+                            <strong>Data:</strong><br>
+                            ${formatDate(transaction.date)}
+                        </div>
+                        <div>
+                            <strong>Tipo:</strong><br>
+                            <span class="badge ${transaction.type === 'receita' ? 'success' : 'warning'}">${transaction.type}</span>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <strong>Descrição:</strong><br>
+                        ${transaction.description}
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <strong>Valor:</strong><br>
+                            ${formatCurrency(transaction.value)}
+                        </div>
+                        <div>
+                            <strong>Status:</strong><br>
+                            <span class="badge ${transaction.status === 'pago' ? 'success' : transaction.status === 'pendente' ? 'warning' : 'secondary'}">${transaction.status}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            openModal('transactionDetailsModal');
+        }
+
+        document.getElementById('transactionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const transactionData = {
+                date: document.getElementById('transactionDate').value,
+                type: document.getElementById('transactionType').value,
+                description: document.getElementById('transactionDescription').value,
+                value: parseFloat(document.getElementById('transactionValue').value),
+                status: document.getElementById('transactionStatus').value
+            };
+
+            if (currentEditingId) {
+                const index = demoData.transactions.findIndex(t => t.id === currentEditingId);
+                if (index > -1) {
+                    demoData.transactions[index] = { ...demoData.transactions[index], ...transactionData };
+                    showMessage('Transação atualizada com sucesso!', 'success');
+                }
+            } else {
+                const newId = Math.max(...demoData.transactions.map(t => t.id), 0) + 1;
+                demoData.transactions.push({ id: newId, ...transactionData });
+                showMessage('Transação cadastrada com sucesso!', 'success');
+            }
+
+            closeModal('transactionModal');
+            loadTransactions();
+            loadFinancialReports();
+        });
+
+        // Pedagogical management
+        function loadPedagogical() {
+            loadSchedule();
+        }
+
+        function loadSchedule() {
+            const tbody = document.getElementById('scheduleTableBody');
+            tbody.innerHTML = '';
+
+            demoData.scheduleEntries.forEach(entry => {
+                const student = demoData.students.find(s => s.id === entry.studentId);
+                const course = demoData.courses.find(c => c.code === student?.course);
+                const teacher = demoData.users.find(u => u.username === entry.teacher);
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student ? student.name : 'Aluno não encontrado'}</td>
+                    <td>${course ? course.name : 'Curso não encontrado'}</td>
+                    <td>${formatDate(entry.startDate)}</td>
+                    <td>${formatDate(entry.firstClassDate)}</td>
+                    <td>${teacher ? teacher.name : entry.teacher}</td>
+                    <td><span class="badge ${entry.status === 'agendado' ? 'warning' : entry.status === 'em_andamento' ? 'info' : 'success'}">${entry.status.replace('_', ' ')}</span></td>
+                    <td>
+                        <button class="btn btn-info" onclick="viewScheduleDetails(${entry.id})" style="font-size: 12px; padding: 8px 12px;">👁️ Ver</button>
+                        <button class="btn btn-warning" onclick="editScheduleEntry(${entry.id})" style="font-size: 12px; padding: 8px 12px;">✏️ Editar</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function loadPreparation() {
+            const preparationList = document.getElementById('preparationList');
+            preparationList.innerHTML = '';
+
+            const upcomingClasses = demoData.scheduleEntries
+                .filter(entry => entry.status === 'agendado' || entry.status === 'em_andamento')
+                .sort((a, b) => new Date(a.firstClassDate) - new Date(b.firstClassDate));
+
+            if (upcomingClasses.length === 0) {
+                preparationList.innerHTML = '<div class="card"><p>Nenhuma aula agendada para preparação.</p></div>';
+                return;
+            }
+
+            upcomingClasses.forEach(entry => {
+                const student = demoData.students.find(s => s.id === entry.studentId);
+                const course = demoData.courses.find(c => c.code === student?.course);
+                const teacher = demoData.users.find(u => u.username === entry.teacher);
+                
+                const daysUntil = Math.ceil((new Date(entry.firstClassDate) - new Date()) / (1000 * 60 * 60 * 24));
+                const urgency = daysUntil <= 2 ? 'danger' : daysUntil <= 7 ? 'warning' : 'info';
+
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div style="border-left: 4px solid var(--${urgency}); padding-left: 20px;">
+                        <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 15px;">
+                            <h3>${student ? student.name : 'Aluno não encontrado'}</h3>
+                            <span class="badge ${urgency}">${daysUntil > 0 ? `${daysUntil} dias` : 'Hoje'}</span>
+                        </div>
+                        <p><strong>Curso:</strong> ${course ? course.name : 'Curso não encontrado'}</p>
+                        <p><strong>Professor:</strong> ${teacher ? teacher.name : entry.teacher}</p>
+                        <p><strong>Data da primeira aula:</strong> ${formatDate(entry.firstClassDate)}</p>
+                        <p><strong>Observações:</strong> ${entry.notes || 'Nenhuma observação específica'}</p>
+                        <div style="margin-top: 15px;">
+                            <button class="btn btn-success" onclick="markAsReady(${entry.id})" style="font-size: 12px; padding: 8px 12px;">✅ Marcar como Preparado</button>
+                        </div>
+                    </div>
+                `;
+                preparationList.appendChild(card);
+            });
+        }
+
+        function openScheduleModal() {
+            currentEditingId = null;
+            currentEditingType = 'schedule';
+            document.getElementById('scheduleForm').reset();
+            
+            // Populate student options
+            const studentSelect = document.getElementById('scheduleStudent');
+            studentSelect.innerHTML = '<option value="">Selecione um aluno</option>';
+            demoData.students.forEach(student => {
+                const option = document.createElement('option');
+                option.value = student.id;
+                option.textContent = `${student.name} (${student.ra})`;
+                studentSelect.appendChild(option);
+            });
+            
+            openModal('scheduleModal');
+        }
+
+        function editScheduleEntry(id) {
+            const entry = demoData.scheduleEntries.find(e => e.id === id);
+            if (!entry) return;
+
+            currentEditingId = id;
+            currentEditingType = 'schedule';
+            
+            // Populate student options
+            const studentSelect = document.getElementById('scheduleStudent');
+            studentSelect.innerHTML = '<option value="">Selecione um aluno</option>';
+            demoData.students.forEach(student => {
+                const option = document.createElement('option');
+                option.value = student.id;
+                option.textContent = `${student.name} (${student.ra})`;
+                if (student.id === entry.studentId) option.selected = true;
+                studentSelect.appendChild(option);
+            });
+            
+            document.getElementById('scheduleStartDate').value = entry.startDate;
+            document.getElementById('scheduleFirstClass').value = entry.firstClassDate;
+            document.getElementById('scheduleTeacher').value = entry.teacher;
+            document.getElementById('scheduleNotes').value = entry.notes || '';
+            
+            openModal('scheduleModal');
+        }
+
+        function markAsReady(id) {
+            const index = demoData.scheduleEntries.findIndex(e => e.id === id);
+            if (index > -1) {
+                demoData.scheduleEntries[index].status = 'preparado';
+                loadPreparation();
+                loadSchedule();
+                showMessage('Aula marcada como preparada!', 'success');
+            }
+        }
+
+        document.getElementById('scheduleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const scheduleData = {
+                studentId: parseInt(document.getElementById('scheduleStudent').value),
+                startDate: document.getElementById('scheduleStartDate').value,
+                firstClassDate: document.getElementById('scheduleFirstClass').value,
+                teacher: document.getElementById('scheduleTeacher').value,
+                notes: document.getElementById('scheduleNotes').value,
+                status: 'agendado'
+            };
+
+            if (currentEditingId) {
+                const index = demoData.scheduleEntries.findIndex(e => e.id === currentEditingId);
+                if (index > -1) {
+                    demoData.scheduleEntries[index] = { ...demoData.scheduleEntries[index], ...scheduleData };
+                    showMessage('Cronograma atualizado com sucesso!', 'success');
+                }
+            } else {
+                const newId = Math.max(...demoData.scheduleEntries.map(e => e.id), 0) + 1;
+                demoData.scheduleEntries.push({ id: newId, ...scheduleData });
+                showMessage('Entrada adicionada ao cronograma!', 'success');
+            }
+
+            closeModal('scheduleModal');
+            loadSchedule();
+            loadPreparation();
+        });
+
+        // Store management
+        function loadStore() {
+            loadStoreItems();
+        }
+
+        function loadStoreItems() {
+            const grid = document.getElementById('storeItemsGrid');
+            grid.innerHTML = '';
+
+            demoData.storeItems.forEach(item => {
+                const isLowStock = item.stock <= item.minStock;
+                const stockStatus = item.stock <= item.minStock ? 'Estoque Baixo' : 'Estoque OK';
+                const stockColor = item.stock <= item.minStock ? 'var(--danger)' : 'var(--success)';
+
+                const card = document.createElement('div');
+                card.className = `store-item-card ${isLowStock ? 'low-stock' : ''}`;
+                card.innerHTML = `
+                    <div class="stock-indicator" style="background: ${stockColor};">${item.stock}</div>
+                    <h4>${item.name}</h4>
+                    <p style="color: #666; margin-bottom: 10px;">${item.description}</p>
+                    <p><strong>Categoria:</strong> ${getCategoryName(item.category)}</p>
+                    <p><strong>Preço:</strong> ${formatCurrency(item.price)}</p>
+                    <p><strong>Estoque:</strong> ${item.stock} unidades</p>
+                    <p style="color: ${stockColor}; font-weight: bold;">${stockStatus}</p>
+                    <div style="margin-top: 15px; display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button class="btn btn-info" onclick="editStoreItem(${item.id})" style="font-size: 12px; padding: 8px 12px;">✏️ Editar</button>
+                        <button class="btn btn-warning" onclick="openStockAdjustModal(${item.id})" style="font-size: 12px; padding: 8px 12px;">📦 Estoque</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function loadStock() {
+            const tbody = document.getElementById('stockTableBody');
+            tbody.innerHTML = '';
+
+            demoData.storeItems.forEach(item => {
+                const isLowStock = item.stock <= item.minStock;
+                const statusBadge = isLowStock ? 'danger' : 'success';
+                const statusText = isLowStock ? 'Baixo' : 'OK';
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${getCategoryName(item.category)}</td>
+                    <td>${item.stock}</td>
+                    <td>${item.minStock}</td>
+                    <td><span class="badge ${statusBadge}">${statusText}</span></td>
+                    <td>
+                        <button class="btn btn-warning" onclick="openStockAdjustModal(${item.id})" style="font-size: 12px; padding: 8px 12px;">📦 Ajustar</button>
+                        <button class="btn btn-info" onclick="editStoreItem(${item.id})" style="font-size: 12px; padding: 8px 12px;">✏️ Editar</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function loadUniforms() {
+            const tbody = document.getElementById('uniformsTableBody');
+            tbody.innerHTML = '';
+
+            // Update uniform statistics
+            const totalUniforms = demoData.storeItems.find(item => item.category === 'uniforme')?.stock || 0;
+            const distributedCount = demoData.students.filter(s => s.uniformReceived).length;
+            const pendingCount = demoData.students.filter(s => !s.uniformReceived).length;
+
+            document.getElementById('totalUniforms').textContent = totalUniforms;
+            document.getElementById('distributedUniforms').textContent = distributedCount;
+            document.getElementById('pendingUniforms').textContent = pendingCount;
+
+            demoData.students.forEach(student => {
+                const status = student.uniformReceived ? 'Entregue' : 'Pendente';
+                const badgeClass = student.uniformReceived ? 'success' : 'warning';
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.name}</td>
+                    <td>${student.uniformSize || 'Não definido'}</td>
+                    <td><span class="badge ${badgeClass}">${status}</span></td>
+                    <td>${student.uniformDate ? formatDate(student.uniformDate) : '-'}</td>
+                    <td>
+                        ${!student.uniformReceived ? `<button class="btn btn-success" onclick="deliverUniformToStudent(${student.id})" style="font-size: 12px; padding: 8px 12px;">👕 Entregar</button>` : ''}
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function getCategoryName(category) {
+            const categories = {
+                'vestuario': '👕 Vestuário',
+                'material': '📚 Material Didático',
+                'acessorio': '🎮 Acessório',
+                'uniforme': '🎯 Uniforme (Gratuito)'
+            };
+            return categories[category] || category;
+        }
+
+        function openStoreItemModal() {
+            currentEditingId = null;
+            currentEditingType = 'storeItem';
+            document.getElementById('storeItemModalTitle').textContent = 'Novo Item da Loja';
+            document.getElementById('storeItemForm').reset();
+            openModal('storeItemModal');
+        }
+
+        function editStoreItem(id) {
+            const item = demoData.storeItems.find(i => i.id === id);
+            if (!item) return;
+
+            currentEditingId = id;
+            currentEditingType = 'storeItem';
+            
+            document.getElementById('storeItemModalTitle').textContent = 'Editar Item da Loja';
+            document.getElementById('itemName').value = item.name;
+            document.getElementById('itemDescription').value = item.description || '';
+            document.getElementById('itemCategory').value = item.category;
+            document.getElementById('itemPrice').value = item.price;
+            document.getElementById('itemStock').value = item.stock;
+            document.getElementById('itemMinStock').value = item.minStock;
+            
+            openModal('storeItemModal');
+        }
+
+        function openStockAdjustModal(itemId) {
+            const item = demoData.storeItems.find(i => i.id === itemId);
+            if (!item) return;
+
+            currentEditingId = itemId;
+            currentEditingType = 'stockAdjust';
+            
+            document.getElementById('stockItemName').value = item.name;
+            document.getElementById('stockCurrentQuantity').value = item.stock;
+            document.getElementById('stockNewMinimum').value = item.minStock;
+            document.getElementById('stockAdjustmentType').value = '';
+            document.getElementById('stockAdjustmentQuantity').value = '';
+            document.getElementById('stockAdjustmentReason').value = '';
+            
+            openModal('stockAdjustModal');
+        }
+
+        function openUniformDistributionModal() {
+            currentEditingType = 'uniformDistribution';
+            
+            // Populate student options
+            const studentSelect = document.getElementById('uniformStudent');
+            studentSelect.innerHTML = '<option value="">Selecione um aluno</option>';
+            demoData.students.forEach(student => {
+                const option = document.createElement('option');
+                option.value = student.id;
+                option.textContent = `${student.name} (${student.ra})`;
+                studentSelect.appendChild(option);
+            });
+            
+            document.getElementById('uniformDistributionForm').reset();
+            document.getElementById('uniformStudentInfo').style.display = 'none';
+            openModal('uniformDistributionModal');
+        }
+
+        function updateUniformInfo() {
+            const studentId = parseInt(document.getElementById('uniformStudent').value);
+            const studentInfo = document.getElementById('uniformStudentInfo');
+            
+            if (!studentId) {
+                studentInfo.style.display = 'none';
+                return;
+            }
+            
+            const student = demoData.students.find(s => s.id === studentId);
+            if (!student) return;
+            
+            studentInfo.style.display = 'block';
+            studentInfo.innerHTML = `
+                <h4>Informações do Aluno</h4>
+                <p><strong>Nome:</strong> ${student.name}</p>
+                <p><strong>Curso:</strong> ${getCourseNameByCode(student.course)}</p>
+                <p><strong>Status do Uniforme:</strong> 
+                    <span class="badge ${student.uniformReceived ? 'success' : 'warning'}">
+                        ${student.uniformReceived ? 'Já recebido' : 'Pendente'}
+                    </span>
+                </p>
+                ${student.uniformReceived ? `
+                    <p><strong>Tamanho anterior:</strong> ${student.uniformSize}</p>
+                    <p><strong>Data da entrega:</strong> ${formatDate(student.uniformDate)}</p>
+                ` : ''}
+            `;
+        }
+
+        function deliverUniformToStudent(studentId) {
+            const student = demoData.students.find(s => s.id === studentId);
+            if (!student) return;
+
+            // Auto-fill form
+            document.getElementById('uniformStudent').value = studentId;
+            updateUniformInfo();
+            openModal('uniformDistributionModal');
+        }
+
+        document.getElementById('storeItemForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const itemData = {
+                name: document.getElementById('itemName').value,
+                description: document.getElementById('itemDescription').value,
+                category: document.getElementById('itemCategory').value,
+                price: parseFloat(document.getElementById('itemPrice').value),
+                stock: parseInt(document.getElementById('itemStock').value),
+                minStock: parseInt(document.getElementById('itemMinStock').value)
+            };
+
+            if (currentEditingId) {
+                const index = demoData.storeItems.findIndex(i => i.id === currentEditingId);
+                if (index > -1) {
+                    demoData.storeItems[index] = { ...demoData.storeItems[index], ...itemData };
+                    showMessage('Item atualizado com sucesso!', 'success');
+                }
+            } else {
+                const newId = Math.max(...demoData.storeItems.map(i => i.id), 0) + 1;
+                demoData.storeItems.push({ id: newId, ...itemData });
+                showMessage('Item cadastrado com sucesso!', 'success');
+            }
+
+            closeModal('storeItemModal');
+            loadStoreItems();
+            loadStock();
+            loadDashboard();
+        });
+
+        document.getElementById('stockAdjustForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const adjustmentType = document.getElementById('stockAdjustmentType').value;
+            const quantity = parseInt(document.getElementById('stockAdjustmentQuantity').value);
+            const newMinimum = parseInt(document.getElementById('stockNewMinimum').value);
+            const reason = document.getElementById('stockAdjustmentReason').value;
+
+            const itemIndex = demoData.storeItems.findIndex(i => i.id === currentEditingId);
+            if (itemIndex > -1) {
+                const item = demoData.storeItems[itemIndex];
+                
+                switch (adjustmentType) {
+                    case 'entrada':
+                        item.stock += quantity;
+                        break;
+                    case 'saida':
+                        item.stock = Math.max(0, item.stock - quantity);
+                        break;
+                    case 'correcao':
+                        item.stock = quantity;
+                        break;
+                }
+                
+                item.minStock = newMinimum;
+                
+                showMessage(`Estoque ajustado com sucesso! ${adjustmentType}: ${quantity} unidades. Motivo: ${reason}`, 'success');
+            }
+
+            closeModal('stockAdjustModal');
+            loadStoreItems();
+            loadStock();
+            loadDashboard();
+        });
+
+        document.getElementById('uniformDistributionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const studentId = parseInt(document.getElementById('uniformStudent').value);
+            const size = document.getElementById('uniformSize').value;
+            const quantity = parseInt(document.getElementById('uniformQuantity').value);
+
+            const studentIndex = demoData.students.findIndex(s => s.id === studentId);
+            const uniformItem = demoData.storeItems.find(i => i.category === 'uniforme');
+
+            if (studentIndex > -1 && uniformItem && uniformItem.stock >= quantity) {
+                demoData.students[studentIndex].uniformReceived = true;
+                demoData.students[studentIndex].uniformSize = size;
+                demoData.students[studentIndex].uniformDate = new Date().toISOString().split('T')[0];
+                
+                uniformItem.stock -= quantity;
+                
+                showMessage(`Uniforme entregue com sucesso para ${demoData.students[studentIndex].name}!`, 'success');
+            } else if (uniformItem && uniformItem.stock < quantity) {
+                showMessage('Estoque insuficiente de uniformes!', 'error');
+                return;
+            }
+
+            closeModal('uniformDistributionModal');
+            loadUniforms();
+            loadStock();
+            loadDashboard();
+        });
+
+        // Utility functions
+        function logout() {
+            currentUser = null;
+            currentEditingId = null;
+            currentEditingType = null;
+            document.getElementById('mainApp').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'flex';
+            showMessage('Logout realizado com sucesso!', 'info');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            showMessage('Tema alterado!', 'info');
+        }
+
+        function connectSheets() {
+            showMessage('Funcionalidade de integração com Google Sheets em desenvolvimento!', 'info');
+        }
+
+        function exportData() {
+            const dataToExport = {
+                students: demoData.students,
+                courses: demoData.courses,
+                transactions: demoData.transactions,
+                storeItems: demoData.storeItems,
+                scheduleEntries: demoData.scheduleEntries,
+                exportDate: new Date().toISOString()
+            };
+
+            const dataStr = JSON.stringify(dataToExport, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `gamecreators_backup_${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            showMessage('Backup exportado com sucesso!', 'success');
+        }
+
+        // Close modals when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCourseOptions();
+        });
+    </script>
+</body>
+</html>
