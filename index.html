@@ -1,4 +1,284 @@
-<!DOCTYPE html>
+<!-- Store Item Modal -->
+    <div id="storeItemModal" class="modal">
+        <div class="modal-content">
+            <h3 id="storeItemModalTitle">Novo Item da Loja</h3>
+            <form id="storeItemForm">
+                <div class="form-group">
+                    <label for="itemName">Nome do Item</label>
+                    <input type="text" id="itemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemDescription">Descrição</label>
+                    <textarea id="itemDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="itemCategory">Categoria</label>
+                    <select id="itemCategory" required>
+                        <option value="">Selecione uma categoria</option>
+                        <option value="vestuario">👕 Vestuário</option>
+                        <option value="material">📚 Material Didático</option>
+                        <option value="acessorio">🎮 Acessório</option>
+                        <option value="uniforme">🎯 Uniforme (Gratuito)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="itemPrice">Preço (R$)</label>
+                    <input type="number" id="itemPrice" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemStock">Estoque Inicial</label>
+                    <input type="number" id="itemStock" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemMinStock">Estoque Mínimo</label>
+                    <input type="number" id="itemMinStock" min="0" value="5">
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('storeItemModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Stock Management Modal -->
+    <div id="stockModal" class="modal">
+        <div class="modal-content">
+            <h3>📦 Gerenciar Estoque</h3>
+            <div style="max-height: 60vh; overflow-y: auto;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Estoque Atual</th>
+                            <th>Estoque Mínimo</th>
+                            <th>Ajustar</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stockTableBody">
+                        <!-- Stock items loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                <button type="button" class="btn btn-success" onclick="openUniformDistributionModal()">👕 Distribuir Uniformes</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('stockModal')">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Uniform Distribution Modal -->
+    <div id="uniformDistributionModal" class="modal">
+        <div class="modal-content">
+            <h3>👕 Distribuição de Uniformes</h3>
+            <div class="form-group">
+                <label for="uniformStudent">Selecionar Aluno:</label>
+                <select id="uniformStudent" onchange="updateUniformInfo()">
+                    <option value="">Selecione um aluno</option>
+                </select>
+            </div>
+            <div id="uniformStudentInfo" style="display: none; background: var(--light); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                <!-- Student uniform info loaded dynamically -->
+            </div>
+            <div class="form-group">
+                <label for="uniformSize">Tamanho:</label>
+                <select id="uniformSize">
+                    <option value="">Selecione o tamanho</option>
+                    <option value="PP">PP</option>
+                    <option value="P">P</option>
+                    <option value="M">M</option>
+                    <option value="G">G</option>
+                    <option value="GG">GG</option>
+                    <option value="XG">XG</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="uniformQuantity">Quantidade:</label>
+                <input type="number" id="uniformQuantity" min="1" max="3" value="1">
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('uniformDistributionModal')">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="distributeUniform()">👕 Entregar Uniforme</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Modal -->
+    <div id="courseModal" class="modal">
+        <div class="modal-content">
+            <h3 id="courseModalTitle">Novo Curso</h3>
+            <form id="courseForm">
+                <div class="form-group">
+                    <label for="courseName">Nome do Curso</label>
+                    <input type="text" id="courseName" required>
+                </div>
+                <div class="form-group">
+                    <label for="courseCode">Código do Curso</label>
+                    <input type="text" id="courseCode" placeholder="ex: unity, unreal, blender" required>
+                </div>
+                <div class="form-group">
+                    <label for="courseDescription">Descrição</label>
+                    <textarea id="courseDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="courseHours">Carga Horária</label>
+                    <input type="number" id="courseHours" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="coursePrice">Mensalidade (R$)</label>
+                    <input type="number" id="coursePrice" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="courseDuration">Duração (meses)</label>
+                    <input type="number" id="courseDuration" min="1" max="24" value="12" required>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('courseModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar Curso</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Transaction Details Modal -->
+    <div id="transactionModal" class="modal">
+        <div class="modal-content">
+            <h3 id="transactionModalTitle">Detalhes da Transação</h3>
+            <div id="transactionDetailsContent">
+                <!-- Transaction details loaded dynamically -->
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                <button type="button" class="btn btn-info" onclick="editCurrentTransaction()">✏️ Editar</button>
+                <button type="button" class="btn btn-warning" onclick="duplicateTransaction()">📋 Duplicar</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('transactionModal')">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Entry Modal -->
+    <div id="scheduleEntryModal" class="modal">
+        <div class="modal-content">
+            <h3>📅 Nova Entrada no Cronograma</h3>
+            <form id="scheduleEntryForm">
+                <div class="form-group">
+                    <label for="scheduleStudent">Aluno</label>
+                    <select id="scheduleStudent" required>
+                        <option value="">Selecione um aluno</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="scheduleStartDate">Data de Início</label>
+                    <input type="date" id="scheduleStartDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="scheduleFirstClass">Data da Primeira Aula</label>
+                    <input type="date" id="scheduleFirstClass" required>
+                </div>
+                <div class="form-group">
+                    <label for="scheduleTeacher">Professor Responsável</label>
+                    <select id="scheduleTeacher" required>
+                        <option value="">Selecione um professor</option>
+                        <option value="ricardo">Prof. Ricardo Santos</option>
+                        <option value="ana">Prof. Ana Costa</option>
+                        <option value="carlos">Prof. Carlos Lima</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="scheduleNotes">Observações para Preparação</label>
+                    <textarea id="scheduleNotes" rows="3" placeholder="Material necessário, configurações especiais, etc."></textarea>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('scheduleEntryModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar Entrada</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Other existing modals (Student Details, Message, Attendance, etc.) -->
+    <div id="studentDetailsModal" class="modal">
+        <div class="modal-content">
+            <h3>👤 Detalhes do Aluno</h3>
+            <div id="studentDetailsContent">
+                <!-- Content loaded dynamically -->
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                <button type="button" class="btn btn-info" onclick="editStudentFromDetails()">✏️ Editar</button>
+                <button type="button" class="btn btn-warning" onclick="openMessageModal()">💬 Enviar Mensagem</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('studentDetailsModal')">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <h3>💬 Enviar Mensagem</h3>
+            <form id="messageForm">
+                <div class="form-group">
+                    <label for="messageRecipient">Para:</label>
+                    <input type="text" id="messageRecipient" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="messageSubject">Assunto:</label>
+                    <input type="text" id="messageSubject" placeholder="Assunto da mensagem" required>
+                </div>
+                <div class="form-group">
+                    <label for="messageContent">Mensagem:</label>
+                    <textarea id="messageContent" rows="5" placeholder="Digite sua mensagem aqui..." required></textarea>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('messageModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">📧 Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <h3 id="reportModalTitle">📊 Relatório</h3>
+            <div id="reportContent" class="report-container">
+                <!-- Report content loaded dynamically -->
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                <button type="button" class="btn btn-info" onclick="printReport()">🖨️ Imprimir</button>
+                <button type="button" class="btn btn-warning" onclick="exportReport()">📥 Exportar PDF</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('reportModal')">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados demo expandidos com novas funcionalidades
+        const demoData = {
+            users: [
+                { id: 1, username: 'admin', password: 'admin123', name: 'Administrador do Sistema', email: 'admin@gamecreators.com', role: 'admin' },
+                { id: 2, username: 'ricardo', password: 'prof123', name: 'Prof. Ricardo Santos', email: 'ricardo@gamecreators.com', role: 'professor' },
+                { id: 3, username: 'ana', password: 'prof123', name: 'Prof. Ana Costa', email: 'ana@gamecreators.com', role: 'professor' }
+            ],
+            students: [
+                { 
+                    id: 1, ra: '2025001', name: 'João Silva', email: 'joao@email.com', phone: '(11) 99999-9999', 
+                    course: 'unity', status: 'ativo', tuition: 299.00, progress: 75, xp: 12450, level: 42, coins: 450, 
+                    enrollmentDate: '2025-01-15', startDate: '2025-02-01', durationMonths: 12,
+                    uniformReceived: false, uniformSize: '', uniformDate: ''
+                },
+                { 
+                    id: 2, ra: '2025002', name: 'Maria Santos', email: 'maria@email.com', phone: '(11) 88888-8888', 
+                    course: 'blender', status: 'inadimplente', tuition: 199.00, progress: 60, xp: 10200, level: 38, coins: 380, 
+                    enrollmentDate: '2025-01-20', startDate: '2025-02-10', durationMonths: 10,
+                    uniformReceived: true, uniformSize: 'M', uniformDate: '2025-02-10'
+                },
+                { 
+                    id: 3, ra: '2025003', name: 'Carlos Oliveira', email: 'carlos@email.com', phone: '(11) 77777-7777', 
+                    course: 'csharp', status: 'ativo', tuition: 349.00, progress: 85, xp: 9800, level: 35, coins: 320, 
+                    enrollmentDate: '2025-02-01', startDate: '2025-02-15', durationMonths: 8,
+                    uniformReceived: false, uniformSize: '', uniformDate: ''
+                }
+            ],
+            courses: [
+                { id: 1, name: 'Unity Game Development', code: 'unity', description: 'Desenvolvimento completo de jogos com Unity', hours: 180, price: 299.00<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -630,6 +910,143 @@
             font-size: 18px;
         }
 
+        .attendance-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--light);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+
+        .attendance-item:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .report-container {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .report-section {
+            margin-bottom: 30px;
+        }
+
+        .report-section h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            padding: 8px 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        /* Financial specific styles */
+        .financial-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: var(--light);
+            border-radius: 12px;
+            padding: 4px;
+        }
+
+        .financial-tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .financial-tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .payment-plan-item {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .payment-plan-item.overdue {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 4px solid var(--danger);
+        }
+
+        .payment-plan-item.paid {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid var(--success);
+        }
+
+        /* Store specific styles */
+        .store-item-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .store-item-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--primary);
+        }
+
+        .store-item-card.low-stock {
+            border-color: var(--danger);
+            background: rgba(244, 67, 54, 0.05);
+        }
+
+        .stock-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+
         .connection-status {
             position: fixed;
             bottom: 20px;
@@ -639,7 +1056,7 @@
             font-size: 12px;
             font-weight: 600;
             z-index: 1000;
-            display: block;
+            display: none;
         }
 
         .connection-status.connected {
@@ -724,10 +1141,18 @@
                 text-align: center;
             }
 
+            .filter-group {
+                flex-direction: column;
+            }
+
             .modal-content {
                 width: 95%;
                 margin: 2% auto;
                 padding: 20px;
+            }
+
+            .financial-tabs {
+                flex-direction: column;
             }
         }
     </style>
@@ -812,541 +1237,4 @@
             <button class="nav-tab active" onclick="switchTab('dashboard')" data-role="all">📊 Dashboard</button>
             <button class="nav-tab" onclick="switchTab('students')" data-role="admin,professor" id="studentsTab">👥 Alunos</button>
             <button class="nav-tab" onclick="switchTab('turmas')" data-role="admin,professor" id="turmasTab">🏫 Turmas</button>
-            <button class="nav-tab" onclick="switchTab('portaria')" data-role="admin" id="portariaTab">🚪 Portaria</button>
-            <button class="nav-tab" onclick="switchTab('financial')" data-role="admin" id="financialTab">💰 Financeiro</button>
-            <button class="nav-tab" onclick="switchTab('store')" data-role="admin" id="storeTab">🛒 Loja</button>
-            <button class="nav-tab" onclick="switchTab('courses')" data-role="admin" id="coursesTab">📚 Cursos</button>
-            <button class="nav-tab" onclick="switchTab('reports')" data-role="admin,professor" id="reportsTab">📊 Relatórios</button>
-        </div>
-
-        <!-- Dashboard Tab -->
-        <div class="tab-content active" id="dashboardTab">
-            <div class="stats-grid">
-                <div class="stat-card" onclick="switchTab('students')">
-                    <div class="stat-number" id="totalStudents">3</div>
-                    <div class="stat-label">Total de Alunos</div>
-                </div>
-                <div class="stat-card success" onclick="switchTab('students')">
-                    <div class="stat-number" id="activeStudents">2</div>
-                    <div class="stat-label">Alunos Ativos</div>
-                </div>
-                <div class="stat-card danger">
-                    <div class="stat-number" id="lateStudents">1</div>
-                    <div class="stat-label">Inadimplentes</div>
-                </div>
-                <div class="stat-card purple">
-                    <div class="stat-number" id="totalCourses">3</div>
-                    <div class="stat-label">Cursos Ativos</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2>📋 Atividades Recentes</h2>
-                </div>
-                <div id="recentActivities">
-                    <p>• Novo aluno João Silva matriculado em Unity (15/01/2025)</p>
-                    <p>• Maria Santos completou módulo Blender Básico (12/01/2025)</p>
-                    <p>• Pagamento de Carlos Oliveira confirmado (10/01/2025)</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Students Tab -->
-        <div class="tab-content" id="studentsTab">
-            <div class="card">
-                <div class="card-header">
-                    <h2>👥 Gerenciamento de Alunos</h2>
-                    <button class="btn btn-success" onclick="openStudentModal()">➕ Novo Aluno</button>
-                </div>
-                <div class="search-container">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" class="form-group input search-input" id="studentSearch" placeholder="Buscar alunos..." onkeyup="filterStudents()">
-                </div>
-                <table class="table" id="studentsTable">
-                    <thead>
-                        <tr>
-                            <th>RA</th>
-                            <th>Nome</th>
-                            <th>Curso</th>
-                            <th>Status</th>
-                            <th>Mensalidade</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="studentsTableBody">
-                        <!-- Students loaded dynamically -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Turmas Tab -->
-        <div class="tab-content" id="turmasTab">
-            <div class="card">
-                <div class="card-header">
-                    <h2>🏫 Gerenciamento de Turmas</h2>
-                    <button class="btn btn-success">➕ Nova Turma</button>
-                </div>
-                <p>Funcionalidade em desenvolvimento...</p>
-            </div>
-        </div>
-
-        <!-- Portaria Tab -->
-        <div class="tab-content" id="portariaTab">
-            <div class="card">
-                <div class="card-header">
-                    <h2>🚪 Controle de Portaria</h2>
-                </div>
-                <p>Funcionalidade em desenvolvimento...</p>
-            </div>
-        </div>
-
-        <!-- Financial Tab -->
-        <div class="tab-content" id="financialTab">
-            <div class="card">
-                <div class="card-header">
-                    <h2>💰 Gestão Financeira</h2>
-                </div>
-                <p>Funcionalidade em desenvolvimento...</p>
-            </div>
-        </div>
-
-        <!-- Store Tab -->
-        <div class="tab-content" id="storeTab">
-            <div class="card">
-                <div class="card-header">
-                    <h2>🛒 Loja da Escola</h2>
-                    <button class="btn btn-success">➕ Novo Item</button>
-                </div>
-                <p>Funcionalidade em desenvolvimento...</p>
-            </div>
-        </div>
-
-        <!-- Courses Tab -->
-        <div class="tab-content" id="coursesTab">
-            <div class="card">
-                <div class="card-header">
-                    <h2>📚 Gestão de Cursos</h2>
-                    <button class="btn btn-success">➕ Novo Curso</button>
-                </div>
-                <p>Funcionalidade em desenvolvimento...</p>
-            </div>
-        </div>
-
-        <!-- Reports Tab -->
-        <div class="tab-content" id="reportsTab">
-            <div class="card">
-                <div class="card-header">
-                    <h2>📊 Relatórios</h2>
-                </div>
-                <p>Funcionalidade em desenvolvimento...</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Student Modal -->
-    <div id="studentModal" class="modal">
-        <div class="modal-content">
-            <h3 id="studentModalTitle">Novo Aluno</h3>
-            <form id="studentForm">
-                <div class="form-group">
-                    <label for="studentRA">RA (Registro Acadêmico)</label>
-                    <input type="text" id="studentRA" required>
-                </div>
-                <div class="form-group">
-                    <label for="studentName">Nome Completo</label>
-                    <input type="text" id="studentName" required>
-                </div>
-                <div class="form-group">
-                    <label for="studentEmail">E-mail</label>
-                    <input type="email" id="studentEmail" required>
-                </div>
-                <div class="form-group">
-                    <label for="studentPhone">Telefone</label>
-                    <input type="tel" id="studentPhone" required>
-                </div>
-                <div class="form-group">
-                    <label for="studentCourse">Curso</label>
-                    <select id="studentCourse" required>
-                        <option value="">Selecione um curso</option>
-                        <option value="unity">Unity Game Development</option>
-                        <option value="blender">Blender 3D</option>
-                        <option value="csharp">C# Programming</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="studentTuition">Mensalidade (R$)</label>
-                    <input type="number" id="studentTuition" step="0.01" min="0" required>
-                </div>
-                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('studentModal')">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Salvar Aluno</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        // Global variables
-        let currentUser = null;
-        let currentStudentId = null;
-        let isEditMode = false;
-
-        // Demo data
-        const demoData = {
-            users: [
-                { id: 1, username: 'admin', password: 'admin123', name: 'Administrador do Sistema', email: 'admin@gamecreators.com', role: 'admin' },
-                { id: 2, username: 'ricardo', password: 'prof123', name: 'Prof. Ricardo Santos', email: 'ricardo@gamecreators.com', role: 'professor' },
-                { id: 3, username: 'ana', password: 'prof123', name: 'Prof. Ana Costa', email: 'ana@gamecreators.com', role: 'professor' }
-            ],
-            students: [
-                { 
-                    id: 1, ra: '2025001', name: 'João Silva', email: 'joao@email.com', phone: '(11) 99999-9999', 
-                    course: 'unity', status: 'ativo', tuition: 299.00, progress: 75, xp: 12450, level: 42, 
-                    enrollmentDate: '2025-01-15', startDate: '2025-02-01', durationMonths: 12
-                },
-                { 
-                    id: 2, ra: '2025002', name: 'Maria Santos', email: 'maria@email.com', phone: '(11) 88888-8888', 
-                    course: 'blender', status: 'inadimplente', tuition: 199.00, progress: 60, xp: 10200, level: 38, 
-                    enrollmentDate: '2025-01-20', startDate: '2025-02-10', durationMonths: 10
-                },
-                { 
-                    id: 3, ra: '2025003', name: 'Carlos Oliveira', email: 'carlos@email.com', phone: '(11) 77777-7777', 
-                    course: 'csharp', status: 'ativo', tuition: 349.00, progress: 85, xp: 9800, level: 35, 
-                    enrollmentDate: '2025-02-01', startDate: '2025-02-15', durationMonths: 8
-                }
-            ],
-            courses: [
-                { id: 1, name: 'Unity Game Development', code: 'unity', description: 'Desenvolvimento completo de jogos com Unity', hours: 180, price: 299.00, duration: 12 },
-                { id: 2, name: 'Blender 3D', code: 'blender', description: 'Modelagem e animação 3D', hours: 120, price: 199.00, duration: 10 },
-                { id: 3, name: 'C# Programming', code: 'csharp', description: 'Programação em C# para jogos', hours: 160, price: 349.00, duration: 8 }
-            ]
-        };
-
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
-            setupEventListeners();
-        });
-
-        function initializeApp() {
-            // Check if user is already logged in
-            const savedUser = JSON.parse(sessionStorage.getItem('currentUser') || 'null');
-            if (savedUser) {
-                currentUser = savedUser;
-                showMainApp();
-            } else {
-                showLoginScreen();
-            }
-        }
-
-        function setupEventListeners() {
-            // Login forms
-            document.getElementById('colaboradorLogin').addEventListener('submit', handleColaboradorLogin);
-            document.getElementById('alunoLogin').addEventListener('submit', handleAlunoLogin);
-            document.getElementById('studentForm').addEventListener('submit', handleStudentSubmit);
-
-            // Close modals when clicking outside
-            window.onclick = function(event) {
-                if (event.target.classList.contains('modal')) {
-                    event.target.style.display = 'none';
-                }
-            }
-        }
-
-        function switchLoginTab(tab) {
-            const colaboradorTab = document.querySelector('[onclick="switchLoginTab(\'colaborador\')"]');
-            const alunoTab = document.querySelector('[onclick="switchLoginTab(\'aluno\')"]');
-            const colaboradorLogin = document.getElementById('colaboradorLogin');
-            const alunoLogin = document.getElementById('alunoLogin');
-
-            if (tab === 'colaborador') {
-                colaboradorTab.classList.add('active');
-                alunoTab.classList.remove('active');
-                colaboradorLogin.style.display = 'block';
-                alunoLogin.style.display = 'none';
-            } else {
-                alunoTab.classList.add('active');
-                colaboradorTab.classList.remove('active');
-                alunoLogin.style.display = 'block';
-                colaboradorLogin.style.display = 'none';
-            }
-        }
-
-        function handleColaboradorLogin(e) {
-            e.preventDefault();
-            const username = document.getElementById('loginUsuario').value;
-            const password = document.getElementById('loginSenha').value;
-
-            const user = demoData.users.find(u => u.username === username && u.password === password);
-            if (user) {
-                currentUser = user;
-                sessionStorage.setItem('currentUser', JSON.stringify(user));
-                showMainApp();
-                showMessage('Login realizado com sucesso!', 'success');
-            } else {
-                showMessage('Credenciais inválidas!', 'error');
-            }
-        }
-
-        function handleAlunoLogin(e) {
-            e.preventDefault();
-            const ra = document.getElementById('loginRA').value;
-
-            const student = demoData.students.find(s => s.ra === ra);
-            if (student) {
-                currentUser = { ...student, role: 'student' };
-                sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
-                showMainApp();
-                showMessage('Login de aluno realizado!', 'success');
-            } else {
-                showMessage('RA não encontrado!', 'error');
-            }
-        }
-
-        function showLoginScreen() {
-            document.getElementById('loginScreen').style.display = 'flex';
-            document.getElementById('mainApp').style.display = 'none';
-        }
-
-        function showMainApp() {
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('mainApp').style.display = 'block';
-            updateUserInterface();
-            loadStudentsTable();
-            updateStats();
-        }
-
-        function updateUserInterface() {
-            document.getElementById('userWelcome').textContent = `Bem-vindo, ${currentUser.name || currentUser.ra}!`;
-            document.getElementById('userRole').textContent = getRoleLabel(currentUser.role);
-
-            // Show/hide tabs based on role
-            const navTabs = document.querySelectorAll('.nav-tab');
-            navTabs.forEach(tab => {
-                const roles = tab.getAttribute('data-role');
-                if (roles === 'all' || roles.includes(currentUser.role)) {
-                    tab.style.display = 'block';
-                } else {
-                    tab.style.display = 'none';
-                }
-            });
-
-            // If student, show only dashboard
-            if (currentUser.role === 'student') {
-                navTabs.forEach(tab => {
-                    if (!tab.getAttribute('data-role').includes('all')) {
-                        tab.style.display = 'none';
-                    }
-                });
-            }
-        }
-
-        function getRoleLabel(role) {
-            const labels = {
-                'admin': 'Administrador',
-                'professor': 'Professor',
-                'student': 'Aluno'
-            };
-            return labels[role] || role;
-        }
-
-        function switchTab(tabName) {
-            // Update active tab
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
-
-            // Update active content
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(tabName + 'Tab').classList.add('active');
-        }
-
-        function loadStudentsTable() {
-            const tbody = document.getElementById('studentsTableBody');
-            if (!tbody) return;
-
-            tbody.innerHTML = '';
-            demoData.students.forEach(student => {
-                const row = tbody.insertRow();
-                row.innerHTML = `
-                    <td>${student.ra}</td>
-                    <td>${student.name}</td>
-                    <td>${getCourseName(student.course)}</td>
-                    <td><span class="badge ${getStatusClass(student.status)}">${student.status}</span></td>
-                    <td>R$ ${student.tuition.toFixed(2)}</td>
-                    <td>
-                        <button class="btn btn-info" onclick="editStudent(${student.id})">✏️ Editar</button>
-                        <button class="btn btn-danger" onclick="deleteStudent(${student.id})">🗑️ Excluir</button>
-                    </td>
-                `;
-            });
-        }
-
-        function getCourseName(courseCode) {
-            const course = demoData.courses.find(c => c.code === courseCode);
-            return course ? course.name : courseCode;
-        }
-
-        function getStatusClass(status) {
-            const classes = {
-                'ativo': 'success',
-                'inadimplente': 'danger',
-                'suspenso': 'warning'
-            };
-            return classes[status] || 'secondary';
-        }
-
-        function updateStats() {
-            const totalStudents = demoData.students.length;
-            const activeStudents = demoData.students.filter(s => s.status === 'ativo').length;
-            const lateStudents = demoData.students.filter(s => s.status === 'inadimplente').length;
-            const totalCourses = demoData.courses.length;
-
-            document.getElementById('totalStudents').textContent = totalStudents;
-            document.getElementById('activeStudents').textContent = activeStudents;
-            document.getElementById('lateStudents').textContent = lateStudents;
-            document.getElementById('totalCourses').textContent = totalCourses;
-        }
-
-        function openStudentModal() {
-            isEditMode = false;
-            currentStudentId = null;
-            document.getElementById('studentModalTitle').textContent = 'Novo Aluno';
-            document.getElementById('studentForm').reset();
-            document.getElementById('studentModal').style.display = 'block';
-        }
-
-        function editStudent(studentId) {
-            const student = demoData.students.find(s => s.id === studentId);
-            if (!student) return;
-
-            isEditMode = true;
-            currentStudentId = studentId;
-            document.getElementById('studentModalTitle').textContent = 'Editar Aluno';
-            
-            // Fill form
-            document.getElementById('studentRA').value = student.ra;
-            document.getElementById('studentName').value = student.name;
-            document.getElementById('studentEmail').value = student.email;
-            document.getElementById('studentPhone').value = student.phone;
-            document.getElementById('studentCourse').value = student.course;
-            document.getElementById('studentTuition').value = student.tuition;
-
-            document.getElementById('studentModal').style.display = 'block';
-        }
-
-        function deleteStudent(studentId) {
-            if (confirm('Tem certeza que deseja excluir este aluno?')) {
-                const index = demoData.students.findIndex(s => s.id === studentId);
-                if (index > -1) {
-                    demoData.students.splice(index, 1);
-                    loadStudentsTable();
-                    updateStats();
-                    showMessage('Aluno excluído com sucesso!', 'success');
-                }
-            }
-        }
-
-        function handleStudentSubmit(e) {
-            e.preventDefault();
-
-            const studentData = {
-                ra: document.getElementById('studentRA').value,
-                name: document.getElementById('studentName').value,
-                email: document.getElementById('studentEmail').value,
-                phone: document.getElementById('studentPhone').value,
-                course: document.getElementById('studentCourse').value,
-                tuition: parseFloat(document.getElementById('studentTuition').value)
-            };
-
-            if (isEditMode && currentStudentId) {
-                const index = demoData.students.findIndex(s => s.id === currentStudentId);
-                if (index > -1) {
-                    demoData.students[index] = { ...demoData.students[index], ...studentData };
-                    showMessage('Aluno atualizado com sucesso!', 'success');
-                }
-            } else {
-                const newStudent = {
-                    id: Date.now(),
-                    ...studentData,
-                    status: 'ativo',
-                    progress: 0,
-                    xp: 0,
-                    level: 1,
-                    enrollmentDate: new Date().toISOString().split('T')[0],
-                    startDate: new Date().toISOString().split('T')[0],
-                    durationMonths: 12
-                };
-                demoData.students.push(newStudent);
-                showMessage('Aluno cadastrado com sucesso!', 'success');
-            }
-
-            closeModal('studentModal');
-            loadStudentsTable();
-            updateStats();
-        }
-
-        function filterStudents() {
-            const filter = document.getElementById('studentSearch').value.toLowerCase();
-            const tbody = document.getElementById('studentsTableBody');
-            const rows = tbody.getElementsByTagName('tr');
-
-            for (let i = 0; i < rows.length; i++) {
-                const name = rows[i].cells[1].textContent.toLowerCase();
-                const ra = rows[i].cells[0].textContent.toLowerCase();
-                if (name.includes(filter) || ra.includes(filter)) {
-                    rows[i].style.display = '';
-                } else {
-                    rows[i].style.display = 'none';
-                }
-            }
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        function showMessage(message, type) {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-
-            setTimeout(() => {
-                notification.classList.add('show');
-            }, 100);
-
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 300);
-            }, 3000);
-        }
-
-        function logout() {
-            if (confirm('Tem certeza que deseja sair?')) {
-                currentUser = null;
-                sessionStorage.removeItem('currentUser');
-                showLoginScreen();
-                showMessage('Logout realizado com sucesso!', 'info');
-            }
-        }
-
-        function connectSheets() {
-            showMessage('Funcionalidade de integração em desenvolvimento', 'info');
-        }
-
-        function toggleTheme() {
-            showMessage('Tema escuro em desenvolvimento', 'info');
-        }
-
-        function exportData() {
-            showMessage('Funcionalidade de backup em desenvolvimento', 'info');
-        }
-    </script>
+            <button class="nav-tab" onclick="switchTab('portaria
