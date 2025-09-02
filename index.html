@@ -633,17 +633,20 @@
                 <button type="submit" class="btn">
                     🔑 Entrar como Colaborador
                 </button>
+                <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                    Demo: admin/admin123 ou ricardo/prof123
+                </p>
             </form>
 
             <!-- Login Aluno -->
             <form id="alunoLogin" class="login-form" style="display: none;">
                 <div class="form-group">
                     <label for="loginRA">RA (Registro Acadêmico)</label>
-                    <input type="text" id="loginRA" placeholder="Digite seu RA" required autocomplete="username" value="2025001">
+                    <input type="text" id="loginRA" placeholder="Digite seu RA" required value="2025001">
                 </div>
                 <div class="form-group">
                     <label for="loginSenhaAluno">Senha</label>
-                    <input type="password" id="loginSenhaAluno" placeholder="Digite sua senha" required autocomplete="current-password" value="senha123">
+                    <input type="password" id="loginSenhaAluno" placeholder="Digite sua senha" required value="senha123">
                 </div>
                 <button type="submit" class="btn">
                     🎓 Entrar como Aluno
@@ -681,10 +684,10 @@
         <div class="nav-tabs">
             <div class="nav-tab active" onclick="showTab('dashboard')">📊 Dashboard</div>
             <div class="nav-tab" onclick="showTab('students')">👨‍🎓 Alunos</div>
-            <div class="nav-tab hidden" id="coursesTab" onclick="showTab('courses')">📚 Cursos</div>
-            <div class="nav-tab hidden" id="classesTab" onclick="showTab('classes')">🏫 Turmas</div>
-            <div class="nav-tab hidden" id="financialTab" onclick="showTab('financial')">💰 Financeiro</div>
-            <div class="nav-tab hidden" id="reportsTab" onclick="showTab('reports')">📋 Relatórios</div>
+            <div class="nav-tab" id="coursesTab" onclick="showTab('courses')">📚 Cursos</div>
+            <div class="nav-tab" id="classesTab" onclick="showTab('classes')">🏫 Turmas</div>
+            <div class="nav-tab" id="financialTab" onclick="showTab('financial')">💰 Financeiro</div>
+            <div class="nav-tab" id="reportsTab" onclick="showTab('reports')">📋 Relatórios</div>
             <div class="nav-tab" onclick="showTab('profile')">👤 Perfil</div>
         </div>
 
@@ -715,6 +718,9 @@
             <div class="card">
                 <div class="card-header">
                     <h2>👨‍🎓 Gestão de Alunos</h2>
+                    <button class="btn btn-success" onclick="showNotification('Funcionalidade em desenvolvimento', 'info')">
+                        ➕ Novo Aluno
+                    </button>
                 </div>
                 <table class="table">
                     <thead>
@@ -723,6 +729,7 @@
                             <th>Nome</th>
                             <th>Curso</th>
                             <th>Status</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -731,12 +738,27 @@
                             <td>João Silva</td>
                             <td>Desenvolvimento de Jogos</td>
                             <td><span class="badge success">Ativo</span></td>
+                            <td>
+                                <button class="btn btn-info" onclick="showNotification('Visualizando perfil do aluno', 'info')">Ver</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>2025002</td>
                             <td>Maria Santos</td>
                             <td>Programação Web</td>
                             <td><span class="badge success">Ativa</span></td>
+                            <td>
+                                <button class="btn btn-info" onclick="showNotification('Visualizando perfil do aluno', 'info')">Ver</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2025003</td>
+                            <td>Carlos Oliveira</td>
+                            <td>Design Digital</td>
+                            <td><span class="badge warning">Pendente</span></td>
+                            <td>
+                                <button class="btn btn-info" onclick="showNotification('Visualizando perfil do aluno', 'info')">Ver</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -748,8 +770,28 @@
             <div class="card">
                 <div class="card-header">
                     <h2>📚 Gestão de Cursos</h2>
+                    <button class="btn btn-success" onclick="showNotification('Funcionalidade em desenvolvimento', 'info')">
+                        ➕ Novo Curso
+                    </button>
                 </div>
-                <p>Módulo de cursos disponível apenas para administradores.</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Desenvolvimento de Jogos</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Programação Web</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Design Digital</div>
+                    </div>
+                    <div class="stat-card purple">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Marketing Digital</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -758,8 +800,44 @@
             <div class="card">
                 <div class="card-header">
                     <h2>🏫 Gestão de Turmas</h2>
+                    <button class="btn btn-success" onclick="showNotification('Funcionalidade em desenvolvimento', 'info')">
+                        ➕ Nova Turma
+                    </button>
                 </div>
-                <p>Módulo de turmas disponível apenas para administradores.</p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Turma</th>
+                            <th>Curso</th>
+                            <th>Alunos</th>
+                            <th>Professor</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jogos - Turma A</td>
+                            <td>Desenvolvimento de Jogos</td>
+                            <td>25</td>
+                            <td>Ricardo Silva</td>
+                            <td><span class="badge success">Ativa</span></td>
+                        </tr>
+                        <tr>
+                            <td>Web - Turma B</td>
+                            <td>Programação Web</td>
+                            <td>30</td>
+                            <td>Ana Costa</td>
+                            <td><span class="badge success">Ativa</span></td>
+                        </tr>
+                        <tr>
+                            <td>Design - Turma A</td>
+                            <td>Design Digital</td>
+                            <td>20</td>
+                            <td>Pedro Santos</td>
+                            <td><span class="badge warning">Iniciando</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -769,7 +847,58 @@
                 <div class="card-header">
                     <h2>💰 Gestão Financeira</h2>
                 </div>
-                <p>Módulo financeiro disponível apenas para administradores.</p>
+                <div class="stats-grid">
+                    <div class="stat-card success">
+                        <div class="stat-number">R$ 89.2k</div>
+                        <div class="stat-label">Receita Mensal</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">R$ 1.2M</div>
+                        <div class="stat-label">Receita Anual</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-number">R$ 15.8k</div>
+                        <div class="stat-label">Pendências</div>
+                    </div>
+                    <div class="stat-card purple">
+                        <div class="stat-number">94%</div>
+                        <div class="stat-label">Taxa de Adimplência</div>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Aluno</th>
+                            <th>Curso</th>
+                            <th>Valor</th>
+                            <th>Vencimento</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>João Silva</td>
+                            <td>Desenvolvimento de Jogos</td>
+                            <td>R$ 450,00</td>
+                            <td>05/09/2025</td>
+                            <td><span class="badge success">Pago</span></td>
+                        </tr>
+                        <tr>
+                            <td>Maria Santos</td>
+                            <td>Programação Web</td>
+                            <td>R$ 380,00</td>
+                            <td>08/09/2025</td>
+                            <td><span class="badge warning">Pendente</span></td>
+                        </tr>
+                        <tr>
+                            <td>Carlos Oliveira</td>
+                            <td>Design Digital</td>
+                            <td>R$ 420,00</td>
+                            <td>01/09/2025</td>
+                            <td><span class="badge danger">Atrasado</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -779,7 +908,28 @@
                 <div class="card-header">
                     <h2>📋 Relatórios</h2>
                 </div>
-                <p>Módulo de relatórios disponível apenas para administradores.</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="card">
+                        <h3>📊 Relatório de Matrículas</h3>
+                        <p>Visualize dados sobre novas matrículas, cancelamentos e transferências.</p>
+                        <button class="btn" onclick="showNotification('Gerando relatório...', 'info')">Gerar Relatório</button>
+                    </div>
+                    <div class="card">
+                        <h3>💰 Relatório Financeiro</h3>
+                        <p>Acompanhe receitas, inadimplência e projeções financeiras.</p>
+                        <button class="btn" onclick="showNotification('Gerando relatório...', 'info')">Gerar Relatório</button>
+                    </div>
+                    <div class="card">
+                        <h3>📚 Relatório Acadêmico</h3>
+                        <p>Analise o desempenho dos alunos por curso e turma.</p>
+                        <button class="btn" onclick="showNotification('Gerando relatório...', 'info')">Gerar Relatório</button>
+                    </div>
+                    <div class="card">
+                        <h3>👨‍🏫 Relatório de Professores</h3>
+                        <p>Visualize carga horária e avaliações dos docentes.</p>
+                        <button class="btn" onclick="showNotification('Gerando relatório...', 'info')">Gerar Relatório</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -805,6 +955,9 @@
                             <p><strong>Status:</strong> <span class="badge success">Ativo</span></p>
                         </div>
                     </div>
+                    <button class="btn" onclick="showNotification('Funcionalidade em desenvolvimento', 'info')">
+                        ✏️ Editar Perfil
+                    </button>
                 </div>
                 <div id="studentProfile" style="display: none;">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
@@ -823,6 +976,42 @@
                             <p><strong>Turma:</strong> Jogos - Turma A</p>
                         </div>
                     </div>
+                    <div class="card">
+                        <h3>📚 Notas e Frequência</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Disciplina</th>
+                                    <th>Nota</th>
+                                    <th>Frequência</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Programação em C#</td>
+                                    <td>8.5</td>
+                                    <td>95%</td>
+                                    <td><span class="badge success">Aprovado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Game Design</td>
+                                    <td>9.2</td>
+                                    <td>88%</td>
+                                    <td><span class="badge success">Aprovado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Unity 3D</td>
+                                    <td>7.8</td>
+                                    <td>92%</td>
+                                    <td><span class="badge success">Aprovado</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn" onclick="showNotification('Funcionalidade em desenvolvimento', 'info')">
+                        ✏️ Editar Perfil
+                    </button>
                 </div>
             </div>
         </div>
@@ -842,3 +1031,276 @@
         const students = {
             '2025001': { password: 'senha123', name: 'João Silva', course: 'Desenvolvimento de Jogos' }
         };
+
+        // Função para alternar tabs de login
+        function switchLoginTab(tipo) {
+            const colaboradorTab = document.querySelector('.login-tab:first-child');
+            const alunoTab = document.querySelector('.login-tab:last-child');
+            const colaboradorForm = document.getElementById('colaboradorLogin');
+            const alunoForm = document.getElementById('alunoLogin');
+
+            if (tipo === 'colaborador') {
+                colaboradorTab.classList.add('active');
+                alunoTab.classList.remove('active');
+                colaboradorForm.style.display = 'block';
+                alunoForm.style.display = 'none';
+            } else {
+                alunoTab.classList.add('active');
+                colaboradorTab.classList.remove('active');
+                alunoForm.style.display = 'block';
+                colaboradorForm.style.display = 'none';
+            }
+        }
+
+        // Função de login para colaboradores
+        document.getElementById('colaboradorLogin').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const usuario = document.getElementById('loginUsuario').value;
+            const senha = document.getElementById('loginSenha').value;
+
+            if (users[usuario] && users[usuario].password === senha) {
+                currentUser = usuario;
+                currentRole = users[usuario].role;
+                
+                showNotification('Login realizado com sucesso!', 'success');
+                setTimeout(() => {
+                    showMainApp();
+                }, 1500);
+            } else {
+                showNotification('Usuário ou senha inválidos!', 'error');
+            }
+        });
+
+        // Função de login para alunos
+        document.getElementById('alunoLogin').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const ra = document.getElementById('loginRA').value;
+            const senha = document.getElementById('loginSenhaAluno').value;
+
+            if (students[ra] && students[ra].password === senha) {
+                currentUser = ra;
+                currentRole = 'student';
+                
+                showNotification('Login realizado com sucesso!', 'success');
+                setTimeout(() => {
+                    showMainApp();
+                }, 1500);
+            } else {
+                showNotification('RA ou senha inválidos!', 'error');
+            }
+        });
+
+        // Função para mostrar a aplicação principal
+        function showMainApp() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('mainApp').style.display = 'block';
+            document.getElementById('connectionStatus').className = 'connection-status connected';
+            document.getElementById('connectionStatus').innerHTML = '🟢 Conectado';
+            
+            updateUserInfo();
+            setupPermissions();
+        }
+
+        // Função para atualizar informações do usuário
+        function updateUserInfo() {
+            if (currentRole === 'student') {
+                const student = students[currentUser];
+                document.getElementById('welcomeText').textContent = `🎮 Bem-vindo, ${student.name}!`;
+                document.getElementById('userInfo').textContent = `RA: ${currentUser} - ${student.course}`;
+                document.getElementById('userRole').textContent = 'Aluno';
+                document.getElementById('studentProfile').style.display = 'block';
+                document.getElementById('adminProfile').style.display = 'none';
+                document.getElementById('studentProfileName').textContent = student.name;
+                document.getElementById('studentProfileRA').textContent = currentUser;
+            } else {
+                const user = users[currentUser];
+                document.getElementById('welcomeText').textContent = `🎮 Bem-vindo, ${user.name}!`;
+                document.getElementById('userInfo').textContent = 'Sistema de Gestão Escolar';
+                document.getElementById('userRole').textContent = user.role === 'admin' ? 'Administrador' : 'Professor';
+                document.getElementById('adminProfile').style.display = 'block';
+                document.getElementById('studentProfile').style.display = 'none';
+                document.getElementById('profileName').textContent = user.name;
+                document.getElementById('profileRole').textContent = user.role === 'admin' ? 'Administrador' : 'Professor';
+                
+                if (user.role === 'admin') {
+                    document.getElementById('profileEmail').textContent = 'admin@gamecreators.com';
+                } else {
+                    document.getElementById('profileEmail').textContent = 'ricardo@gamecreators.com';
+                }
+            }
+        }
+
+        // Função para configurar permissões
+        function setupPermissions() {
+            const adminTabs = ['coursesTab', 'classesTab', 'financialTab', 'reportsTab'];
+            
+            if (currentRole === 'student') {
+                // Ocultar tabs administrativas para alunos
+                adminTabs.forEach(tabId => {
+                    const tab = document.getElementById(tabId);
+                    if (tab) {
+                        tab.style.display = 'none';
+                    }
+                });
+                
+                // Redirecionar para dashboard se estiver em uma tab restrita
+                showTab('dashboard');
+            } else if (currentRole === 'professor') {
+                // Professores têm acesso limitado
+                document.getElementById('financialTab').style.display = 'none';
+                document.getElementById('reportsTab').style.display = 'none';
+            } else {
+                // Administradores têm acesso total
+                adminTabs.forEach(tabId => {
+                    const tab = document.getElementById(tabId);
+                    if (tab) {
+                        tab.style.display = 'block';
+                    }
+                });
+            }
+        }
+
+        // Função para mostrar tabs
+        function showTab(tabName) {
+            // Verificar permissões
+            if (currentRole === 'student') {
+                const allowedTabs = ['dashboard', 'students', 'profile'];
+                if (!allowedTabs.includes(tabName)) {
+                    showNotification('Você não tem permissão para acessar esta seção', 'error');
+                    return;
+                }
+            } else if (currentRole === 'professor') {
+                const restrictedTabs = ['financial', 'reports'];
+                if (restrictedTabs.includes(tabName)) {
+                    showNotification('Você não tem permissão para acessar esta seção', 'error');
+                    return;
+                }
+            }
+
+            // Remover classe active de todas as tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Adicionar classe active na tab selecionada
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Função para fazer logout
+        function logout() {
+            currentUser = null;
+            currentRole = null;
+            
+            document.getElementById('mainApp').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('connectionStatus').className = 'connection-status disconnected';
+            document.getElementById('connectionStatus').innerHTML = '🔴 Modo Demo';
+            
+            // Limpar formulários
+            document.getElementById('colaboradorLogin').reset();
+            document.getElementById('alunoLogin').reset();
+            
+            // Restaurar valores padrão
+            document.getElementById('loginUsuario').value = 'admin';
+            document.getElementById('loginSenha').value = 'admin123';
+            document.getElementById('loginRA').value = '2025001';
+            document.getElementById('loginSenhaAluno').value = 'senha123';
+            
+            showNotification('Logout realizado com sucesso!', 'info');
+        }
+
+        // Função para mostrar notificações
+        function showNotification(message, type = 'info') {
+            // Remover notificação existente
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Mostrar notificação
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Remover notificação após 3 segundos
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Adicionar event listeners para as tabs de navegação
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.getAttribute('onclick').replace("showTab('", '').replace("')", '');
+                    showTab(tabName);
+                });
+            });
+
+            // Mostrar notificação de boas-vindas
+            setTimeout(() => {
+                showNotification('Bem-vindo ao GameCreators! Sistema em modo demo.', 'info');
+            }, 1000);
+        });
+
+        // Função para corrigir o sistema de navegação
+        function showTab(tabName) {
+            // Verificar permissões
+            if (currentRole === 'student') {
+                const allowedTabs = ['dashboard', 'students', 'profile'];
+                if (!allowedTabs.includes(tabName)) {
+                    showNotification('Você não tem permissão para acessar esta seção', 'error');
+                    return;
+                }
+                
+                // Para alunos, a aba "students" mostra apenas seu próprio perfil
+                if (tabName === 'students') {
+                    tabName = 'profile';
+                }
+            } else if (currentRole === 'professor') {
+                const restrictedTabs = ['financial', 'reports'];
+                if (restrictedTabs.includes(tabName)) {
+                    showNotification('Você não tem permissão para acessar esta seção', 'error');
+                    return;
+                }
+            }
+
+            // Remover classe active de todas as tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Adicionar classe active na tab selecionada
+            const activeTab = document.querySelector(`[onclick="showTab('${tabName}')"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+            
+            const tabContent = document.getElementById(tabName);
+            if (tabContent) {
+                tabContent.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
