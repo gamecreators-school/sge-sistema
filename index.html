@@ -2098,3 +2098,329 @@
 
             return totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
         }
+
+        // Utility functions
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(value);
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString + 'T00:00:00');
+            return date.toLocaleDateString('pt-BR');
+        }
+
+        function showMessage(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'block';
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        // Login functions
+        function switchLoginTab(type) {
+            const colaboradorTab = document.querySelector('.login-tab:first-child');
+            const alunoTab = document.querySelector('.login-tab:last-child');
+            const colaboradorForm = document.getElementById('colaboradorLogin');
+            const alunoForm = document.getElementById('alunoLogin');
+
+            if (type === 'colaborador') {
+                colaboradorTab.classList.add('active');
+                alunoTab.classList.remove('active');
+                colaboradorForm.style.display = 'block';
+                alunoForm.style.display = 'none';
+            } else {
+                alunoTab.classList.add('active');
+                colaboradorTab.classList.remove('active');
+                alunoForm.style.display = 'block';
+                colaboradorForm.style.display = 'none';
+            }
+        }
+
+        // Main login logic
+        document.getElementById('colaboradorLogin').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsuario').value;
+            const password = document.getElementById('loginSenha').value;
+
+            const user = demoData.users.find(u => u.username === username && u.password === password);
+            if (user) {
+                currentUser = user;
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                document.getElementById('userWelcome').textContent = `Bem-vindo, ${user.name}!`;
+                document.getElementById('userRole').textContent = user.role === 'admin' ? 'Administrador' : 'Professor';
+                
+                setupUserInterface();
+                loadDashboard();
+                showMessage('Login realizado com sucesso!', 'success');
+            } else {
+                showMessage('Usuário ou senha incorretos!', 'error');
+            }
+        });
+
+        document.getElementById('alunoLogin').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const ra = document.getElementById('loginRA').value;
+            
+            const student = demoData.students.find(s => s.ra === ra);
+            if (student) {
+                currentUser = { ...student, role: 'student' };
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                document.getElementById('userWelcome').textContent = `Bem-vindo, ${student.name}!`;
+                document.getElementById('userRole').textContent = 'Aluno';
+                
+                setupStudentInterface();
+                showMessage('Login realizado com sucesso!', 'success');
+            } else {
+                showMessage('RA não encontrado!', 'error');
+            }
+        });
+
+        function setupUserInterface() {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const userRole = currentUser.role;
+
+            tabs.forEach(tab => {
+                const allowedRoles = tab.getAttribute('data-role');
+                if (allowedRoles === 'all' || allowedRoles.includes(userRole)) {
+                    tab.style.display = 'block';
+                } else {
+                    tab.style.display = 'none';
+                }
+            });
+        }
+
+        function setupStudentInterface() {
+            // Hide all tabs except dashboard for students
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                const allowedRoles = tab.getAttribute('data-role');
+                if (allowedRoles !== 'all') {
+                    tab.style.display = 'none';
+                }
+            });
+            
+            // Show student-specific dashboard
+            loadStudentDashboard();
+        }
+
+        function loadStudentDashboard() {
+            const dashboard = document.getElementById('dashboard');
+            const progress = calculateStudentProgress(currentUser.id);
+            dashboard.innerHTML = `
+                <div class="student-dashboard">
+                    <div class="student-profile">
+                        <div class="student-avatar">${currentUser.name.charAt(0)}</div>
+                        <div class="student-info">
+                            <h2>${currentUser.name}</h2>
+                            <p><strong>RA:</strong> ${currentUser.ra}</p>
+                            <p><strong>Curso:</strong> ${getCourseNameByCode(currentUser.course)}</p>
+                            <p><strong>Status:</strong> <span class="badge ${currentUser.status === 'ativo' ? 'success' : 'danger'}">${currentUser.status}</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card purple">
+                            <div class="stat-number">${progress}%</div>
+                            <div class="stat-label">Progresso do Curso</div>
+                        </div>
+                        <div class="stat-card gold">
+                            <div class="stat-number">${currentUser.xp}</div>
+                            <div class="stat-label">XP Total</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${currentUser.level}</div>
+                            <div class="stat-label">Nível Atual</div>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-number">${currentUser.coins}</div>
+                            <div class="stat-label">Moedas</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Informações do Curso</h2>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progress}%"></div>
+                        </div>
+                        <p><strong>Data de Início:</strong> ${formatDate(currentUser.startDate)}</p>
+                        <p><strong>Duração:</strong> ${currentUser.durationMonths} meses</p>
+                        <p><strong>Data de Término:</strong> ${formatDate(currentUser.endDate)}</p>
+                        <p><strong>Mensalidade:</strong> ${formatCurrency(currentUser.tuition)}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getCourseNameByCode(code) {
+            const course = demoData.courses.find(c => c.code === code);
+            return course ? course.name : code;
+        }
+
+        // Dashboard loading
+        function loadDashboard() {
+            if (currentUser?.role === 'student') {
+                loadStudentDashboard();
+                return;
+            }
+
+            const totalStudents = demoData.students.length;
+            const activeStudents = demoData.students.filter(s => s.status === 'ativo').length;
+            const overdueStudents = demoData.students.filter(s => s.status === 'inadimplente').length;
+            const lowStockItems = demoData.storeItems.filter(item => item.stock <= item.minStock).length;
+
+            document.getElementById('totalStudents').textContent = totalStudents;
+            document.getElementById('activeStudents').textContent = activeStudents;
+            document.getElementById('overdueStudents').textContent = overdueStudents;
+            document.getElementById('lowStockItems').textContent = lowStockItems;
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+
+            // Load tab content
+            switch(tabName) {
+                case 'dashboard':
+                    loadDashboard();
+                    break;
+                case 'students':
+                    loadStudents();
+                    break;
+                case 'courses':
+                    loadCourses();
+                    break;
+                case 'financial':
+                    loadFinancial();
+                    break;
+                case 'pedagogical':
+                    loadPedagogical();
+                    break;
+                case 'attendance':
+                    loadAttendance();
+                    break;
+                case 'store':
+                    loadStore();
+                    break;
+                case 'users':
+                    loadUsers();
+                    break;
+            }
+        }
+
+        // Students management
+        function loadStudents() {
+            const tbody = document.getElementById('studentsTableBody');
+            tbody.innerHTML = '';
+
+            demoData.students.forEach(student => {
+                const course = demoData.courses.find(c => c.code === student.course);
+                const progress = calculateStudentProgress(student.id);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.ra}</td>
+                    <td>${student.name}</td>
+                    <td>${course ? course.name : student.course}</td>
+                    <td><span class="badge ${student.status === 'ativo' ? 'success' : 'danger'}">${student.status}</span></td>
+                    <td>${formatCurrency(student.tuition)}</td>
+                    <td>${progress}%</td>
+                    <td>
+                        <button class="btn btn-info" onclick="editStudent(${student.id})" style="font-size: 12px; padding: 8px 12px;">✏️ Editar</button>
+                        <button class="btn btn-danger" onclick="deleteStudent(${student.id})" style="font-size: 12px; padding: 8px 12px;">🗑️ Excluir</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Utility functions
+        function logout() {
+            currentUser = null;
+            currentEditingId = null;
+            currentEditingType = null;
+            document.getElementById('mainApp').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'flex';
+            showMessage('Logout realizado com sucesso!', 'info');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            showMessage('Tema alterado!', 'info');
+        }
+
+        function connectSheets() {
+            showMessage('Funcionalidade de integração com Google Sheets disponível na aba Usuários!', 'info');
+        }
+
+        function exportData() {
+            const dataToExport = {
+                students: demoData.students,
+                courses: demoData.courses,
+                courseModules: demoData.courseModules,
+                courseLessons: demoData.courseLessons,
+                transactions: demoData.transactions,
+                storeItems: demoData.storeItems,
+                scheduleEntries: demoData.scheduleEntries,
+                attendance: demoData.attendance,
+                users: demoData.users.map(u => ({ ...u, password: '[PROTECTED]' })),
+                sheetsConfig: demoData.sheetsConfig,
+                exportDate: new Date().toISOString()
+            };
+
+            const dataStr = JSON.stringify(dataToExport, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `gamecreators_backup_${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            showMessage('Backup exportado com sucesso!', 'success');
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Sistema GameCreators carregado!');
+        });
+
+        // Close modals when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
