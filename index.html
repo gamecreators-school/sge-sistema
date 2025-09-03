@@ -213,6 +213,13 @@
         .btn-info { background: linear-gradient(135deg, var(--info), #1976D2); }
         .btn-purple { background: linear-gradient(135deg, var(--purple), #7B1FA2); }
 
+        .btn-sm {
+            padding: 8px 12px;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
         .forgot-password {
             text-align: center;
             margin-top: 20px;
@@ -527,15 +534,15 @@
 
         .modal-content {
             background: white;
-            margin: 5% auto;
+            margin: 2% auto;
             padding: 30px;
             border-radius: 16px;
             width: 90%;
-            max-width: 800px;
+            max-width: 900px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             transform: translateY(-50px);
             transition: var(--transition);
-            max-height: 80vh;
+            max-height: 85vh;
             overflow-y: auto;
         }
 
@@ -543,7 +550,7 @@
             transform: translateY(0);
         }
 
-        .financial-tabs, .pedagogic-tabs, .course-tabs, .user-tabs {
+        .financial-tabs, .pedagogic-tabs, .course-tabs, .user-tabs, .class-tabs {
             display: flex;
             gap: 8px;
             margin-bottom: 20px;
@@ -553,7 +560,7 @@
             flex-wrap: wrap;
         }
 
-        .financial-tab, .pedagogic-tab, .course-tab, .user-tab {
+        .financial-tab, .pedagogic-tab, .course-tab, .user-tab, .class-tab {
             flex: 1;
             padding: 12px;
             border: none;
@@ -567,7 +574,7 @@
             min-width: 120px;
         }
 
-        .financial-tab.active, .pedagogic-tab.active, .course-tab.active, .user-tab.active {
+        .financial-tab.active, .pedagogic-tab.active, .course-tab.active, .user-tab.active, .class-tab.active {
             background: white;
             color: var(--primary);
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -594,7 +601,8 @@
             text-transform: uppercase;
         }
 
-        .filter-group select {
+        .filter-group select,
+        .filter-group input {
             padding: 8px 12px;
             border: 2px solid var(--border);
             border-radius: 8px;
@@ -603,9 +611,50 @@
             min-width: 150px;
         }
 
+        .search-section {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .search-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-input-group input {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .client-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .client-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .client-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+        }
+
         .class-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
@@ -629,6 +678,18 @@
             color: var(--primary);
             margin-bottom: 15px;
             font-size: 18px;
+        }
+
+        .class-card.status-ativa {
+            border-left-color: var(--success);
+        }
+
+        .class-card.status-completa {
+            border-left-color: var(--warning);
+        }
+
+        .class-card.status-encerrada {
+            border-left-color: var(--secondary);
         }
 
         .progress-bar {
@@ -769,35 +830,16 @@
             transform: scale(1.1);
         }
 
-        .course-content {
+        .attendance-btn.active {
+            opacity: 0.8;
+            transform: scale(0.95);
+        }
+
+        .course-content, .pedagogic-content, .financial-content, .user-content, .class-content {
             display: none;
         }
 
-        .course-content.active {
-            display: block;
-        }
-
-        .pedagogic-content {
-            display: none;
-        }
-
-        .pedagogic-content.active {
-            display: block;
-        }
-
-        .financial-content {
-            display: none;
-        }
-
-        .financial-content.active {
-            display: block;
-        }
-
-        .user-content {
-            display: none;
-        }
-
-        .user-content.active {
+        .course-content.active, .pedagogic-content.active, .financial-content.active, .user-content.active, .class-content.active {
             display: block;
         }
 
@@ -821,6 +863,94 @@
 
         .sheets-status.disconnected {
             color: var(--danger);
+        }
+
+        .lesson-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .lesson-input-group input {
+            padding: 8px 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .lesson-input-group .lesson-name {
+            flex: 1;
+        }
+
+        .lesson-input-group .lesson-duration {
+            width: 120px;
+        }
+
+        .financial-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .financial-summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            border-left: 4px solid var(--info);
+        }
+
+        .financial-summary-card.paid {
+            border-left-color: var(--success);
+        }
+
+        .financial-summary-card.pending {
+            border-left-color: var(--warning);
+        }
+
+        .financial-summary-card.overdue {
+            border-left-color: var(--danger);
+        }
+
+        .student-progress-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .progress-details {
+            margin-top: 15px;
+        }
+
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .progress-item:last-child {
+            border-bottom: none;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .financial-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         @media (max-width: 768px) {
@@ -895,7 +1025,7 @@
                 padding: 20px;
             }
 
-            .financial-tabs, .pedagogic-tabs, .course-tabs, .user-tabs {
+            .financial-tabs, .pedagogic-tabs, .course-tabs, .user-tabs, .class-tabs {
                 flex-direction: column;
             }
 
@@ -904,11 +1034,34 @@
                 align-items: stretch;
             }
 
-            .filter-group select {
+            .filter-group select,
+            .filter-group input {
                 min-width: auto;
             }
 
             .class-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-input-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-input-group input {
+                min-width: auto;
+                margin-bottom: 10px;
+            }
+
+            .client-results {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                justify-content: center;
+            }
+
+            .financial-status {
                 grid-template-columns: 1fr;
             }
         }
@@ -981,6 +1134,7 @@
         <div class="nav-tabs" id="navTabs">
             <button class="nav-tab active" onclick="switchTab('dashboard')" data-role="all">📊 Dashboard</button>
             <button class="nav-tab" onclick="switchTab('students')" data-role="admin,professor" id="studentsTab">👨‍🎓 Alunos</button>
+            <button class="nav-tab" onclick="switchTab('classes')" data-role="admin,professor" id="classesTab">👥 Turmas</button>
             <button class="nav-tab" onclick="switchTab('courses')" data-role="admin" id="coursesTab">📚 Cursos</button>
             <button class="nav-tab" onclick="switchTab('pedagogic')" data-role="admin,professor" id="pedagogicTab">🎯 Pedagógico</button>
             <button class="nav-tab" onclick="switchTab('financial')" data-role="admin" id="financialTab">💰 Financeiro</button>
@@ -1003,6 +1157,10 @@
                     <div class="stat-label">Cursos Ativos</div>
                 </div>
                 <div class="stat-card purple">
+                    <div class="stat-number" id="totalClasses">0</div>
+                    <div class="stat-label">Turmas Ativas</div>
+                </div>
+                <div class="stat-card gold">
                     <div class="stat-number" id="totalRevenue">R$ 0</div>
                     <div class="stat-label">Receita Total</div>
                 </div>
@@ -1058,12 +1216,20 @@
                             <option value="ativo">Ativo</option>
                             <option value="inativo">Inativo</option>
                             <option value="suspenso">Suspenso</option>
+                            <option value="trancado">Trancado</option>
+                            <option value="cancelado">Cancelado</option>
                         </select>
                     </div>
                     <div class="filter-group">
                         <label>Curso</label>
                         <select id="studentCourseFilter" onchange="filterStudents()">
                             <option value="">Todos os Cursos</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Turma</label>
+                        <select id="studentClassFilter" onchange="filterStudents()">
+                            <option value="">Todas as Turmas</option>
                         </select>
                     </div>
                 </div>
@@ -1075,7 +1241,9 @@
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Curso</th>
+                            <th>Turma</th>
                             <th>Status</th>
+                            <th>Progresso</th>
                             <th>Data Matrícula</th>
                             <th>Ações</th>
                         </tr>
@@ -1084,6 +1252,62 @@
                         <!-- Dados serão carregados dinamicamente -->
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <!-- Classes Tab -->
+        <div id="classes" class="tab-content">
+            <div class="class-tabs">
+                <button class="class-tab active" onclick="switchClassTab('list')">📋 Lista de Turmas</button>
+                <button class="class-tab" onclick="switchClassTab('attendance')">📅 Chamada</button>
+                <button class="class-tab" onclick="switchClassTab('schedule')">🕒 Horários</button>
+            </div>
+
+            <div id="classList" class="class-content active">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>👥 Gestão de Turmas</h2>
+                        <button class="btn btn-success" onclick="showAddClassModal()">➕ Nova Turma</button>
+                    </div>
+
+                    <div class="class-grid" id="classesGrid">
+                        <!-- Turmas serão carregadas aqui -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="classAttendance" class="class-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📅 Chamada por Turma</h2>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <select id="attendanceClassSelect" onchange="loadClassAttendance()">
+                                <option value="">Selecione uma turma</option>
+                            </select>
+                            <input type="date" id="attendanceDate" onchange="loadClassAttendance()">
+                        </div>
+                    </div>
+                    
+                    <div id="classAttendanceGrid" class="attendance-grid">
+                        <!-- Alunos da turma serão carregados aqui -->
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-success" onclick="saveClassAttendance()">💾 Salvar Chamada</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="classSchedule" class="class-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>🕒 Horários das Turmas</h2>
+                    </div>
+                    
+                    <div id="scheduleGrid">
+                        <!-- Horários serão carregados aqui -->
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1112,6 +1336,7 @@
                                 <th>Valor</th>
                                 <th>Status</th>
                                 <th>Alunos</th>
+                                <th>Turmas</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -1156,29 +1381,28 @@
         <!-- Pedagogic Tab -->
         <div id="pedagogic" class="tab-content">
             <div class="pedagogic-tabs">
-                <button class="pedagogic-tab active" onclick="switchPedagogicTab('attendance')">📋 Frequência</button>
+                <button class="pedagogic-tab active" onclick="switchPedagogicTab('progress')">📈 Progresso Individual</button>
                 <button class="pedagogic-tab" onclick="switchPedagogicTab('reports')">📊 Relatórios</button>
                 <button class="pedagogic-tab" onclick="switchPedagogicTab('evaluations')">📝 Avaliações</button>
             </div>
 
-            <div id="attendanceContent" class="pedagogic-content active">
+            <div id="progressContent" class="pedagogic-content active">
                 <div class="card">
                     <div class="card-header">
-                        <h2>📋 Controle de Frequência</h2>
-                        <div>
-                            <select id="attendanceClassSelect" onchange="loadAttendanceClass()">
-                                <option value="">Selecione uma turma</option>
+                        <h2>📈 Progresso Individual dos Alunos</h2>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <select id="progressCourseFilter" onchange="filterStudentProgress()">
+                                <option value="">Todos os Cursos</option>
                             </select>
-                            <input type="date" id="attendanceDate" onchange="loadAttendanceClass()">
+                            <select id="progressClassFilter" onchange="filterStudentProgress()">
+                                <option value="">Todas as Turmas</option>
+                            </select>
+                            <input type="text" id="progressStudentSearch" placeholder="Buscar aluno..." onkeyup="filterStudentProgress()">
                         </div>
                     </div>
                     
-                    <div id="attendanceGrid" class="attendance-grid">
-                        <!-- Lista de alunos para chamada será carregada aqui -->
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 20px;">
-                        <button class="btn btn-success" onclick="saveAttendance()">💾 Salvar Frequência</button>
+                    <div id="studentsProgressGrid" class="class-grid">
+                        <!-- Progresso dos alunos será carregado aqui -->
                     </div>
                 </div>
             </div>
@@ -1215,6 +1439,7 @@
                             <tr>
                                 <th>Avaliação</th>
                                 <th>Curso</th>
+                                <th>Turma</th>
                                 <th>Data</th>
                                 <th>Tipo</th>
                                 <th>Status</th>
@@ -1234,6 +1459,7 @@
             <div class="financial-tabs">
                 <button class="financial-tab active" onclick="switchFinancialTab('overview')">📊 Visão Geral</button>
                 <button class="financial-tab" onclick="switchFinancialTab('payments')">💳 Pagamentos</button>
+                <button class="financial-tab" onclick="switchFinancialTab('search')">🔍 Consulta Cliente</button>
                 <button class="financial-tab" onclick="switchFinancialTab('reports')">📋 Relatórios</button>
             </div>
 
@@ -1247,31 +1473,35 @@
                         <div class="stat-number" id="pendingAmount">R$ 0</div>
                         <div class="stat-label">Valores Pendentes</div>
                     </div>
-                    <div class="stat-card info">
-                        <div class="stat-number" id="overdue">0</div>
+                    <div class="stat-card danger">
+                        <div class="stat-number" id="overdueCount">0</div>
                         <div class="stat-label">Pagamentos em Atraso</div>
+                    </div>
+                    <div class="stat-card purple">
+                        <div class="stat-number" id="defaultersCount">0</div>
+                        <div class="stat-label">Alunos Inadimplentes</div>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-header">
-                        <h2>💰 Resumo Financeiro</h2>
+                        <h2>💰 Status Financeiro por Categoria</h2>
                     </div>
-                    <div class="class-grid">
-                        <div class="class-card">
-                            <h3>📈 Receita Anual</h3>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 68%">68%</div>
-                            </div>
-                            <p><strong>Meta:</strong> R$ 120.000,00</p>
-                            <p><strong>Atual:</strong> R$ 81.600,00</p>
+                    <div class="financial-status">
+                        <div class="financial-summary-card paid">
+                            <h4>✅ Pagamentos em Dia</h4>
+                            <div class="stat-number" id="upToDateCount">0</div>
+                            <p>Alunos com pagamentos em dia</p>
                         </div>
-                        <div class="class-card">
-                            <h3>💳 Taxa de Adimplência</h3>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 92%">92%</div>
-                            </div>
-                            <p><strong>Pagamentos em dia:</strong> 92%</p>
+                        <div class="financial-summary-card pending">
+                            <h4>⏳ Pagamentos Pendentes</h4>
+                            <div class="stat-number" id="pendingCount">0</div>
+                            <p>Pagamentos aguardando vencimento</p>
+                        </div>
+                        <div class="financial-summary-card overdue">
+                            <h4>⚠️ Alunos Inadimplentes</h4>
+                            <div class="stat-number" id="overdueStudents">0</div>
+                            <p>Alunos com pagamentos em atraso</p>
                         </div>
                     </div>
                 </div>
@@ -1292,11 +1522,18 @@
                                 <option value="pago">Pago</option>
                                 <option value="pendente">Pendente</option>
                                 <option value="vencido">Vencido</option>
+                                <option value="cancelado">Cancelado</option>
                             </select>
                         </div>
                         <div class="filter-group">
                             <label>Período</label>
                             <input type="month" id="paymentPeriodFilter" onchange="filterPayments()">
+                        </div>
+                        <div class="filter-group">
+                            <label>Curso</label>
+                            <select id="paymentCourseFilter" onchange="filterPayments()">
+                                <option value="">Todos os Cursos</option>
+                            </select>
                         </div>
                     </div>
 
@@ -1306,6 +1543,7 @@
                                 <th>ID</th>
                                 <th>Aluno</th>
                                 <th>Curso</th>
+                                <th>Tipo</th>
                                 <th>Valor</th>
                                 <th>Vencimento</th>
                                 <th>Status</th>
@@ -1319,6 +1557,29 @@
                 </div>
             </div>
 
+            <div id="clientSearchContent" class="financial-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>🔍 Consulta Situação Financeira do Cliente</h2>
+                    </div>
+                    
+                    <div class="search-section">
+                        <div class="search-input-group">
+                            <input type="text" id="clientSearchInput" placeholder="Digite o nome do aluno ou RA..." onkeyup="searchClients()">
+                            <button class="btn btn-info" onclick="searchClients()">🔍 Buscar</button>
+                        </div>
+                        
+                        <div id="clientSearchResults" class="client-results">
+                            <!-- Resultados da busca serão exibidos aqui -->
+                        </div>
+                    </div>
+                    
+                    <div id="clientFinancialDetails" style="display: none;">
+                        <!-- Detalhes financeiros do cliente selecionado -->
+                    </div>
+                </div>
+            </div>
+
             <div id="financialReports" class="financial-content">
                 <div class="card">
                     <div class="card-header">
@@ -1326,6 +1587,7 @@
                         <div>
                             <input type="month" id="reportMonth">
                             <button class="btn btn-info" onclick="generateFinancialReport()">📊 Gerar Relatório</button>
+                            <button class="btn btn-warning" onclick="generateDefaultersReport()">⚠️ Relatório Inadimplentes</button>
                         </div>
                     </div>
                     
@@ -1413,12 +1675,77 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>Turma</label>
+                    <select id="studentClass" required>
+                        <option value="">Selecione uma turma</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>Data de Nascimento</label>
                     <input type="date" id="studentBirthDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="studentStatus" required>
+                        <option value="ativo">Ativo</option>
+                        <option value="inativo">Inativo</option>
+                        <option value="suspenso">Suspenso</option>
+                        <option value="trancado">Trancado</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
                 </div>
                 <div style="text-align: right; margin-top: 20px;">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('addStudentModal')">Cancelar</button>
                     <button type="submit" class="btn btn-success">Salvar Aluno</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Class Modal -->
+    <div id="addClassModal" class="modal">
+        <div class="modal-content">
+            <h2>➕ Nova Turma</h2>
+            <form id="addClassForm">
+                <div class="form-group">
+                    <label>Nome da Turma</label>
+                    <input type="text" id="className" required>
+                </div>
+                <div class="form-group">
+                    <label>Curso</label>
+                    <select id="classCourse" required>
+                        <option value="">Selecione um curso</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Professor</label>
+                    <select id="classTeacher">
+                        <option value="">Selecione um professor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Vagas Totais</label>
+                    <input type="number" id="classMaxStudents" min="1" max="50" required>
+                </div>
+                <div class="form-group">
+                    <label>Data de Início</label>
+                    <input type="date" id="classStartDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Data de Término</label>
+                    <input type="date" id="classEndDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Horário</label>
+                    <input type="text" id="classSchedule" placeholder="Ex: Segunda e Quarta 19:00-22:00" required>
+                </div>
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea id="classDescription" rows="3"></textarea>
+                </div>
+                <div style="text-align: right; margin-top: 20px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('addClassModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar Turma</button>
                 </div>
             </form>
         </div>
@@ -1544,6 +1871,10 @@
                             <label for="perm_students">Alunos</label>
                         </div>
                         <div class="permission-item">
+                            <input type="checkbox" id="perm_classes" value="classes">
+                            <label for="perm_classes">Turmas</label>
+                        </div>
+                        <div class="permission-item">
                             <input type="checkbox" id="perm_courses" value="courses">
                             <label for="perm_courses">Cursos</label>
                         </div>
@@ -1605,6 +1936,15 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>Status</label>
+                    <select id="paymentStatus">
+                        <option value="pendente">Pendente</option>
+                        <option value="pago">Pago</option>
+                        <option value="vencido">Vencido</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>Observações</label>
                     <textarea id="paymentNotes" rows="3"></textarea>
                 </div>
@@ -1627,8 +1967,14 @@
                 </div>
                 <div class="form-group">
                     <label>Curso</label>
-                    <select id="evaluationCourse" required>
+                    <select id="evaluationCourse" onchange="loadEvaluationClasses()" required>
                         <option value="">Selecione um curso</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Turma</label>
+                    <select id="evaluationClass" required>
+                        <option value="">Selecione uma turma</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -1690,6 +2036,10 @@
                     <input type="text" id="sheetsCoursesTab" value="Cursos" required>
                 </div>
                 <div class="form-group">
+                    <label>Aba das Turmas</label>
+                    <input type="text" id="sheetsClassesTab" value="Turmas" required>
+                </div>
+                <div class="form-group">
                     <label>Aba Financeira</label>
                     <input type="text" id="sheetsFinancialTab" value="Financeiro" required>
                 </div>
@@ -1707,19 +2057,48 @@
         </div>
     </div>
 
+    <!-- Student Progress Modal -->
+    <div id="studentProgressModal" class="modal">
+        <div class="modal-content">
+            <h2 id="progressModalTitle">📈 Progresso do Aluno</h2>
+            <div id="studentProgressContent">
+                <!-- Conteúdo do progresso será carregado aqui -->
+            </div>
+            <div style="text-align: right; margin-top: 20px;">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('studentProgressModal')">Fechar</button>
+                <button type="button" class="btn btn-warning" onclick="updateStudentProgress()">✏️ Atualizar Progresso</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Client Financial Details Modal -->
+    <div id="clientFinancialModal" class="modal">
+        <div class="modal-content">
+            <h2 id="financialModalTitle">💰 Situação Financeira</h2>
+            <div id="clientFinancialContent">
+                <!-- Conteúdo financeiro será carregado aqui -->
+            </div>
+            <div style="text-align: right; margin-top: 20px;">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('clientFinancialModal')">Fechar</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Sistema de Gestão Escolar - GameCreators
+        // Sistema de Gestão Escolar - GameCreators - Versão Completa
         // Variáveis globais
         let currentUser = null;
         let systemData = {
             students: [],
             courses: [],
+            classes: [],
             users: [],
             payments: [],
             attendance: [],
             evaluations: [],
             modules: [],
             lessons: [],
+            studentProgress: [],
             sheetsConfig: null
         };
 
@@ -1754,12 +2133,16 @@
             
             // Modais
             document.getElementById('addStudentForm').addEventListener('submit', handleAddStudent);
+            document.getElementById('addClassForm').addEventListener('submit', handleAddClass);
             document.getElementById('addCourseForm').addEventListener('submit', handleAddCourse);
             document.getElementById('addModuleForm').addEventListener('submit', handleAddModule);
             document.getElementById('addUserForm').addEventListener('submit', handleAddUser);
             document.getElementById('addPaymentForm').addEventListener('submit', handleAddPayment);
             document.getElementById('addEvaluationForm').addEventListener('submit', handleAddEvaluation);
             document.getElementById('sheetsConfigForm').addEventListener('submit', handleSheetsConfig);
+
+            // Auto-atualização de status dos pagamentos
+            setInterval(updatePaymentStatuses, 60000); // Verificar a cada minuto
         }
 
         // Sistema de Login
@@ -1781,7 +2164,9 @@
             
             if (user) {
                 currentUser = user;
+                user.lastAccess = new Date().toISOString();
                 localStorage.setItem('gamecreators_current_user', JSON.stringify(user));
+                saveSystemData();
                 showMainApp();
                 showMessage('Login realizado com sucesso!', 'success');
             } else {
@@ -1878,6 +2263,9 @@
                 case 'students':
                     loadStudentsData();
                     break;
+                case 'classes':
+                    loadClassesData();
+                    break;
                 case 'courses':
                     loadCoursesData();
                     break;
@@ -1912,8 +2300,9 @@
             document.querySelector(`[onclick="switchPedagogicTab('${tabName}')"]`).classList.add('active');
             document.getElementById(`${tabName}Content`).classList.add('active');
             
-            if (tabName === 'attendance') loadAttendanceOptions();
+            if (tabName === 'progress') loadStudentProgressData();
             if (tabName === 'reports') loadReportOptions();
+            if (tabName === 'evaluations') loadEvaluationsData();
         }
 
         function switchFinancialTab(tabName) {
@@ -1921,9 +2310,19 @@
             document.querySelectorAll('.financial-content').forEach(content => content.classList.remove('active'));
             
             document.querySelector(`[onclick="switchFinancialTab('${tabName}')"]`).classList.add('active');
-            document.getElementById(`financial${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`).classList.add('active');
+            
+            let contentId = '';
+            switch(tabName) {
+                case 'overview': contentId = 'financialOverview'; break;
+                case 'payments': contentId = 'paymentsContent'; break;
+                case 'search': contentId = 'clientSearchContent'; break;
+                case 'reports': contentId = 'financialReports'; break;
+            }
+            
+            document.getElementById(contentId).classList.add('active');
             
             if (tabName === 'payments') loadPaymentsData();
+            if (tabName === 'search') setupClientSearch();
         }
 
         function switchUserTab(tabName) {
@@ -1934,6 +2333,25 @@
             document.getElementById(`${tabName === 'list' ? 'usersList' : 'permissionsContent'}`).classList.add('active');
             
             if (tabName === 'permissions') loadPermissionsData();
+        }
+
+        function switchClassTab(tabName) {
+            document.querySelectorAll('.class-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.class-content').forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`[onclick="switchClassTab('${tabName}')"]`).classList.add('active');
+            
+            let contentId = '';
+            switch(tabName) {
+                case 'list': contentId = 'classList'; break;
+                case 'attendance': contentId = 'classAttendance'; break;
+                case 'schedule': contentId = 'classSchedule'; break;
+            }
+            
+            document.getElementById(contentId).classList.add('active');
+            
+            if (tabName === 'attendance') loadClassAttendanceOptions();
+            if (tabName === 'schedule') loadClassSchedules();
         }
 
         // Carregamento de dados
@@ -1949,9 +2367,59 @@
                     role: 'admin',
                     status: 'ativo',
                     lastAccess: new Date().toISOString(),
-                    permissions: ['dashboard', 'students', 'courses', 'pedagogic', 'financial', 'users']
+                    permissions: ['dashboard', 'students', 'classes', 'courses', 'pedagogic', 'financial', 'users']
                 });
+
+                // Dados de exemplo para demonstração
+                initializeSampleData();
                 saveSystemData();
+            }
+        }
+
+        function initializeSampleData() {
+            // Adicionar cursos de exemplo se não existirem
+            if (systemData.courses.length === 0) {
+                systemData.courses = [
+                    {
+                        id: 1,
+                        name: 'Desenvolvimento de Jogos Unity',
+                        description: 'Curso completo de desenvolvimento de jogos usando Unity',
+                        duration: 120,
+                        price: 1200.00,
+                        category: 'programacao',
+                        status: 'ativo',
+                        createdDate: new Date().toISOString()
+                    },
+                    {
+                        id: 2,
+                        name: 'Game Design Fundamentals',
+                        description: 'Princípios básicos de design de jogos',
+                        duration: 80,
+                        price: 800.00,
+                        category: 'design',
+                        status: 'ativo',
+                        createdDate: new Date().toISOString()
+                    }
+                ];
+            }
+
+            // Adicionar turmas de exemplo se não existirem
+            if (systemData.classes.length === 0) {
+                systemData.classes = [
+                    {
+                        id: 1,
+                        name: 'Unity Básico - Turma A',
+                        courseId: 1,
+                        teacherId: null,
+                        maxStudents: 20,
+                        currentStudents: 0,
+                        startDate: '2024-03-01',
+                        endDate: '2024-06-30',
+                        schedule: 'Segunda e Quarta 19:00-22:00',
+                        status: 'ativa',
+                        description: 'Turma iniciante de Unity'
+                    }
+                ];
             }
         }
 
@@ -1960,6 +2428,7 @@
             document.getElementById('totalStudents').textContent = systemData.students.length;
             document.getElementById('activeStudents').textContent = systemData.students.filter(s => s.status === 'ativo').length;
             document.getElementById('totalCourses').textContent = systemData.courses.length;
+            document.getElementById('totalClasses').textContent = systemData.classes.filter(c => c.status === 'ativa').length;
             
             const totalRevenue = systemData.payments.filter(p => p.status === 'pago').reduce((sum, p) => sum + parseFloat(p.amount), 0);
             document.getElementById('totalRevenue').textContent = `R$ ${totalRevenue.toFixed(2)}`;
@@ -1971,27 +2440,43 @@
         function loadStudentsData() {
             const tbody = document.getElementById('studentsTableBody');
             const courseSelect = document.getElementById('studentCourseFilter');
+            const classSelect = document.getElementById('studentClassFilter');
             
-            // Limpar e popular filtro de cursos
+            // Limpar e popular filtros
             courseSelect.innerHTML = '<option value="">Todos os Cursos</option>';
             systemData.courses.forEach(course => {
                 courseSelect.innerHTML += `<option value="${course.id}">${course.name}</option>`;
+            });
+
+            classSelect.innerHTML = '<option value="">Todas as Turmas</option>';
+            systemData.classes.forEach(cls => {
+                classSelect.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
             });
             
             // Carregar lista de alunos
             tbody.innerHTML = '';
             systemData.students.forEach(student => {
                 const course = systemData.courses.find(c => c.id === student.courseId);
+                const studentClass = systemData.classes.find(c => c.id === student.classId);
+                const progress = getStudentProgress(student.id);
+                
                 const row = `
                     <tr>
                         <td>${student.ra}</td>
                         <td>${student.name}</td>
                         <td>${student.email}</td>
                         <td>${course ? course.name : 'N/A'}</td>
+                        <td>${studentClass ? studentClass.name : 'N/A'}</td>
                         <td><span class="badge ${getStatusColor(student.status)}">${student.status}</span></td>
-                        <td>${formatDate(student.enrollmentDate)}</td>
                         <td>
-                            <button class="btn btn-info btn-sm" onclick="viewStudent(${student.id})">👁️</button>
+                            <div class="progress-bar" style="height: 15px;">
+                                <div class="progress-fill" style="width: ${progress}%">${progress}%</div>
+                            </div>
+                        </td>
+                        <td>${formatDate(student.enrollmentDate)}</td>
+                        <td class="btn-group">
+                            <button class="btn btn-info btn-sm" onclick="viewStudentProgress(${student.id})">📈</button>
+                            <button class="btn btn-success btn-sm" onclick="viewStudent(${student.id})">👁️</button>
                             <button class="btn btn-warning btn-sm" onclick="editStudent(${student.id})">✏️</button>
                             <button class="btn btn-danger btn-sm" onclick="deleteStudent(${student.id})">🗑️</button>
                         </td>
@@ -2001,12 +2486,52 @@
             });
         }
 
+        function loadClassesData() {
+            const grid = document.getElementById('classesGrid');
+            grid.innerHTML = '';
+            
+            systemData.classes.forEach(cls => {
+                const course = systemData.courses.find(c => c.id === cls.courseId);
+                const studentsCount = systemData.students.filter(s => s.classId === cls.id).length;
+                const occupancyPercent = Math.round((studentsCount / cls.maxStudents) * 100);
+                const availableSpots = cls.maxStudents - studentsCount;
+                
+                const statusClass = cls.status === 'ativa' ? 'status-ativa' : 
+                                  cls.status === 'completa' ? 'status-completa' : 'status-encerrada';
+                
+                const card = `
+                    <div class="class-card ${statusClass}">
+                        <h3>${cls.name}</h3>
+                        <p><strong>Curso:</strong> ${course ? course.name : 'N/A'}</p>
+                        <p><strong>Período:</strong> ${formatDate(cls.startDate)} - ${formatDate(cls.endDate)}</p>
+                        <p><strong>Horário:</strong> ${cls.schedule}</p>
+                        <p><strong>Status:</strong> <span class="badge ${getStatusColor(cls.status)}">${cls.status}</span></p>
+                        
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${occupancyPercent}%">${occupancyPercent}%</div>
+                        </div>
+                        <p><strong>Alunos:</strong> ${studentsCount}/${cls.maxStudents} (${availableSpots} vagas disponíveis)</p>
+                        
+                        <div class="btn-group" style="margin-top: 15px;">
+                            <button class="btn btn-info btn-sm" onclick="viewClassStudents(${cls.id})">👥 Alunos</button>
+                            <button class="btn btn-success btn-sm" onclick="takeClassAttendance(${cls.id})">📋 Chamada</button>
+                            <button class="btn btn-warning btn-sm" onclick="editClass(${cls.id})">✏️</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteClass(${cls.id})">🗑️</button>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
         function loadCoursesData() {
             const tbody = document.getElementById('coursesTableBody');
             
             tbody.innerHTML = '';
             systemData.courses.forEach(course => {
                 const studentsCount = systemData.students.filter(s => s.courseId === course.id).length;
+                const classesCount = systemData.classes.filter(c => c.courseId === course.id).length;
+                
                 const row = `
                     <tr>
                         <td>${course.id}</td>
@@ -2016,7 +2541,8 @@
                         <td>R$ ${parseFloat(course.price).toFixed(2)}</td>
                         <td><span class="badge ${getStatusColor(course.status)}">${course.status}</span></td>
                         <td>${studentsCount}</td>
-                        <td>
+                        <td>${classesCount}</td>
+                        <td class="btn-group">
                             <button class="btn btn-info btn-sm" onclick="viewCourse(${course.id})">👁️</button>
                             <button class="btn btn-warning btn-sm" onclick="editCourse(${course.id})">✏️</button>
                             <button class="btn btn-danger btn-sm" onclick="deleteCourse(${course.id})">🗑️</button>
@@ -2041,7 +2567,7 @@
                         <td>${getRoleLabel(user.role)}</td>
                         <td><span class="badge ${getStatusColor(user.status)}">${user.status}</span></td>
                         <td>${formatDate(user.lastAccess)}</td>
-                        <td>
+                        <td class="btn-group">
                             <button class="btn btn-info btn-sm" onclick="viewUser(${user.id})">👁️</button>
                             <button class="btn btn-warning btn-sm" onclick="editUser(${user.id})">✏️</button>
                             <button class="btn btn-danger btn-sm" onclick="deleteUser(${user.id})">🗑️</button>
@@ -2053,11 +2579,12 @@
         }
 
         function loadPedagogicData() {
-            loadAttendanceOptions();
+            loadStudentProgressData();
         }
 
         function loadFinancialData() {
-            // Carregar dados financeiros
+            updatePaymentStatuses(); // Atualizar status antes de calcular
+            
             const monthlyRevenue = systemData.payments
                 .filter(p => p.status === 'pago' && isCurrentMonth(p.paymentDate))
                 .reduce((sum, p) => sum + parseFloat(p.amount), 0);
@@ -2066,24 +2593,66 @@
                 .filter(p => p.status === 'pendente')
                 .reduce((sum, p) => sum + parseFloat(p.amount), 0);
             
-            const overdueCount = systemData.payments
-                .filter(p => p.status === 'vencido').length;
+            const overdueCount = systemData.payments.filter(p => p.status === 'vencido').length;
+            
+            // Contar alunos inadimplentes (com pelo menos um pagamento vencido)
+            const defaulterStudents = new Set(
+                systemData.payments
+                    .filter(p => p.status === 'vencido')
+                    .map(p => p.studentId)
+            );
             
             document.getElementById('monthlyRevenue').textContent = `R$ ${monthlyRevenue.toFixed(2)}`;
             document.getElementById('pendingAmount').textContent = `R$ ${pendingAmount.toFixed(2)}`;
-            document.getElementById('overdue').textContent = overdueCount;
+            document.getElementById('overdueCount').textContent = overdueCount;
+            document.getElementById('defaultersCount').textContent = defaulterStudents.size;
+
+            // Atualizar cards de status
+            const upToDateStudents = systemData.students.filter(s => {
+                const hasOverduePayments = systemData.payments.some(p => p.studentId === s.id && p.status === 'vencido');
+                return !hasOverduePayments && s.status === 'ativo';
+            });
+            
+            document.getElementById('upToDateCount').textContent = upToDateStudents.length;
+            document.getElementById('pendingCount').textContent = systemData.payments.filter(p => p.status === 'pendente').length;
+            document.getElementById('overdueStudents').textContent = defaulterStudents.size;
         }
 
         // Funções dos modais
         function showAddStudentModal() {
             const courseSelect = document.getElementById('studentCourse');
+            const classSelect = document.getElementById('studentClass');
+            
             courseSelect.innerHTML = '<option value="">Selecione um curso</option>';
             systemData.courses.forEach(course => {
                 courseSelect.innerHTML += `<option value="${course.id}">${course.name}</option>`;
             });
+
+            classSelect.innerHTML = '<option value="">Selecione uma turma</option>';
+            systemData.classes.forEach(cls => {
+                classSelect.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
+            });
             
             document.getElementById('addStudentModal').style.display = 'block';
             setTimeout(() => document.getElementById('addStudentModal').classList.add('show'), 10);
+        }
+
+        function showAddClassModal() {
+            const courseSelect = document.getElementById('classCourse');
+            const teacherSelect = document.getElementById('classTeacher');
+            
+            courseSelect.innerHTML = '<option value="">Selecione um curso</option>';
+            systemData.courses.forEach(course => {
+                courseSelect.innerHTML += `<option value="${course.id}">${course.name}</option>`;
+            });
+
+            teacherSelect.innerHTML = '<option value="">Selecione um professor</option>';
+            systemData.users.filter(u => u.role === 'professor').forEach(teacher => {
+                teacherSelect.innerHTML += `<option value="${teacher.id}">${teacher.name}</option>`;
+            });
+            
+            document.getElementById('addClassModal').style.display = 'block';
+            setTimeout(() => document.getElementById('addClassModal').classList.add('show'), 10);
         }
 
         function showAddCourseModal() {
@@ -2102,7 +2671,7 @@
             
             studentSelect.innerHTML = '<option value="">Selecione um aluno</option>';
             systemData.students.forEach(student => {
-                studentSelect.innerHTML += `<option value="${student.id}">${student.name}</option>`;
+                studentSelect.innerHTML += `<option value="${student.id}">${student.name} (${student.ra})</option>`;
             });
             
             courseSelect.innerHTML = '<option value="">Selecione um curso</option>';
@@ -2126,7 +2695,7 @@
         }
 
         function showAddModuleModal() {
-            const selectedCourse = document.getElementById('schedulesCourseSelect').value;
+            const selectedCourse = document.getElementById('scheduleCourseSelect').value;
             if (!selectedCourse) {
                 showMessage('Selecione um curso primeiro!', 'warning');
                 return;
@@ -2143,6 +2712,7 @@
                 document.getElementById('sheetsUrl').value = systemData.sheetsConfig.url || '';
                 document.getElementById('sheetsStudentsTab').value = systemData.sheetsConfig.studentsTab || 'Alunos';
                 document.getElementById('sheetsCoursesTab').value = systemData.sheetsConfig.coursesTab || 'Cursos';
+                document.getElementById('sheetsClassesTab').value = systemData.sheetsConfig.classesTab || 'Turmas';
                 document.getElementById('sheetsFinancialTab').value = systemData.sheetsConfig.financialTab || 'Financeiro';
                 document.getElementById('sheetsAttendanceTab').value = systemData.sheetsConfig.attendanceTab || 'Frequencia';
             }
@@ -2169,19 +2739,79 @@
                 cpf: document.getElementById('studentCPF').value,
                 phone: document.getElementById('studentPhone').value,
                 courseId: parseInt(document.getElementById('studentCourse').value),
+                classId: parseInt(document.getElementById('studentClass').value),
                 birthDate: document.getElementById('studentBirthDate').value,
                 enrollmentDate: new Date().toISOString(),
-                status: 'ativo'
+                status: document.getElementById('studentStatus').value
             };
             
+            // Verificar se a turma tem vagas
+            const selectedClass = systemData.classes.find(c => c.id === studentData.classId);
+            if (selectedClass) {
+                const currentStudents = systemData.students.filter(s => s.classId === selectedClass.id).length;
+                if (currentStudents >= selectedClass.maxStudents) {
+                    showMessage('Turma não possui vagas disponíveis!', 'error');
+                    return;
+                }
+                selectedClass.currentStudents = currentStudents + 1;
+            }
+            
             systemData.students.push(studentData);
+            
+            // Criar progresso inicial do aluno
+            const courseModules = systemData.modules.filter(m => m.courseId === studentData.courseId);
+            systemData.studentProgress.push({
+                id: Date.now() + 1,
+                studentId: studentData.id,
+                courseId: studentData.courseId,
+                classId: studentData.classId,
+                startDate: new Date().toISOString(),
+                currentModuleId: courseModules.length > 0 ? courseModules[0].id : null,
+                currentLessonId: null,
+                completedModules: [],
+                completedLessons: [],
+                progressPercent: 0,
+                lastActivity: new Date().toISOString()
+            });
+            
             saveSystemData();
             syncWithSheets('students', studentData);
             
             closeModal('addStudentModal');
             loadStudentsData();
+            loadClassesData();
+            loadDashboardData();
             showMessage('Aluno adicionado com sucesso!', 'success');
             document.getElementById('addStudentForm').reset();
+        }
+
+        function handleAddClass(e) {
+            e.preventDefault();
+            
+            const classData = {
+                id: Date.now(),
+                name: document.getElementById('className').value,
+                courseId: parseInt(document.getElementById('classCourse').value),
+                teacherId: document.getElementById('classTeacher').value ? parseInt(document.getElementById('classTeacher').value) : null,
+                maxStudents: parseInt(document.getElementById('classMaxStudents').value),
+                currentStudents: 0,
+                startDate: document.getElementById('classStartDate').value,
+                endDate: document.getElementById('classEndDate').value,
+                schedule: document.getElementById('classSchedule').value,
+                description: document.getElementById('classDescription').value,
+                status: 'ativa',
+                createdDate: new Date().toISOString()
+            };
+            
+            systemData.classes.push(classData);
+            saveSystemData();
+            syncWithSheets('classes', classData);
+            
+            closeModal('addClassModal');
+            loadClassesData();
+            loadDashboardData();
+            showMessage('Turma criada com sucesso!', 'success');
+            document.getElementById('addClassForm').reset();
         }
 
         function handleAddCourse(e) {
@@ -2204,6 +2834,7 @@
             
             closeModal('addCourseModal');
             loadCoursesData();
+            loadDashboardData();
             showMessage('Curso adicionado com sucesso!', 'success');
             document.getElementById('addCourseForm').reset();
         }
@@ -2296,10 +2927,10 @@
                 amount: parseFloat(document.getElementById('paymentAmount').value),
                 dueDate: document.getElementById('paymentDueDate').value,
                 type: document.getElementById('paymentType').value,
+                status: document.getElementById('paymentStatus').value,
                 notes: document.getElementById('paymentNotes').value,
-                status: 'pendente',
                 createdDate: new Date().toISOString(),
-                paymentDate: null
+                paymentDate: document.getElementById('paymentStatus').value === 'pago' ? new Date().toISOString() : null
             };
             
             systemData.payments.push(paymentData);
@@ -2308,6 +2939,8 @@
             
             closeModal('addPaymentModal');
             loadPaymentsData();
+            loadFinancialData();
+            loadDashboardData();
             showMessage('Pagamento adicionado com sucesso!', 'success');
             document.getElementById('addPaymentForm').reset();
         }
@@ -2319,6 +2952,7 @@
                 id: Date.now(),
                 name: document.getElementById('evaluationName').value,
                 courseId: parseInt(document.getElementById('evaluationCourse').value),
+                classId: parseInt(document.getElementById('evaluationClass').value),
                 type: document.getElementById('evaluationType').value,
                 date: document.getElementById('evaluationDate').value,
                 weight: parseFloat(document.getElementById('evaluationWeight').value),
@@ -2344,6 +2978,7 @@
                 url: document.getElementById('sheetsUrl').value,
                 studentsTab: document.getElementById('sheetsStudentsTab').value,
                 coursesTab: document.getElementById('sheetsCoursesTab').value,
+                classesTab: document.getElementById('sheetsClassesTab').value,
                 financialTab: document.getElementById('sheetsFinancialTab').value,
                 attendanceTab: document.getElementById('sheetsAttendanceTab').value,
                 connected: true,
@@ -2358,87 +2993,393 @@
             showMessage('Configuração do Sheets salva com sucesso!', 'success');
         }
 
-        // Funções auxiliares
-        function generateRA() {
-            const year = new Date().getFullYear();
-            const sequence = (systemData.students.length + 1).toString().padStart(4, '0');
-            return `${year}${sequence}`;
+        // Funções de progresso do aluno
+        function getStudentProgress(studentId) {
+            const progress = systemData.studentProgress.find(p => p.studentId === studentId);
+            return progress ? progress.progressPercent : 0;
         }
 
-        function getStatusColor(status) {
-            const colors = {
-                'ativo': 'success',
-                'inativo': 'secondary',
-                'suspenso': 'warning',
-                'vencido': 'danger',
-                'pago': 'success',
-                'pendente': 'warning'
-            };
-            return colors[status] || 'secondary';
-        }
-
-        function formatDate(dateString) {
-            if (!dateString) return 'N/A';
-            const date = new Date(dateString);
-            return date.toLocaleDateString('pt-BR');
-        }
-
-        function isCurrentMonth(dateString) {
-            if (!dateString) return false;
-            const date = new Date(dateString);
-            const now = new Date();
-            return date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
-        }
-
-        function saveSystemData() {
-            localStorage.setItem('gamecreators_system_data', JSON.stringify(systemData));
-        }
-
-        function showMessage(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
-            document.body.appendChild(notification);
+        function loadStudentProgressData() {
+            const courseSelect = document.getElementById('progressCourseFilter');
+            const classSelect = document.getElementById('progressClassFilter');
             
-            setTimeout(() => notification.classList.add('show'), 100);
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => document.body.removeChild(notification), 300);
-            }, 3000);
+            // Popular filtros
+            courseSelect.innerHTML = '<option value="">Todos os Cursos</option>';
+            systemData.courses.forEach(course => {
+                courseSelect.innerHTML += `<option value="${course.id}">${course.name}</option>`;
+            });
+
+            classSelect.innerHTML = '<option value="">Todas as Turmas</option>';
+            systemData.classes.forEach(cls => {
+                classSelect.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
+            });
+            
+            displayStudentProgress();
         }
 
-        // Funções de filtros
-        function filterStudents() {
-            const statusFilter = document.getElementById('studentStatusFilter').value;
-            const courseFilter = document.getElementById('studentCourseFilter').value;
+        function displayStudentProgress() {
+            const grid = document.getElementById('studentsProgressGrid');
+            grid.innerHTML = '';
+            
+            systemData.students.forEach(student => {
+                const progress = systemData.studentProgress.find(p => p.studentId === student.id);
+                const course = systemData.courses.find(c => c.id === student.courseId);
+                const studentClass = systemData.classes.find(c => c.id === student.classId);
+                
+                if (!progress) return;
+                
+                const currentModule = systemData.modules.find(m => m.id === progress.currentModuleId);
+                const progressPercent = progress.progressPercent || 0;
+                
+                const card = `
+                    <div class="student-progress-card">
+                        <h4>${student.name} (${student.ra})</h4>
+                        <p><strong>Curso:</strong> ${course ? course.name : 'N/A'}</p>
+                        <p><strong>Turma:</strong> ${studentClass ? studentClass.name : 'N/A'}</p>
+                        <p><strong>Status:</strong> <span class="badge ${getStatusColor(student.status)}">${student.status}</span></p>
+                        
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progressPercent}%">${progressPercent}%</div>
+                        </div>
+                        
+                        <div class="progress-details">
+                            <div class="progress-item">
+                                <span><strong>Data de Início:</strong></span>
+                                <span>${formatDate(progress.startDate)}</span>
+                            </div>
+                            <div class="progress-item">
+                                <span><strong>Módulo Atual:</strong></span>
+                                <span>${currentModule ? currentModule.name : 'N/A'}</span>
+                            </div>
+                            <div class="progress-item">
+                                <span><strong>Módulos Concluídos:</strong></span>
+                                <span>${progress.completedModules ? progress.completedModules.length : 0}</span>
+                            </div>
+                            <div class="progress-item">
+                                <span><strong>Última Atividade:</strong></span>
+                                <span>${formatDate(progress.lastActivity)}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-group" style="margin-top: 15px;">
+                            <button class="btn btn-info btn-sm" onclick="viewStudentProgress(${student.id})">📊 Detalhes</button>
+                            <button class="btn btn-warning btn-sm" onclick="updateStudentProgressModal(${student.id})">✏️ Atualizar</button>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        function filterStudentProgress() {
+            const courseFilter = document.getElementById('progressCourseFilter').value;
+            const classFilter = document.getElementById('progressClassFilter').value;
+            const searchTerm = document.getElementById('progressStudentSearch').value.toLowerCase();
+            
+            const grid = document.getElementById('studentsProgressGrid');
+            grid.innerHTML = '';
             
             let filteredStudents = systemData.students;
-            
-            if (statusFilter) {
-                filteredStudents = filteredStudents.filter(s => s.status === statusFilter);
-            }
             
             if (courseFilter) {
                 filteredStudents = filteredStudents.filter(s => s.courseId === parseInt(courseFilter));
             }
             
-            const tbody = document.getElementById('studentsTableBody');
-            tbody.innerHTML = '';
+            if (classFilter) {
+                filteredStudents = filteredStudents.filter(s => s.classId === parseInt(classFilter));
+            }
+            
+            if (searchTerm) {
+                filteredStudents = filteredStudents.filter(s => 
+                    s.name.toLowerCase().includes(searchTerm) || 
+                    s.ra.toLowerCase().includes(searchTerm)
+                );
+            }
             
             filteredStudents.forEach(student => {
+                const progress = systemData.studentProgress.find(p => p.studentId === student.id);
                 const course = systemData.courses.find(c => c.id === student.courseId);
+                const studentClass = systemData.classes.find(c => c.id === student.classId);
+                
+                if (!progress) return;
+                
+                const currentModule = systemData.modules.find(m => m.id === progress.currentModuleId);
+                const progressPercent = progress.progressPercent || 0;
+                
+                const card = `
+                    <div class="student-progress-card">
+                        <h4>${student.name} (${student.ra})</h4>
+                        <p><strong>Curso:</strong> ${course ? course.name : 'N/A'}</p>
+                        <p><strong>Turma:</strong> ${studentClass ? studentClass.name : 'N/A'}</p>
+                        <p><strong>Status:</strong> <span class="badge ${getStatusColor(student.status)}">${student.status}</span></p>
+                        
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progressPercent}%">${progressPercent}%</div>
+                        </div>
+                        
+                        <div class="progress-details">
+                            <div class="progress-item">
+                                <span><strong>Data de Início:</strong></span>
+                                <span>${formatDate(progress.startDate)}</span>
+                            </div>
+                            <div class="progress-item">
+                                <span><strong>Módulo Atual:</strong></span>
+                                <span>${currentModule ? currentModule.name : 'N/A'}</span>
+                            </div>
+                            <div class="progress-item">
+                                <span><strong>Módulos Concluídos:</strong></span>
+                                <span>${progress.completedModules ? progress.completedModules.length : 0}</span>
+                            </div>
+                            <div class="progress-item">
+                                <span><strong>Última Atividade:</strong></span>
+                                <span>${formatDate(progress.lastActivity)}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-group" style="margin-top: 15px;">
+                            <button class="btn btn-info btn-sm" onclick="viewStudentProgress(${student.id})">📊 Detalhes</button>
+                            <button class="btn btn-warning btn-sm" onclick="updateStudentProgressModal(${student.id})">✏️ Atualizar</button>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        function viewStudentProgress(studentId) {
+            const student = systemData.students.find(s => s.id === studentId);
+            const progress = systemData.studentProgress.find(p => p.studentId === studentId);
+            const course = systemData.courses.find(c => c.id === student.courseId);
+            const modules = systemData.modules.filter(m => m.courseId === student.courseId).sort((a, b) => a.order - b.order);
+            
+            if (!progress) {
+                showMessage('Progresso não encontrado para este aluno', 'warning');
+                return;
+            }
+            
+            document.getElementById('progressModalTitle').textContent = `Progresso de ${student.name}`;
+            
+            let html = `
+                <div class="student-progress-details">
+                    <h3>📊 Detalhes do Progresso</h3>
+                    <p><strong>Aluno:</strong> ${student.name} (${student.ra})</p>
+                    <p><strong>Curso:</strong> ${course ? course.name : 'N/A'}</p>
+                    <p><strong>Data de Início:</strong> ${formatDate(progress.startDate)}</p>
+                    <p><strong>Progresso Geral:</strong> ${progress.progressPercent}%</p>
+                    
+                    <div class="progress-bar" style="margin: 20px 0;">
+                        <div class="progress-fill" style="width: ${progress.progressPercent}%">${progress.progressPercent}%</div>
+                    </div>
+                    
+                    <h4>📚 Módulos do Curso</h4>
+            `;
+            
+            modules.forEach(module => {
+                const isCompleted = progress.completedModules && progress.completedModules.includes(module.id);
+                const isCurrent = progress.currentModuleId === module.id;
+                const statusClass = isCompleted ? 'completed' : isCurrent ? 'current' : '';
+                const statusText = isCompleted ? '✅ Concluído' : isCurrent ? '📚 Atual' : '⏳ Pendente';
+                
+                html += `
+                    <div class="module-card ${statusClass}">
+                        <h5>${module.name} - ${statusText}</h5>
+                        <p>${module.description}</p>
+                        <p><strong>Duração:</strong> ${module.duration}h</p>
+                `;
+                
+                if (module.lessons && module.lessons.length > 0) {
+                    html += '<div class="lesson-list"><h6>Aulas:</h6>';
+                    module.lessons.forEach(lesson => {
+                        const lessonCompleted = progress.completedLessons && progress.completedLessons.includes(lesson.id);
+                        html += `
+                            <div class="lesson-item">
+                                <span>${lessonCompleted ? '✅' : '⏳'} ${lesson.name}</span>
+                                <span>${lesson.duration} min</span>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                }
+                
+                html += '</div>';
+            });
+            
+            html += '</div>';
+            
+            document.getElementById('studentProgressContent').innerHTML = html;
+            document.getElementById('studentProgressModal').style.display = 'block';
+            setTimeout(() => document.getElementById('studentProgressModal').classList.add('show'), 10);
+        }
+
+        // Sistema Financeiro Avançado
+        function setupClientSearch() {
+            // Inicializar busca de clientes
+            document.getElementById('clientSearchResults').innerHTML = '';
+            document.getElementById('clientFinancialDetails').style.display = 'none';
+        }
+
+        function searchClients() {
+            const searchTerm = document.getElementById('clientSearchInput').value.toLowerCase().trim();
+            const resultsContainer = document.getElementById('clientSearchResults');
+            
+            if (!searchTerm) {
+                resultsContainer.innerHTML = '<p>Digite um nome ou RA para buscar</p>';
+                return;
+            }
+            
+            const matchingStudents = systemData.students.filter(student => 
+                student.name.toLowerCase().includes(searchTerm) ||
+                student.ra.toLowerCase().includes(searchTerm) ||
+                student.email.toLowerCase().includes(searchTerm)
+            );
+            
+            if (matchingStudents.length === 0) {
+                resultsContainer.innerHTML = '<p>Nenhum aluno encontrado</p>';
+                return;
+            }
+            
+            resultsContainer.innerHTML = '';
+            matchingStudents.forEach(student => {
+                const course = systemData.courses.find(c => c.id === student.courseId);
+                const payments = systemData.payments.filter(p => p.studentId === student.id);
+                const totalPaid = payments.filter(p => p.status === 'pago').reduce((sum, p) => sum + parseFloat(p.amount), 0);
+                const totalPending = payments.filter(p => p.status === 'pendente').reduce((sum, p) => sum + parseFloat(p.amount), 0);
+                const hasOverdue = payments.some(p => p.status === 'vencido');
+                
+                const financialStatus = hasOverdue ? 'Inadimplente' : totalPending > 0 ? 'Pendências' : 'Em Dia';
+                const statusClass = hasOverdue ? 'danger' : totalPending > 0 ? 'warning' : 'success';
+                
+                const card = `
+                    <div class="client-card" onclick="showClientFinancialDetails(${student.id})">
+                        <h4>${student.name}</h4>
+                        <p><strong>RA:</strong> ${student.ra}</p>
+                        <p><strong>Email:</strong> ${student.email}</p>
+                        <p><strong>Curso:</strong> ${course ? course.name : 'N/A'}</p>
+                        <p><strong>Status:</strong> <span class="badge ${getStatusColor(student.status)}">${student.status}</span></p>
+                        <p><strong>Situação Financeira:</strong> <span class="badge ${statusClass}">${financialStatus}</span></p>
+                        <p><strong>Total Pago:</strong> R$ ${totalPaid.toFixed(2)}</p>
+                        <p><strong>Pendente:</strong> R$ ${totalPending.toFixed(2)}</p>
+                    </div>
+                `;
+                resultsContainer.innerHTML += card;
+            });
+        }
+
+        function showClientFinancialDetails(studentId) {
+            const student = systemData.students.find(s => s.id === studentId);
+            const course = systemData.courses.find(c => c.id === student.courseId);
+            const payments = systemData.payments.filter(p => p.studentId === studentId);
+            
+            document.getElementById('financialModalTitle').textContent = `Situação Financeira - ${student.name}`;
+            
+            const totalPaid = payments.filter(p => p.status === 'pago').reduce((sum, p) => sum + parseFloat(p.amount), 0);
+            const totalPending = payments.filter(p => p.status === 'pendente').reduce((sum, p) => sum + parseFloat(p.amount), 0);
+            const totalOverdue = payments.filter(p => p.status === 'vencido').reduce((sum, p) => sum + parseFloat(p.amount), 0);
+            const totalCanceled = payments.filter(p => p.status === 'cancelado').reduce((sum, p) => sum + parseFloat(p.amount), 0);
+            
+            let html = `
+                <div class="financial-details">
+                    <div class="financial-status">
+                        <div class="financial-summary-card paid">
+                            <h4>✅ Total Pago</h4>
+                            <div class="stat-number">R$ ${totalPaid.toFixed(2)}</div>
+                        </div>
+                        <div class="financial-summary-card pending">
+                            <h4>⏳ Total Pendente</h4>
+                            <div class="stat-number">R$ ${totalPending.toFixed(2)}</div>
+                        </div>
+                        <div class="financial-summary-card overdue">
+                            <h4>⚠️ Total Vencido</h4>
+                            <div class="stat-number">R$ ${totalOverdue.toFixed(2)}</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin: 20px 0;">
+                        <p><strong>Aluno:</strong> ${student.name} (${student.ra})</p>
+                        <p><strong>Curso:</strong> ${course ? course.name : 'N/A'}</p>
+                        <p><strong>Status do Aluno:</strong> <span class="badge ${getStatusColor(student.status)}">${student.status}</span></p>
+                        <p><strong>Total de Pagamentos:</strong> ${payments.length}</p>
+                    </div>
+                    
+                    <div class="financial-actions">
+                        <button class="btn btn-success" onclick="addPaymentForStudent(${studentId})">➕ Novo Pagamento</button>
+                        <button class="btn btn-info" onclick="generateStudentFinancialReport(${studentId})">📊 Relatório</button>
+                        <button class="btn btn-warning" onclick="sendPaymentReminder(${studentId})">📧 Lembrete</button>
+                    </div>
+                    
+                    <h4>💳 Histórico de Pagamentos</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Data Venc.</th>
+                                <th>Tipo</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                                <th>Data Pgto</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            payments.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate)).forEach(payment => {
+                html += `
+                    <tr>
+                        <td>${formatDate(payment.dueDate)}</td>
+                        <td>${payment.type}</td>
+                        <td>R$ ${parseFloat(payment.amount).toFixed(2)}</td>
+                        <td><span class="badge ${getStatusColor(payment.status)}">${payment.status}</span></td>
+                        <td>${payment.paymentDate ? formatDate(payment.paymentDate) : '-'}</td>
+                        <td class="btn-group">
+                            ${payment.status !== 'pago' ? `<button class="btn btn-success btn-sm" onclick="markAsPaid(${payment.id})">💳</button>` : ''}
+                            <button class="btn btn-warning btn-sm" onclick="editPayment(${payment.id})">✏️</button>
+                            <button class="btn btn-danger btn-sm" onclick="deletePayment(${payment.id})">🗑️</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table></div>';
+            
+            document.getElementById('clientFinancialContent').innerHTML = html;
+            document.getElementById('clientFinancialModal').style.display = 'block';
+            setTimeout(() => document.getElementById('clientFinancialModal').classList.add('show'), 10);
+        }
+
+        // Sistema de Pagamentos
+        function loadPaymentsData() {
+            const courseSelect = document.getElementById('paymentCourseFilter');
+            
+            // Popular filtro de cursos
+            courseSelect.innerHTML = '<option value="">Todos os Cursos</option>';
+            systemData.courses.forEach(course => {
+                courseSelect.innerHTML += `<option value="${course.id}">${course.name}</option>`;
+            });
+            
+            displayPayments(systemData.payments);
+        }
+
+        function displayPayments(payments) {
+            const tbody = document.getElementById('paymentsTableBody');
+            tbody.innerHTML = '';
+            
+            payments.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate)).forEach(payment => {
+                const student = systemData.students.find(s => s.id === payment.studentId);
+                const course = systemData.courses.find(c => c.id === payment.courseId);
+                
                 const row = `
                     <tr>
-                        <td>${student.ra}</td>
-                        <td>${student.name}</td>
-                        <td>${student.email}</td>
+                        <td>${payment.id}</td>
+                        <td>${student ? `${student.name} (${student.ra})` : 'N/A'}</td>
                         <td>${course ? course.name : 'N/A'}</td>
-                        <td><span class="badge ${getStatusColor(student.status)}">${student.status}</span></td>
-                        <td>${formatDate(student.enrollmentDate)}</td>
-                        <td>
-                            <button class="btn btn-info btn-sm" onclick="viewStudent(${student.id})">👁️</button>
-                            <button class="btn btn-warning btn-sm" onclick="editStudent(${student.id})">✏️</button>
-                            <button class="btn btn-danger btn-sm" onclick="deleteStudent(${student.id})">🗑️</button>
+                        <td>${payment.type}</td>
+                        <td>R$ ${parseFloat(payment.amount).toFixed(2)}</td>
+                        <td>${formatDate(payment.dueDate)}</td>
+                        <td><span class="badge ${getStatusColor(payment.status)}">${payment.status}</span></td>
+                        <td class="btn-group">
+                            ${payment.status !== 'pago' ? `<button class="btn btn-success btn-sm" onclick="markAsPaid(${payment.id})">💳</button>` : ''}
+                            <button class="btn btn-warning btn-sm" onclick="editPayment(${payment.id})">✏️</button>
+                            <button class="btn btn-danger btn-sm" onclick="deletePayment(${payment.id})">🗑️</button>
                         </td>
                     </tr>
                 `;
@@ -2449,6 +3390,7 @@
         function filterPayments() {
             const statusFilter = document.getElementById('paymentStatusFilter').value;
             const periodFilter = document.getElementById('paymentPeriodFilter').value;
+            const courseFilter = document.getElementById('paymentCourseFilter').value;
             
             let filteredPayments = systemData.payments;
             
@@ -2463,156 +3405,75 @@
                 });
             }
             
+            if (courseFilter) {
+                filteredPayments = filteredPayments.filter(p => p.courseId === parseInt(courseFilter));
+            }
+            
             displayPayments(filteredPayments);
         }
 
-        function displayPayments(payments) {
-            const tbody = document.getElementById('paymentsTableBody');
-            tbody.innerHTML = '';
+        function markAsPaid(paymentId) {
+            const payment = systemData.payments.find(p => p.id === paymentId);
+            if (!payment) return;
             
-            payments.forEach(payment => {
-                const student = systemData.students.find(s => s.id === payment.studentId);
-                const course = systemData.courses.find(c => c.id === payment.courseId);
-                
-                const row = `
-                    <tr>
-                        <td>${payment.id}</td>
-                        <td>${student ? student.name : 'N/A'}</td>
-                        <td>${course ? course.name : 'N/A'}</td>
-                        <td>R$ ${parseFloat(payment.amount).toFixed(2)}</td>
-                        <td>${formatDate(payment.dueDate)}</td>
-                        <td><span class="badge ${getStatusColor(payment.status)}">${payment.status}</span></td>
-                        <td>
-                            <button class="btn btn-success btn-sm" onclick="markAsPaid(${payment.id})">💳</button>
-                            <button class="btn btn-warning btn-sm" onclick="editPayment(${payment.id})">✏️</button>
-                            <button class="btn btn-danger btn-sm" onclick="deletePayment(${payment.id})">🗑️</button>
-                        </td>
-                    </tr>
-                `;
-                tbody.innerHTML += row;
-            });
+            payment.status = 'pago';
+            payment.paymentDate = new Date().toISOString();
+            
+            saveSystemData();
+            syncWithSheets('payments', payment);
+            loadPaymentsData();
+            loadFinancialData();
+            loadDashboardData();
+            showMessage('Pagamento marcado como pago!', 'success');
         }
 
-        function loadPaymentsData() {
-            displayPayments(systemData.payments);
-        }
-
-        // Funções específicas de cursos
-        function loadCourseScheduleOptions() {
-            const select = document.getElementById('scheduleCourseSelect');
-            select.innerHTML = '<option value="">Selecione um curso</option>';
-            systemData.courses.forEach(course => {
-                select.innerHTML += `<option value="${course.id}">${course.name}</option>`;
-            });
-        }
-
-        function loadCourseSchedule() {
-            const courseId = parseInt(document.getElementById('scheduleCourseSelect').value);
-            const content = document.getElementById('courseScheduleContent');
+        function updatePaymentStatuses() {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
             
-            if (!courseId) {
-                content.innerHTML = '<p>Selecione um curso para visualizar seu cronograma</p>';
-                return;
-            }
-            
-            const course = systemData.courses.find(c => c.id === courseId);
-            const modules = systemData.modules.filter(m => m.courseId === courseId).sort((a, b) => a.order - b.order);
-            
-            let html = `<h3>📚 ${course.name}</h3>`;
-            
-            if (modules.length === 0) {
-                html += '<p>Nenhum módulo cadastrado para este curso.</p>';
-            } else {
-                modules.forEach(module => {
-                    html += `
-                        <div class="module-card">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <h4>📖 ${module.name}</h4>
-                                <div>
-                                    <button class="btn btn-warning btn-sm" onclick="editModule(${module.id})">✏️</button>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteModule(${module.id})">🗑️</button>
-                                </div>
-                            </div>
-                            <p>${module.description}</p>
-                            <p><strong>Duração:</strong> ${module.duration}h</p>
-                            
-                            <div class="lesson-list">
-                                <h5>📝 Aulas:</h5>
-                    `;
+            systemData.payments.forEach(payment => {
+                if (payment.status === 'pendente') {
+                    const dueDate = new Date(payment.dueDate);
+                    dueDate.setHours(0, 0, 0, 0);
                     
-                    if (module.lessons && module.lessons.length > 0) {
-                        module.lessons.forEach(lesson => {
-                            html += `
-                                <div class="lesson-item">
-                                    <span>${lesson.name}</span>
-                                    <span>${lesson.duration} min</span>
-                                </div>
-                            `;
-                        });
-                    } else {
-                        html += '<p>Nenhuma aula cadastrada</p>';
+                    if (dueDate < today) {
+                        payment.status = 'vencido';
                     }
-                    
-                    html += '</div></div>';
-                });
-            }
-            
-            content.innerHTML = html;
-        }
-
-        function loadCourseProgress() {
-            const grid = document.getElementById('courseProgressGrid');
-            grid.innerHTML = '';
-            
-            systemData.courses.forEach(course => {
-                const modules = systemData.modules.filter(m => m.courseId === course.id);
-                const totalLessons = modules.reduce((sum, m) => sum + (m.lessons ? m.lessons.length : 0), 0);
-                const completedLessons = modules.reduce((sum, m) => 
-                    sum + (m.lessons ? m.lessons.filter(l => l.completed).length : 0), 0);
-                
-                const progress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
-                
-                const card = `
-                    <div class="class-card">
-                        <h3>📚 ${course.name}</h3>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: ${progress}%">${progress}%</div>
-                        </div>
-                        <p><strong>Módulos:</strong> ${modules.length}</p>
-                        <p><strong>Aulas:</strong> ${completedLessons}/${totalLessons}</p>
-                        <p><strong>Alunos:</strong> ${systemData.students.filter(s => s.courseId === course.id).length}</p>
-                    </div>
-                `;
-                grid.innerHTML += card;
+                }
             });
+            
+            saveSystemData();
         }
 
-        // Funções pedagógicas
-        function loadAttendanceOptions() {
+        // Sistema de Turmas - Chamada
+        function loadClassAttendanceOptions() {
             const classSelect = document.getElementById('attendanceClassSelect');
             const dateInput = document.getElementById('attendanceDate');
             
-            // Popular select de turmas
             classSelect.innerHTML = '<option value="">Selecione uma turma</option>';
-            systemData.courses.forEach(course => {
-                classSelect.innerHTML += `<option value="${course.id}">${course.name}</option>`;
+            systemData.classes.forEach(cls => {
+                classSelect.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
             });
             
-            // Definir data atual
             dateInput.value = new Date().toISOString().split('T')[0];
         }
 
-        function loadAttendanceClass() {
+        function loadClassAttendance() {
             const classId = document.getElementById('attendanceClassSelect').value;
             const date = document.getElementById('attendanceDate').value;
-            const grid = document.getElementById('attendanceGrid');
+            const grid = document.getElementById('classAttendanceGrid');
             
             if (!classId || !date) {
                 grid.innerHTML = '<p>Selecione uma turma e data</p>';
                 return;
             }
             
-            const students = systemData.students.filter(s => s.courseId === parseInt(classId) && s.status === 'ativo');
+            const students = systemData.students.filter(s => s.classId === parseInt(classId) && s.status === 'ativo');
+            
+            if (students.length === 0) {
+                grid.innerHTML = '<p>Nenhum aluno encontrado nesta turma</p>';
+                return;
+            }
             
             grid.innerHTML = '';
             students.forEach(student => {
@@ -2676,126 +3537,142 @@
             studentCard.querySelector(`.attendance-btn.${status === 'presente' ? 'present' : 'absent'}`).classList.add('active');
         }
 
-        function saveAttendance() {
+        function saveClassAttendance() {
             saveSystemData();
             syncWithSheets('attendance', systemData.attendance);
-            showMessage('Frequência salva com sucesso!', 'success');
+            showMessage('Chamada salva com sucesso!', 'success');
         }
 
-        function loadReportOptions() {
-            const courseSelect = document.getElementById('reportCourseSelect');
-            const startDate = document.getElementById('reportStartDate');
-            const endDate = document.getElementById('reportEndDate');
-            
-            courseSelect.innerHTML = '<option value="">Todos os Cursos</option>';
-            systemData.courses.forEach(course => {
-                courseSelect.innerHTML += `<option value="${course.id}">${course.name}</option>`;
-            });
-            
-            // Definir período padrão (último mês)
-            const today = new Date();
-            const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
-            
-            startDate.value = lastMonth.toISOString().split('T')[0];
-            endDate.value = today.toISOString().split('T')[0];
+        function takeClassAttendance(classId) {
+            document.getElementById('attendanceClassSelect').value = classId;
+            switchClassTab('attendance');
+            loadClassAttendance();
         }
 
-        function generateAttendanceReport() {
-            const courseId = document.getElementById('reportCourseSelect').value;
-            const startDate = document.getElementById('reportStartDate').value;
-            const endDate = document.getElementById('reportEndDate').value;
-            const content = document.getElementById('attendanceReportContent');
+        // Funções auxiliares
+        function generateRA() {
+            const year = new Date().getFullYear();
+            const sequence = (systemData.students.length + 1).toString().padStart(4, '0');
+            return `${year}${sequence}`;
+        }
+
+        function getStatusColor(status) {
+            const colors = {
+                'ativo': 'success',
+                'inativo': 'secondary',
+                'suspenso': 'warning',
+                'trancado': 'info',
+                'cancelado': 'danger',
+                'vencido': 'danger',
+                'pago': 'success',
+                'pendente': 'warning',
+                'ativa': 'success',
+                'completa': 'warning',
+                'encerrada': 'secondary'
+            };
+            return colors[status] || 'secondary';
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('pt-BR');
+        }
+
+        function isCurrentMonth(dateString) {
+            if (!dateString) return false;
+            const date = new Date(dateString);
+            const now = new Date();
+            return date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
+        }
+
+        function saveSystemData() {
+            localStorage.setItem('gamecreators_system_data', JSON.stringify(systemData));
+        }
+
+        function showMessage(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
             
-            let attendanceRecords = systemData.attendance.filter(a => {
-                const recordDate = new Date(a.date);
-                const start = new Date(startDate);
-                const end = new Date(endDate);
-                
-                return recordDate >= start && recordDate <= end &&
-                       (!courseId || a.classId === parseInt(courseId));
-            });
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        function filterStudents() {
+            const statusFilter = document.getElementById('studentStatusFilter').value;
+            const courseFilter = document.getElementById('studentCourseFilter').value;
+            const classFilter = document.getElementById('studentClassFilter').value;
             
-            if (attendanceRecords.length === 0) {
-                content.innerHTML = '<p>Nenhum registro de frequência encontrado para o período selecionado.</p>';
-                return;
+            let filteredStudents = systemData.students;
+            
+            if (statusFilter) {
+                filteredStudents = filteredStudents.filter(s => s.status === statusFilter);
             }
             
-            // Agrupar por aluno
-            const studentAttendance = {};
-            attendanceRecords.forEach(record => {
-                const student = systemData.students.find(s => s.id === record.studentId);
-                if (!student) return;
-                
-                if (!studentAttendance[student.id]) {
-                    studentAttendance[student.id] = {
-                        name: student.name,
-                        ra: student.ra,
-                        present: 0,
-                        absent: 0,
-                        absentDates: []
-                    };
-                }
-                
-                if (record.status === 'presente') {
-                    studentAttendance[student.id].present++;
-                } else {
-                    studentAttendance[student.id].absent++;
-                    studentAttendance[student.id].absentDates.push(formatDate(record.date));
-                }
-            });
+            if (courseFilter) {
+                filteredStudents = filteredStudents.filter(s => s.courseId === parseInt(courseFilter));
+            }
             
-            let html = `
-                <h3>📊 Relatório de Frequência</h3>
-                <p><strong>Período:</strong> ${formatDate(startDate)} a ${formatDate(endDate)}</p>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>RA</th>
-                            <th>Nome</th>
-                            <th>Presenças</th>
-                            <th>Faltas</th>
-                            <th>% Presença</th>
-                            <th>Datas das Faltas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
+            if (classFilter) {
+                filteredStudents = filteredStudents.filter(s => s.classId === parseInt(classFilter));
+            }
             
-            Object.values(studentAttendance).forEach(student => {
-                const total = student.present + student.absent;
-                const percentage = total > 0 ? Math.round((student.present / total) * 100) : 0;
-                const statusClass = percentage >= 75 ? 'success' : percentage >= 60 ? 'warning' : 'danger';
+            const tbody = document.getElementById('studentsTableBody');
+            tbody.innerHTML = '';
+            
+            filteredStudents.forEach(student => {
+                const course = systemData.courses.find(c => c.id === student.courseId);
+                const studentClass = systemData.classes.find(c => c.id === student.classId);
+                const progress = getStudentProgress(student.id);
                 
-                html += `
+                const row = `
                     <tr>
                         <td>${student.ra}</td>
                         <td>${student.name}</td>
-                        <td>${student.present}</td>
-                        <td>${student.absent}</td>
-                        <td><span class="badge ${statusClass}">${percentage}%</span></td>
-                        <td>${student.absentDates.join(', ')}</td>
+                        <td>${student.email}</td>
+                        <td>${course ? course.name : 'N/A'}</td>
+                        <td>${studentClass ? studentClass.name : 'N/A'}</td>
+                        <td><span class="badge ${getStatusColor(student.status)}">${student.status}</span></td>
+                        <td>
+                            <div class="progress-bar" style="height: 15px;">
+                                <div class="progress-fill" style="width: ${progress}%">${progress}%</div>
+                            </div>
+                        </td>
+                        <td>${formatDate(student.enrollmentDate)}</td>
+                        <td class="btn-group">
+                            <button class="btn btn-info btn-sm" onclick="viewStudentProgress(${student.id})">📈</button>
+                            <button class="btn btn-success btn-sm" onclick="viewStudent(${student.id})">👁️</button>
+                            <button class="btn btn-warning btn-sm" onclick="editStudent(${student.id})">✏️</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteStudent(${student.id})">🗑️</button>
+                        </td>
                     </tr>
                 `;
+                tbody.innerHTML += row;
             });
-            
-            html += '</tbody></table>';
-            content.innerHTML = html;
         }
 
+        // Mais funções específicas...
         function loadEvaluationsData() {
             const tbody = document.getElementById('evaluationsTableBody');
             tbody.innerHTML = '';
             
             systemData.evaluations.forEach(evaluation => {
                 const course = systemData.courses.find(c => c.id === evaluation.courseId);
+                const evalClass = systemData.classes.find(c => c.id === evaluation.classId);
                 const row = `
                     <tr>
                         <td>${evaluation.name}</td>
                         <td>${course ? course.name : 'N/A'}</td>
+                        <td>${evalClass ? evalClass.name : 'N/A'}</td>
                         <td>${formatDate(evaluation.date)}</td>
                         <td>${evaluation.type}</td>
                         <td><span class="badge ${getStatusColor(evaluation.status)}">${evaluation.status}</span></td>
-                        <td>
+                        <td class="btn-group">
                             <button class="btn btn-info btn-sm" onclick="viewEvaluation(${evaluation.id})">👁️</button>
                             <button class="btn btn-warning btn-sm" onclick="editEvaluation(${evaluation.id})">✏️</button>
                             <button class="btn btn-danger btn-sm" onclick="deleteEvaluation(${evaluation.id})">🗑️</button>
@@ -2806,314 +3683,20 @@
             });
         }
 
-        function loadPermissionsData() {
-            const grid = document.getElementById('permissionsGrid');
-            const permissions = ['dashboard', 'students', 'courses', 'pedagogic', 'financial', 'users'];
+        function loadEvaluationClasses() {
+            const courseId = document.getElementById('evaluationCourse').value;
+            const classSelect = document.getElementById('evaluationClass');
             
-            grid.innerHTML = '';
-            systemData.users.forEach(user => {
-                const userPermissions = user.permissions || [];
-                
-                let html = `
-                    <div class="permission-item" style="grid-column: 1 / -1;">
-                        <h4>${user.name} (${getRoleLabel(user.role)})</h4>
-                `;
-                
-                permissions.forEach(permission => {
-                    const checked = userPermissions.includes(permission) ? 'checked' : '';
-                    html += `
-                        <label>
-                            <input type="checkbox" ${checked} 
-                                   onchange="updateUserPermission(${user.id}, '${permission}', this.checked)">
-                            ${permission.charAt(0).toUpperCase() + permission.slice(1)}
-                        </label>
-                    `;
+            classSelect.innerHTML = '<option value="">Selecione uma turma</option>';
+            if (courseId) {
+                const courseclasses = systemData.classes.filter(c => c.courseId === parseInt(courseId));
+                courseclasses.forEach(cls => {
+                    classSelect.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
                 });
-                
-                html += '</div>';
-                grid.innerHTML += html;
-            });
-        }
-
-        function updateUserPermission(userId, permission, checked) {
-            const user = systemData.users.find(u => u.id === userId);
-            if (!user) return;
-            
-            if (!user.permissions) user.permissions = [];
-            
-            if (checked && !user.permissions.includes(permission)) {
-                user.permissions.push(permission);
-            } else if (!checked) {
-                user.permissions = user.permissions.filter(p => p !== permission);
-            }
-            
-            saveSystemData();
-            showMessage('Permissões atualizadas!', 'success');
-        }
-
-        // Funções de relatórios financeiros
-        function generateFinancialReport() {
-            const month = document.getElementById('reportMonth').value;
-            const content = document.getElementById('financialReportContent');
-            
-            if (!month) {
-                content.innerHTML = '<p>Selecione um mês para gerar o relatório</p>';
-                return;
-            }
-            
-            const payments = systemData.payments.filter(p => {
-                const paymentMonth = new Date(p.dueDate).toISOString().substring(0, 7);
-                return paymentMonth === month;
-            });
-            
-            const totalReceived = payments.filter(p => p.status === 'pago').reduce((sum, p) => sum + parseFloat(p.amount), 0);
-            const totalPending = payments.filter(p => p.status === 'pendente').reduce((sum, p) => sum + parseFloat(p.amount), 0);
-            const totalOverdue = payments.filter(p => p.status === 'vencido').reduce((sum, p) => sum + parseFloat(p.amount), 0);
-            
-            let html = `
-                <h3>💰 Relatório Financeiro - ${month}</h3>
-                
-                <div class="stats-grid" style="margin-bottom: 20px;">
-                    <div class="stat-card success">
-                        <div class="stat-number">R$ ${totalReceived.toFixed(2)}</div>
-                        <div class="stat-label">Total Recebido</div>
-                    </div>
-                    <div class="stat-card warning">
-                        <div class="stat-number">R$ ${totalPending.toFixed(2)}</div>
-                        <div class="stat-label">Total Pendente</div>
-                    </div>
-                    <div class="stat-card danger">
-                        <div class="stat-number">R$ ${totalOverdue.toFixed(2)}</div>
-                        <div class="stat-label">Total Vencido</div>
-                    </div>
-                </div>
-                
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Aluno</th>
-                            <th>Curso</th>
-                            <th>Tipo</th>
-                            <th>Valor</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-            
-            payments.forEach(payment => {
-                const student = systemData.students.find(s => s.id === payment.studentId);
-                const course = systemData.courses.find(c => c.id === payment.courseId);
-                
-                html += `
-                    <tr>
-                        <td>${formatDate(payment.dueDate)}</td>
-                        <td>${student ? student.name : 'N/A'}</td>
-                        <td>${course ? course.name : 'N/A'}</td>
-                        <td>${payment.type}</td>
-                        <td>R$ ${parseFloat(payment.amount).toFixed(2)}</td>
-                        <td><span class="badge ${getStatusColor(payment.status)}">${payment.status}</span></td>
-                    </tr>
-                `;
-            });
-            
-            html += '</tbody></table>';
-            content.innerHTML = html;
-        }
-
-        // Funções de ação para registros
-        function viewStudent(id) {
-            const student = systemData.students.find(s => s.id === id);
-            if (!student) return;
-            
-            const course = systemData.courses.find(c => c.id === student.courseId);
-            const payments = systemData.payments.filter(p => p.studentId === id);
-            const attendance = systemData.attendance.filter(a => a.studentId === id);
-            
-            alert(`
-Aluno: ${student.name}
-RA: ${student.ra}
-Email: ${student.email}
-Curso: ${course ? course.name : 'N/A'}
-Status: ${student.status}
-Data de Matrícula: ${formatDate(student.enrollmentDate)}
-Pagamentos: ${payments.length}
-Frequência: ${attendance.length} registros
-            `);
-        }
-
-        function editStudent(id) {
-            showMessage('Função de edição em desenvolvimento', 'info');
-        }
-
-        function deleteStudent(id) {
-            if (confirm('Tem certeza que deseja excluir este aluno?')) {
-                systemData.students = systemData.students.filter(s => s.id !== id);
-                saveSystemData();
-                loadStudentsData();
-                showMessage('Aluno excluído com sucesso!', 'success');
             }
         }
 
-        function viewCourse(id) {
-            const course = systemData.courses.find(c => c.id === id);
-            if (!course) return;
-            
-            const students = systemData.students.filter(s => s.courseId === id);
-            const modules = systemData.modules.filter(m => m.courseId === id);
-            
-            alert(`
-Curso: ${course.name}
-Descrição: ${course.description}
-Duração: ${course.duration}h
-Valor: R$ ${parseFloat(course.price).toFixed(2)}
-Categoria: ${course.category}
-Status: ${course.status}
-Alunos: ${students.length}
-Módulos: ${modules.length}
-            `);
-        }
-
-        function editCourse(id) {
-            showMessage('Função de edição em desenvolvimento', 'info');
-        }
-
-        function deleteCourse(id) {
-            if (confirm('Tem certeza que deseja excluir este curso?')) {
-                systemData.courses = systemData.courses.filter(c => c.id !== id);
-                systemData.modules = systemData.modules.filter(m => m.courseId !== id);
-                saveSystemData();
-                loadCoursesData();
-                showMessage('Curso excluído com sucesso!', 'success');
-            }
-        }
-
-        function editModule(id) {
-            showMessage('Função de edição em desenvolvimento', 'info');
-        }
-
-        function deleteModule(id) {
-            if (confirm('Tem certeza que deseja excluir este módulo?')) {
-                systemData.modules = systemData.modules.filter(m => m.id !== id);
-                saveSystemData();
-                loadCourseSchedule();
-                showMessage('Módulo excluído com sucesso!', 'success');
-            }
-        }
-
-        function viewUser(id) {
-            const user = systemData.users.find(u => u.id === id);
-            if (!user) return;
-            
-            alert(`
-Nome: ${user.name}
-Email: ${user.email}
-Usuário: ${user.username}
-Função: ${getRoleLabel(user.role)}
-Status: ${user.status}
-Último Acesso: ${formatDate(user.lastAccess)}
-Permissões: ${user.permissions ? user.permissions.join(', ') : 'Nenhuma'}
-            `);
-        }
-
-        function editUser(id) {
-            showMessage('Função de edição em desenvolvimento', 'info');
-        }
-
-        function deleteUser(id) {
-            if (currentUser && currentUser.id === id) {
-                showMessage('Não é possível excluir o usuário logado!', 'error');
-                return;
-            }
-            
-            if (confirm('Tem certeza que deseja excluir este usuário?')) {
-                systemData.users = systemData.users.filter(u => u.id !== id);
-                saveSystemData();
-                loadUsersData();
-                showMessage('Usuário excluído com sucesso!', 'success');
-            }
-        }
-
-        function markAsPaid(id) {
-            const payment = systemData.payments.find(p => p.id === id);
-            if (!payment) return;
-            
-            payment.status = 'pago';
-            payment.paymentDate = new Date().toISOString();
-            
-            saveSystemData();
-            syncWithSheets('payments', payment);
-            loadPaymentsData();
-            loadFinancialData();
-            loadDashboardData();
-            showMessage('Pagamento marcado como pago!', 'success');
-        }
-
-        function editPayment(id) {
-            showMessage('Função de edição em desenvolvimento', 'info');
-        }
-
-        function deletePayment(id) {
-            if (confirm('Tem certeza que deseja excluir este pagamento?')) {
-                systemData.payments = systemData.payments.filter(p => p.id !== id);
-                saveSystemData();
-                loadPaymentsData();
-                showMessage('Pagamento excluído com sucesso!', 'success');
-            }
-        }
-
-        function viewEvaluation(id) {
-            const evaluation = systemData.evaluations.find(e => e.id === id);
-            if (!evaluation) return;
-            
-            const course = systemData.courses.find(c => c.id === evaluation.courseId);
-            
-            alert(`
-Avaliação: ${evaluation.name}
-Curso: ${course ? course.name : 'N/A'}
-Tipo: ${evaluation.type}
-Data: ${formatDate(evaluation.date)}
-Peso: ${evaluation.weight}
-Descrição: ${evaluation.description}
-Status: ${evaluation.status}
-            `);
-        }
-
-        function editEvaluation(id) {
-            showMessage('Função de edição em desenvolvimento', 'info');
-        }
-
-        function deleteEvaluation(id) {
-            if (confirm('Tem certeza que deseja excluir esta avaliação?')) {
-                systemData.evaluations = systemData.evaluations.filter(e => e.id !== id);
-                saveSystemData();
-                loadEvaluationsData();
-                showMessage('Avaliação excluída com sucesso!', 'success');
-            }
-        }
-
-        // Funções de aulas no modal de módulo
-        function addLessonInput() {
-            const container = document.getElementById('lessonsContainer');
-            const newInput = document.createElement('div');
-            newInput.className = 'lesson-input-group';
-            newInput.style.cssText = 'display: flex; gap: 10px; margin-bottom: 10px; align-items: center;';
-            
-            newInput.innerHTML = `
-                <input type="text" placeholder="Nome da aula" class="lesson-name" style="flex: 1;">
-                <input type="number" placeholder="Duração (min)" class="lesson-duration" style="width: 120px;">
-                <button type="button" onclick="removeLessonInput(this)" class="btn btn-danger" style="padding: 8px;">❌</button>
-            `;
-            
-            container.appendChild(newInput);
-        }
-
-        function removeLessonInput(button) {
-            button.parentElement.remove();
-        }
-
-        // Integração com Google Sheets
+        // Integração com Google Sheets e outras funções...
         function updateConnectionStatus() {
             const statusElement = document.getElementById('connectionStatus');
             const iconElement = document.getElementById('sheetsStatusIcon');
@@ -3162,24 +3745,20 @@ Status: ${evaluation.status}
                 return;
             }
             
-            // Simulação de sincronização
             console.log(`Sincronizando ${dataType} com Google Sheets:`, data);
-            
-            // Em uma implementação real, aqui seria feita a chamada para a API do Google Sheets
-            // usando a Google Sheets API v4 ou Apps Script
-            
             showMessage(`Dados sincronizados com Google Sheets!`, 'info');
         }
 
-        // Função de backup/exportação
         function exportData() {
             const dataToExport = {
                 students: systemData.students,
                 courses: systemData.courses,
+                classes: systemData.classes,
                 payments: systemData.payments,
                 attendance: systemData.attendance,
                 evaluations: systemData.evaluations,
                 modules: systemData.modules,
+                studentProgress: systemData.studentProgress,
                 exportDate: new Date().toISOString()
             };
             
@@ -3194,7 +3773,97 @@ Status: ${evaluation.status}
             showMessage('Backup exportado com sucesso!', 'success');
         }
 
-        // Clique fora dos modals para fechar
+        // Funções placeholder para funcionalidades futuras
+        function viewStudent(id) { showMessage('Função de visualização em desenvolvimento', 'info'); }
+        function editStudent(id) { showMessage('Função de edição em desenvolvimento', 'info'); }
+        function deleteStudent(id) { 
+            if (confirm('Tem certeza que deseja excluir este aluno?')) {
+                systemData.students = systemData.students.filter(s => s.id !== id);
+                systemData.studentProgress = systemData.studentProgress.filter(p => p.studentId !== id);
+                saveSystemData();
+                loadStudentsData();
+                showMessage('Aluno excluído com sucesso!', 'success');
+            }
+        }
+
+        function viewClass(id) { showMessage('Função de visualização em desenvolvimento', 'info'); }
+        function editClass(id) { showMessage('Função de edição em desenvolvimento', 'info'); }
+        function deleteClass(id) {
+            if (confirm('Tem certeza que deseja excluir esta turma?')) {
+                systemData.classes = systemData.classes.filter(c => c.id !== id);
+                saveSystemData();
+                loadClassesData();
+                showMessage('Turma excluída com sucesso!', 'success');
+            }
+        }
+
+        function viewCourse(id) { showMessage('Função de visualização em desenvolvimento', 'info'); }
+        function editCourse(id) { showMessage('Função de edição em desenvolvimento', 'info'); }
+        function deleteCourse(id) {
+            if (confirm('Tem certeza que deseja excluir este curso?')) {
+                systemData.courses = systemData.courses.filter(c => c.id !== id);
+                saveSystemData();
+                loadCoursesData();
+                showMessage('Curso excluído com sucesso!', 'success');
+            }
+        }
+
+        function viewUser(id) { showMessage('Função de visualização em desenvolvimento', 'info'); }
+        function editUser(id) { showMessage('Função de edição em desenvolvimento', 'info'); }
+        function deleteUser(id) {
+            if (currentUser && currentUser.id === id) {
+                showMessage('Não é possível excluir o usuário logado!', 'error');
+                return;
+            }
+            if (confirm('Tem certeza que deseja excluir este usuário?')) {
+                systemData.users = systemData.users.filter(u => u.id !== id);
+                saveSystemData();
+                loadUsersData();
+                showMessage('Usuário excluído com sucesso!', 'success');
+            }
+        }
+
+        function editPayment(id) { showMessage('Função de edição em desenvolvimento', 'info'); }
+        function deletePayment(id) {
+            if (confirm('Tem certeza que deseja excluir este pagamento?')) {
+                systemData.payments = systemData.payments.filter(p => p.id !== id);
+                saveSystemData();
+                loadPaymentsData();
+                showMessage('Pagamento excluído com sucesso!', 'success');
+            }
+        }
+
+        function viewEvaluation(id) { showMessage('Função de visualização em desenvolvimento', 'info'); }
+        function editEvaluation(id) { showMessage('Função de edição em desenvolvimento', 'info'); }
+        function deleteEvaluation(id) {
+            if (confirm('Tem certeza que deseja excluir esta avaliação?')) {
+                systemData.evaluations = systemData.evaluations.filter(e => e.id !== id);
+                saveSystemData();
+                loadEvaluationsData();
+                showMessage('Avaliação excluída com sucesso!', 'success');
+            }
+        }
+
+        // Funções de aulas no modal de módulo
+        function addLessonInput() {
+            const container = document.getElementById('lessonsContainer');
+            const newInput = document.createElement('div');
+            newInput.className = 'lesson-input-group';
+            
+            newInput.innerHTML = `
+                <input type="text" placeholder="Nome da aula" class="lesson-name">
+                <input type="number" placeholder="Duração (min)" class="lesson-duration">
+                <button type="button" onclick="removeLessonInput(this)" class="btn btn-danger btn-sm">❌</button>
+            `;
+            
+            container.appendChild(newInput);
+        }
+
+        function removeLessonInput(button) {
+            button.parentElement.remove();
+        }
+
+        // Event listeners para clique fora dos modals
         window.onclick = function(event) {
             const modals = document.querySelectorAll('.modal');
             modals.forEach(modal => {
@@ -3204,117 +3873,3 @@ Status: ${evaluation.status}
                 }
             });
         }
-
-        // CSS adicional para melhorar a aparência dos inputs de aula
-        const additionalStyles = `
-            .lesson-input-group {
-                display: flex;
-                gap: 10px;
-                margin-bottom: 10px;
-                align-items: center;
-            }
-            
-            .lesson-input-group input {
-                padding: 8px 12px;
-                border: 2px solid var(--border);
-                border-radius: 8px;
-                font-size: 14px;
-            }
-            
-            .lesson-input-group .lesson-name {
-                flex: 1;
-            }
-            
-            .lesson-input-group .lesson-duration {
-                width: 120px;
-            }
-            
-            .btn-sm {
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-            
-            .attendance-btn.active {
-                opacity: 0.8;
-                transform: scale(0.95);
-            }
-
-            .client-search-card {
-                border: 2px solid var(--border);
-                transition: var(--transition);
-                cursor: pointer;
-            }
-
-            .client-search-card:hover {
-                border-color: var(--primary);
-                transform: translateY(-2px);
-            }
-
-            .financial-status-badge {
-                display: inline-block;
-                padding: 4px 8px;
-                border-radius: 12px;
-                font-size: 11px;
-                font-weight: 600;
-                text-transform: uppercase;
-            }
-
-            .class-occupancy {
-                margin: 10px 0;
-            }
-
-            .class-occupancy .progress-bar {
-                height: 8px;
-                margin: 5px 0;
-            }
-
-            .class-status-active { border-left-color: var(--success); }
-            .class-status-completa { border-left-color: var(--warning); }
-            .class-status-encerrada { border-left-color: var(--secondary); }
-
-            .btn-group {
-                display: flex;
-                gap: 5px;
-                flex-wrap: wrap;
-            }
-
-            .search-input-group {
-                display: flex;
-                gap: 10px;
-                align-items: center;
-                margin-bottom: 20px;
-            }
-
-            .search-input-group input {
-                flex: 1;
-                min-width: 250px;
-            }
-
-            @media (max-width: 768px) {
-                .search-input-group {
-                    flex-direction: column;
-                    align-items: stretch;
-                }
-                
-                .search-input-group input {
-                    min-width: auto;
-                    margin-bottom: 10px;
-                }
-                
-                .btn-group {
-                    justify-content: center;
-                }
-                
-                .stats-grid {
-                    grid-template-columns: 1fr;
-                    gap: 12px;
-                }
-            }
-        `;
-        
-        const styleSheet = document.createElement('style');
-        styleSheet.textContent = additionalStyles;
-        document.head.appendChild(styleSheet);
-    </script>
-</body>
-</html>
