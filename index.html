@@ -3238,6 +3238,78 @@ Status: ${evaluation.status}
                 opacity: 0.8;
                 transform: scale(0.95);
             }
+
+            .client-search-card {
+                border: 2px solid var(--border);
+                transition: var(--transition);
+                cursor: pointer;
+            }
+
+            .client-search-card:hover {
+                border-color: var(--primary);
+                transform: translateY(-2px);
+            }
+
+            .financial-status-badge {
+                display: inline-block;
+                padding: 4px 8px;
+                border-radius: 12px;
+                font-size: 11px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+
+            .class-occupancy {
+                margin: 10px 0;
+            }
+
+            .class-occupancy .progress-bar {
+                height: 8px;
+                margin: 5px 0;
+            }
+
+            .class-status-active { border-left-color: var(--success); }
+            .class-status-completa { border-left-color: var(--warning); }
+            .class-status-encerrada { border-left-color: var(--secondary); }
+
+            .btn-group {
+                display: flex;
+                gap: 5px;
+                flex-wrap: wrap;
+            }
+
+            .search-input-group {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .search-input-group input {
+                flex: 1;
+                min-width: 250px;
+            }
+
+            @media (max-width: 768px) {
+                .search-input-group {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+                
+                .search-input-group input {
+                    min-width: auto;
+                    margin-bottom: 10px;
+                }
+                
+                .btn-group {
+                    justify-content: center;
+                }
+                
+                .stats-grid {
+                    grid-template-columns: 1fr;
+                    gap: 12px;
+                }
+            }
         `;
         
         const styleSheet = document.createElement('style');
